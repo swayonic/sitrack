@@ -1,0 +1,5 @@
+<%= render :partial => 'messages' %>
+
+<% unless @sitrack_user.nil? %>
+<%= error_messages_for 'sitrack_user' %>
+<% end %>

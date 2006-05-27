@@ -1,0 +1,37 @@
+<fieldset>
+	<div class="row">
+		<!--[form:sitrack_query]-->
+<div class="form-element">
+  <label for="sitrack_query_queryID">Queryid</label>
+  <%= text_field 'sitrack_query', 'queryID' , {:class=>"text-input"} %>
+</div>
+
+<div class="form-element">
+  <label for="sitrack_query_queryName">Queryname</label>
+  <%= text_field 'sitrack_query', 'queryName' , {:class=>"text-input"} %>
+</div>
+
+<div class="form-element">
+  <label for="sitrack_query_owner">Owner</label>
+  <%= text_field 'sitrack_query', 'owner' , {:class=>"text-input"} %>
+</div>
+
+<div class="form-element">
+  <label for="sitrack_query_persons">Persons</label>
+  <%= text_area 'sitrack_query', 'persons'  %>
+</div>
+
+<div class="form-element">
+  <label for="sitrack_query_createdDate">Createddate</label>
+  <%= datetime_select 'sitrack_query', 'createdDate'  %>
+</div>
+
+<div class="form-element">
+  <label for="sitrack_query_modifyDate">Modifydate</label>
+  
+</div>
+
+<!--[eoform:sitrack_query]-->
+
+	</div>
+</fieldset>

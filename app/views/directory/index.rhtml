@@ -1,0 +1,320 @@
+<div id="center">
+	<div class="boxheader">Directory Listing</div>
+	<form name="search_f" method="post">
+	<input type="hidden" name="action" value="search">
+	<div id="selected_options" class="box"></div>
+	<div id="search" onblur="show_me('false');">
+		<span id="options" onclick="show('selected_options');"><strong>Search Options:</strong>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><br />
+		<div id="status" class="search_item" onclick="show_me('statuses');" onmouseout="hide_menu(event);">Status</div>
+		<div id="type" class="search_item" onclick="show_me('types');" onmouseout="hide_menu(event);">Type</div>
+		<span id="position" class="search_item" onclick="show_me('positions');" onmouseout="hide_menu(event);">Position</span>
+		<span id="tenure" class="search_item" onclick="show_me('tenures');" onmouseout="hide_menu(event);">Tenure</span>
+		<span id="misc" class="search_item" onclick="show_me('miscs');" onmouseout="hide_menu(event);">Misc</span>
+		<span id="rog" class="search_item" onclick="show_me('rogs');" onmouseout="hide_menu(event);">Region of Origin</span>
+		<span id="cr" class="search_item" onclick="show_me('crs');" onmouseout="hide_menu(event);">Caring Region</span>
+		<span id="year" class="search_item" onclick="show_me('years');" onmouseout="hide_menu(event);">App Year</span>
+		<span id="name">
+			Last: <input type="Text" name="last_name" title="Last Name" value="<%=@last_name%>" size="10" onKeyUp="enterCheck(this.form);selected(this.form);">&nbsp;&nbsp;&nbsp;
+			First: <input type="Text" name="first_name" title="First Name" value="<%=@first_name%>" size="10" onKeyUp="enterCheck(this.form);selected(this.form);">&nbsp;&nbsp;&nbsp;
+			Preferred: <input type="Text" name="pref_name" title="Pref Name" value="<%=@pref_name%>" size="10" onKeyUp="enterCheck(this.form);selected(this.form);">
+		</span><br /><br /><br />
+		<div id="search_button">
+			<a href="javascript:document.search_f.submit();" class="button">Search!</a><br /><br /><br /><br />
+			<a href="javascript:clear_search();" class="button">Clear</a>
+		</div>
+	</div>
+	<div id="statuses" class="select_box" title="Status" onmouseout="hide_menu(event);">
+		<%= display_option_box(SiApplicationStatus.all)%>
+	</div>
+	<div id="types" class="select_box" title="Type" onmouseout="hide_menu(event);">
+		<%= display_option_box(SiType.all)%>
+	</div>
+	<div id="positions" class="select_box" title="Position" onmouseout="hide_menu(event);">
+		<%= display_option_box([['staff','Staff'],['not_staff','Not Staff']])%>
+	</div>
+	<div id="tenures" class="select_box" title="Tenure" onmouseout="hide_menu(event);">
+		<%= display_option_box([['First Year','First Year'], ['Second Year','Second Year']])%>
+	</div>
+	<div id="miscs" class="select_box" title="Misc" onmouseout="hide_menu(event);">
+		<%= display_option_box([['team_leader','Team Leader'],['monthly_birthday','Monthly Birthday']])%>
+	</div>
+	<div id="rogs" class="select_box" title="Region of Origin" onmouseout="hide_menu(event);">
+		<%= display_option_box(Region.all, 'o_')%>
+	</div>
+	<div id="crs" class="select_box" title="Caring Region" onmouseout="hide_menu(event);">
+		<%= display_option_box(Region.all, 'c_')%>
+	</div>
+	<div id="years" class="select_box" title="Year" onmouseout="hide_menu(event);">
+		<%= display_option_box(app_years)%>
+	</div>
+	<input type="hidden" name="orderby" value="<%=@orderby%> <%=if @sort_direction == 'asc' then @sort_direction else 'desc' end%>">
+	<br />
+	<div id="action_menu" align="center">
+	&nbsp;Views: 
+	<select name="view" onchange="change_view();">
+	<%@views.each do |view| %>
+		<%if view.viewID == @view_id%>
+			<option value="<%=view.viewID%>" selected><%=view.viewName%></option>
+		<%else%>
+			<option value="<%=view.viewID%>"><%=view.viewName%></option>
+		<%end%>
+	<%end%>
+		<option value="|ev|">[Edit Views...]</option>
+	</select>
+	&nbsp;&nbsp;
+	Actions:
+	<select name="do_something" onchange="perform_action();">
+		<option>Choose Action...</option>
+		<option value="email">Send Email</option>
+		<option value="excel">Create Spreadsheet</option>
+		<option value="add">Add Person</option>
+		<option value="delete">Delete People</option>
+	<!--	<option value="print">Print</option> -->
+	</select>
+	&nbsp;&nbsp; 
+	Choose Region:
+	<select name="region" onchange="change_region();">
+	{foreach from=$regions item=curr key=region}
+		{if $region == $sel_region}
+			<option value="{$region}" selected="selected">{$region}</option>
+		{else}
+			<option value="{$region}">{$region}</option>
+		{/if}
+	{/foreach}
+	{if '%' == $sel_region}
+		<option value="%" selected="selected">All</option>
+	{else}
+		<option value="%">All</option>
+	{/if}
+	</select>
+	</div>
+	<br /><br />
+	</form>
+	<form name="participants_f" method="post" action="{$smarty.server.SCRIPT_NAME}">
+	<input type="hidden" name="action">
+	<input type="hidden" name="queryName">
+	<input type="hidden" name="criteriaName">
+	<input type="hidden" name="queryID">
+	<input type="hidden" name="criteriaID">
+	<input type="hidden" name="id_list">
+	<!-- Begin participant table -->
+	<table cellspacing="0" border="0" width="100%" id="results">
+	{* Set up table header *}
+		<tr>
+			<td class="white nosort"><input type="Checkbox" value="true" name="all" onclick="javascript:checkAll();"></td>
+		{foreach from=$columns item=curr}
+			{if $curr.orderBy}
+				<!-- common js -->
+				{capture assign="js"}
+					{if $queryID}
+						document.search_f.action.value='show_query';
+					{/if}
+					{if $criteriaID}
+						document.search_f.action.value='show_criteria';
+					{/if}
+					document.search_f.submit();
+				{/capture}
+				<!-- If you can order by this column, check to see if it is the current column -->
+				{if $orderby == $curr.colName|replace:" ":"_"}
+					<!-- If it is, figure out which arrow to show, and what to do when clicked -->
+					{if $sort_direction == "asc"}
+						{assign var="img" value="arrow-up.gif"}
+						{strip}
+						{capture assign="js"}
+							document.search_f.orderby.value='{$curr.colName|replace:" ":"_"} desc';
+							{$js}
+						{/capture}
+						{/strip}
+					{else}
+						{assign var="img" value="arrow-down.gif"}
+						{strip}
+						{capture assign="js"}
+							document.search_f.orderby.value='{$curr.colName|replace:" ":"_"} asc';
+							{$js}
+						{/capture}
+						{/strip}
+					{/if}
+					{strip}
+					
+					{/strip}
+					<td class="white sortactive" align="center" nowrap="nowrap"><a class="sortactive" href="javascript:{$js}">{$curr.colName} &nbsp;&nbsp;<img src="/images/{$img}" border="0"></a></td>
+				{else}
+					<td class="white sort" align="center" nowrap="nowrap"><a class="sort" href="javascript:document.search_f.orderby.value='{$curr.colName|replace:" ":"_"} asc';{$js}">{$curr.colName} &nbsp;&nbsp;<img src="/images/diamond.gif" border="0"></a></td>
+				{/if}
+			{else}
+				<td class="white nosort" align="center" nowrap="nowrap">{$curr.colName}</td>
+			{/if}
+		{/foreach}
+		</tr>
+	{foreach from=$results item=curr name=participants}
+		{if $smarty.foreach.participants.iteration % 2}
+			{assign var="class" value="cell"}
+		{else}
+			{assign var="class" value="cell2"}
+		{/if}
+		<tr>
+			<td class="{$class}">
+				<input type="Checkbox" name="id_array[]" value="{$curr.applicationID}">
+				<input type="hidden" name="e{$curr.applicationID}" value="{$curr.main_email}">
+			</td>
+			{strip}
+			{foreach from=$columns item=col}
+				{strip}
+				{capture assign="safeName"}
+					{$col.colName|replace:" ":"_"}
+				{/capture}
+				{/strip}
+				{if $col.writeable}
+					{assign var="selectClause" value=true}
+				{else}
+					{assign var="selectClause" value=false}
+				{/if}
+				{if $col.colName == "Full Name" || $col.colName == "First Name" || $col.colName == "Last Name"}
+					<td class="{$class}"><strong> <a href="profile.php?personID={$curr.personID}&applicationID={$curr.applicationID}">{$curr[$safeName]}</a> </strong></td>
+				{else}
+					{if $col.colType == "date"}
+						{strip}
+						{capture assign="output"}
+						<div id="{$col.colName}{$curr.applicationID}c{$col.colID}">
+						{if $curr[$safeName] != "" && $curr[$safeName] != "Jan 01 1900 12:00AM" && $curr[$safeName] != "Dec 13 1901 12:00AM"}
+							{if $selectClause}
+							<a href="javascript:popCalendar('{$col.colName}',{$curr.applicationID},'{$col.colID}','{$curr[$safeName]|date_format:"%#m/%d/%Y"}')">
+								{$curr[$safeName]|date_format:"%#m/%d/%Y"}
+							</a>
+							{else}
+								{$curr[$safeName]|date_format:"%#m/%d/%Y"}
+							{/if}
+						{else}
+							{if $selectClause}
+							<a href="javascript:popCalendar('{$col.colName}',{$curr.applicationID},'{$col.colID}','{$smarty.now|date_format:"%#m/%d/%Y"}')">
+								<img src="/images/edit.png" border="0"/> 
+							</a> 
+							{/if}
+						{/if}
+						</div>
+						{/capture}
+						{/strip}
+					{elseif $col.colType == "text"}
+						{strip}
+						{capture assign="note_text"}
+							{$curr[$safeName]|escape:"javascript"}
+						{/capture}
+						{/strip}
+						{strip}
+						{capture assign="output"}
+							<script type="text/javascript">
+								var ol_fgcolor = "#eeeeee";
+							</script>
+
+							<div id="{$col.colName}{$curr.applicationID}c{$col.colID}">
+							{if $curr[$safeName] != "" && $curr[$safeName] != " "}
+								<a href="javascript:edit_value('{$col.colName}',{$curr.applicationID},'{$curr[$safeName]|escape:"javascript"}','{$col.colID}','{$col.colType}')"  onclick="nd();" onmouseover="return overlib('{$curr[$safeName]|escape:"javascript"}',LEFT);" onmouseout="nd();">
+									{$curr[$safeName]|truncate:30:"...":true}
+							{else}
+								<a href="javascript:edit_value('{$col.colName}',{$curr.applicationID},'{$curr[$safeName]}','{$col.colID}','{$col.colType}')">
+									<img src="/images/edit.png" border="0"/> 
+							{/if}									
+								</a>
+							</div>
+							
+						{/capture}
+						{/strip}
+					{elseif $col.colType == "bool"}
+						{strip}
+						{capture assign="output"}
+							{capture assign="index"}{$curr[$safeName]}{/capture}
+							<div id="{$col.colName}{$curr.applicationID}c{$col.colID}">
+							<a href="javascript:edit_value('{$col.colName}','{$curr.applicationID}','{$curr.$safeName|escape:"javascript"}',{$col.colID},'enum')">
+							{if $index !='' && $index != ' '}
+								{capture assign="value"}{$options.$safeName[$index]}{/capture}
+								{$value}
+							{else}
+								<img src="/images/edit.png" border="0"/>
+							{/if}
+							</a>
+							</div>
+						{/capture}
+						{/strip}
+					{elseif $col.colType == "image"}
+						{strip}
+						{capture assign="output"}
+							{if $curr[$safeName] != "" && $curr[$safeName] != " "}
+								<a href="javascript:pictureWindow({$curr.personID})">
+									<img src="/directory/pictures/{$curr[$safeName]}" border="0" />
+							{else}
+								<a href="javascript:pictureWindow({$curr.personID})">
+									<img src="/images/edit.png" border="0"/> 
+							{/if}									
+								</a>
+						{/capture}
+						{/strip}
+					{else}
+						{if $selectClause}
+							{strip}
+							{capture assign="output"}
+								<div id="{$col.colName}{$curr.applicationID}c{$col.colID}">
+								<a href="javascript:edit_value('{$col.colName}',{$curr.applicationID},'{$curr[$safeName]|escape:"javascript"}','{$col.colID}','{$col.colType}')">
+								{if $curr[$safeName] !='' && $curr[$safeName] != ' '}
+									{$curr[$safeName]}
+								{else}
+									<img src="/images/edit.png" border="0"/> 
+								{/if}
+								</a>
+								</div>
+							{/capture}
+							{/strip}
+						{else}
+							{assign var="output" value=$curr[$safeName]}
+						{/if}
+					{/if}
+					<td class="{$class}" align="center" id="c{$col.colName}{$curr.applicationID}c{$col.colID}">{$output}</td>
+				{/if}
+			{/foreach}
+			{/strip}
+		</tr>
+	{/foreach}
+	</table>
+	Total: {$total}
+</div> 
+<div id="right">
+	<div id="queries" class="box">
+		<div id="query_header" class="subboxheader" onclick="show('hide_queries');">Stored Lists</div>
+		<div id="hide_queries">
+		{foreach from=$saved_queries item=query}
+			<div class="menu"><a href="directory.php?action=show_query&queryID={$query.queryID}" class="menu">{$query.queryName}</a><img class="x" alt="Delete Query" title="Delete Query" src="/images/x.png" onclick="delete_query('{$query.queryName}',{$query.queryID});"></div>
+		{/foreach}<br />
+			<a href="javascript:save_query('new');" class="button">Save List&nbsp;&nbsp;</a><br /><br />
+			<a href="javascript:save_query('append');" class="button">Append to List</a>
+		</div>
+	</div>
+	<div id="append_query" class="box">
+		Choose a list to append to.<br />
+		<select name="append_query">
+		{foreach from=$saved_queries item=query}
+			<option value="{$query.queryID}">{$query.queryName}</option>
+		{/foreach}
+		</select>
+		<a href="javascript:append_query();" class="button">Save</a>
+	</div>
+	<br /><br />
+	<div id="criteria" class="box">
+		<div id="criteria_header" class="subboxheader" onclick="show('hide_criteria');">Stored Criteria</div>
+		<div id="hide_criteria">
+		{foreach from=$saved_criteria item=criteria}
+			<div class="menu">
+				<a href="directory.php?action=show_criteria&criteriaID={$criteria.criteriaID}" class="menu">{$criteria.criteriaName}</a>
+				<img class="x" alt="Delete Criteria" title="Delete Criteria" src="/images/x.png" onclick="delete_criteria('{$criteria.criteriaName|escape:"javascript"}',{$criteria.criteriaID});">
+			</div>
+		{/foreach}<br />
+			<a href="javascript:save_criteria();" class="button">Save Criteria&nbsp;&nbsp;</a>
+		</div>
+	</div>
+</div> 
+<div id="modify_value">
+	<iframe src="modify_value.php" width="130px" height="200px" frameborder="0" scrolling="no" name="modify_frame"></iframe>
+</div>
+</div>
+</form>
+<script type="text/javascript">
+	align_menu();
+</script>

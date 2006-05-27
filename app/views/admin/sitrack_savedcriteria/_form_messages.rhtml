@@ -1,0 +1,5 @@
+<%= render :partial => 'messages' %>
+
+<% unless @sitrack_savedcriteria.nil? %>
+<%= error_messages_for 'sitrack_savedcriteria' %>
+<% end %>
