@@ -3,10 +3,10 @@ function change_view()
 	var f = document.search_f;
 	var view = f.view;
 	if (view.options[view.selectedIndex].value == '|ev|') {
-		document.location = '/views/directory_views.php';
+		document.location = '/views';
 		return;
 	}
-	document.location = 'directory.php?view_id=' + view.options[view.selectedIndex].value;
+	document.location = 'directory?view_id=' + view.options[view.selectedIndex].value;
 }
 function change_region()
 {
@@ -178,10 +178,6 @@ function perform_action()
 		break;
 	case 'excel':
 		document.location = 'create_excel.php';
-		return;
-		break;
-	case 'add':
-		document.location = 'add_person.php';
 		return;
 		break;
 	case 'delete':

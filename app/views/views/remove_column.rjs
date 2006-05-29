@@ -1,0 +1,8 @@
+page.insert_html(:top, 'unused_column_list', 
+      '<li id="unused_'+@column.id.to_s+'">'+
+			link_to_remote(@column.name, 
+										:url => {:action => :add_column, :id => @view.id, :column_id => @column.id},
+										:loading => visual_effect(:blind_up, "unused_#{@column.id}"))+
+			'</li>')
+			
+page.visual_effect(:highlight, 'unused_'+@column.id.to_s )

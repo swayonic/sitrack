@@ -1,0 +1,13 @@
+<div id="center">
+	<div class="boxheader">{$legend}</div>
+	<br>
+	<div class="insidebox">
+		<% if @flash[:notice] -%>
+			<div id="notice"><%= @flash[:notice] %></div>
+		<% end -%>
+		<%= form_tag({:controller => 'view', :action => 'new'})%>
+			<%=render(:partial => 'form')%>
+		</form>
+	</div>
+	</div>
+</div>

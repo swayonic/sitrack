@@ -1,6 +1,6 @@
 require 'ajax_scaffold'
 
 class SitrackView < ActiveRecord::Base
-  set_primary_key           :viewID
-  has_and_belongs_to_many   :sitrack_columns
+  has_many   :sitrack_view_columns, :order => :position
+  has_many   :sitrack_columns, :through => :sitrack_view_columns
 end

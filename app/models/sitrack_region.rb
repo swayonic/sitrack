@@ -1,4 +1,4 @@
-class Region
+class SitrackRegion
   def self.all
     [['SW','SW'],
 		 ['GL','GL'],

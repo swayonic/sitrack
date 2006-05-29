@@ -1,3 +1,6 @@
+module Engines
+  CONFIG = {:edge => true}
+end
 # Be sure to restart your web server when you modify this file.
 
 # Uncomment below to force Rails into production mode when 
@@ -51,3 +54,20 @@ Inflector.inflections do |inflect|
 end
 
 # Include your application configuration below
+Engines.start :common_engine
+ActionMailer::Base.server_settings = {
+  :addres   => "stmp1.ccci.org",
+  :domain   => "ccci.org"
+}
+ExceptionNotifier.exception_recipients = %w(josh.starcher@uscm.org matt.drees@uscm.org)
+ExceptionNotifier.sender_address = %("Application Error" <fskorders@uscm.org>)
+ExceptionNotifier.email_prefix = "[FSK] "
+
+# Set the default place to find file_column files.
+FILE_COLUMN_PREFIX = 'files'
+module FileColumn
+  module ClassMethods
+    DEFAULT_OPTIONS[:root_path] = File.join(RAILS_ROOT, "public", FILE_COLUMN_PREFIX)
+    DEFAULT_OPTIONS[:web_root] = "#{FILE_COLUMN_PREFIX}/"
+  end
+end

@@ -3,13 +3,6 @@ BODY {
 	padding: 0px;
 	color: #336699;
 	/*background: #FFFFFF;*/
-	scrollbar-3dlight-color: #E5E5CC;
-	scrollbar-highlight-color: #336699;
-	scrollbar-shadow-color: #336699;
-	scrollbar-darkshadow-color: #E5E5CC;
-	scrollbar-face-color: #D0DDEA;
-	scrollbar-arrow-color: #336699;
-	scrollbar-track-color: #E5E5CC;
 	font-family: Arial, sans-serif;
 	font-size: 12px;
 }

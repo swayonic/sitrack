@@ -1,7 +1,7 @@
 <div id="center">
 	<div class="boxheader">Directory Listing</div>
 	<form name="search_f" method="post">
-	<input type="hidden" name="action" value="search">
+	<input type="hidden" name="action" value="search" />
 	<div id="selected_options" class="box"></div>
 	<div id="search" onblur="show_me('false');">
 		<span id="options" onclick="show('selected_options');"><strong>Search Options:</strong>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><br />
@@ -24,28 +24,28 @@
 		</div>
 	</div>
 	<div id="statuses" class="select_box" title="Status" onmouseout="hide_menu(event);">
-		<%= display_option_box(SiApplicationStatus.all)%>
+		<%= display_option_box(SiApplicationStatus.all, 'status')%>
 	</div>
 	<div id="types" class="select_box" title="Type" onmouseout="hide_menu(event);">
-		<%= display_option_box(SiType.all)%>
+		<%= display_option_box(SiType.all, 'type')%>
 	</div>
 	<div id="positions" class="select_box" title="Position" onmouseout="hide_menu(event);">
-		<%= display_option_box([['staff','Staff'],['not_staff','Not Staff']])%>
+		<%= display_option_box([['staff','Staff'],['not_staff','Not Staff']], 'position')%>
 	</div>
 	<div id="tenures" class="select_box" title="Tenure" onmouseout="hide_menu(event);">
-		<%= display_option_box([['First Year','First Year'], ['Second Year','Second Year']])%>
+		<%= display_option_box([['First Year','First Year'], ['Second Year','Second Year']], 'tenure')%>
 	</div>
 	<div id="miscs" class="select_box" title="Misc" onmouseout="hide_menu(event);">
-		<%= display_option_box([['team_leader','Team Leader'],['monthly_birthday','Monthly Birthday']])%>
+		<%= display_option_box([['team_leader','Team Leader'],['monthly_birthday','Monthly Birthday']], 'misc')%>
 	</div>
 	<div id="rogs" class="select_box" title="Region of Origin" onmouseout="hide_menu(event);">
-		<%= display_option_box(Region.all, 'o_')%>
+		<%= display_option_box(@regions, 'region_of_origin')%>
 	</div>
 	<div id="crs" class="select_box" title="Caring Region" onmouseout="hide_menu(event);">
-		<%= display_option_box(Region.all, 'c_')%>
+		<%= display_option_box(@regions, 'caring_region')%>
 	</div>
 	<div id="years" class="select_box" title="Year" onmouseout="hide_menu(event);">
-		<%= display_option_box(app_years)%>
+		<%= display_option_box(app_years, 'app_year')%>
 	</div>
 	<input type="hidden" name="orderby" value="<%=@orderby%> <%=if @sort_direction == 'asc' then @sort_direction else 'desc' end%>">
 	<br />
@@ -53,10 +53,10 @@
 	&nbsp;Views: 
 	<select name="view" onchange="change_view();">
 	<%@views.each do |view| %>
-		<%if view.viewID == @view_id%>
-			<option value="<%=view.viewID%>" selected><%=view.viewName%></option>
+		<%if view.id == @view_id%>
+			<option value="<%=view.id%>" selected><%=view.name%></option>
 		<%else%>
-			<option value="<%=view.viewID%>"><%=view.viewName%></option>
+			<option value="<%=view.id%>"><%=view.name%></option>
 		<%end%>
 	<%end%>
 		<option value="|ev|">[Edit Views...]</option>
@@ -67,36 +67,35 @@
 		<option>Choose Action...</option>
 		<option value="email">Send Email</option>
 		<option value="excel">Create Spreadsheet</option>
-		<option value="add">Add Person</option>
 		<option value="delete">Delete People</option>
 	<!--	<option value="print">Print</option> -->
 	</select>
 	&nbsp;&nbsp; 
 	Choose Region:
 	<select name="region" onchange="change_region();">
-	{foreach from=$regions item=curr key=region}
-		{if $region == $sel_region}
-			<option value="{$region}" selected="selected">{$region}</option>
-		{else}
-			<option value="{$region}">{$region}</option>
-		{/if}
-	{/foreach}
-	{if '%' == $sel_region}
+	<%@regions.each do |region|%>
+		<%if region[0] == @sel_region%>
+			<option value="<%=region[0]%>" selected="selected"><%=region[0]%></option>
+		<%else%>
+			<option value="<%=region[0]%>"><%=region[0]%></option>
+		<%end%>
+	<%end%>
+	<%if '%' == @sel_region%>
 		<option value="%" selected="selected">All</option>
-	{else}
+	<%else%>
 		<option value="%">All</option>
-	{/if}
+	<%end%>
 	</select>
 	</div>
 	<br /><br />
 	</form>
 	<form name="participants_f" method="post" action="{$smarty.server.SCRIPT_NAME}">
-	<input type="hidden" name="action">
-	<input type="hidden" name="queryName">
-	<input type="hidden" name="criteriaName">
-	<input type="hidden" name="queryID">
-	<input type="hidden" name="criteriaID">
-	<input type="hidden" name="id_list">
+	<input type="hidden" name="action" />
+	<input type="hidden" name="queryName" />
+	<input type="hidden" name="criteriaName" />
+	<input type="hidden" name="queryID" />
+	<input type="hidden" name="criteriaID" />
+	<input type="hidden" name="id_list" />
 	<!-- Begin participant table -->
 	<table cellspacing="0" border="0" width="100%" id="results">
 	{* Set up table header *}

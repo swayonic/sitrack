@@ -1,0 +1,8 @@
+page.insert_html(:bottom, 'column_list', 
+      '<li id="column_'+params[:column_id]+'">'+
+      link_to_remote(image_tag('x', :border => 0), 
+              :url => {:action => :remove_column, :view_column_id => @view_column.id},
+              :loading => visual_effect(:drop_out, 'column_'+params[:column_id]))+
+						' &nbsp;&nbsp;'+@view_column.sitrack_column.name+'</li>')
+						
+page.visual_effect(:highlight, 'column_'+params[:column_id] )

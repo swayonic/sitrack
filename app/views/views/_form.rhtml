@@ -1,0 +1,41 @@
+<%# if ENV['RAILS_ENV'] == 'development' -%>
+			<div id="errors"></div>
+			<%# end -%>
+			View Name:
+			<input type="text" id="view_name" name="view_name" value="<%=@view.name%>" />&nbsp;&nbsp;
+			<%= observe_field('view_name', :url => {:action => :save_name, :id => @view.id}, :update => 'errors')%>
+			<a href="/views" class="button">Done</a>
+		<!--  ============= BEGIN Layout column choices ============== -->
+		<p>The following columns are currently a part of this view. To reorder them, 
+		simply click and drag the column where you'd like it to be. To remove a column 
+		from the view, simply click on the red 'x' on that row. <strong>Changes are 
+		saved automatically!</strong></p>
+			<ul id="column_list">
+			<% @view.sitrack_view_columns.each do |column| -%>
+				<li id="column_<%=column.id%>">
+						<%=link_to_remote image_tag('x', :border => 0), 
+								:url => {:action => :remove_column, :view_column_id => column.id},
+								:loading => visual_effect(:drop_out, "column_#{column.id}")%>
+						&nbsp;&nbsp;<%=column.sitrack_column.name%>
+				</li>
+			<% end -%>
+			</ul>
+			<%= sortable_element 'column_list' ,
+				:url => { :action => "reorder", :id => @view },
+				:complete => visual_effect(:highlight, 'column_list' ),
+				:update => 'errors'
+			%>
+		<p>The columns listed below are not currently part of your view. To add one 
+		of the columns below to your view simply click on it. When you click on it 
+		it will jump to the bottom of the list above. Once it's there you can click 
+		and drag it where you'd like the column to go.
+			<ul id="unused_column_list">
+			<% @unused_columns.each do |column| -%>
+				<li id="unused_<%=column.id%>">
+						<%= link_to_remote(column.name, 
+										:url => {:action => :add_column, :id => @view.id, :column_id => column.id},
+										:loading => visual_effect(:blind_up, "unused_#{column.id}"))%>
+				</li>
+			<% end -%>
+			</ul>
+			
