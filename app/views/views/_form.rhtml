@@ -1,6 +1,5 @@
-<%# if ENV['RAILS_ENV'] == 'development' -%>
-			<div id="errors"></div>
-			<%# end -%>
+
+<!--			<div id="errors" style="display:<%=(ENV['RAILS_ENV']=='development')?'block':'none'%>"></div>-->
 			View Name:
 			<input type="text" id="view_name" name="view_name" value="<%=@view.name%>" />&nbsp;&nbsp;
 			<%= observe_field('view_name', :url => {:action => :save_name, :id => @view.id}, :update => 'errors')%>
@@ -34,7 +33,8 @@
 				<li id="unused_<%=column.id%>">
 						<%= link_to_remote(column.name, 
 										:url => {:action => :add_column, :id => @view.id, :column_id => column.id},
-										:loading => visual_effect(:blind_up, "unused_#{column.id}"))%>
+										:loading => visual_effect(:blind_up, "unused_#{column.id}"),
+										:update => 'errors')%>
 				</li>
 			<% end -%>
 			</ul>

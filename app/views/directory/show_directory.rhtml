@@ -1,0 +1,232 @@
+<%#=@sql%>
+<div id="center">
+	<div class="boxheader">Directory Listing</div>
+	<%= start_form_tag({:action => 'search'}, {:name => 'search_f', :id => 'search_f'})%>
+	<div id="selected_options" class="box"></div>
+	<div id="search" onblur="show_me('false');">
+		<span id="options"><strong>Search Options:</strong>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><br />
+		<div id="status" class="search_item" onclick="show_me('statuses');" onmouseout="hide_menu(event);">Status</div>
+		<div id="type" class="search_item" onclick="show_me('types');" onmouseout="hide_menu(event);">Type</div>
+		<span id="position" class="search_item" onclick="show_me('positions');" onmouseout="hide_menu(event);">Position</span>
+		<span id="tenure" class="search_item" onclick="show_me('tenures');" onmouseout="hide_menu(event);">Tenure</span>
+		<span id="misc" class="search_item" onclick="show_me('miscs');" onmouseout="hide_menu(event);">Misc</span>
+		<span id="rog" class="search_item" onclick="show_me('rogs');" onmouseout="hide_menu(event);">Region of Origin</span>
+		<span id="cr" class="search_item" onclick="show_me('crs');" onmouseout="hide_menu(event);">Caring Region</span>
+		<span id="year" class="search_item" onclick="show_me('years');" onmouseout="hide_menu(event);">App Year</span>
+		<span id="name">
+			Last: <input type="Text" name="last_name" title="Last Name" value="<%=@last_name%>" size="10" onKeyUp="enterCheck(this.form);selected(this.form);" />&nbsp;&nbsp;&nbsp;
+			First: <input type="Text" name="first_name" title="First Name" value="<%=@first_name%>" size="10" onKeyUp="enterCheck(this.form);selected(this.form);" />&nbsp;&nbsp;&nbsp;
+			Preferred: <input type="Text" name="pref_name" title="Pref Name" value="<%=@pref_name%>" size="10" onKeyUp="enterCheck(this.form);selected(this.form);" />
+		</span><br />
+		<div id="search_button">
+			<a href="javascript:document.search_f.submit();" class="button">Search!</a><br /><br />
+			<a href="javascript:clear_search();" class="button">Clear</a>
+		</div>
+	</div>
+	<div id="statuses" class="select_box" title="Status" onmouseout="hide_menu(event);">
+		<%= display_option_box(@options['Status'], 'status')%>
+	</div>
+	<div id="types" class="select_box" title="Type" onmouseout="hide_menu(event);">
+		<%= display_option_box(@options['Intern Type'], 'type')%>
+	</div>
+	<div id="positions" class="select_box" title="Position" onmouseout="hide_menu(event);">
+		<%= display_option_box(@options['Staff'], 'position')%>
+	</div>
+	<div id="tenures" class="select_box" title="Tenure" onmouseout="hide_menu(event);">
+		<%= display_option_box(@options['Tenure'], 'tenure')%>
+	</div>
+	<div id="miscs" class="select_box" title="Misc" onmouseout="hide_menu(event);">
+		<%= display_option_box(SiMiscOption.all, 'misc')%>
+	</div>
+	<div id="rogs" class="select_box" title="Region of Origin" onmouseout="hide_menu(event);">
+		<%= display_option_box(@options['Region of Origin'], 'region_of_origin')%>
+	</div>
+	<div id="crs" class="select_box" title="Caring Region" onmouseout="hide_menu(event);">
+		<%= display_option_box(@options['Caring Region'], 'caring_region')%>
+	</div>
+	<div id="years" class="select_box" title="Year" onmouseout="hide_menu(event);">
+		<%= display_option_box(@options['App Year'], 'app_year')%>
+	</div>
+	<br />
+	<div id="action_menu">
+	
+	<a><span id="toggle_options" onclick="javascript:toggle_options()"></span></a>
+	
+	&nbsp;Views: 
+	<select name="view" onchange="change_view();">
+	<%@views.sort_by(&:name).each do |view| -%>
+		<%if view.id == @view.id-%>
+			<option value="<%=view.id%>" selected="selected"><%=view.name%></option>
+		<%else-%>
+			<option value="<%=view.id%>"><%=view.name%></option>
+		<%end-%>
+	<%end-%>
+		<option value="|ev|">[Edit Views...]</option>
+	</select>
+	&nbsp;&nbsp;
+	Actions:
+	<select name="do_something" onchange="perform_action();">
+		<option>Choose Action...</option>
+		<option value="email">Send Email</option>
+		<option value="excel">Create Spreadsheet</option>
+		<option value="delete">Delete People</option>
+	<!--	<option value="print">Print</option> -->
+	</select>
+	&nbsp;&nbsp; 
+	Restrict Search To:
+	<select name="region" id="region" onchange="change_region();">
+	<%@regions.sort.each do |region|-%>
+		<%if region[0] == @sel_region_name-%>
+			<option value="<%=region[0]%>" selected="selected"><%=region[0]%></option>
+		<%else-%>
+			<option value="<%=region[0]%>"><%=region[0]%></option>
+		<%end-%>
+	<%end%>
+	<%if '%' == @sel_region_name-%>
+		<option value="all" selected="selected">All</option>
+	<%else-%>
+		<option value="all">All</option>
+	<%end-%>
+	</select>
+	</div>
+	</form>
+	<br /><br />
+	<form name="participants_f" method="post" action="/directory">
+	<input type="hidden" name="id" />
+	<input type="hidden" name="id_list" />
+	<input type="hidden" name="name" />
+	<!-- Begin participant table -->
+	<table cellspacing="0" border="0" width="100%" id="results">
+	<!-- Set up table header -->
+		<tr>
+			<td class="white nosort"><input type="Checkbox" value="true" name="all" onclick="javascript:checkAll();"></td>
+		<%@view.sitrack_view_columns.each do |view_column|
+				column = view_column.sitrack_column 
+				if column.column_type != 'text' 
+					if column.safe_name == @order_column 
+						direction, img = (@order_direction == 'asc') ? ['desc', 'arrow-up.gif'] : ['asc', 'arrow-down.gif']-%>
+						<td class="white sortactive" align="center" nowrap="nowrap">
+							<%= link_to(column.name+' &nbsp;&nbsp;'+image_tag(img, :border => 0), {:action => 'index', :order_by => column.safe_name+' '+direction}, {:class => 'sortactive'}) %>
+						</td>
+			 <% else -%>
+						<td class="white sort" align="center" nowrap="nowrap">
+							<%= link_to(column.name+' &nbsp;&nbsp;'+image_tag('diamond.gif', :border => 0), {:action => 'index', :order_by => column.safe_name+' asc'}, {:class => 'sort'}) %>
+						</td>
+			 <% end -%>
+  	 <% else -%>
+				<td class="white nosort" align="center" nowrap="nowrap"><%=column.name%></td>
+		 <% end -%>
+	<% end -%>
+		</tr>
+	<% @people.each_with_index do |@person,i|
+		style = (i%2 == 0)?'cell':'cell2'
+	-%>
+		<tr>
+			<td class="<%=style%>">
+				<input type="Checkbox" name="id_array[]" value="<%=@person['applicationID']%>">
+				<input type="hidden" name="e<%=@person['applicationID']%>" value="<%=@person['email']%>}">
+			</td>
+			<%@view.sitrack_view_columns.each do |view_column|
+					column = view_column.sitrack_column
+					value = @person[column.safe_name] || '' -%>
+				<% if column.name == "Full Name" || column.name == "First Name" || column.name == "Last Name"%>
+					<td class="<%=style%>"><strong> <a href="/profile/<%=@person['applicationID']%>"><%=value%></a> </strong></td>
+				<% else -%>
+					<td class="<%=style%>" align="center" id="c<%=column.name%><%=@person['applicationID']%>c<%=column.id%>">
+					<% if column.writeable? %>
+						<div id="<%=column.name%><%=@person['applicationID']%>c<%=column.id%>">
+					<% case column.column_type 
+						 when 'date' 
+						 	   if is_date(value)
+						 			 value = formatted_date(value)
+						 			 href = date_edit_js(column.name, column.id, @person['applicationID'], value)
+						 	   else 
+						 	   	 value = ''
+									 href = date_edit_js(column.name, column.id, @person['applicationID'], formatted_date)
+								 end 
+					  when 'text' -%>
+							<% href = "\"javascript:edit_value('#{column.name}',#{@person['applicationID']},'#{escape_javascript(value)}','#{column.id}','#{column.column_type}')\"" -%>
+							<% if value && value.length > 30
+								 	 href += " onclick=\"nd();\" onmouseover=\"return overlib('#{escape_javascript(value)}',LEFT);\" onmouseout=\"nd();\""
+							   	 value = value[0..27]+'...'
+							   end 
+					  when 'image' -%>
+						<% href="\"javascript:pictureWindow(#{@person['id']})\"" -%>
+						<% value = "<img src=\"/directory/pictures/#{value}\" border=\"0\" />" if value && value != '' -%>
+					<% else 
+						   href = "\"javascript:edit_value('#{column.name}',#{@person['applicationID']},'#{escape_javascript(@person[column.safe_name])}','#{column.id}','#{column.column_type}')\"" 
+						   value = @option_hash[column.name][value] if column.column_type = 'enum' -%>
+					<% end -%>
+					<a href=<%=href%>>
+					<% if value && value != '' %>
+						<%=value%>
+					<% else -%>
+						<img src="/images/edit.png" border="0"/>
+					<% end -%>
+					</a>
+					</div>
+				<% else 
+						 case column.column_type 
+						 when 'date' 
+					   	value = is_date(value) ? formatted_date(value) : ''
+					  when 'project' 
+							 value = @projects[value.to_i]
+				    end -%>
+						 <%=value%>
+				<% end -%>
+					</td>
+				<% end -%>
+			<% end -%>
+		</tr>
+	<% end -%>
+	</table>
+	Total: <%=@people.size%>
+</div> 
+</form>
+<div id="right">
+	<%= start_form_tag({}, {:id => 'query_form', :name => 'query_form'}) %>
+	<input type="hidden" name="query_id" />
+	<div id="queries" class="box">
+		<div id="query_header" class="subboxheader" onclick="Element.toggle('hide_queries');">Stored Lists</div>
+		<div id="hide_queries">
+		<% @saved_queries.each do |query| -%>
+			<div class="menu">
+				<%= link_to(query.name, {:controller => 'directory', :action => 'show_query', :id => query[:id]}, {:class => 'menu'})%>
+				<%= link_to(image_tag('x', :alt => 'Delete Query', :class => 'x', :border => 0), {:action => 'delete_query', :id => query[:id]}, :confirm => 'Are you sure you want to delete the "'+query.name+'" query?', :post => true) %>
+			</div>
+		<% end -%><br />
+			<a href="javascript:save_query('new');" class="button">Save List&nbsp;&nbsp;</a><br />
+			<a href="javascript:save_query('append');" class="button">Append to List</a>
+		</div>
+	</div>
+	<div id="append_query" class="box">
+		Choose a list to append to.<br />
+		<%= collection_select(:current_query, :id, @saved_queries, :id, :name) %>
+		<a href="javascript:append_query();" class="button">Save</a>
+	</div>
+	<%= end_form_tag %>
+	<br />
+	<%= start_form_tag({}, {:id => 'criteria_form', :name => 'criteria_form'}) %>
+	<input type="hidden" name="criteria_id" />
+	<div id="criteria" class="box">
+		<div id="criteria_header" class="subboxheader" onclick="Element.toggle('hide_criteria');">Stored Criteria</div>
+		<div id="hide_criteria">
+		<% @saved_criteria.each do |criteria| -%>
+			<div class="menu">
+				<%= link_to(criteria.name, {:controller => 'directory', :action => 'show_criteria', :id => criteria[:id]}, {:class => 'menu'})%>
+				<%= link_to(image_tag('x', :alt => 'Delete Query', :class => 'x', :border => 0), {:action => 'delete_criteria', :id => criteria[:id]}, :confirm => 'Are you sure you want to delete the "'+criteria.name+'" criteria?', :post => true) %>
+			</div>
+		<% end -%><br />
+			<a href="javascript:save_criteria();" class="button">Save Criteria&nbsp;&nbsp;</a>
+		</div>
+	</div>
+	<%= end_form_tag %>
+</div> 
+</div>
+<script type="text/javascript">
+	align_menu();
+	var ol_fgcolor = "#eeeeee";
+</script>
+<div id="modify_value">
+	<iframe src="" width="1000px" height="500px" frameborder="0" scrolling="yes" name="modify_frame"></iframe>
+</div>

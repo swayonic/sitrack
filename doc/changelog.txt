@@ -1,0 +1,11 @@
+Version 1.2
+* Removed ICS as a status option
+* Changed Tenure options to 'First Year', 'Second Year', 'Exception'
+* You can no longer change an applicant's preferences. The "Placement Comments" column should be used to note any needed changes.
+
+Version 1.1
+* Rewrote the PSW SI Tracker in php.
+* Integrated with national functionality.
+
+Version 1.0
+* PSW SI Tracker

@@ -17,10 +17,10 @@ function align_menu()
 	// Make box appear with selected items, and align it.
 	document.getElementById("selected_options").style.top = bottom_menu;
 	document.getElementById("selected_options").style.left = -5 + document.getElementById("options").offsetLeft + 'px';
-	document.getElementById("selected_options").style.display = 'none';
+//	document.getElementById("selected_options").style.display = 'none';
 	if (selected(document.forms[0])) {
 		// If options are selected, hide the box
-		show("selected_options");
+//		show("selected_options");
 	}
 
 	// set up each section
@@ -55,41 +55,39 @@ function align_menu()
 	// resize the search options box
 	document.getElementById('search').style.height = 26 * rows + 'px';
 
-	// hide append_query box
-	document.getElementById('append_query').style.display = "none";
-
-
 }
 function show_me(item) {
-	var ptr = document.getElementById(item);
-	var action_ptr = document.getElementById('action_menu');
-	// hide the previous item (if any), then show the one clicked
-	// if this was the last item clicked, switch it's display
-	if (item == current) {
-		ptr.style.display = "none"
-		current = '';
-		// display the action menu
-		action_ptr.style.visibility = "visible";
-		return;
-	}
-	// hide old item
-	if (current) {
-		document.getElementById(current).style.display = "none";
-	}
-	// display current item
-	if (ptr) {
-		ptr.style.display = "block";
-	}
-	current = item;
-	// hide the action menu
-	action_ptr.style.visibility = "hidden";
+    if (item && $(item)) {
+    	var ptr = document.getElementById(item);
+    	var action_ptr = document.getElementById('action_menu');
+    	// hide the previous item (if any), then show the one clicked
+    	// if this was the last item clicked, switch it's display
+    	if (item == current) {
+    		ptr.style.display = "none"
+    		current = '';
+    		// display the action menu
+    		action_ptr.style.visibility = "visible";
+    		return;
+    	}
+    	// hide old item
+    	if ($(current)) {
+    		$(current).style.display = "none";
+    	}
+    	// display current item
+    	if (ptr) {
+    		ptr.style.display = "block";
+    	}
+    	current = item;
+    	// hide the action menu
+    	action_ptr.style.visibility = "hidden";
+    }
 }
 function hide_menu(event)
 {
 	captureMousePosition(event)
 	// check to see if the mouse is currently over the current menu
-	if (current) {
-		var ptr = document.getElementById(current);
+	if ($(current)) {
+		var ptr = $(current);
 		// mouse position is tracked by a function in general.js
 		// get the box boundries
 		var pad = 0;
@@ -150,20 +148,32 @@ function selected(form) {
 	// Get pointer for selected options
 	var sel_ptr = document.getElementById('selected_options');
 	var op_ptr = document.getElementById('options');
-
+	
+    sel_ptr.style.display = 'block';
 	if (selected_options != '') {
 		sel_ptr.innerHTML = selected_options;
-		sel_ptr.style.display = 'block';
-		// make sure the box doesn't overlap the options
-		op_ptr.style.width = Math.max(op_ptr.offsetWidth, sel_ptr.offsetWidth);
+		sel_ptr.style.visibility = 'visible';
+		$('toggle_options').innerHTML = '(hide seach options)';
 		return true;
 	} else {
 		sel_ptr.innerHTML = '';
-		sel_ptr.style.display = 'none';
+		sel_ptr.style.visibility='hidden';
+		$('toggle_options').innerHTML = '';
 		return false;
 	}
 }
 
+function toggle_options()
+{   
+    if ($('selected_options').style.visibility=='hidden') {
+        $('selected_options').style.visibility='visible';
+        $('toggle_options').innerHTML = '(hide seach options)';
+    } else {
+        $('selected_options').style.visibility='hidden';
+        $('toggle_options').innerHTML = '(show seach options)';
+    }
+    return false;
+}
 function clear_form(form)
 {
 	// loop over entire form clearing all values
@@ -178,13 +188,15 @@ function clear_form(form)
 			item.checked = false;
 		}
 	}
+	$('selected_options').style.visibility = 'hidden';
+	$('action_menu').style.display = 'block';
 }
 
 function clear_search()
 {
 	// Clear and hide selected items box
 	document.getElementById('selected_options').innerHTML = '';
-	document.getElementById('selected_options').style.display = 'none';
+//	document.getElementById('selected_options').style.display = 'none';
 	clear_form(document.search_f);
 }
 

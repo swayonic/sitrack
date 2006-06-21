@@ -1,8 +1,13 @@
 page.insert_html(:bottom, 'column_list', 
-      '<li id="column_'+params[:column_id]+'">'+
+      '<li id="column_'+@view_column.id.to_s+'">'+
       link_to_remote(image_tag('x', :border => 0), 
               :url => {:action => :remove_column, :view_column_id => @view_column.id},
-              :loading => visual_effect(:drop_out, 'column_'+params[:column_id]))+
+              :loading => visual_effect(:drop_out, 'column_'+@view_column.id.to_s))+
 						' &nbsp;&nbsp;'+@view_column.sitrack_column.name+'</li>')
 						
-page.visual_effect(:highlight, 'column_'+params[:column_id] )
+page.visual_effect(:highlight, 'column_'+@view_column.id.to_s )
+
+page.sortable 'column_list' ,
+				:url => { :action => "reorder", :id => @view_column.sitrack_view.id },
+				:complete => visual_effect(:highlight, 'column_list' ),
+				:update => 'errors'

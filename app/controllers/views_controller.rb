@@ -9,6 +9,18 @@ class ViewsController < ApplicationController
     @unused_columns = @all_columns - @view.sitrack_columns
   end
   
+  def new
+    if request.get?
+      @view = SitrackView.new
+    else 
+      @view = SitrackView.new(:name => params[:view][:name])
+      @view.sitrack_user = session[:sitrack_user]
+      if @view.save
+        redirect_to(:action => :edit, :id => @view.id)
+      end
+    end
+  end
+  
   def reorder
     @view = SitrackView.find(params[:id], :include => :sitrack_view_columns)
     @view.sitrack_view_columns.each do |view_column|
@@ -28,10 +40,14 @@ class ViewsController < ApplicationController
   
   def add_column
     #raise params.inspect
-    #figure out what the current biggest position is
-    @view_column = SitrackViewColumn.create(:sitrack_view_id => params[:id], 
+    # make sure the column isn't already on this view (catch a double-click)
+    @view_column = SitrackViewColumn.find(:first, 
+                                          :conditions => ['sitrack_view_id = ? and sitrack_column_id = ?', params[:id], params[:column_id]])
+    unless @view_column    
+      @view_column = SitrackViewColumn.create(:sitrack_view_id => params[:id], 
                              :sitrack_column_id => params[:column_id],
                              :position => SitrackViewColumn.maximum('position')+1)
+    end
   end
   
   def remove_column

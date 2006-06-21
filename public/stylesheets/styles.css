@@ -1,4 +1,4 @@
-BODY {
+body {
 	margin: 0px;
 	padding: 0px;
 	color: #336699;
@@ -6,7 +6,7 @@ BODY {
 	font-family: Arial, sans-serif;
 	font-size: 12px;
 }
-BR {
+br {
 	font-size: 4px;
 }
 .static {
@@ -42,7 +42,7 @@ div.screen {
 	background: #E5E5CC;
 	border: 1px solid #336699;
 	margin-left: 10px;
-	margin-right: 115px;
+	margin-right: 120px;
 	margin-top: 5px;
 	padding-left: 3px;
 	padding-bottom: 10px;
@@ -65,17 +65,18 @@ div.screen {
 	border-width: 1px 2px 2px 1px;
 	border-style: solid;
 	border-color: #336699;
+	display: block;
 }
 
 .col1 {
 	width: 47%;
-	left: 10px;
+	left: 5px;
 	position: relative;
 }
 .col2 {
 	width: 42%;
 	top: 54px;
-	right: 115px;
+	right: 125px;
 	position: absolute;
 }
 .insidebox {
@@ -95,7 +96,7 @@ div.screen {
 	font-size: 11px;
 }
 .subboxheader-a {
-	display: inline-block;
+	display: block;
 }
 .subboxheader2{
 	color: #336699;
@@ -135,7 +136,6 @@ A.menu:hover{
 	padding: 1px 2px;
 	color: #336699;
 	text-decoration: none;
-	cursor: hand;
 	border-width: 1px 0px;
 	border-style: solid;
 	border-color: #336699;
@@ -355,7 +355,7 @@ div.column_title {
 	width: 130px;
 	height: 100px;
 	background: #FFFF99;
-	display: none;
+	display: block;
 	border: thin solid black;
 }
 .modify_field {
@@ -363,4 +363,7 @@ div.column_title {
 }
 #preview {
 	background: #FFFFFF;
+}
+#action_menu {
+    margin-left: 120px;
 }

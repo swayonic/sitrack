@@ -485,6 +485,9 @@ Ajax.InPlaceEditor.prototype = {
       highlightendcolor: "#FFFFFF",
       externalControl: null,
       submitOnBlur: false,
+      defaultClickTextClassName: "default_inline_editor_text",
+//      defaultClickText: "<img src=\"/images/edit.png\" border=\"0\" alt=\"Click to edit...\"/>",
+      defaultClickText: "Click to edit...",
       ajaxOptions: {},
       evalScripts: false
     }, options || {});
@@ -507,6 +510,7 @@ Ajax.InPlaceEditor.prototype = {
     }
     
     this.element.title = this.options.clickToEditText;
+    this.insertDefaultText();
     
     this.onclickListener = this.enterEditMode.bindAsEventListener(this);
     this.mouseoverListener = this.enterHover.bindAsEventListener(this);
@@ -520,9 +524,25 @@ Ajax.InPlaceEditor.prototype = {
       Event.observe(this.options.externalControl, 'mouseout', this.mouseoutListener);
     }
   },
+  insertDefaultText: function() {
+	  if(this.getText() == "") {
+	    this.defaultClickElement = document.createElement("span");
+	    Element.addClassName(this.defaultClickElement, this.options.defaultClickTextClassName)
+	    this.defaultClickElement.appendChild(document.createTextNode(this.options.defaultClickText));
+	 	+
+	    this.element.appendChild(this.defaultClickElement);
+	  }
+	},
+	removeDefaultText: function() {
+	  if(this.defaultClickElement) {
+	    if (this.defaultClickElement.parentNode) Element.remove(this.defaultClickElement);
+	    this.defaultClickElement = null;
+	  }
+	},
   enterEditMode: function(evt) {
     if (this.saving) return;
     if (this.editing) return;
+    this.removeDefaultText();
     this.editing = true;
     this.onEnterEditMode();
     if (this.options.externalControl) {
@@ -729,6 +749,7 @@ Ajax.InPlaceEditor.prototype = {
     Element.removeClassName(this.element, this.options.savingClassName);
     this.removeForm();
     this.leaveHover();
+    this.insertDefaultText();
     this.element.style.backgroundColor = this.originalBackground;
     Element.show(this.element);
     if (this.options.externalControl) {

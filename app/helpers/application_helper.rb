@@ -5,45 +5,33 @@ module ApplicationHelper
     ret_val = ''
     options.each do |key, value|
       id = name+'_'+key
-      ret_val += "<div class=\"select_item\" onclick=\"check($('#{id}'));\"><input id=\"#{id}\" type=\"Checkbox\" name=\"#{id}\" value=\"#{value}\" title=\"#{value}\" onclick=\"check($('#{id}'));\" /> #{value}<br /></div>\n";
+      checked = @selected_options ? (@selected_options.match(/\[#{id}\]/) ? 'checked="checked"' : '') : ''
+      ret_val += "<div class=\"select_item\" onclick=\"check($('#{id}'));\"><input id=\"#{id}\" type=\"Checkbox\" name=\"#{id}\" value=\"#{value}\" title=\"#{value}\" onclick=\"check($('#{id}'));\" #{checked} /> #{value}<br /></div>\n";
     end
     return ret_val
   end
   
-  def app_years
-  	years = []
-    (2003..Time.now.year).sort{|a,b| b<=>a}.each do |year|
-      years << ['y'+year.to_s,year]
-  	end
-  	return years
+  # add underscores
+  def u(str)
+    str.strip.gsub(/ /, '_')
   end
   
-  def in_place_select_editor_field(object,
-                                   method,
-                                   tag_options = {},
-                                   in_place_editor_options = {})
-    tag = ::ActionView::Helpers::InstanceTag.new(object, method, self)
-    tag_options = { :tag => "span",
-                    :id => "#{object}_#{method}_#{tag.object.id}_in_place_editor",
-                    :class => "in_place_editor_field"}.merge!(tag_options)
-    in_place_editor_options[:url] ||=
-        url_for({ :action => "set_#{object}_#{method}", :id => tag.object.id })
-    tag.to_content_tag(tag_options.delete(:tag), tag_options) +
-    in_place_select_editor(tag_options[:id], in_place_editor_options)
+  # check for valid date
+  def is_date(value)
+    value != '' && value != '1900-01-01 00:00:00' && value != '0000-00-00 00:00:00' && value != '1901-12-13 00:00:00' && value != '1969-12-31 00:00:00'
   end
   
-  def in_place_select_editor(field_id, options = {})
-    function = "new Ajax.InPlaceSelectEditor("
-    function << "' #{field_id}' , "
-    function << "' #{url_for(options[:url])}' "
-    function << (' , ' + options_for_javascript(
-      {
-        ' selectOptionsHTML' =>
-              %(' #{escape_javascript(options[:select_options].gsub(/\n/, ""))}' )
-      }
-      )
-    ) if options[:select_options]
-    function << ' )'
-    javascript_tag(function)
+  # format date
+  def formatted_date(value=nil)
+    if value
+      time = Time.parse(value)
+    else 
+      time = Time.now
+    end
+    time.strftime('%m/%d/%Y')
+  end
+  
+  def date_edit_js(column_name, column_id, application_id, value)
+    "\"javascript:popCalendar('#{column_name}',#{application_id},#{column_id},'#{value}')\""
   end
 end

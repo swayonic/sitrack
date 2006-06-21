@@ -1,12 +1,12 @@
 <div id="center">
-	<div class="boxheader">{$legend}</div>
+	<div class="boxheader">Create a view</div>
 	<br>
 	<div class="insidebox">
-		<% if @flash[:notice] -%>
-			<div id="notice"><%= @flash[:notice] %></div>
-		<% end -%>
-		<%= form_tag({:controller => 'view', :action => 'new'})%>
-			<%=render(:partial => 'form')%>
+		<%= error_messages_for 'view' %>
+		<%= form_tag({:action => 'new'})%>
+			View Name:
+			<%=text_field(:view, :name)%>&nbsp;&nbsp;
+			<input type="submit" name="next" value="next" class="button">
 		</form>
 	</div>
 	</div>
