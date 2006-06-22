@@ -3,6 +3,10 @@
 class ApplicationController < ActionController::Base
   before_filter :dummy_cas, AuthenticationFilter, :authorize, :except => 'no_access'
   
+  # Define the app name. This is used in authentication_filter
+  @@application_name = "sitrack"
+  cattr_accessor :application_name
+  
   private
   def dummy_cas
     session[:cas_receipt] = {}

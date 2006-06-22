@@ -11,8 +11,9 @@ class DirectoryControllerTest < Test::Unit::TestCase
     @response   = ActionController::TestResponse.new
   end
 
-  # Replace this with your real tests.
-  def test_truth
-    assert true
+  # Basic action tests:
+  def test_show_directory
+    get :show_directory
+    assert_response :success
   end
 end
