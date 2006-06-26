@@ -1,11 +1,16 @@
 # Filters added to this controller will be run for all controllers in the application.
 # Likewise, all the methods added will be available for all controllers.
 class ApplicationController < ActionController::Base
-  before_filter :dummy_cas, AuthenticationFilter, :authorize, :except => 'no_access'
+  before_filter CAS::CASFilter, AuthenticationFilter, :authorize, :except => 'no_access'
   
   # Define the app name. This is used in authentication_filter
   @@application_name = "sitrack"
   cattr_accessor :application_name
+  
+  def logout
+    reset_session
+    redirect_to('https://signin.mygcx.org/cas/logout')
+  end
   
   private
   def dummy_cas

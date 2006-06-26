@@ -1,0 +1,14 @@
+--- 
+simplesecuritymanager_user_001: 
+  email_deprecated: josh.starcher@uscm.org
+  lastLogin: 2006-06-25 14:09:19
+  lastFailure: 
+  lastFailureCnt: "0"
+  username: josh.starcher@uscm.org
+  passwordQuestion: ''
+  userID: "42655"
+  createdOn: 2004-04-09 00:00:00
+  passwordAnswer: ''
+  emailVerified: "1"
+  password: DomB6DfPieMK1vx6Tt6Vpw==
+  globallyUniqueID: F167605D-94A4-7121-2A58-8D0F2CA6E026

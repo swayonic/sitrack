@@ -1,5 +1,21 @@
-# Read about fixtures at http://ar.rubyonrails.org/classes/Fixtures.html
-first:
-  id: 1
-another:
-  id: 2
+--- 
+sitrack_view_columns_001: 
+  sitrack_view_id: "85"
+  sitrack_column_id: "105"
+  id: "9110"
+  position: "9"
+sitrack_view_columns_002: 
+  sitrack_view_id: "85"
+  sitrack_column_id: "115"
+  id: "9114"
+  position: "8"
+sitrack_view_columns_003: 
+  sitrack_view_id: "85"
+  sitrack_column_id: "66"
+  id: "9115"
+  position: "11"
+sitrack_view_columns_004: 
+  sitrack_view_id: "85"
+  sitrack_column_id: "41"
+  id: "9119"
+  position: "10"

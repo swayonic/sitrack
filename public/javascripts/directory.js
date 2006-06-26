@@ -26,8 +26,12 @@ function save_query(action)
 		case 'new':
 			// Prompt user for query name
 			var name;
-			name = prompt('This query will contain all the people whose names have been checked.\n Please enter a name for this query.','');
-			if(!name) {
+			name = prompt('This list will contain all the people whose names have been checked.\n Please enter a name for this list.','');
+			if(name == null) {
+			    break;
+			} else if (name == '') {
+    			alert('Sorry, naming your list is mandatory.');
+				save_query(action);
 				break;
 			}
 			f.name.value = name;
@@ -45,13 +49,22 @@ function save_query(action)
 }
 function save_criteria()
 {	
+    // Make sure we have criteria
+    
 	// Prompt user for query name
 	var name;
 	name = prompt('This "Stored Criteria" will store all the search options used in this search.\n Please enter a name for this criteria.','');
-	if(!name) {
+	if(name == null) {
+	    return;
+	} else if (name == '') {
+		alert('Sorry, naming your criteria is mandatory.');
+		save_criteria();
 		return;
 	}
-	document.location = '/directory/save_criteria?name='+name;
+	var f = document.participants_f;
+	f.name.value = name;
+	f.action = '/directory/save_criteria';
+	f.submit();
 }
 
 function append_query()
@@ -154,7 +167,7 @@ function perform_action()
 		}
 		break;
 	case 'excel':
-		document.location = 'create_excel.php';
+		document.location = '/directory/excel_download';
 		return;
 		break;
 	case 'delete':

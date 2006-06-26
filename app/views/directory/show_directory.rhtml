@@ -1,4 +1,4 @@
-<%#=@sql%>
+<%#=debug(@selected_options)%>
 <div id="center">
 	<div class="boxheader">Directory Listing</div>
 	<%= start_form_tag({:action => 'search'}, {:name => 'search_f', :id => 'search_f'})%>
@@ -27,10 +27,10 @@
 		<%= display_option_box(@options['Status'], 'status')%>
 	</div>
 	<div id="types" class="select_box" title="Type" onmouseout="hide_menu(event);">
-		<%= display_option_box(@options['Intern Type'], 'type')%>
+		<%= display_option_box(@options['Intern Type'], 'intern_type')%>
 	</div>
 	<div id="positions" class="select_box" title="Position" onmouseout="hide_menu(event);">
-		<%= display_option_box(@options['Staff'], 'position')%>
+		<%= display_option_box(@options['Position'], 'position')%>
 	</div>
 	<div id="tenures" class="select_box" title="Tenure" onmouseout="hide_menu(event);">
 		<%= display_option_box(@options['Tenure'], 'tenure')%>
@@ -69,7 +69,6 @@
 		<option>Choose Action...</option>
 		<option value="email">Send Email</option>
 		<option value="excel">Create Spreadsheet</option>
-		<option value="delete">Delete People</option>
 	<!--	<option value="print">Print</option> -->
 	</select>
 	&nbsp;&nbsp; 
@@ -99,7 +98,7 @@
 	<table cellspacing="0" border="0" width="100%" id="results">
 	<!-- Set up table header -->
 		<tr>
-			<td class="white nosort"><input type="Checkbox" value="true" name="all" onclick="javascript:checkAll();"></td>
+			<td class="white nosort"><input type="Checkbox" value="true" name="all" onclick="javascript:checkAll();" /></td>
 		<%@view.sitrack_view_columns.each do |view_column|
 				column = view_column.sitrack_column 
 				if column.column_type != 'text' 
@@ -123,8 +122,8 @@
 	-%>
 		<tr>
 			<td class="<%=style%>">
-				<input type="Checkbox" name="id_array[]" value="<%=@person['applicationID']%>">
-				<input type="hidden" name="e<%=@person['applicationID']%>" value="<%=@person['email']%>}">
+				<input type="Checkbox" name="id_array[]" value="<%=@person['applicationID']%>" />
+				<input type="hidden" name="e<%=@person['applicationID']%>" value="<%=@person['email']%>" />
 			</td>
 			<%@view.sitrack_view_columns.each do |view_column|
 					column = view_column.sitrack_column
@@ -155,7 +154,7 @@
 						<% value = "<img src=\"/directory/pictures/#{value}\" border=\"0\" />" if value && value != '' -%>
 					<% else 
 						   href = "\"javascript:edit_value('#{column.name}',#{@person['applicationID']},'#{escape_javascript(@person[column.safe_name])}','#{column.id}','#{column.column_type}')\"" 
-						   value = @option_hash[column.name][value] if column.column_type = 'enum' -%>
+						   value = @option_hash[column.name][u(value)] if column.column_type = 'enum' -%>
 					<% end -%>
 					<a href=<%=href%>>
 					<% if value && value != '' %>
@@ -181,8 +180,8 @@
 	<% end -%>
 	</table>
 	Total: <%=@people.size%>
+	</form>
 </div> 
-</form>
 <div id="right">
 	<%= start_form_tag({}, {:id => 'query_form', :name => 'query_form'}) %>
 	<input type="hidden" name="query_id" />
@@ -217,12 +216,16 @@
 				<%= link_to(image_tag('x', :alt => 'Delete Query', :class => 'x', :border => 0), {:action => 'delete_criteria', :id => criteria[:id]}, :confirm => 'Are you sure you want to delete the "'+criteria.name+'" criteria?', :post => true) %>
 			</div>
 		<% end -%><br />
-			<a href="javascript:save_criteria();" class="button">Save Criteria&nbsp;&nbsp;</a>
+		<% if @selected_options 
+				js = 'save_criteria()'
+			 else
+			  js = 'alert(\'You must perform click the \\\'Search!\\\' button before you can save the criteria.\')'
+			 end-%>
+			<a href="javascript:<%=js%>;" class="button">Save Criteria&nbsp;&nbsp;</a>
 		</div>
 	</div>
 	<%= end_form_tag %>
 </div> 
-</div>
 <script type="text/javascript">
 	align_menu();
 	var ol_fgcolor = "#eeeeee";

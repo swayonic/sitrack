@@ -8,7 +8,7 @@ common = ['First Name',
 					'Account No',
 					'SSN',
 					'Intern Type',
-					'Staff',
+					'Position',
 					'Citizenship',
 					'US Citizen']
 
@@ -115,9 +115,16 @@ person_id = @person['personID']
 		document.getElementById('center').style.height = document.getElementById('col2').offsetHeight + 30 + 'px';
 	}
 	//Open child window
-	function childWindow(childID,personID,action) {
-		var path = "child.php?childID="+childID+"&personID="+personID+"&action="+action;
-		cwin = window.open(path, "cwin", "toolbar=0,scrollbars=0,resizable=1,width=300,height=200");
+	function childWindow(id,action) {
+		switch(action) {
+			case 'edit':
+				var path = "/child/edit_child?childID="+id;
+				break;
+			case 'add':
+				var path = "/child/add_child?personID="+id;
+				break;
+		}
+		cwin = window.open(path, "cwin", "toolbar=0,scrollbars=0,resizable=1,width=450,height=400");
 		cwin.focus();
 	}
 	//Open picture window
@@ -259,19 +266,22 @@ person_id = @person['personID']
 			<div class="subboxheader-a">Children</div>
 			<table cellspacing="0" border="0" width="100%">
 			<tr>
-				<td class="white nosort" align="center">Name</td>
-				<td class="white nosort" align="center">Birthday</td>
-				<td class="white nosort" align="center">Passport#</td>
-				<td class="white nosort" align="center"><a href="javascript:childWindow(0,<%=person_id%>,'edit');">Add Child</a></td>
+				<td class="white nosort">Name</td>
+				<td class="white nosort">Birthday</td>
+				<td class="white nosort">Passport#</td>
+				<td class="white nosort" align="center"><a href="javascript:childWindow(<%=person_id%>,'add');">Add Child</a></td>
 			</tr>
 			<%@children.each do |child|%>
-			<tr>
+			<tr id="child#{child.id}">
 				<td><%=child.name %></td>
-				<td><%=date_format(child.birthday) %></td>
-				<td><%=child.passportNo %></td>
+				<td><%=child.birthday.strftime('%m/%d/%Y') unless child.birthday.nil?%></td>
+				<td><%=child.passport_no %></td>
 				<td align="center">
-					<a href="javascript:childWindow(<%=child.childID%>,<%=person_id%>,'edit');">edit</a>&nbsp;&nbsp;&nbsp;
-					<a href="javascript:childWindow(<%=child.childID%>,<%=person_id%>,'remove');">remove</a>
+					<a href="javascript:childWindow(<%=child.id%>,'edit');">edit</a>&nbsp;&nbsp;&nbsp;
+					<%= link_to_remote 'remove', 
+														:url => {:controller => 'child', :action => 'delete_child', :id => child.id},
+														:complete => "document.location = '/profile/#{application_id}'",
+														:condition => "confirm('Are you sure you want to remove this child?')"%>
 				</td>
 			</tr>
 			<%end -%>
@@ -345,5 +355,3 @@ person_id = @person['personID']
 <script type="text/javascript">
 	adjustHeight();
 </script>
-
-

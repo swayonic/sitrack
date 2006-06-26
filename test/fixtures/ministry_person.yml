@@ -1,0 +1,97 @@
+--- 
+ministry_person_001: 
+  changedBy: STINT
+  cruCommonsInvite: 
+  blogfeed: 
+  occupation: 
+  isChild: "0"
+  isStaff: "0"
+  deprecated_fk_infobaseID: 
+  preferredName: Phil
+  lastName: Wright
+  title: Mr.
+  region: RR
+  birthDate: ''
+  deprecated_phone: "2143958493"
+  deprecated_username: 
+  universityState: TX
+  usCitizen: "0"
+  deprecated_marriageDate: 
+  yearInSchool: Junior
+  citizenship: ''
+  middleName: ''
+  fk_StaffSiteProfileID: "0"
+  greekAffiliation: Lamda Chi Alpha
+  gender: "1"
+  deprecated_email: philwright182@hotmail.com
+  firstName: Philip
+  dateChanged: 2003-11-11 00:00:00
+  cruCommonsLastLogin: 
+  maritalStatus: S
+  graduationDate: Dec 10 2005 12:00AM
+  fk_childOf: "0"
+  fk_ssmUserId: "16204"
+  major: International Studies
+  dateBecameChristian: ''
+  accountNo: ''
+  deprecated_CrsSpouseID: "0"
+  dateCreated: 2003-01-15 00:00:00
+  bio: 
+  numberChildren: "0"
+  createdBy: ''
+  image: 
+  deprecated_isInPeopleSoft: "0"
+  deprecated_spouseVerified: ''
+  campus: Southern Methodist University
+  workInUS: "1"
+  personID: "50069"
+  fk_spouseID: "0"
+  minor: 
+ministry_person_002: 
+  changedBy: CruCommons
+  cruCommonsInvite: 2006-04-03 12:47:39
+  blogfeed: http://www.starcherscene.com/feed
+  occupation: CCC Staff
+  isChild: "0"
+  isStaff: "0"
+  deprecated_fk_infobaseID: 
+  preferredName: " "
+  lastName: Starcher
+  title: Mr.
+  region: SW
+  birthDate: 07/07/1982
+  deprecated_phone: "5307583786"
+  deprecated_username: 
+  universityState: CA
+  usCitizen: "1"
+  deprecated_marriageDate: 
+  yearInSchool: Alumni
+  citizenship: ''
+  middleName: ''
+  fk_StaffSiteProfileID: "0"
+  greekAffiliation: " "
+  gender: "1"
+  deprecated_email: josh.starcher@uscm.org
+  firstName: Josh
+  dateChanged: 
+  cruCommonsLastLogin: 
+  maritalStatus: M
+  graduationDate: 05/26/2006
+  fk_childOf: "0"
+  fk_ssmUserId: "42655"
+  major: " Philosophy"
+  dateBecameChristian: "1"
+  accountNo: ''
+  deprecated_CrsSpouseID: "7891"
+  dateCreated: 
+  bio: ''
+  numberChildren: "0"
+  createdBy: CRS
+  image: Amanda_and_Josh_010.jpg
+  deprecated_isInPeopleSoft: "0"
+  deprecated_spouseVerified: ''
+  campus: University of California-Davis
+  workInUS: "1"
+  personID: "102546"
+  fk_spouseID: "77512"
+  minor: Computer Science

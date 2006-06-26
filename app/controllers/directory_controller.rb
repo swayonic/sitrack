@@ -13,53 +13,41 @@ class DirectoryController < ApplicationController
     @view ||= view_id ? SitrackView.find(view_id, :include => [:sitrack_view_columns, :sitrack_columns], :order => 'sitrack_view_columns.position') :
           session[:sitrack_user].sitrack_views.find(:first, :include => [:sitrack_view_columns, :sitrack_columns])
     
+    session[:session].save_value('view_id', @view.id) unless @view.id == view_id
+    
     # if we have a query_id in the session, use the saved list
     if (query_id = session[:session].get_value('query_id'))
-      @current_query = SitrackQuery.find(query_id)
-      where_clause = ' applicationID IN('+@current_query.persons+') '
-      @selected_options = nil
+      @current_query = SitrackQuery.find_by_id(query_id)
+      if (@current_query)
+        @where_clause = ' applicationID IN('+@current_query.persons+') ' 
+        @selected_options = nil
+      end
     end
     
     # if we have a criteria_id in the session, use the saved query
     if (criteria_id = session[:session].get_value('criteria_id'))
-      @current_criteria = SitrackSavedCriteria.find(criteria_id)
-      @qs = @current_criteria.criteria
-      @selected_options = @current_criteria.options
+      @current_criteria = SitrackSavedCriteria.find_by_id(criteria_id)
+      if @current_criteria
+        @qs = @current_criteria.criteria
+        @selected_options = @current_criteria.options
+      end
     end
     
-    #########################      
-    #### Build the query ####
-    #########################
-    @sel_region_name = session[:session].get_value('region') || session[:user].person.region
-    @sel_region_name = '%' if @sel_region_name == 'all'
-    all_where = "( #{Person.table_name}.region LIKE '#{@sel_region_name}' OR #{SitrackTracking.table_name}.caringRegion LIKE '#{@sel_region_name}' ) "+
-			     "AND (#{Person.table_name}.firstName <> '' OR #{Person.table_name}.lastName <>'' )"
-    select_clause = @view.display_columns
-    from_clause = SitrackView.join_tables
-    where_clause = all_where unless where_clause
-    @sql = 'SELECT '+select_clause+' FROM '+from_clause+' WHERE '+where_clause
-    # If we have a search or saved criteria, add the query string.
-    @sql += @qs if @qs
+    build_query
+    
 
     #############################
     #### Get ready to render ####
     #############################
-    @order_by = get_order_by(@view)
     @order_column = @order_by.split(' ')[0]
     @order_direction = @order_by.split(' ')[1]
     
-    @people = ActiveRecord::Base.connection.select_all(@sql+' ORDER BY '+@order_by)
     
     @saved_queries = SitrackQuery.find_all_by_owner(session[:sitrack_user].id, :order => :name)
     @saved_criteria = SitrackSavedCriteria.find_all_by_owner(session[:sitrack_user].id, :conditions => 'saved = 1', :order => :name)
     @sel_region_name ||= '%'
     
-    # get all the project, and create an array of id=> name pairs
-    if @view.sitrack_columns.detect {|c| 'project' == c.column_type}
-      projects_hash = ActiveRecord::Base.connection.select_all("SELECT SIProjectID, name FROM #{SiProject.table_name}")
-      @projects = Array.new
-      projects_hash.each {|p| @projects[p['SIProjectID'].to_i] = p['name']}
-    end
+    get_projects
     
     # get the search options
     @options = get_options
@@ -70,6 +58,34 @@ class DirectoryController < ApplicationController
     @last_name = @selected_options ? (@selected_options.match(/<last_name>(.*)<\/last_name>/) ? $1 : '') : ''
     @pref_name = @selected_options ? (@selected_options.match(/<pref_name>(.*)<\/pref_name>/) ? $1 : '') : ''
     render(:action => :show_directory)
+  end
+  
+  #########################      
+  #### Query           ####
+  #########################
+  def build_query
+    @sel_region_name = session[:session].get_value('region') || session[:user].person.region
+    @sel_region_name = '%' if @sel_region_name == 'all'
+    all_where = "( #{Person.table_name}.region LIKE '#{@sel_region_name}' OR #{SitrackTracking.table_name}.caringRegion LIKE '#{@sel_region_name}' ) "+
+			     "AND (#{Person.table_name}.firstName <> '' OR #{Person.table_name}.lastName <>'' )"
+    select_clause = @view.display_columns
+    from_clause = SitrackView.join_tables
+    @where_clause = all_where unless @where_clause
+    @sql = 'SELECT '+select_clause+' FROM '+from_clause+' WHERE '+@where_clause
+    
+    # If we have a search or saved criteria, add the query string.
+    @sql += @qs if @qs
+    @order_by = get_order_by(@view)
+    @people = ActiveRecord::Base.connection.select_all(@sql+' ORDER BY '+@order_by)
+  end
+  
+  # get all the project, and create an array of id=> name pairs
+  def get_projects
+    if @view.sitrack_columns.detect {|c| 'project' == c.column_type}
+      projects_hash = ActiveRecord::Base.connection.select_all("SELECT SIProjectID, name FROM #{SiProject.table_name}")
+      @projects = Array.new
+      projects_hash.each {|p| @projects[p['SIProjectID'].to_i] = p['name']}
+    end
   end
   
   def search
@@ -100,7 +116,7 @@ class DirectoryController < ApplicationController
     query_string[:type] += ')' unless query_string[:type] == ''
     
     ## Position
-    @options['Staff'].each do |position|
+    @options['Position'].each do |position|
       if params['position_'+position[0]]
         join = (query_string[:position] == '') ? ' AND (' : ' OR '
         query_string[:position] += join + Person.table_name + ".isStaff = #{position[0]}"
@@ -150,7 +166,7 @@ class DirectoryController < ApplicationController
     query_string[:caring_region] += ')' unless query_string[:caring_region] == ''
     
     ## App Year
-    SiAppYear.all.each do |app_year|
+    @options['App Year'].each do |app_year|
       if params['app_year_'+app_year[0]]
         join = (query_string[:app_year] == '') ? ' AND (' : ' OR '
         query_string[:app_year] += join + SiApplication.table_name + ".siYear = '#{app_year[1]}'"
@@ -186,18 +202,24 @@ class DirectoryController < ApplicationController
   
   def show_query
     query_id = params[:id]
-    session[:session].save_value('query_id', query_id)
-    # clear any unsaved stored criteria
-    session[:session].remove_value('criteria_id')
-    SitrackSavedCriteria.delete_all("owner = #{session[:sitrack_user].id} AND saved = 0")
+    # if we don't have a query id, just show the directory
+    if query_id
+      session[:session].save_value('query_id', query_id)
+      # clear any unsaved stored criteria
+      session[:session].remove_value('criteria_id')
+      SitrackSavedCriteria.delete_all("owner = #{session[:sitrack_user].id} AND saved = 0")
+    end
     show_directory
   end
   
   def show_criteria
     criteria_id = params[:id]
-    session[:session].save_value('criteria_id', criteria_id)
-    # remove any query_id. You can't use a criteria and query at the same time.
-    session[:session].remove_value('query_id')
+    # if we don't have a criteria id, just show the directory
+    if criteria_id
+      session[:session].save_value('criteria_id', criteria_id)
+      # remove any query_id. You can't use a criteria and query at the same time.
+      session[:session].remove_value('query_id')
+    end
     show_directory
   end
   
@@ -216,38 +238,47 @@ class DirectoryController < ApplicationController
   end
   
   def save_query
-    query = SitrackQuery.create(:name => params[:name], :owner => session[:sitrack_user].id, :persons => params[:id_list])
-    session[:session].save_value('query_id', query.id)
+    if request.post? && params[:name] && params[:id_list]
+      query = SitrackQuery.create(:name => params[:name], :owner => session[:sitrack_user].id, :persons => params[:id_list])
+      session[:session].save_value('query_id', query.id)
+    end
     show_directory
   end
   
   def append_query
-    query = SitrackQuery.find(params[:id])
-    curr_list = query.persons.split(',')
-    add_list = params[:id_list].split(',')
-    query.persons = (curr_list + add_list).uniq.join(',')
-    query.save! 
-    session[:session].save_value('query_id', query.id)
+    if request.post? && params[:id] && params[:id_list]
+      # make sure they own this query
+      query = SitrackQuery.find_by_owner_and_id(session[:sitrack_user].id, params[:id])
+      if query
+        curr_list = query.persons.split(',')
+        add_list = params[:id_list].split(',')
+        query.persons = (curr_list + add_list).uniq.join(',')
+        query.save! 
+        session[:session].save_value('query_id', query.id)
+      end
+    end
     show_directory   
   end
   
   def save_criteria
-    criteria = SitrackSavedCriteria.find(session[:session].get_value('criteria_id'))
-    criteria.name = params[:name]
-    criteria.saved = 1
-    criteria.save!
+    if request.post? && params[:name] && (id = session[:session].get_value('criteria_id'))
+      criteria = SitrackSavedCriteria.find(id)
+      criteria.name = params[:name]
+      criteria.saved = 1
+      criteria.save!
+    end
     show_directory
   end
   
   def change_region
-    session[:session].save_value('region', params[:region])
+    session[:session].save_value('region', params[:region]) if params[:region]
     show_directory
   end
   
   def change_view
     view_id = params[:view_id].to_i
   	# save view in session object
-  	session[:session].save_value('view_id', view_id)
+  	session[:session].save_value('view_id', view_id) if view_id != 0
   	show_directory
   end
   
@@ -339,10 +370,63 @@ class DirectoryController < ApplicationController
     render :layout => false
   end
   
+  def fix_criteria
+    @options_hash = get_option_hash
+    @criteria = SitrackSavedCriteria.find_all
+    @criteria.each do |c|
+      ['Status', 'Intern Type', 'Position', 'Tenure', 'App Year'].each do |field|
+        raise field.inspect unless @options_hash[field]
+        @options_hash[field].each do |value|
+          c.options.gsub!('['+value[1]+']', '['+u(field.downcase)+'_'+value[0]+']')
+        end
+      end
+      c.options.gsub!('[o_', '[region_of_origin_')
+      c.options.gsub!('[c_', '[caring_region_')
+      c.options.gsub!('[y','[app_year_')
+      c.options.gsub!('[team_leader]','[misc_team_leader]')
+      c.options.gsub!('[monthly_birthday]','[misc_monthly_birthday]')
+      c.save!
+    end
+  end
+  
+  def excel_download
+    #get the view
+    @view = SitrackView.find(session[:session].get_value('view_id'), 
+                            :include => [:sitrack_view_columns, :sitrack_columns], 
+                            :order => 'sitrack_view_columns.position')
+    # figure out what to call the downlaod
+    if (id = session[:session].get_value('query_id'))
+      query = SitrackQuery.find(id)
+      name = query.name
+      @where_clause = " #{SiApplication.table_name}.applicationID in( #{query.persons} ) "
+    elsif (id = session[:session].get_value('criteria_id'))
+      criteria = SitrackSavedCriteria.find(id)
+      name = criteria.name
+      @qs = criteria.criteria
+    end
+    name = @view.name if !name || name.empty?
+    where ||= ''
+    
+    build_query
+    
+    @options_hash = get_option_hash
+    
+    get_projects
+    
+    headers['Content-Type'] = "application/vnd.ms-excel" 
+    headers['Content-Disposition'] = "attachment; filename=\"#{name}.xls\""
+    headers['Cache-Control'] = ''
+
+    render_without_layout
+  end
+  
   #####################
   ##### PRIVATE #######
   #####################
   private
+  def u(str)
+    str.strip.gsub(/ /, '_')
+  end
   def get_order_by(view)
     # if there is a query id in the params, set the session value
     if (params[:order_by])

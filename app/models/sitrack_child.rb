@@ -1,5 +1,4 @@
-require 'ajax_scaffold'
-
 class SitrackChild < ActiveRecord::Base
-  set_primary_key 			:childID
+  validates_presence_of :name
+  validates_presence_of :birthday
 end
