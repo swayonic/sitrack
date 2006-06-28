@@ -3454,7 +3454,7 @@ ActiveRecord::Schema.define(:version => 14) do
   create_table "sitrack_children", :force => true do |t|
     t.column "name", :string, :limit => 50
     t.column "birthday", :datetime
-    t.column "passportNo", :string, :limit => 50
+    t.column "passport_no", :string, :limit => 50
     t.column "person_id", :integer, :limit => 10, :default => 0, :null => false
   end
 
@@ -3533,18 +3533,12 @@ ActiveRecord::Schema.define(:version => 14) do
     t.column "owner", :integer, :limit => 10, :default => 0, :null => false
     t.column "criteria", :text, :default => "", :null => false
     t.column "saved", :integer, :limit => 3, :default => 0, :null => false
-    t.column "options", :string, :default => "", :null => false
+    t.column "options", :text, :default => "", :null => false
     t.column "created_at", :datetime, :null => false
     t.column "updated_at", :datetime
   end
 
   add_index "sitrack_saved_criteria", ["owner"], :name => "owner_sitrack_SavedCriteria"
-
-  create_table "sitrack_session", :id => false, :force => true do |t|
-    t.column "uuid", :integer, :limit => 10, :default => 0, :null => false
-    t.column "attribute", :string, :limit => 50, :default => "", :null => false
-    t.column "value", :string, :default => "", :null => false
-  end
 
   create_table "sitrack_session_values", :force => true do |t|
     t.column "sitrack_session_id", :integer, :limit => 10, :default => 0, :null => false

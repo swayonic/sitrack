@@ -197,7 +197,7 @@ A:hover {
 	text-decoration: none;
 	cursor: pointer;
 }
-INPUT, TEXTAREA, SELECT{
+input, textarea, select{
 	font-family: Arial, sans-serif;	
 	font-size: 11px;
 	background: #EEEEEE;

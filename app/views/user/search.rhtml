@@ -1,0 +1,12 @@
+<% if @people.size > 20 -%>
+	There are <strong>more than 20 people</strong> who match the name you've typed so far. Keep typing.
+<% elsif @people.size == 0 %>
+	<strong>There are no matches for the name you have entered. Please try something else.</strong>
+<% else %> 
+	Click on one of the names listed below to give that person access to the tool.<br/>
+	<% @people.each do |person| -%>
+		<%=link_to_remote(person.firstName+' '+person.lastName, 
+											:url => {:action => :add, :ssm_id => person.fk_ssmUserId},
+											:update => 'results')%><br/>
+	<% end
+   end -%>

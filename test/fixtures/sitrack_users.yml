@@ -2,3 +2,5 @@
 first:
   id: 1
   ssm_id: 42655
+  created_at: "0000-00-00"
+  updated_at: "0000-00-00"

@@ -9,10 +9,29 @@ class ChildControllerTest < Test::Unit::TestCase
     @controller = ChildController.new
     @request    = ActionController::TestRequest.new
     @response   = ActionController::TestResponse.new
+    # fake cas
+    @request.session[:cas_receipt] = {:user => 'josh.starcher@uscm.org',
+                                      :ssoGuid => 'F167605D-94A4-7121-2A58-8D0F2CA6E026'}
   end
 
-  # Replace this with your real tests.
-  def test_truth
-    assert true
+  # really basic bare minimum tests
+  def test_add_child
+    get :add_child
+    assert_response :success
+  end
+  
+  def test_edit_child
+    get :edit_child
+    assert_response :success
+  end
+  
+  def test_save_child
+    post :save_child, :child => {:name => 'bob', :birthday => '5/5/2000'}
+    assert_response :success
+  end
+  
+  def test_delete_child
+    xhr :post, :delete_child
+    assert_response :success
   end
 end

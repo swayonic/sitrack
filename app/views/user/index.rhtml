@@ -1,0 +1,20 @@
+<div id="center">
+	<div class="boxheader">Add SI Tracker User</div>
+<p>
+You can search by any combination of first or last name, including partial names:
+</p>
+<%= form_tag %>
+	<p>
+	<label for="name">Name:</label>
+  <%= text_field_tag :name %>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+  <%= observe_field(:name,
+  									:update => "results",
+  									:frequency => 1,
+										:url 		=> {:action => :search},
+										:loading => "Element.show('spinner')",
+										:complete => "Element.hide('spinner')")%>
+</p>
+<%= end_form_tag%>
+<p><div id="results">
+<%= image_tag "spinner.gif", :id => 'spinner', :style => 'display:none' %></div></p>
+</div>

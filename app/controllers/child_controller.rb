@@ -1,16 +1,27 @@
 class ChildController < ApplicationController
   
   def add_child
-    @child = SitrackChild.new(:person_id => params[:personID])
-    render(:action => :child, :layout => false)
+    if params[:personID]
+      @child = SitrackChild.new(:person_id => params[:personID])
+      render(:action => :child, :layout => false)
+    else
+      close_window
+    end
   end
   
   def edit_child
-    @child = SitrackChild.find(params[:childID])
-    render(:action => :child, :layout => false)    
+    if params[:childID]
+      @child = SitrackChild.find(params[:childID])
+      render(:action => :child, :layout => false)    
+    else
+      close_window
+    end
   end
   
   def save_child
+    unless params[:child]
+      raise "Bad form post"
+    end
     if params[:id]
       #update
       @child = SitrackChild.find(params[:id])
@@ -20,7 +31,7 @@ class ChildController < ApplicationController
       @child = SitrackChild.create(params["child"])
     end
     if @child.valid?
-      render(:layout => false)
+      close_window
     else 
       render(:action => :child, :layout => false)
     end
@@ -28,5 +39,12 @@ class ChildController < ApplicationController
   
   def delete_child
     SitrackChild.destroy(params[:id]) if params[:id]
+    render :nothing => true
+  end
+  
+  private 
+  
+  def close_window
+    render :action => 'close_window'
   end
 end
