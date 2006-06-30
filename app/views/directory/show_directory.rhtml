@@ -151,10 +151,10 @@
 							   end 
 					  when 'image' -%>
 						<% href="\"javascript:pictureWindow(#{@person['id']})\"" -%>
-						<% value = "<img src=\"/directory/pictures/#{value}\" border=\"0\" />" if value && value != '' -%>
+						<% value = "<img src=\"#{url_for_picture(@person['id'], value)}\" border=\"0\" />" if value && value != '' -%>
 					<% else 
 						   href = "\"javascript:edit_value('#{column.name}',#{@person['applicationID']},'#{escape_javascript(@person[column.safe_name])}','#{column.id}','#{column.column_type}')\"" 
-						   value = @option_hash[column.name][u(value)] if column.column_type = 'enum' -%>
+						   value = @option_hash[column.name][u(value)] if 'enum' == column.column_type  -%>
 					<% end -%>
 					<a href=<%=href%>>
 					<% if value && value != '' %>

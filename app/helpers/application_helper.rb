@@ -34,4 +34,8 @@ module ApplicationHelper
   def date_edit_js(column_name, column_id, application_id, value)
     "\"javascript:popCalendar('#{column_name}',#{application_id},#{column_id},'#{value}')\""
   end
+  
+  def url_for_picture(id, img, size='mini')
+    "/files/person/image/#{id}/#{size}/#{img}"
+  end
 end

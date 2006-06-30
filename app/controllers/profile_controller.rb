@@ -1,4 +1,6 @@
 class ProfileController < ApplicationController
+  caches_action :index
+  
   def index
     # if we don't have an id in the request, go back to the directory
     unless params[:id]
@@ -14,6 +16,9 @@ class ProfileController < ApplicationController
     if !@person
       redirect_to(:controller => 'directory'); return; 
     end
+    
+    # sometimes it's useful to have the person as an object instead of a hash
+    @person_obj = Person.find(@person['personID'])
     
     # get all the columns and create an hash of name=> column pairs
     @columns = Hash.new
@@ -46,4 +51,46 @@ class ProfileController < ApplicationController
     render(:action => :index)
   end
 
+  def edit_image
+    @person = Person.find(params[:id])
+    render(:action => :edit_image, :layout => false)
+  end
+  
+  def update_image
+  	#make sure we have a person in the params
+  	@person = Person.find(params[:id])
+  	if params[:person] && @person
+	    @person.image = params[:person][:image]
+	    if @person.save
+        # clear page caches
+        @person.si_applications do |app|
+  	      expire_action(:action => :index, :id => app.id)
+  	    end
+        render(:template => '/shared/close_window', :layout => false)
+      else 
+    	  edit_image
+	    end
+	  else
+	   edit_image
+    end
+  end  
+  
+  def create_second_year
+    @first_year = SiApplication.find(params[:id])
+    @second_year = @first_year.clone
+    @tracking = @first_year.sitrack_tracking ? @first_year.sitrack_tracking.clone : SitrackTracking.new
+    @tracking.asgYear = "#{Time.now.year}-#{Time.now.year+1}"
+    @tracking.tenure = 'Second Year'
+    @tracking.status = 'Re-Applied'
+    @second_year.sitrack_tracking = @tracking
+    @mpd = @first_year.sitrack_mpd ? @first_year.sitrack_mpd.clone : SitrackMpd.new
+    @mpd.monthlyRaised = 0
+    @mpd.oneTimeRaised = 0
+    @mpd.totalRaised = 0
+    @mpd.percentRaised = 0
+    @second_year.sitrack_mpd = @mpd
+    @second_year.save!
+    # go to the new profile
+    redirect_to(:action => :index, :id => @second_year.id)
+  end
 end

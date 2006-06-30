@@ -129,8 +129,8 @@ person_id = @person['personID']
 	}
 	//Open picture window
 	function pictureWindow(personID) {
-		var path = "picture.php?personID="+personID+"&action=edit";
-		pwin = window.open(path, "pwin", "toolbar=0,scrollbars=0,resizable=1,width=350,height=180");
+		var path = "/profile/edit_image?id="+personID;
+		pwin = window.open(path, "pwin", "toolbar=0,scrollbars=0,resizable=1,width=420,height=320");
 		pwin.focus();
 	}
 	// Function to decide which salary form to use
@@ -332,8 +332,8 @@ person_id = @person['personID']
 <div id="right">
 	<div id="profile_nav" class="box">
 		<div id="profile_nav_header" class="subboxheader">Quick Links</div>
-		<%if @person['Tenure'] != 'Second Year'%>
-			<a href="create_second_year.php?applicationID=<%=application_id%>">&nbsp;&nbsp;[ Create Second <br />&nbsp;&nbsp;&nbsp;&nbsp;Year Record ]</a><br />
+		<%if @person_obj.si_applications.size < 2%>
+			<a href="create_second_year?id=<%=application_id%>">&nbsp;&nbsp;[ Create Second <br />&nbsp;&nbsp;&nbsp;&nbsp;Year Record ]</a><br />
 		<%end -%>
 		<a href="javascript:pictureWindow(<%=person_id%>);">&nbsp;&nbsp;[ Upload Picture ]&nbsp;&nbsp;</a>
 		<div class="subboxheader2">Generate Forms</div>
@@ -342,9 +342,10 @@ person_id = @person['personID']
 		<a href="javascript:additionalSalaryForm();">&nbsp;&nbsp;Additional Salary</a><br />
 		<a href="forms/updateform.php?applicationID=<%=application_id%>&personID=<%=person_id%>&action=prompt">&nbsp;&nbsp;ACOS Form</a><br />
 		<a href="forms/joinstaffform.php?applicationID=<%=application_id%>&personID=<%=person_id%>&action=prompt">&nbsp;&nbsp;Join Staff Form</a><br />
-		<%if @picture-%>
+
+		<%if @person_obj.image && !@person_obj.image.empty?-%>
 			<div class="subboxheader2">Picture</div>
-			<img src="<%=@picture%>" border="0" />
+			<img src="<%=@person_obj.thumb_pic%>" border="0" />
 		<%end-%>
 	</div>
 </div> 

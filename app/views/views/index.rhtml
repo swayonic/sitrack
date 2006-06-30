@@ -12,7 +12,7 @@
 					<td><strong><%=view.name%></strong> &nbsp;&nbsp;&nbsp;&nbsp;</td>
 					<td><a href="/views/edit/<%=view.id%>">edit</a>&nbsp;&nbsp;</td>
 					<td><a href="javascript:delete_view(<%=view.id%>,'<%=escape_javascript(view.name)%>');">remove</a></td>
-					<td><a href="/directory?view_id=<%=view.id%>">go to</a></td>
+					<td><a href="/directory/change_view?view_id=<%=view.id%>">go to</a></td>
 				</tr>
 			<%
 			end

@@ -3,7 +3,8 @@
 			View Name:
 			<input type="text" id="view_name" name="view_name" value="<%=@view.name%>" />&nbsp;&nbsp;
 			<%= observe_field('view_name', :url => {:action => :save_name, :id => @view.id}, :update => 'errors')%>
-			<a href="/views" class="button">Done</a>
+			<a href="/views" class="button">Done</a> 
+			<a href="/directory/change_view?view_id=<%=@view.id%>" class="button">Go To View</a> 
 		<!--  ============= BEGIN Layout column choices ============== -->
 		<p>The following columns are currently a part of this view. To reorder them, 
 		simply click and drag the column where you'd like it to be. To remove a column 

@@ -19,8 +19,8 @@ class ChildController < ApplicationController
   end
   
   def save_child
-    unless params[:child]
-      raise "Bad form post"
+    unless params[:child] && params[:child][:person_id] 
+      raise "Bad form post: "+params.inspect
     end
     if params[:id]
       #update
@@ -31,6 +31,10 @@ class ChildController < ApplicationController
       @child = SitrackChild.create(params["child"])
     end
     if @child.valid?
+      # clear page caches
+      @child.person.si_applications do |app|
+	      expire_action(:action => :index, :id => app.id)
+	    end
       close_window
     else 
       render(:action => :child, :layout => false)
@@ -45,6 +49,6 @@ class ChildController < ApplicationController
   private 
   
   def close_window
-    render :action => 'close_window'
+      render(:template => '/shared/close_window', :layout => false)
   end
 end

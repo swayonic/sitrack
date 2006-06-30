@@ -60,34 +60,6 @@ class DirectoryController < ApplicationController
     render(:action => :show_directory)
   end
   
-  #########################      
-  #### Query           ####
-  #########################
-  def build_query
-    @sel_region_name = session[:session].get_value('region') || session[:user].person.region
-    @sel_region_name = '%' if @sel_region_name == 'all'
-    all_where = "( #{Person.table_name}.region LIKE '#{@sel_region_name}' OR #{SitrackTracking.table_name}.caringRegion LIKE '#{@sel_region_name}' ) "+
-			     "AND (#{Person.table_name}.firstName <> '' OR #{Person.table_name}.lastName <>'' )"
-    select_clause = @view.display_columns
-    from_clause = SitrackView.join_tables
-    @where_clause = all_where unless @where_clause
-    @sql = 'SELECT '+select_clause+' FROM '+from_clause+' WHERE '+@where_clause
-    
-    # If we have a search or saved criteria, add the query string.
-    @sql += @qs if @qs
-    @order_by = get_order_by(@view)
-    @people = ActiveRecord::Base.connection.select_all(@sql+' ORDER BY '+@order_by)
-  end
-  
-  # get all the project, and create an array of id=> name pairs
-  def get_projects
-    if @view.sitrack_columns.detect {|c| 'project' == c.column_type}
-      projects_hash = ActiveRecord::Base.connection.select_all("SELECT SIProjectID, name FROM #{SiProject.table_name}")
-      @projects = Array.new
-      projects_hash.each {|p| @projects[p['SIProjectID'].to_i] = p['name']}
-    end
-  end
-  
   def search
     @options = get_options if !@options
     query_string = {:status => '', :type => '', :position => '', :tenure => '', :misc => '',   
@@ -301,6 +273,7 @@ class DirectoryController < ApplicationController
   end
   
   def modify_value
+    app_id = params[:id]
     value = escape_string(params[:value].to_s.strip)
     type = params[:type]
     value = (value != '' ? Time.parse(value).strftime('%Y-%m-%d') : '') if type == 'date'
@@ -321,7 +294,7 @@ class DirectoryController < ApplicationController
     	safe_columns = ['coachName', 'updated_at', 'coachEmail', 'coachPhone', 'coachCell']
     	if (table == SitrackMpd.table_name)
     	  # make sure they have an mpd row
-    	  SitrackMpd.find(:first, :conditions => ['application_id', params[:id]]) || SitrackMpd.create(:application_id => params[:id])
+    	  SitrackMpd.find(:first, :conditions => ['application_id', app_id]) || SitrackMpd.create(:application_id => app_id)
     	  # strip commas and dollar signs
   		  value = value.scan(/\d/).join unless safe_columns.include?(column.select_clause)
         value = 'NULL' if value == ''
@@ -335,10 +308,10 @@ class DirectoryController < ApplicationController
         # If this is an address, use the person id instead of the application id
     		if Address.table_name == table
     			# Get the person id
-    			application = SiApplication.find(params[:id])
+    			application = SiApplication.find(app_id)
     			id = application.fk_personID
     		else 
-    		  id = params[:id]
+    		  id = app_id
     		end
         column.update_clause.gsub!(/\?/, id) # the rest are the id
     	  queries = column.update_clause.split(';')
@@ -346,19 +319,19 @@ class DirectoryController < ApplicationController
     	else
         # Use the select string to figure out which column to update
         # set some default values
-        id = params[:id]  
+        id = app_id  
         where = 'application_id'
         set = ''
         
         # First, perform some extra logic depeding on which table we're updating
         case table
         when Person.table_name
-          id = SiApplication.find(params[:id]).fk_personID
+          id = SiApplication.find(app_id).fk_personID
           where = Person.primary_key
           set = ", changedBy = 'SITRACK', dateChanged = NOW() "
         when SitrackTracking.table_name
           # make sure they have a tracking row
-          SitrackTracking.find(:first, :conditions => ['application_id', params[:id]]) || SitrackTracking.create(:application_id => params[:id])
+          SitrackTracking.find(:first, :conditions => ['application_id', app_id]) || SitrackTracking.create(:application_id => app_id)
         when SiApplication.table_name
           where = SiApplication.primary_key
         end
@@ -366,6 +339,8 @@ class DirectoryController < ApplicationController
         @result = ActiveRecord::Base.connection.update(@sql)
     	end
     end
+    # clear page cache
+    expire_action(:action => :index, :id => app_id)
     @column = column
     render :layout => false
   end
@@ -424,6 +399,34 @@ class DirectoryController < ApplicationController
   ##### PRIVATE #######
   #####################
   private
+  #########################      
+  #### Query           ####
+  #########################
+  def build_query
+    @sel_region_name = session[:session].get_value('region') || session[:user].person.region
+    @sel_region_name = '%' if @sel_region_name == 'all'
+    all_where = "( #{Person.table_name}.region LIKE '#{@sel_region_name}' OR #{SitrackTracking.table_name}.caringRegion LIKE '#{@sel_region_name}' ) "+
+			     "AND (#{Person.table_name}.firstName <> '' OR #{Person.table_name}.lastName <>'' )"
+    select_clause = @view.display_columns
+    from_clause = SitrackView.join_tables
+    @where_clause = all_where unless @where_clause
+    @sql = 'SELECT '+select_clause+' FROM '+from_clause+' WHERE '+@where_clause
+    
+    # If we have a search or saved criteria, add the query string.
+    @sql += @qs if @qs
+    @order_by = get_order_by(@view)
+    @people = ActiveRecord::Base.connection.select_all(@sql+' ORDER BY '+@order_by)
+  end
+  
+  # get all the project, and create an array of id=> name pairs
+  def get_projects
+    if @view.sitrack_columns.detect {|c| 'project' == c.column_type}
+      projects_hash = ActiveRecord::Base.connection.select_all("SELECT SIProjectID, name FROM #{SiProject.table_name}")
+      @projects = Array.new
+      projects_hash.each {|p| @projects[p['SIProjectID'].to_i] = p['name']}
+    end
+  end
+  
   def u(str)
     str.strip.gsub(/ /, '_')
   end
