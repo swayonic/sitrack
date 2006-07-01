@@ -278,8 +278,13 @@ function update_value(fieldname, id, colID, type, selectClause)
 		item.innerHTML = '<a id="link'+fieldname+id+'c'+colID+'" '+href+'>'+text+'</a>';
 		break;
 	default: 
-		if (value && ' ' != value) {
-			item.innerHTML = '<a '+href+'>'+value+'</a>';
+		if (value.replace(/s+/gi,'') != '') {
+		    new_text = '<a '+href+'>';
+		    if ('dollar' == type) {
+		      new_text += '$';
+		    }
+			new_text += value+'</a>';
+			item.innerHTML = new_text;
 		} else {
 			item.innerHTML = '<a '+href+'><img src="/images/edit.png" border="0"/></a>';
 		}

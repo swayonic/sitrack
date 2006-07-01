@@ -294,7 +294,7 @@ class DirectoryController < ApplicationController
     	safe_columns = ['coachName', 'updated_at', 'coachEmail', 'coachPhone', 'coachCell']
     	if (table == SitrackMpd.table_name)
     	  # make sure they have an mpd row
-    	  SitrackMpd.find(:first, :conditions => ['application_id', app_id]) || SitrackMpd.create(:application_id => app_id)
+    	  mpd = SitrackMpd.find(:first, :conditions => ['application_id = ?', app_id]) || SitrackMpd.create(:application_id => app_id)
     	  # strip commas and dollar signs
   		  value = value.scan(/\d/).join unless safe_columns.include?(column.select_clause)
         value = 'NULL' if value == ''
@@ -331,7 +331,7 @@ class DirectoryController < ApplicationController
           set = ", changedBy = 'SITRACK', dateChanged = NOW() "
         when SitrackTracking.table_name
           # make sure they have a tracking row
-          SitrackTracking.find(:first, :conditions => ['application_id', app_id]) || SitrackTracking.create(:application_id => app_id)
+          SitrackTracking.find(:first, :conditions => ['application_id = ?', app_id]) || SitrackTracking.create(:application_id => app_id)
         when SiApplication.table_name
           where = SiApplication.primary_key
         end

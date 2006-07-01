@@ -1,5 +1,5 @@
 class SitrackSession < ActiveRecord::Base
-  has_many  :sitrack_session_values
+  has_many  :sitrack_session_values, :dependent => true
   
   def save_value(attribute, value)
     remove_value(attribute)

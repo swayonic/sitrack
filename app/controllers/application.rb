@@ -1,32 +1,34 @@
 # Filters added to this controller will be run for all controllers in the application.
 # Likewise, all the methods added will be available for all controllers.
 class ApplicationController < ActionController::Base
-  before_filter CAS::CASFilter, AuthenticationFilter, :authorize, :except => 'no_access'
-  
+  before_filter CAS::CASFilter, AuthenticationFilter, :authorize, :except => ['no_access','logout']
+  #CAS::CASFilter
   # Define the app name. This is used in authentication_filter
   @@application_name = "sitrack"
   cattr_accessor :application_name
   
   def logout
     reset_session
-    redirect_to('https://signin.mygcx.org/cas/logout')
+    redirect_to('https://signin.mygcx.org/cas/logout?service='+url_for(:controller => 'directory', :only_path => false ))
   end
   
   private
   def dummy_cas
     session[:cas_receipt] = {}
-    session[:cas_receipt][:user] = 'josh.starcher@uscm.org'
-    session[:cas_receipt][:ssoGuid] = 'F167605D-94A4-7121-2A58-8D0F2CA6E026'
+    session[:cas_receipt][:user] = 'Scott.Santee@uscm.org'
+    session[:cas_receipt][:ssoGuid] = '06A245FD-88DD-4624-4A00-65152E57122A'
   end
   
   def authorize
-    session[:sitrack_user] = SitrackUser.find_by_ssm_id(session[:user].id)
-    unless session[:sitrack_user]
-      redirect_to(:controller => 'directory', :action => 'no_access') 
+    if !session[:sitrack_user]
+      session[:sitrack_user] = SitrackUser.find_by_ssm_id(session[:user].id)
+      if session[:sitrack_user].nil?
+        redirect_to(:controller => 'directory', :action => 'no_access'); return; 
+      end
+      sitrack_session = session[:sitrack_user].sitrack_session
+      sitrack_session ||= SitrackSession.create(:sitrack_user_id => session[:sitrack_user].id)
+      session[:session] = sitrack_session
     end
-    sitrack_session = SitrackSession.find_by_ssm_id(session[:user].id)
-    sitrack_session ||= SitrackSession.create(:ssm_id => session[:user].id)
-    session[:session] = sitrack_session
   end
   
   def all_tables

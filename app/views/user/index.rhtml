@@ -3,7 +3,7 @@
 <p>
 You can search by any combination of first or last name, including partial names:
 </p>
-<%= form_tag %>
+
 	<p>
 	<label for="name">Name:</label>
   <%= text_field_tag :name %>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
@@ -14,7 +14,7 @@ You can search by any combination of first or last name, including partial names
 										:loading => "Element.show('spinner')",
 										:complete => "Element.hide('spinner')")%>
 </p>
-<%= end_form_tag%>
+
 <p><div id="results">
 <%= image_tag "spinner.gif", :id => 'spinner', :style => 'display:none' %></div></p>
 </div>

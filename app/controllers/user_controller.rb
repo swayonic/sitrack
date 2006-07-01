@@ -25,6 +25,14 @@ class UserController < ApplicationController
     # see if the user already has access
     unless (@sitrack_user = SitrackUser.find_by_ssm_id(ssm_id))
       @sitrack_user = SitrackUser.create(:ssm_id => ssm_id, :created_by => session[:user].id, :updated_by => session[:user].id)
+      # set the new user up with some default views
+      SitrackView.find_all_by_sitrack_user_id(0).each do |view|
+        new_view = view.clone
+        view.sitrack_view_columns.each do |vc|
+          new_view.sitrack_view_columns << vc.clone
+        end
+        @sitrack_user.sitrack_views << new_view 
+      end
     end
     @person = Person.find(:first, :conditions => ['fk_ssmUserID  = ?', ssm_id])
 	  render(:layout => false)
