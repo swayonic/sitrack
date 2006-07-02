@@ -7,7 +7,7 @@ class UserController < ApplicationController
     	if (names.size > 1)
 	    	first = names[0]
     		last = names[1].empty? ? first : names[1]
-	    	@conditions = [ "lastName LIKE ? AND firstName LIKE ? ", last + "%", first + "%" ]
+	    	@conditions = [ "lastName LIKE ? AND firstName LIKE ? AND isStaff = 1 ", last + "%", first + "%" ]
 	   	else 
 	   	  name = names.join
 	   		@conditions = [ "(lastName LIKE ? OR firstName LIKE ?) AND isStaff = 1 ", name+'%',name+'%' ]
