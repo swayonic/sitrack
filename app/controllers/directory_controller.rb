@@ -263,8 +263,13 @@ class DirectoryController < ApplicationController
       @iMonth = params[:selMonth]
       @iYear = params[:selYear]
     elsif params[:SelectDate]
-      @iMonth = Time.parse(params[:SelectDate]).month - 1
-      @iYear = Time.parse(params[:SelectDate]).year
+      begin
+        @iMonth = Time.parse(params[:SelectDate]).month - 1
+        @iYear = Time.parse(params[:SelectDate]).year
+      rescue
+        @iMonth = Time.now.month - 1
+        @iYear = Time.now.year
+      end
     else
       @iMonth = Time.now.month - 1
       @iYear = Time.now.year
