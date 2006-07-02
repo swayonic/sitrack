@@ -137,7 +137,10 @@
 					<% case column.column_type 
 						 when 'date' 
 						 	   if is_date(value)
+						 	   begin
 						 			 value = formatted_date(value)
+						 		 rescue 
+						 		 end
 						 			 href = date_edit_js(column.name, column.id, @person['applicationID'], value)
 						 	   else 
 						 	   	 value = ''
