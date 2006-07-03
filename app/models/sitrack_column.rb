@@ -13,7 +13,7 @@ class SitrackColumn < ActiveRecord::Base
   def self.all_select_clauses
     @@all_columns = self.find(:all) if !@@all_columns
     select_clauses = []
-    @@all_columns.each {|column| select_clauses << column.table + column.select_clause+' as '+column.safe_name }
+    @@all_columns.each {|column| select_clauses << column.select_clause+' as '+column.safe_name }
     return select_clauses.join(', ')
   end
   

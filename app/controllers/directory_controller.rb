@@ -307,9 +307,9 @@ class DirectoryController < ApplicationController
     	# If we have an update clause, use it
     	if (column.update_clause && column.update_clause != '')
     	  #replace table names
-    	  column.update_clause.gsub!('$table_mpd',SitrackMpd.table_name).gsub!('$table_address',Address.table_name)
+#    	  column.update_clause.gsub('$table_mpd',SitrackMpd.table_name).gsub('$table_address',Address.table_name)
     	  # replace question marks
-    	  column.update_clause.sub!(/\?/, value.to_s) # the first question mark is the value
+    	  column.update_clause.sub!(/\?/, "'"+value.to_s+"'") # the first question mark is the value
         # If this is an address, use the person id instead of the application id
     		if Address.table_name == table
     			# Get the person id
@@ -318,7 +318,7 @@ class DirectoryController < ApplicationController
     		else 
     		  id = app_id
     		end
-        column.update_clause.gsub!(/\?/, id) # the rest are the id
+        column.update_clause.gsub!(/\?/, id.to_s) # the rest are the id
     	  queries = column.update_clause.split(';')
     	  queries.each {|@sql| @result = ActiveRecord::Base.connection.update(@sql)}
     	else
