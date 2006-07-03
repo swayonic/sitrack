@@ -76,7 +76,7 @@ class ProfileController < ApplicationController
   end  
   
   def create_second_year
-    @first_year = SiApplication.find(params[:id])
+    @first_year = HrSiApplication.find(params[:id])
     @second_year = @first_year.clone
     @tracking = @first_year.sitrack_tracking ? @first_year.sitrack_tracking.clone : SitrackTracking.new
     @tracking.asgYear = "#{Time.now.year}-#{Time.now.year+1}"

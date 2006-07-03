@@ -141,7 +141,7 @@ class DirectoryController < ApplicationController
     @options['App Year'].each do |app_year|
       if params['app_year_'+app_year[0]]
         join = (query_string[:app_year] == '') ? ' AND (' : ' OR '
-        query_string[:app_year] += join + SiApplication.table_name + ".siYear = '#{app_year[1]}'"
+        query_string[:app_year] += join + HrSiApplication.table_name + ".siYear = '#{app_year[1]}'"
         @selected_options += "[app_year_#{app_year[0]}]"
       end
     end
@@ -313,7 +313,7 @@ class DirectoryController < ApplicationController
         # If this is an address, use the person id instead of the application id
     		if Address.table_name == table
     			# Get the person id
-    			application = SiApplication.find(app_id)
+    			application = HrSiApplication.find(app_id)
     			id = application.fk_personID
     		else 
     		  id = app_id
@@ -331,14 +331,14 @@ class DirectoryController < ApplicationController
         # First, perform some extra logic depeding on which table we're updating
         case table
         when Person.table_name
-          id = SiApplication.find(app_id).fk_personID
+          id = HrSiApplication.find(app_id).fk_personID
           where = Person.primary_key
           set = ", changedBy = 'SITRACK', dateChanged = NOW() "
         when SitrackTracking.table_name
           # make sure they have a tracking row
           SitrackTracking.find(:first, :conditions => ['application_id = ?', app_id]) || SitrackTracking.create(:application_id => app_id)
-        when SiApplication.table_name
-          where = SiApplication.primary_key
+        when HrSiApplication.table_name
+          where = HrSiApplication.primary_key
         end
         @sql = "UPDATE #{table} SET #{column.select_clause} = #{value ? "'#{value}'" : NULL} #{set} WHERE #{where} = #{id}"
         @result = ActiveRecord::Base.connection.update(@sql)
@@ -378,7 +378,7 @@ class DirectoryController < ApplicationController
     if (id = session[:session].get_value('query_id'))
       query = SitrackQuery.find(id)
       name = query.name
-      @where_clause = " #{SiApplication.table_name}.applicationID in( #{query.persons} ) "
+      @where_clause = " #{HrSiApplication.table_name}.applicationID in( #{query.persons} ) "
     elsif (id = session[:session].get_value('criteria_id'))
       criteria = SitrackSavedCriteria.find(id)
       name = criteria.name
@@ -426,7 +426,7 @@ class DirectoryController < ApplicationController
   # get all the project, and create an array of id=> name pairs
   def get_projects
     if @view.sitrack_columns.detect {|c| 'project' == c.column_type}
-      projects_hash = ActiveRecord::Base.connection.select_all("SELECT SIProjectID, name FROM #{SiProject.table_name}")
+      projects_hash = ActiveRecord::Base.connection.select_all("SELECT SIProjectID, name FROM #{HrSiProject.table_name}")
       @projects = Array.new
       projects_hash.each {|p| @projects[p['SIProjectID'].to_i] = p['name']}
     end

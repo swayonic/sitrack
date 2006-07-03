@@ -8,7 +8,7 @@ class SitrackView < ActiveRecord::Base
   validates_presence_of :name
   
   def display_columns
-    out = Person.table_name+'.personID as id, '+SiApplication.table_name+'.applicationID, '
+    out = Person.table_name+'.personID as id, '+HrSiApplication.table_name+'.applicationID, '
     out += '(SELECT email FROM '+Address.table_name+' WHERE fk_personID = '+Person.table_name+".personID AND addressType = 'current') as email, "
     sitrack_view_columns.each do |vc|
       column = vc.sitrack_column
@@ -21,10 +21,10 @@ class SitrackView < ActiveRecord::Base
   
   def self.join_tables
     out = Person.table_name
-    out += " JOIN #{SiApplication.table_name} on #{Person.table_name}.personID = #{SiApplication.table_name}.fk_personID "
+    out += " JOIN #{HrSiApplication.table_name} on #{Person.table_name}.personID = #{HrSiApplication.table_name}.fk_personID "
     out += " LEFT JOIN #{Staff.table_name} on #{Person.table_name}.accountNo = #{Staff.table_name}.accountNo "
-    out += " LEFT JOIN #{SitrackMpd.table_name} on #{SiApplication.table_name}.applicationID = #{SitrackMpd.table_name}.application_id "
-    out += " LEFT JOIN #{SitrackTracking.table_name} on #{SiApplication.table_name}.applicationID = #{SitrackTracking.table_name}.application_id "
+    out += " LEFT JOIN #{SitrackMpd.table_name} on #{HrSiApplication.table_name}.applicationID = #{SitrackMpd.table_name}.application_id "
+    out += " LEFT JOIN #{SitrackTracking.table_name} on #{HrSiApplication.table_name}.applicationID = #{SitrackTracking.table_name}.application_id "
     return out
   end
   

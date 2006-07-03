@@ -39,7 +39,7 @@ class ApplicationController < ActionController::Base
     table_tracking = SitrackTracking.table_name
     table_users = 'sitrack_Users'
     table_staff = 'ministry_Staff'
-    table_app = SiApplication.table_name
+    table_app = HrSiApplication.table_name
     table_views = 'sitrack_Views'
     table_columns = 'sitrack_Columns'
     table_vc = 'sitrack_View_Columns'
