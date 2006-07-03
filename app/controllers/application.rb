@@ -13,6 +13,9 @@ class ApplicationController < ActionController::Base
     redirect_to('https://signin.mygcx.org/cas/logout?service='+url_for(:controller => 'directory', :only_path => false ))
   end
   
+  def boom
+    raise boom
+  end
   private
   def dummy_cas
     session[:cas_receipt] = {}
