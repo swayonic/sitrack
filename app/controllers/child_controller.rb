@@ -32,7 +32,7 @@ class ChildController < ApplicationController
     end
     if @child.valid?
       # clear page caches
-      @child.person.si_applications do |app|
+      @child.person.hr_si_applications do |app|
 	      expire_action(:action => :index, :id => app.id)
 	    end
       close_window

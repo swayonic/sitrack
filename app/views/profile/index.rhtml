@@ -42,7 +42,7 @@ application =  ['App Year',
 								'Final A',
 								'Acceptance Sent']
 
-if SiApplication.is_intern(@person['Intern_Type'])
+if HrSiApplication.is_intern(@person['Intern_Type'])
 	placement =  ['Asg Year',
 								'Preference A',
 								'Preference B',
@@ -244,7 +244,7 @@ person_id = @person['personID']
 					when 'date' 
 				   	value = is_date(value) ? formatted_date(value) : ''
 				  when 'project' 
-						value = SiProject.find(value.to_i).name if value.to_i != 0
+						value = HrSiProject.find(value.to_i).name if value.to_i != 0
 					when 'percent'
 						value = value.to_i.round.to_s+'%'
 				  when 'dollars'
@@ -336,7 +336,7 @@ person_id = @person['personID']
 <div id="right">
 	<div id="profile_nav" class="box">
 		<div id="profile_nav_header" class="subboxheader">Quick Links</div>
-		<%if @person_obj.si_applications.size < 2%>
+		<%if @person_obj.hr_si_applications.size < 2%>
 			<a href="create_second_year?id=<%=application_id%>">&nbsp;&nbsp;[ Create Second <br />&nbsp;&nbsp;&nbsp;&nbsp;Year Record ]</a><br />
 		<%end -%>
 		<a href="javascript:pictureWindow(<%=person_id%>);">&nbsp;&nbsp;[ Upload Picture ]&nbsp;&nbsp;</a>

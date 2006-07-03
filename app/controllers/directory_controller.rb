@@ -365,6 +365,11 @@ class DirectoryController < ApplicationController
       c.options.gsub!('[y','[app_year_')
       c.options.gsub!('[team_leader]','[misc_team_leader]')
       c.options.gsub!('[monthly_birthday]','[misc_monthly_birthday]')
+      
+      # fix criteria
+      c.criteria.gsub!('t.', 'sitrack_tracking')
+      c.criteria.gsub!('l.', 'hr_si_applications')
+      c.criteria.gsub!('p.', 'ministry_person')
       c.save!
     end
   end

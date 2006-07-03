@@ -63,7 +63,7 @@ class ProfileController < ApplicationController
 	    @person.image = params[:person][:image]
 	    if @person.save
         # clear page caches
-        @person.si_applications do |app|
+        @person.hr_si_applications do |app|
   	      expire_action(:action => :index, :id => app.id)
   	    end
         render(:template => '/shared/close_window', :layout => false)

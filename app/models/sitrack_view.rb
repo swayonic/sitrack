@@ -12,7 +12,9 @@ class SitrackView < ActiveRecord::Base
     out += '(SELECT email FROM '+Address.table_name+' WHERE fk_personID = '+Person.table_name+".personID AND addressType = 'current') as email, "
     sitrack_view_columns.each do |vc|
       column = vc.sitrack_column
- #     out += column.table
+      unless column.select_clause.first == '('
+        out += column.table
+      end
       out += column.select_clause+ ' as ' +column.safe_name
       out += ', ' unless vc == sitrack_view_columns.last
     end
