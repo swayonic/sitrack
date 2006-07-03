@@ -59,9 +59,9 @@ ActionMailer::Base.server_settings = {
   :addres   => "stmp1.ccci.org",
   :domain   => "ccci.org"
 }
-ExceptionNotifier.exception_recipients = %w(josh.starcher@uscm.org matt.drees@uscm.org)
-ExceptionNotifier.sender_address = %("Application Error" <fskorders@uscm.org>)
-ExceptionNotifier.email_prefix = "[FSK] "
+ExceptionNotifier.exception_recipients = %w(josh.starcher@uscm.org)
+ExceptionNotifier.sender_address = %("Application Error" <sitrack@uscm.org>)
+ExceptionNotifier.email_prefix = "[SITRACK] "
 
 # Set the default place to find file_column files.
 FILE_COLUMN_PREFIX = 'files'
