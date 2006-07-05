@@ -1,0 +1,117 @@
+<h2>ADD NOTICE For STINT and U.S.MINISTRY INTERNS</h2>
+
+<p class="instructions">
+For STINT: This form must be submitted <u>within two weeks of acceptance.</u> Hire date is always
+the 1<sup>st</sup> of the month in which they depart. For MINISTRY INTERNS: This form must be submitted <u>within two
+weeks of acceptance.</u> All setup forms (i.e. I-9, W-4, Benefits Forms, etc.)
+submitted<u> 2 weeks prior to hire date</u> in order to begin payroll. Hire date will be either the 1<sup>st</sup>
+or the 16<sup>th</sup>.</p>
+
+<p>Regional Office & Phone# <span class="data"><%=@region.name%>&nbsp;<%=@region.phone%></span></p>
+
+<p><strong>(For STINT Only)</strong> Sending Campus (Specific School): <span class="data"><%if @stint %>UCLA<%end%></span></p>
+
+<p>
+Last Name: <span class="data"><%=@person.lastName%> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>
+First Name: <span class="data"><%=@person.firstName%> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>
+Middle Name: <span class="data"><%=@person.middleName%></span>
+</p>
+
+<p>
+Sex: <span class="data"><%=@person.human_gender%></span> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+Spouse First Name: <span class="data"> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>
+Maiden Name:  
+</p>
+
+<p> Spouse's account#: <%=@spouse.accountNo%> &nbsp; Marriage Date __________</p>
+ 
+<p>
+<strong>Current Address:</strong><br/>
+Street: <span class="data"><%=@current_address.address1%> <%=@current_address.address2%></span><br/>
+City: <span class="data"><%=@current_address.city%>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>
+State: <span class="data"><%=@current_address.state%>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>
+Zip: <span class="data"><%=@current_address.zip%></span><br/>
+Phone#: <span class="data"><%=@current_address.homePhone%> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><br/>
+Email: <span class="data"><%=@current_address.email%></span>
+</p>
+<p><strong>Emergency Contact:</strong><br/>
+Name: <span class="data"><%=@emergency_address.contactName%>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>
+Relationship: <span class="data"><%=@emergency_address.contactRelationship%>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><br/>
+Street: <span class="data"><%=@emergency_address.address1%> <%=@emergency_address.address2%></span><br/>
+City: <span class="data"><%=@emergency_address.city%> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>
+State: <span class="data"><%=@emergency_address.state%>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>
+Zip: <span class="data"><%=@emergency_address.zip%></span><br/>
+Phone#: <span class="data"><%=@emergency_address.homePhone%> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><br/>
+Email: <span class="data"><%=@emergency_address.email%></span>
+</p>
+
+<p><strong>Permanent U.S. Address while Overseas (Parent, Sibling,
+Family Member, etc. other than Financial Coordinator)</strong><br/>
+Name: <span class="data"><%=@permanent_address.contactName%>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>
+Relationship: <span class="data"><%=@permanent_address.contactName%>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><br/>
+Street: <span class="data"><%=@permanent_address.address1%> <%=@permanent_address.address2%></span><br/>
+City: <span class="data"><%=@permanent_address.city%> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>
+State: <span class="data"><%=@permanent_address.state%>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>
+Zip: <span class="data"><%=@permanent_address.zip%></span><br/>
+Phone#: <span class="data"><%=@permanent_address.homePhone%> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><br/>
+Email: <span class="data"><%=@permanent_address.email%></span><br/>
+</p>
+
+<p>
+Birthdate: <span class="data">06/26/1981</span>&nbsp;&nbsp; 
+Spouse Birthdate: 
+</p>
+
+<p>
+S.S#: <span class="data">546-97-3290</span> &nbsp;&nbsp;
+Spouse S.S.#:</p>
+<table cellpadding="2">
+	<tr>
+		<td colspan="2">HUMAN RESOURCES STATUS:</td>
+		<td colspan="4">MINISTRY PLACEMENT:</td>
+	</tr>
+	<tr>
+		<td><span class="data"><%if @stint%>X<%end%></span></td>
+		<td>CAMPUS STINT</td>
+		<td><span class="data">X</span></td>
+		<td>CAMPUS</td>
+		<td>&nbsp;</td>
+		<td>SILK ROAD</td>
+	</tr>
+	<tr>
+		<td>&nbsp;</td>
+		<td>COMMUNITY STINT</td>
+		<td>&nbsp;</td>
+		<td>CO-MISSION</td>
+		<td>&nbsp;</td>
+		<td>AIA</td>
+	</tr>
+	<tr>
+		<td><span class="data"><%unless @stint%>X<%end%></span></td>
+		<td>U.S. MINISTRY INTERN</td>
+		<td>&nbsp;</td>
+		<td>STUDENT VENTURE</td>
+		<td>&nbsp;</td>
+		<td>OTHER</td>
+	</tr>
+</table>
+
+<p>If "other", please specify_______________</p>
+
+<p>Location of Assignment: <u><span class="data"><%=@location%></span></u></p>
+
+<p><strong>(For STINT Only)</strong> Caring Region: <span class="data"><%= if @stint then @tracking.caringRegion end%></span>  &nbsp;&nbsp;
+Team Leader: __________
+</p>
+
+<p>
+Hire Date: __/__/__
+Estimated Departure Date: <span class="data"><%= if @stint then ApplicationController::formatted_date(@tracking.departureDate) end%></span>&nbsp;
+<strong>(For STINT Only)</strong>
+</p>
+<p>&nbsp;</p>
+<h3>
+AUTHORIZING SIGNATURE: <span class="data"><%=@approver.firstName%> <%=@approver.lastName%></span> ACCT#: <span class="data"><%=@approver.accountNo%> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>
+DATE: <span class="data"><%=ApplicationController::formatted_date%></span>
+</h3>
+

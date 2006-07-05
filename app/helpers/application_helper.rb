@@ -23,12 +23,7 @@ module ApplicationHelper
   
   # format date
   def formatted_date(value=nil)
-    if value
-      time = Time.parse(value)
-    else 
-      time = Time.now
-    end
-    time.strftime('%m/%d/%Y')
+    ApplicationController::formatted_date(value)
   end
   
   def date_edit_js(column_name, column_id, application_id, value)

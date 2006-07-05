@@ -17,6 +17,16 @@ class ApplicationController < ActionController::Base
   def boom
     raise boom
   end
+  
+  def self.formatted_date(value=nil)
+    if value
+      time = value.class == Time ? value : Time.parse(value) 
+    else 
+      time = Time.now
+    end
+    time.strftime('%m/%d/%Y')
+  end
+  
   private
   def dummy_cas
     session[:cas_receipt] = {}
@@ -90,4 +100,5 @@ class ApplicationController < ActionController::Base
     end
     return @option_hash
   end
+  
 end

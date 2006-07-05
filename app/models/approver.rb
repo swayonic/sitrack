@@ -1,0 +1,2 @@
+class Approver < Person
+end

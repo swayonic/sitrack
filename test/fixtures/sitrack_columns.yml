@@ -6,7 +6,7 @@ sitrack_columns_051:
   writeable: "1"
   show_in_directory: "1"
   column_type: dollar
-  table_clause: SitrackMpd,SiApplication
+  table_clause: SitrackMpd,HrSiApplication
   update_clause: "UPDATE $table_mpd SET oneTimeRaised = ? WHERE application_id = ?;UPDATE
     $table_mpd SET totalRaised = (monthlyRaised*12)+oneTimeRaised WHERE
     application_id = ?"
@@ -36,7 +36,7 @@ sitrack_columns_080:
   writeable: "1"
   show_in_directory: "0"
   column_type: date
-  table_clause: SitrackTracking,SiApplication
+  table_clause: SitrackTracking,HrSiApplication
   update_clause: 
   id: "88"
   select_clause: addFormSent
@@ -80,7 +80,7 @@ sitrack_columns_081:
   writeable: "1"
   show_in_directory: "1"
   column_type: date
-  table_clause: SitrackTracking,SiApplication
+  table_clause: SitrackTracking,HrSiApplication
   update_clause: 
   id: "89"
   select_clause: updateFormSent
@@ -92,7 +92,7 @@ sitrack_columns_052:
   writeable: "0"
   show_in_directory: "1"
   column_type: dollar
-  table_clause: SitrackMpd,SiApplication
+  table_clause: SitrackMpd,HrSiApplication
   update_clause: 
   id: "57"
   select_clause: totalRaised
@@ -123,7 +123,7 @@ sitrack_columns_082:
   writeable: "1"
   show_in_directory: "1"
   column_type: string
-  table_clause: SitrackTracking,SiApplication
+  table_clause: SitrackTracking,HrSiApplication
   update_clause: 
   id: "91"
   select_clause: fieldCoach
@@ -135,7 +135,7 @@ sitrack_columns_053:
   writeable: "1"
   show_in_directory: "1"
   column_type: date
-  table_clause: SitrackMpd,SiApplication
+  table_clause: SitrackMpd,HrSiApplication
   update_clause: 
   id: "58"
   select_clause: updated_at
@@ -166,7 +166,7 @@ sitrack_columns_083:
   writeable: "1"
   show_in_directory: "1"
   column_type: enum
-  table_clause: SitrackTracking,SiApplication
+  table_clause: SitrackTracking,HrSiApplication
   update_clause: 
   id: "93"
   select_clause: needsDebtCheck
@@ -178,7 +178,7 @@ sitrack_columns_054:
   writeable: "1"
   show_in_directory: "1"
   column_type: enum
-  table_clause: SitrackTracking,SiApplication
+  table_clause: SitrackTracking,HrSiApplication
   update_clause: 
   id: "59"
   select_clause: tenure
@@ -190,7 +190,7 @@ sitrack_columns_027:
   writeable: "1"
   show_in_directory: "1"
   column_type: string
-  table_clause: SiApplication
+  table_clause: HrSiApplication
   update_clause: 
   id: "30"
   select_clause: ssn
@@ -202,7 +202,7 @@ sitrack_columns_055:
   writeable: "0"
   show_in_directory: "1"
   column_type: date
-  table_clause: SiApplication
+  table_clause: HrSiApplication
   update_clause: 
   id: "60"
   select_clause: dateAppStarted
@@ -242,7 +242,7 @@ sitrack_columns_084:
   writeable: "1"
   show_in_directory: "1"
   column_type: date
-  table_clause: SitrackTracking,SiApplication
+  table_clause: SitrackTracking,HrSiApplication
   update_clause: 
   id: "94"
   select_clause: acceptanceLetter
@@ -254,7 +254,7 @@ sitrack_columns_056:
   writeable: "0"
   show_in_directory: "1"
   column_type: date
-  table_clause: SiApplication
+  table_clause: HrSiApplication
   update_clause: 
   id: "61"
   select_clause: dateSubmitted
@@ -291,7 +291,7 @@ sitrack_columns_085:
   writeable: "1"
   show_in_directory: "1"
   column_type: date
-  table_clause: SitrackTracking,SiApplication
+  table_clause: SitrackTracking,HrSiApplication
   update_clause: 
   id: "95"
   select_clause: evalDocsRec
@@ -303,7 +303,7 @@ sitrack_columns_057:
   writeable: "1"
   show_in_directory: "1"
   column_type: date
-  table_clause: SitrackTracking,SiApplication
+  table_clause: SitrackTracking,HrSiApplication
   update_clause: 
   id: "62"
   select_clause: appReadyDate
@@ -333,7 +333,7 @@ sitrack_columns_086:
   writeable: "1"
   show_in_directory: "1"
   column_type: bool
-  table_clause: SitrackTracking,SiApplication
+  table_clause: SitrackTracking,HrSiApplication
   update_clause: 
   id: "96"
   select_clause: oneCard
@@ -345,7 +345,7 @@ sitrack_columns_058:
   writeable: "1"
   show_in_directory: "1"
   column_type: string
-  table_clause: SitrackTracking,SiApplication
+  table_clause: SitrackTracking,HrSiApplication
   update_clause: 
   id: "63"
   select_clause: evaluator
@@ -374,7 +374,7 @@ sitrack_columns_087:
   writeable: "1"
   show_in_directory: "1"
   column_type: date
-  table_clause: SitrackTracking,SiApplication
+  table_clause: SitrackTracking,HrSiApplication
   update_clause: 
   id: "97"
   select_clause: playbookSent
@@ -386,7 +386,7 @@ sitrack_columns_059:
   writeable: "1"
   show_in_directory: "1"
   column_type: date
-  table_clause: SitrackTracking,SiApplication
+  table_clause: SitrackTracking,HrSiApplication
   update_clause: 
   id: "64"
   select_clause: evalStartDate
@@ -434,7 +434,7 @@ sitrack_columns_088:
   writeable: "1"
   show_in_directory: "1"
   column_type: string
-  table_clause: SitrackTracking,SiApplication
+  table_clause: SitrackTracking,HrSiApplication
   update_clause: 
   id: "98"
   select_clause: kickoffRoomate
@@ -476,7 +476,7 @@ sitrack_columns_030:
   writeable: "1"
   show_in_directory: "1"
   column_type: string
-  table_clause: SitrackTracking,SiApplication
+  table_clause: SitrackTracking,HrSiApplication
   update_clause: 
   id: "33"
   select_clause: asgCountry
@@ -488,7 +488,7 @@ sitrack_columns_089:
   writeable: "1"
   show_in_directory: "1"
   column_type: enum
-  table_clause: SitrackTracking,SiApplication
+  table_clause: SitrackTracking,HrSiApplication
   update_clause: 
   id: "100"
   select_clause: futurePlan
@@ -512,7 +512,7 @@ sitrack_columns_117:
   writeable: "1"
   show_in_directory: "1"
   column_type: date
-  table_clause: SitrackTracking,SiApplication
+  table_clause: SitrackTracking,HrSiApplication
   update_clause: 
   id: "132"
   select_clause: additionalSalaryForm
@@ -536,7 +536,7 @@ sitrack_columns_060:
   writeable: "1"
   show_in_directory: "1"
   column_type: date
-  table_clause: SitrackTracking,SiApplication
+  table_clause: SitrackTracking,HrSiApplication
   update_clause: 
   id: "65"
   select_clause: preADate
@@ -548,7 +548,7 @@ sitrack_columns_031:
   writeable: "1"
   show_in_directory: "1"
   column_type: string
-  table_clause: SitrackTracking,SiApplication
+  table_clause: SitrackTracking,HrSiApplication
   update_clause: 
   id: "34"
   select_clause: asgCity
@@ -560,7 +560,7 @@ sitrack_columns_118:
   writeable: "1"
   show_in_directory: "1"
   column_type: string
-  table_clause: SitrackTracking,SiApplication
+  table_clause: SitrackTracking,HrSiApplication
   update_clause: 
   id: "133"
   select_clause: miniPref
@@ -584,7 +584,7 @@ sitrack_columns_061:
   writeable: "1"
   show_in_directory: "1"
   column_type: date
-  table_clause: SitrackTracking,SiApplication
+  table_clause: SitrackTracking,HrSiApplication
   update_clause: 
   id: "66"
   select_clause: medPsychDate
@@ -596,7 +596,7 @@ sitrack_columns_032:
   writeable: "1"
   show_in_directory: "1"
   column_type: string
-  table_clause: SitrackTracking,SiApplication
+  table_clause: SitrackTracking,HrSiApplication
   update_clause: 
   id: "35"
   select_clause: asgState
@@ -608,7 +608,7 @@ sitrack_columns_119:
   writeable: "1"
   show_in_directory: "1"
   column_type: image
-  table_clause: SitrackTracking,SiApplication
+  table_clause: SitrackTracking,HrSiApplication
   update_clause: 
   id: "134"
   select_clause: picture
@@ -620,7 +620,7 @@ sitrack_columns_005:
   writeable: "1"
   show_in_directory: "1"
   column_type: enum
-  table_clause: SiApplication
+  table_clause: HrSiApplication
   update_clause: 
   id: "6"
   select_clause: siYear
@@ -632,7 +632,7 @@ sitrack_columns_090:
   writeable: "1"
   show_in_directory: "1"
   column_type: date
-  table_clause: SitrackTracking,SiApplication
+  table_clause: SitrackTracking,HrSiApplication
   update_clause: 
   id: "101"
   select_clause: mpReceived
@@ -644,7 +644,7 @@ sitrack_columns_033:
   writeable: "1"
   show_in_directory: "1"
   column_type: string
-  table_clause: SitrackTracking,SiApplication
+  table_clause: SitrackTracking,HrSiApplication
   update_clause: 
   id: "36"
   select_clause: asgSchool
@@ -675,7 +675,7 @@ sitrack_columns_091:
   writeable: "1"
   show_in_directory: "1"
   column_type: date
-  table_clause: SitrackTracking,SiApplication
+  table_clause: SitrackTracking,HrSiApplication
   update_clause: 
   id: "102"
   select_clause: physicalSent
@@ -687,7 +687,7 @@ sitrack_columns_062:
   writeable: "1"
   show_in_directory: "1"
   column_type: date
-  table_clause: SitrackTracking,SiApplication
+  table_clause: SitrackTracking,HrSiApplication
   update_clause: 
   id: "67"
   select_clause: finalADate
@@ -711,7 +711,7 @@ sitrack_columns_007:
   writeable: "1"
   show_in_directory: "1"
   column_type: dollar
-  table_clause: SitrackMpd,SiApplication
+  table_clause: SitrackMpd,HrSiApplication
   update_clause: ''
   id: "8"
   select_clause: salary
@@ -723,7 +723,7 @@ sitrack_columns_092:
   writeable: "1"
   show_in_directory: "1"
   column_type: date
-  table_clause: SitrackTracking,SiApplication
+  table_clause: SitrackTracking,HrSiApplication
   update_clause: 
   id: "103"
   select_clause: physicalReceived
@@ -735,7 +735,7 @@ sitrack_columns_063:
   writeable: "0"
   show_in_directory: "1"
   column_type: project
-  table_clause: SiApplication
+  table_clause: HrSiApplication
   update_clause: 
   id: "68"
   select_clause: locationA
@@ -759,7 +759,7 @@ sitrack_columns_008:
   writeable: "1"
   show_in_directory: "1"
   column_type: dollar
-  table_clause: SitrackMpd,SiApplication
+  table_clause: SitrackMpd,HrSiApplication
   update_clause: "UPDATE $table_mpd SET monthlyGoal = ? WHERE application_id = ?;UPDATE $table_mpd
     SET totalGoal = (monthlyGoal*12)+oneTimeGoal WHERE application_id = ?"
   id: "9"
@@ -772,7 +772,7 @@ sitrack_columns_093:
   writeable: "1"
   show_in_directory: "1"
   column_type: enum
-  table_clause: SitrackTracking,SiApplication
+  table_clause: SitrackTracking,HrSiApplication
   update_clause: 
   id: "105"
   select_clause: evalType
@@ -784,7 +784,7 @@ sitrack_columns_064:
   writeable: "0"
   show_in_directory: "1"
   column_type: project
-  table_clause: SiApplication
+  table_clause: HrSiApplication
   update_clause: 
   id: "69"
   select_clause: locationB
@@ -808,7 +808,7 @@ sitrack_columns_120:
   writeable: "1"
   show_in_directory: "1"
   column_type: string
-  table_clause: SitrackTracking,SiApplication
+  table_clause: SitrackTracking,HrSiApplication
   update_clause: 
   id: "135"
   select_clause: birthCity
@@ -820,7 +820,7 @@ sitrack_columns_094:
   writeable: "1"
   show_in_directory: "1"
   column_type: date
-  table_clause: SitrackTracking,SiApplication
+  table_clause: SitrackTracking,HrSiApplication
   update_clause: 
   id: "106"
   select_clause: preIKWSent
@@ -832,7 +832,7 @@ sitrack_columns_065:
   writeable: "0"
   show_in_directory: "1"
   column_type: project
-  table_clause: SiApplication
+  table_clause: HrSiApplication
   update_clause: 
   id: "70"
   select_clause: locationC
@@ -856,7 +856,7 @@ sitrack_columns_009:
   writeable: "1"
   show_in_directory: "1"
   column_type: dollar
-  table_clause: SitrackMpd,SiApplication
+  table_clause: SitrackMpd,HrSiApplication
   update_clause: "UPDATE $table_mpd SET oneTimeGoal = ? WHERE application_id = ?;UPDATE $table_mpd
     SET totalGoal = (monthlyGoal*12)+oneTimeGoal  WHERE application_id = ?"
   id: "10"
@@ -869,7 +869,7 @@ sitrack_columns_121:
   writeable: "1"
   show_in_directory: "1"
   column_type: string
-  table_clause: SitrackTracking,SiApplication
+  table_clause: SitrackTracking,HrSiApplication
   update_clause: 
   id: "136"
   select_clause: birthState
@@ -881,7 +881,7 @@ sitrack_columns_066:
   writeable: "1"
   show_in_directory: "1"
   column_type: text
-  table_clause: SitrackTracking,SiApplication
+  table_clause: SitrackTracking,HrSiApplication
   update_clause: 
   id: "71"
   select_clause: placementComments
@@ -905,7 +905,7 @@ sitrack_columns_067:
   writeable: "1"
   show_in_directory: "1"
   column_type: string
-  table_clause: SitrackTracking,SiApplication
+  table_clause: SitrackTracking,HrSiApplication
   update_clause: 
   id: "72"
   select_clause: asgTeam
@@ -929,7 +929,7 @@ sitrack_columns_095:
   writeable: "1"
   show_in_directory: "1"
   column_type: enum
-  table_clause: SitrackTracking,SiApplication
+  table_clause: SitrackTracking,HrSiApplication
   update_clause: 
   id: "108"
   select_clause: debt
@@ -953,7 +953,7 @@ sitrack_columns_096:
   writeable: "1"
   show_in_directory: "1"
   column_type: date
-  table_clause: SitrackTracking,SiApplication
+  table_clause: SitrackTracking,HrSiApplication
   update_clause: 
   id: "109"
   select_clause: evalSummary
@@ -965,7 +965,7 @@ sitrack_columns_069:
   writeable: "1"
   show_in_directory: "1"
   column_type: enum
-  table_clause: SitrackTracking,SiApplication
+  table_clause: SitrackTracking,HrSiApplication
   update_clause: 
   id: "74"
   select_clause: caringRegion
@@ -977,7 +977,7 @@ sitrack_columns_097:
   writeable: "1"
   show_in_directory: "1"
   column_type: text
-  table_clause: SitrackTracking,SiApplication
+  table_clause: SitrackTracking,HrSiApplication
   update_clause: 
   id: "110"
   select_clause: restint
@@ -989,7 +989,7 @@ sitrack_columns_010:
   writeable: "0"
   show_in_directory: "1"
   column_type: dollar
-  table_clause: SitrackMpd,SiApplication
+  table_clause: SitrackMpd,HrSiApplication
   update_clause: ''
   id: "11"
   select_clause: totalGoal
@@ -1001,7 +1001,7 @@ sitrack_columns_098:
   writeable: "1"
   show_in_directory: "1"
   column_type: date
-  table_clause: SitrackTracking,SiApplication
+  table_clause: SitrackTracking,HrSiApplication
   update_clause: 
   id: "111"
   select_clause: returnDate
@@ -1013,7 +1013,7 @@ sitrack_columns_011:
   writeable: "1"
   show_in_directory: "1"
   column_type: string
-  table_clause: SitrackMpd,SiApplication
+  table_clause: SitrackMpd,HrSiApplication
   update_clause: ''
   id: "14"
   select_clause: coachName
@@ -1025,7 +1025,7 @@ sitrack_columns_040:
   writeable: "1"
   show_in_directory: "1"
   column_type: enum
-  table_clause: SitrackTracking,SiApplication
+  table_clause: SitrackTracking,HrSiApplication
   update_clause: 
   id: "43"
   select_clause: status
@@ -1037,7 +1037,7 @@ sitrack_columns_099:
   writeable: "1"
   show_in_directory: "1"
   column_type: date
-  table_clause: SitrackTracking,SiApplication
+  table_clause: SitrackTracking,HrSiApplication
   update_clause: 
   id: "112"
   select_clause: effectiveChange
@@ -1069,7 +1069,7 @@ sitrack_columns_070:
   writeable: "1"
   show_in_directory: "1"
   column_type: date
-  table_clause: SitrackTracking,SiApplication
+  table_clause: SitrackTracking,HrSiApplication
   update_clause: 
   id: "76"
   select_clause: expectReturnDate
@@ -1081,7 +1081,7 @@ sitrack_columns_041:
   writeable: "1"
   show_in_directory: "1"
   column_type: enum
-  table_clause: SitrackTracking,SiApplication
+  table_clause: SitrackTracking,HrSiApplication
   update_clause: 
   id: "44"
   select_clause: internType
@@ -1093,7 +1093,7 @@ sitrack_columns_013:
   writeable: "1"
   show_in_directory: "1"
   column_type: text
-  table_clause: SitrackTracking,SiApplication
+  table_clause: SitrackTracking,HrSiApplication
   update_clause: ''
   id: "16"
   select_clause: notes
@@ -1105,7 +1105,7 @@ sitrack_columns_071:
   writeable: "1"
   show_in_directory: "1"
   column_type: date
-  table_clause: SitrackTracking,SiApplication
+  table_clause: SitrackTracking,HrSiApplication
   update_clause: 
   id: "77"
   select_clause: confirmReturnDate
@@ -1117,7 +1117,7 @@ sitrack_columns_042:
   writeable: "1"
   show_in_directory: "1"
   column_type: enum
-  table_clause: SitrackTracking,SiApplication
+  table_clause: SitrackTracking,HrSiApplication
   update_clause: 
   id: "45"
   select_clause: teamLeader
@@ -1141,7 +1141,7 @@ sitrack_columns_072:
   writeable: "1"
   show_in_directory: "1"
   column_type: enum
-  table_clause: SitrackTracking,SiApplication
+  table_clause: SitrackTracking,HrSiApplication
   update_clause: 
   id: "79"
   select_clause: asgYear
@@ -1153,7 +1153,7 @@ sitrack_columns_043:
   writeable: "1"
   show_in_directory: "1"
   column_type: string
-  table_clause: SitrackTracking,SiApplication
+  table_clause: SitrackTracking,HrSiApplication
   update_clause: 
   id: "47"
   select_clause: passportNo
@@ -1177,7 +1177,7 @@ sitrack_columns_044:
   writeable: "1"
   show_in_directory: "1"
   column_type: string
-  table_clause: SitrackTracking,SiApplication
+  table_clause: SitrackTracking,HrSiApplication
   update_clause: 
   id: "49"
   select_clause: asgContinent
@@ -1208,7 +1208,7 @@ sitrack_columns_045:
   writeable: "1"
   show_in_directory: "1"
   column_type: date
-  table_clause: SitrackTracking,SiApplication
+  table_clause: SitrackTracking,HrSiApplication
   update_clause: 
   id: "50"
   select_clause: departureDate
@@ -1264,7 +1264,7 @@ sitrack_columns_046:
   writeable: "1"
   show_in_directory: "1"
   column_type: date
-  table_clause: SitrackTracking,SiApplication
+  table_clause: SitrackTracking,HrSiApplication
   update_clause: 
   id: "51"
   select_clause: terminationDate
@@ -1276,7 +1276,7 @@ sitrack_columns_101:
   writeable: "1"
   show_in_directory: "1"
   column_type: string
-  table_clause: SitrackTracking,SiApplication
+  table_clause: SitrackTracking,HrSiApplication
   update_clause: 
   id: "114"
   select_clause: spouseName
@@ -1307,7 +1307,7 @@ sitrack_columns_074:
   writeable: "0"
   show_in_directory: "0"
   column_type: date
-  table_clause: SiApplication
+  table_clause: HrSiApplication
   update_clause: 
   id: "82"
   select_clause: dateSubmitted
@@ -1319,7 +1319,7 @@ sitrack_columns_047:
   writeable: "1"
   show_in_directory: "1"
   column_type: string
-  table_clause: SitrackMpd,SiApplication
+  table_clause: SitrackMpd,HrSiApplication
   update_clause: 
   id: "52"
   select_clause: coachPhone
@@ -1331,7 +1331,7 @@ sitrack_columns_102:
   writeable: "1"
   show_in_directory: "1"
   column_type: date
-  table_clause: SitrackTracking,SiApplication
+  table_clause: SitrackTracking,HrSiApplication
   update_clause: 
   id: "115"
   select_clause: addForm
@@ -1374,7 +1374,7 @@ sitrack_columns_048:
   writeable: "1"
   show_in_directory: "1"
   column_type: string
-  table_clause: SitrackMpd,SiApplication
+  table_clause: SitrackMpd,HrSiApplication
   update_clause: 
   id: "53"
   select_clause: coachCell
@@ -1386,7 +1386,7 @@ sitrack_columns_103:
   writeable: "1"
   show_in_directory: "1"
   column_type: date
-  table_clause: SitrackTracking,SiApplication
+  table_clause: SitrackTracking,HrSiApplication
   update_clause: 
   id: "116"
   select_clause: joinStaffForm
@@ -1398,7 +1398,7 @@ sitrack_columns_076:
   writeable: "1"
   show_in_directory: "1"
   column_type: string
-  table_clause: SitrackTracking,SiApplication
+  table_clause: SitrackTracking,HrSiApplication
   update_clause: 
   id: "84"
   select_clause: maidenName
@@ -1410,7 +1410,7 @@ sitrack_columns_049:
   writeable: "1"
   show_in_directory: "1"
   column_type: string
-  table_clause: SitrackMpd,SiApplication
+  table_clause: SitrackMpd,HrSiApplication
   update_clause: 
   id: "54"
   select_clause: coachEmail
@@ -1422,7 +1422,7 @@ sitrack_columns_104:
   writeable: "1"
   show_in_directory: "1"
   column_type: date
-  table_clause: SitrackTracking,SiApplication
+  table_clause: SitrackTracking,HrSiApplication
   update_clause: 
   id: "117"
   select_clause: acosForm
@@ -1434,7 +1434,7 @@ sitrack_columns_077:
   writeable: "1"
   show_in_directory: "1"
   column_type: enum
-  table_clause: SitrackTracking,SiApplication
+  table_clause: SitrackTracking,HrSiApplication
   update_clause: 
   id: "85"
   select_clause: sendLane
@@ -1446,7 +1446,7 @@ sitrack_columns_105:
   writeable: "1"
   show_in_directory: "1"
   column_type: date
-  table_clause: SitrackTracking,SiApplication
+  table_clause: SitrackTracking,HrSiApplication
   update_clause: 
   id: "118"
   select_clause: salaryForm
@@ -1458,7 +1458,7 @@ sitrack_columns_078:
   writeable: "1"
   show_in_directory: "1"
   column_type: date
-  table_clause: SitrackTracking,SiApplication
+  table_clause: SitrackTracking,HrSiApplication
   update_clause: 
   id: "86"
   select_clause: mpdEmailSent
@@ -1470,7 +1470,7 @@ sitrack_columns_106:
   writeable: "1"
   show_in_directory: "1"
   column_type: string
-  table_clause: SiApplication
+  table_clause: HrSiApplication
   update_clause: 
   id: "119"
   select_clause: locationAExplanation
@@ -1501,7 +1501,7 @@ sitrack_columns_079:
   writeable: "1"
   show_in_directory: "1"
   column_type: text
-  table_clause: SitrackTracking,SiApplication
+  table_clause: SitrackTracking,HrSiApplication
   update_clause: 
   id: "87"
   select_clause: kickoffNotes
@@ -1513,7 +1513,7 @@ sitrack_columns_107:
   writeable: "1"
   show_in_directory: "1"
   column_type: string
-  table_clause: SiApplication
+  table_clause: HrSiApplication
   update_clause: 
   id: "120"
   select_clause: locationBExplanation
@@ -1525,7 +1525,7 @@ sitrack_columns_050:
   writeable: "1"
   show_in_directory: "1"
   column_type: dollar
-  table_clause: SitrackMpd,SiApplication
+  table_clause: SitrackMpd,HrSiApplication
   update_clause: "UPDATE $table_mpd SET monthlyRaised = ? WHERE application_id = ?;UPDATE
     $table_mpd SET totalRaised = (monthlyRaised*12)+oneTimeRaised WHERE
     application_id = ?"
@@ -1577,7 +1577,7 @@ sitrack_columns_108:
   writeable: "1"
   show_in_directory: "1"
   column_type: string
-  table_clause: SiApplication
+  table_clause: HrSiApplication
   update_clause: 
   id: "121"
   select_clause: locationCExplanation

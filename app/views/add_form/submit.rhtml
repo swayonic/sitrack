@@ -1,0 +1,10 @@
+<div id="center">
+<div class="boxheader">Add Form Submited</div>
+	<h3>
+	The Add Form for <strong><%=@person.full_name%> has been emailed to HR, and a copy has been emailed to you as well.
+	</h3>
+	<br>
+	<%= link_to "Back to #{@person.full_name}'s Profile", {:controller => 'profile', :id => @application.id}, {:class => 'button'}%>&nbsp;&nbsp;
+	<%= link_to "Back to Directory", {:controller => 'directory'}, {:class => 'button'} %>
+</div>
+</div>

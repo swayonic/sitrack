@@ -1,0 +1,2 @@
+class SitrackJoinStaffForm < SitrackForm
+end

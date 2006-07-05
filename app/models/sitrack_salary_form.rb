@@ -1,0 +1,2 @@
+class SitrackSalaryForm < SitrackForm
+end

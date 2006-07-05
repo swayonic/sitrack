@@ -296,7 +296,7 @@ function update_value(fieldname, id, colID, type, selectClause)
 	item.style.display = "inline";
 	// use the iframe
 	value = escape(value);
-	var loc = '/directory/modify_value?value='+value+'&id='+id+'&type='+type+'&colID='+colID+'&fieldname='+fieldname;
+	var loc = '/modify/update?value='+value+'&id='+id+'&type='+type+'&colID='+colID+'&fieldname='+fieldname;
 	if (selectClause) {
 		loc += '&selectClause='+selectClause
 	}

@@ -7,7 +7,7 @@ class DirectoryController; def rescue_action(e) raise e end; end
 class DirectoryControllerTest < Test::Unit::TestCase
   fixtures :simplesecuritymanager_user, :ministry_person, :sitrack_users,
            :sitrack_views, :sitrack_columns, :sitrack_view_columns, :sitrack_queries,
-           :sitrack_saved_criteria, :hr_si_application
+           :sitrack_saved_criteria, :hr_si_applications
   def setup
     @controller = DirectoryController.new
     @request    = ActionController::TestRequest.new
@@ -15,6 +15,7 @@ class DirectoryControllerTest < Test::Unit::TestCase
     # fake cas
     @request.session[:cas_receipt] = {:user => 'josh.starcher@uscm.org',
                                       :ssoGuid => 'F167605D-94A4-7121-2A58-8D0F2CA6E026'}
+    @request.session[:session] = {:view_id => sitrack_views(:form).id}
   end
 
   # Basic action tests:
@@ -154,9 +155,9 @@ class DirectoryControllerTest < Test::Unit::TestCase
   end
   
   def test_change_view_with_id
-    get :change_view, :id => sitrack_views(:form).id
+    get :change_view, :view_id => sitrack_views(:everything).id
     assert_response :success
-    assert_equal assigns('view'), sitrack_views(:form)
+    assert_equal assigns('view'), sitrack_views(:everything)
   end
   
   def test_no_access
@@ -166,21 +167,6 @@ class DirectoryControllerTest < Test::Unit::TestCase
   
   def test_calendar
     get :calendar, :SelectDate => "06/29/2005"
-    assert_response :success
-  end
-  
-  def test_modify_value_enum
-    get :modify_value, :value => 'D', :id => 1922, :type => 'enum', :fieldname => 'Marital Status', :colID => 42
-    assert_response :success
-  end
-  
-  def test_modify_value_address
-    get :modify_value, :value => 'somewhere', :id => 50831, :type => 'address', :fieldname => 'address1', :colID => 12229
-    assert_response :success
-  end
-  
-  def test_modify_value_date
-    get :modify_value, :value => "06/29/2005", :id => 4720, :type => 'date', :fieldname => 'Add Form', :colID => 115
     assert_response :success
   end
   

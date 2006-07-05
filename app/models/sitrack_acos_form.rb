@@ -1,0 +1,2 @@
+class SitrackAcosForm < SitrackForm
+end

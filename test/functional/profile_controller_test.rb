@@ -5,8 +5,8 @@ require 'profile_controller'
 class ProfileController; def rescue_action(e) raise e end; end
 
 class ProfileControllerTest < Test::Unit::TestCase
-  fixtures :hr_si_application, :ministry_person, :hr_si_project, :sitrack_users,
-           :simplesecuritymanager_user
+  fixtures :hr_si_applications, :ministry_person, :hr_si_project, :sitrack_users,
+           :simplesecuritymanager_user, :sitrack_columns
   def setup
     @controller = ProfileController.new
     @request    = ActionController::TestRequest.new

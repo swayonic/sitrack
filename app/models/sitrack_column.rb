@@ -14,8 +14,10 @@ class SitrackColumn < ActiveRecord::Base
     @@all_columns = self.find(:all) if !@@all_columns
     select_clauses = []
     @@all_columns.each do |column| 
-      table = '(' == column.select_clause.first ? '' : column.table
-      select_clauses << table + column.select_clause+' as '+column.safe_name 
+      if column
+        table = '(' == column.select_clause.first ? '' : column.table
+        select_clauses << table + column.select_clause+' as '+column.safe_name 
+      end
     end
     return select_clauses.join(', ')
   end

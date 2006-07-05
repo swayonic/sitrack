@@ -25,7 +25,7 @@ function changeDate(sNewDate)
 	var href = 'href="javascript:popCalendar('+params+')"';
 	oDateTarget.innerHTML = '<a '+href+'">'+sNewDate+'</a>';
 	// use the iframe
-	var loc = '/directory/modify_value?value='+sNewDate+'&id='+id+'&type=date&colID='+colID+'&fieldname='+fieldname;
+	var loc = '/modify/update?value='+sNewDate+'&id='+id+'&type=date&colID='+colID+'&fieldname='+fieldname;
 	var frame = window.frames["modify_frame"];
 	frame.document.location = loc;
 }
