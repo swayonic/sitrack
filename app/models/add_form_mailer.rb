@@ -8,9 +8,9 @@ class AddFormMailer < ActionMailer::Base
     @recipients = to
     @body = var_hash
     attachment "text/html" do |a|
-      #a.disposition = "attachment" 
       a.filename = "Add Form.html" 
       a.body = form_html
+      a.transfer_encoding = '7bit'
     end
   end
 end
