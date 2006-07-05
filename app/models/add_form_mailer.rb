@@ -7,6 +7,8 @@ class AddFormMailer < ActionMailer::Base
     @cc = @from
     @recipients = to
     @body = var_hash
+    part :content_type => "text/html",
+        :body => render_message("form_email", @body)
     attachment "text/html" do |a|
       a.filename = "Add Form.html" 
       a.body = form_html
