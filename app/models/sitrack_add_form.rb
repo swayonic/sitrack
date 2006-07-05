@@ -14,7 +14,6 @@ class SitrackAddForm < SitrackForm
   def email(var_hash, form_html)
     to = 'Josh Starcher <josh.starcher@uscm.org>'
     email = AddFormMailer.create_form_email(to, var_hash, form_html)
-    email.set_content_type("text/html")
     AddFormMailer.deliver(email)
   end
 end

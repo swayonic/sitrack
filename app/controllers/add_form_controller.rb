@@ -29,7 +29,7 @@ class AddFormController < ApplicationController
                 'stint' => @stint,
                 'location' => @location,
                 'approver' => @approver}
-    form_html = render_to_string(:template => 'add_form/form')
+    form_html = render_to_string(:template => 'add_form/form', :layout => 'form')
     @form.email(var_hash, form_html)
   end
   
