@@ -9,6 +9,7 @@ class SitrackAddForm < SitrackForm
     errors.add_on_empty('Current Address', 'must be completely filled out') if hr_si_application.person.current_address.address1.empty?
     errors.add_on_empty('Permanent Address', 'must be completely filled out') if hr_si_application.person.permanent_address.address1.empty?
     errors.add_on_empty('Emergency Address', 'must be completely filled out') if hr_si_application.person.emergency_address1.address1.empty?
+    super
   end 
   
   def email(var_hash, form_html)

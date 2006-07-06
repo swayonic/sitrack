@@ -3,8 +3,8 @@ class AddFormController < ApplicationController
     if params[:form_id]
       @form = SitrackAddForm.find(params[:form_id])
     else
-      @form = (SitrackAddForm.find_first(params[:id]) || 
-                SitrackAddForm.create(:application_id => params[:id],
+      @form = (SitrackAddForm.find(:first, :conditions => ['hr_si_application_id = ?', app_id]) || 
+                SitrackAddForm.create(:hr_si_application_id => params[:id],
                                       :approver_id => session[:user].person.id))
     end
     if @form.valid?
@@ -18,16 +18,7 @@ class AddFormController < ApplicationController
   def submit
     @form = SitrackAddForm.find(params[:id])
     setup
-    var_hash = {'application' => @application,
-                'person' => @person,
-                'current_address' => @current_address,
-                'emergency_address' => @emergency_address,
-                'permanent_address' => @permanent_address,
-                'region' => @region,
-                'tracking' => @tracking,
-                'spouse' => @spouse,
-                'stint' => @stint,
-                'location' => @location,
+    var_hash = {'person' => @person,
                 'approver' => @approver}
     form_html = render_to_string(:template => 'add_form/form', :layout => 'form')
     @form.email(var_hash, form_html)
@@ -50,10 +41,9 @@ class AddFormController < ApplicationController
     @region = (Region.find_by_region(@person.region) || Region.new)
     @tracking = @application.sitrack_tracking
     @spouse = (@person.spouse || Person.new)
-    @stint = @tracking.is_stint? ? true : false
+    @stint = @tracking.is_stint?
     @location = @stint ? [@tracking.asgCity, @tracking.asgCountry].join(', ') : @tracking.asgTeam
     @approver = @form.approver
   end
 
-  
 end

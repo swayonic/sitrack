@@ -1,0 +1,59 @@
+<div class="center"> 
+	<div class="boxheader">Salary Form Information</div>
+	<%= error_messages_for 'form' %>
+	<%= start_form_tag :id => @application.id %>
+	<div class="box">
+		<div class="subboxheader">Information Fields</div>
+		<table>
+		<tr>
+			<td align="right">Account #: </td>
+			<td><%= text_field 'person', 'accountNo' %></td>
+		</tr>
+		<tr><td align="right">First Name:</td>
+			<td><%= text_field 'person', 'firstName' %></td>
+		</tr>
+		<tr><td align="right">Last Name:</td>
+			<td><%= text_field 'person', 'lastName' %></td>
+		</tr>
+		<tr>
+			<td align="right">SSN: </td>
+			<td><%= text_field 'application', 'ssn' %></td>
+		</tr>
+		<tr>
+			<td align="right">Birth Date: </td>
+			<td><%=date_select('person','birthDate', :order => [:month, :day, :year], :include_blank => true, :start_year => 1960)%></td>
+		</tr>
+		<tr>
+			<td align="right">Hire Date (or Effective Date of Change): </td>
+			<td><%=date_select('form','date_of_change', :order => [:month, :day, :year], :include_blank => true, :start_year => Time.now.year)%></td>
+		</tr>
+		<tr>
+			<td align="right">Expected Date of Departure (If New Hire): </td>
+			<td><%=date_select('tracking','departureDate', :order => [:month, :day, :year], :include_blank => true, :start_year => Time.now.year)%></td>
+		</tr>
+		<tr>
+			<td align="right">City: </td>
+			<td><%= text_field 'tracking', 'asgCity' %></td>
+		</tr>
+		<tr>
+			<td align="right">Country: </td>
+			<td><%= text_field 'tracking', 'asgCountry' %></td>
+		</tr>
+		<tr>
+			<td align="right">AOA: </td>
+			<td><%= text_field 'tracking', 'asgContinent' %></td>
+		</tr>
+		<tr>
+			<td align="right">Reason for Change: </td>		
+			<td><%= text_field 'form', 'salary_reason' %></td>
+		</tr>
+		<tr>
+			<td align="right">New Annual Base Salary (Net): </td>
+			<td><%= text_field 'form', 'annual_salary', :size => 30, :maxlength => 200 %></td>
+		</tr>
+		</table>
+	</div><br /><br />
+	<a href="javascript:submitForm();" class="button">Generate AND Submit Form</a>&nbsp;&nbsp;&nbsp;&nbsp;
+	<a href="../profile.php?personID={$personID}&applicationID={$applicationID}" class="button">Back to Profile</a>
+	</form>
+</div>

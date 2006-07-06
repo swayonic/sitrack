@@ -5,5 +5,6 @@ class SitrackTracking < ActiveRecord::Base
   
   def is_stint?
     return true if ['ICS','STINT'].include?(internType)
+    return false
   end
 end
