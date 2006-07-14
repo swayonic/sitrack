@@ -1,117 +1,173 @@
-<h2>ADD NOTICE For STINT and U.S.MINISTRY INTERNS</h2>
-
-<p class="instructions">
-For STINT: This form must be submitted <u>within two weeks of acceptance.</u> Hire date is always
-the 1<sup>st</sup> of the month in which they depart. For MINISTRY INTERNS: This form must be submitted <u>within two
-weeks of acceptance.</u> All setup forms (i.e. I-9, W-4, Benefits Forms, etc.)
-submitted<u> 2 weeks prior to hire date</u> in order to begin payroll. Hire date will be either the 1<sup>st</sup>
-or the 16<sup>th</sup>.</p>
-
-<p>Regional Office & Phone# <span class="data"><%=@region.name%>&nbsp;<%=@region.phone%></span></p>
-
-<p><strong>(For STINT Only)</strong> Sending Campus (Specific School): <span class="data"><%if @stint %>UCLA<%end%></span></p>
-
-<p>
-Last Name: <span class="data"><%=@person.lastName%> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>
-First Name: <span class="data"><%=@person.firstName%> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>
-Middle Name: <span class="data"><%=@person.middleName%></span>
-</p>
-
-<p>
-Sex: <span class="data"><%=@person.human_gender%></span> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-Spouse First Name: <span class="data"> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>
-Maiden Name:  
-</p>
-
-<p> Spouse's account#: <%=@spouse.accountNo%> &nbsp; Marriage Date __________</p>
- 
-<p>
-<strong>Current Address:</strong><br/>
-Street: <span class="data"><%=@current_address.address1%> <%=@current_address.address2%></span><br/>
-City: <span class="data"><%=@current_address.city%>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>
-State: <span class="data"><%=@current_address.state%>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>
-Zip: <span class="data"><%=@current_address.zip%></span><br/>
-Phone#: <span class="data"><%=@current_address.homePhone%> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><br/>
-Email: <span class="data"><%=@current_address.email%></span>
-</p>
-<p><strong>Emergency Contact:</strong><br/>
-Name: <span class="data"><%=@emergency_address.contactName%>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>
-Relationship: <span class="data"><%=@emergency_address.contactRelationship%>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><br/>
-Street: <span class="data"><%=@emergency_address.address1%> <%=@emergency_address.address2%></span><br/>
-City: <span class="data"><%=@emergency_address.city%> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>
-State: <span class="data"><%=@emergency_address.state%>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>
-Zip: <span class="data"><%=@emergency_address.zip%></span><br/>
-Phone#: <span class="data"><%=@emergency_address.homePhone%> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><br/>
-Email: <span class="data"><%=@emergency_address.email%></span>
-</p>
-
-<p><strong>Permanent U.S. Address while Overseas (Parent, Sibling,
-Family Member, etc. other than Financial Coordinator)</strong><br/>
-Name: <span class="data"><%=@permanent_address.contactName%>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>
-Relationship: <span class="data"><%=@permanent_address.contactName%>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><br/>
-Street: <span class="data"><%=@permanent_address.address1%> <%=@permanent_address.address2%></span><br/>
-City: <span class="data"><%=@permanent_address.city%> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>
-State: <span class="data"><%=@permanent_address.state%>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>
-Zip: <span class="data"><%=@permanent_address.zip%></span><br/>
-Phone#: <span class="data"><%=@permanent_address.homePhone%> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><br/>
-Email: <span class="data"><%=@permanent_address.email%></span><br/>
-</p>
-
-<p>
-Birthdate: <span class="data">06/26/1981</span>&nbsp;&nbsp; 
-Spouse Birthdate: 
-</p>
-
-<p>
-S.S#: <span class="data">546-97-3290</span> &nbsp;&nbsp;
-Spouse S.S.#:</p>
-<table cellpadding="2">
+	<table cellspacing="0" cellpadding="0"> 
+	  <tr> 
+		<td> 
+		  <div style='border:solid 2.0pt; padding:3px' align="center"> 
+			<span style="font-size:16pt; font-weight:bold; font-family:'Cooper Black'">
+				STINT and Ministry Intern Administrative Change of Status Form 
+			</span>
+		  </div>
+		</td> 
+	  </tr> 
+	</table> 
+	<table>
 	<tr>
-		<td colspan="2">HUMAN RESOURCES STATUS:</td>
-		<td colspan="4">MINISTRY PLACEMENT:</td>
+	<td width="440">
+	
+	<p><span style='font-size:9.0pt;'>Status prior to submission of this form:</span>
+		<b><span style='font-size:9.0pt;'> <span style='color:blue'><%=@tracking.internType%></span></span></b></p> 
+	<p><span style='font-size:9.0pt;'>Account #:<b> <span style='color:blue'><%=@person.accountNo%></span></span></b></span><br/>
+		<span	style='font-size:9.0pt;'> Supervising Office &amp; Phone #:<b> <span> </span><%=@region.name%>&nbsp;<%=@region.phone%></b></span></p> 
+	<p><span style='font-size:9.0pt;'>Last Name:</span><b><span style='font-size:9.0pt;'> <span
+		style='color:blue;'><%=@person.lastName%> </span></span></b><br/>
+		<span style='font-size:9.0pt;	'>First Name:</span><b><span style='font-size:9.0pt;'> <span
+		style='color:blue;'><%=@person.firstName%>&nbsp;&nbsp;</span></span></b>
+		<span	style='font-size:9.0pt;'>Middle Name:</span><b><span style='font-size:9.0pt;
+		'> <span style='color:blue'><%=@person.middleName%></span></span></b></p> 
+	<p><span style='font-size:9.0pt;	'>Gender:</span><b><span
+		style='font-size:9.0pt;'> <span style='color:blue'><%=@options_hash['Gender'][@person.gender]%></span></span></b><span
+		style='font-size:9.0pt;'> Spouse First Name:<b> <span style='color:blue;'><%=@spouse.firstName%></span></b>&nbsp;&nbsp;&nbsp;Middle Name: <b><span
+		style='color:blue'><%=@spouse.middleName%></span></b></span></p> 
+	<p>
+	<span style='font-size:9.0pt;'> <b>CURRENT U.S. MAILING ADDRESS:</b> </span>
+	<br>
+	<span style='font-size:9.0pt;'>
+	<b><span style='color:blue'>
+		<%=@current_address.address1%>
+	<br>
+		<%=@current_address.address2%>
+	</span></b></span>
+	<span style='font-size:9.0pt;'> 
+	<br>
+	<b><span
+		style='font-size:9.0pt;color:blue'><span
+		style='"MERGEFIELD CurrentCity"'><%=@current_address.city%></span></span></b><b><span style='font-size:9.0pt;'>, <span style='color:blue'><span style='"MERGEFIELD CurrentState"'><%=@current_address.state%></span></span> </span></b><span style='font-size:9.0pt;'> <b><span
+		style='color:blue'><span style='"MERGEFIELD CurrentZip"'><%=@current_address.zip%></span></span></b></span> 
+	<p><b><span
+		style='font-size:9.0pt;color:blue'><span
+		style='"MERGEFIELD CurrentHomePhone"'><%=@current_address.homePhone%> (home) <br> 
+	   <%=@current_address.cellPhone%> (cell) <br> 
+	  </span></span></b><b><span style='font-size:9.0pt;'> </span></b><span
+		style='font-size:9.0pt;'> <b><span style='color:blue'><%=@current_address.email%> </span></b></span></p> 
+	<p><b>Human Resource Status</b><b><span style='font-size:11.0pt;'>:</span></b></p> 
+	<p><span style='font-size:9.0pt;	'>EFFECTIVE DATE OF CHANGE <br> 
+	  (For STINTers use the 1st and 16th ONLY):</span><b><span style='font-size:9.0pt;'> </span></b><b><span
+		style='font-size:9.0pt;color:blue'><%=ApplicationController::formatted_date(@form.date_of_change)%><a
+		name=Text49></a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span></b></p> 
+	<p><span
+		style='font-size:9.0pt;'><a
+		name=Check1></a></span><span style='font-size:9.0pt;'> <%=@termination%> TERMINATION</span></p> 
+		<ul>
+	<li><span style='font-size:9.0pt;'>Reopen account as </span><b><span style='font-size:9.0pt;'><a
+		name=Check2></a></span></b><b><span style='font-size:9.0pt;'> </span></b><span
+		style='font-size:9.0pt;'><%=@staff%> Staff Applicant </span><b><span
+		style='font-size:9.0pt;'> </span></b><span style='font-size:9.0pt;'><%=@stint%> STINT Applicant<b> </b> </span><b><span style='font-size:9.0pt;'><a name=Check3></a></span></b><b><span style='font-size:9.0pt;'> </span></b><span
+		style='font-size:9.0pt;'><%=@intern%> Intern Applicant<b> </b></span>
+	</li>
+	<li><b><span style='font-size:9.0pt;'> </span></b><span
+		style='font-size:9.0pt;'> <%=@freeze%> FREEZE ACCOUNT (No funds go in or out of the account)</span>
+	<span style='font-size:9.0pt;'>From <%=ApplicationController::formatted_date @form.freeze_start%> </span><b><span style='font-size:9.0pt;'><a name=Text47></a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span></b><span
+		style='font-size:9.0pt;'> to <%=ApplicationController::formatted_date @form.freeze_end%></span><b><span style='font-size:9.0pt;'><a name=Text48></a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span></b><span
+		style='font-size:9.0pt;'> ( up to 1 year) </span>
+	</li>
+	</ul>
+	</p>
+	<p class=MsoHeader><b><span style='font-size:9.0pt;'><a name=Check5></a></span></b><span
+		style='font-size:9.0pt;'> <%=@toIntern%> TRANSITION FROM STINT to US Intern</span></p> 
+	<p class=MsoHeader><b><span
+		style='font-size:9.0pt;'> </span></b><span style='font-size:9.0pt;'> <%=@toStint%> TRANSITION FROM US Intern to STINT </span>
+	<br><span style='font-size:9.0pt;'> </span><span style='font-size:9.0pt;'><a name=Text53></a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>
+			<span style='font-size:9.0pt;'> <%=@tracking.caringRegion%> Caring HR Team </span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+			<span style='font-size:9.0pt;'> <%=@person.region%> Sending HR Team</span></p> 
+	<p class=MsoHeader><b><span style='font-size:9.0pt;'><a name=Check6></a></span></b><b><span style='font-size:9.0pt;'> </span></b><span
+		style='font-size:9.0pt;'> <%=@withdrawal%> WITHDRAWAL </span></p> 
+	<p class=MsoHeader><b><span style='font-size:9.0pt;'><a name=Check7></a></span></b><b><span style='font-size:9.0pt;'> </span></b><span
+		style='font-size:9.0pt;'><%=@changeLocation%> CHANGE IN ASSIGNMENT (Please indicate: TEAM and LOCATION)</span>
+	<br><span style='font-size:9.0pt;'>From <%=@form.change_assignment_from_location%></span><b><span style='font-size:9.0pt;'><a name=Text45></a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span></b><span
+		style='font-size:9.0pt;'> to <%=@form.change_assignment_to_location%></span><b><span style='font-size:9.0pt;'><a name=Text46></a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span></b><span
+		style='font-size:9.0pt;'> </span></p> 
+	<p class=MsoHeader><b><span style='font-size:9.0pt;'><a name=Check8></a></span></b><b><span style='font-size:9.0pt;'> </span></b><span
+		style='font-size:9.0pt;'><%=@restint%> RESTINT to Location: <span style='color:blue'><%=@form.restint_location%></span></span><span style='font-size:9.0pt;'><a name=Text51></a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>
+	<br><span style='font-size:9.0pt;
+		'>DEPARTURE DATE: <%=ApplicationController::formatted_date @tracking.departureDate%></span><b><span
+		style='font-size:9.0pt;'><a
+		name=Text52></a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span></b><b><span
+		style='font-size:9.0pt;'> </span></b><b><span style='font-size:9.0pt;'><a
+		name=Check11></a></span></b><span
+		style='font-size:9.0pt;'> <%=@est%> Est. </span><b><span style='font-size:9.0pt;'><a name=Check12></a></span></b><span
+		style='font-size:9.0pt;'><%=@conf%> Conf.</span></p> 
+	<p class=MsoHeader><b><span
+		style='font-size:9.0pt;'><a
+		name=Check21></a></span></b><span
+		style='font-size:9.0pt;'> <%=@reintern%> Intern approved for second-year Internship.</span></p> 
+	<p class=MsoHeader><span style='font-size:9.0pt;'><a name=Check22></a></span><span style='font-size:9.0pt;'> <%=@changeHours%> Change in hours worked. New number of hours per week: <%=@form.hours_per_week%> </span><span style='font-size:9.0pt;'><a name=Text55></a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>
+</p> 
+	<p><span
+		style='font-size:9.0pt;'> <%=@other%> Other: <%=@form.other_explanation%></span><b><span style='font-size:9.0pt;'><a name=Text44></a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span></b><span
+		style='font-size:9.0pt;'> </span></p> 
+	<p><b><span
+		style='font-size:9.0pt;'>AUTHORIZING SIGNATURE: <span
+		style='color:blue'><%=@approver.full_name%> <%=@approver.accountNo%></span> DATE: <a name=Text50></a></span></b><b><span
+		style='font-size:9.0pt;color:blue'><%=ApplicationController::formatted_date%></span></b><span
+		style='font-size:9.0pt;'> </span></p> 
+	</span> 
+	</td>
+	<td>
+	  <table cellpadding="0" cellspacing="0"> 
+		<tr> 
+		  <td width="264" height="511" align="left" valign="top" bgcolor="white" class="Normal" style="border:2.25pt solid black;vertical-align:top;background:white"> <table cellpadding=0 cellspacing=0 width="100%"> 
+			  <tr> 
+				<td class="Normal"> <p><b><span style='font-size:11.0pt;'>For Staff Services Use Only:</span></b></p> 
+				  <p><span style='font-size:11.0pt;			font-family:Wingdings;"Times New Roman";'> 
+					<input type="checkbox"> 
+					</span><span
+				style='font-size:11.0pt;'> Change Address </span></p> 
+				  <p><span style='font-size:11.0pt;			font-family:Wingdings;"Times New Roman";'> 
+					<input type="checkbox"> 
+					</span><span
+				style='font-size:11.0pt;'> Enter Status/Location </span></p> 
+				  <p><span style='font-size:11.0pt;			font-family:Wingdings;"Times New Roman";'> 
+					<input type="checkbox"> 
+					</span><span
+				style='font-size:11.0pt;'> Change/Zero Pay Rate</span></p> 
+				  <p><span style='font-size:11.0pt;			font-family:Wingdings;"Times New Roman";'> 
+					<input type="checkbox"> 
+					</span><span
+				style='font-size:11.0pt;'> Enter Benefits Changes</span></p> 
+				  <p><span style='font-size:11.0pt;			font-family:Wingdings;"Times New Roman";'> 
+					<input type="checkbox"> 
+					</span><span
+				style='font-size:11.0pt;'> Enter Tax Data</span></p> 
+				  <p><span style='font-size:11.0pt;			font-family:Wingdings;"Times New Roman";'> 
+					<input type="checkbox"> 
+					</span><span
+				style='font-size:11.0pt;'> Enter Tax Distribution</span></p> 
+				  <p><span style='font-size:11.0pt;			font-family:Wingdings;"Times New Roman";'> 
+					<input type="checkbox"> 
+					</span><span
+				style='font-size:11.0pt;'> Repeat For Spouse (except address)</span></p> 
+				  <p><span style='font-size:11.0pt;			font-family:Wingdings;"Times New Roman";'> 
+					<input type="checkbox"> 
+					</span><span
+				style='font-size:11.0pt;'> Give to Benefits for Changes</span></p> 
+				  <p><span style='font-size:11.0pt;			font-family:Wingdings;"Times New Roman";'> 
+					<input type="checkbox"> 
+					</span><span
+				style='font-size:11.0pt;'> Give to Reimb. to clear Salary Adv., </span></p> 
+				  <p><span style='font-size:11.0pt;'>Reimb. Adv., and Final Reimb.</span></p> 
+				  <p><span style='font-size:11.0pt;			font-family:Wingdings;"Times New Roman";'> 
+					<input type="checkbox"> 
+					</span><span
+				style='font-size:11.0pt;'> Zero out account balance.</span></p> 
+				  <p><span style='font-size:11.0pt;			font-family:Wingdings;"Times New Roman";'> 
+					<input type="checkbox"> 
+					</span><span
+				style='font-size:11.0pt;'> Request made for funds transfer.</span></p> 
+				  <p><span style='font-size:11.0pt;'>Notes:</span></p> 
+				 <td class="Normal">  
+			  </div> 
+			   </table></td> 
+		</tr> 
+	  </table> 
+	</td>
 	</tr>
-	<tr>
-		<td><span class="data"><%if @stint%>X<%end%></span></td>
-		<td>CAMPUS STINT</td>
-		<td><span class="data">X</span></td>
-		<td>CAMPUS</td>
-		<td>&nbsp;</td>
-		<td>SILK ROAD</td>
-	</tr>
-	<tr>
-		<td>&nbsp;</td>
-		<td>COMMUNITY STINT</td>
-		<td>&nbsp;</td>
-		<td>CO-MISSION</td>
-		<td>&nbsp;</td>
-		<td>AIA</td>
-	</tr>
-	<tr>
-		<td><span class="data"><%unless @stint%>X<%end%></span></td>
-		<td>U.S. MINISTRY INTERN</td>
-		<td>&nbsp;</td>
-		<td>STUDENT VENTURE</td>
-		<td>&nbsp;</td>
-		<td>OTHER</td>
-	</tr>
-</table>
-
-<p>If "other", please specify_______________</p>
-
-<p>Location of Assignment: <u><span class="data"><%=@location%></span></u></p>
-
-<p><strong>(For STINT Only)</strong> Caring Region: <span class="data"><%= if @stint then @tracking.caringRegion end%></span>  &nbsp;&nbsp;
-Team Leader: __________
-</p>
-
-<p>
-Hire Date: __/__/__
-Estimated Departure Date: <span class="data"><%= if @stint then ApplicationController::formatted_date(@tracking.departureDate) end%></span>&nbsp;
-<strong>(For STINT Only)</strong>
-</p>
-<p>&nbsp;</p>
-<h3>
-AUTHORIZING SIGNATURE: <span class="data"><%=@approver.firstName%> <%=@approver.lastName%></span> ACCT#: <span class="data"><%=@approver.accountNo%> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>
-DATE: <span class="data"><%=ApplicationController::formatted_date%></span>
-</h3>
-
+	</table>
