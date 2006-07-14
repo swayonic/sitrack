@@ -1,2 +1,0 @@
-class SitrackInternAdditionalSalaryForm < SitrackAdditionalSalaryForm
-end

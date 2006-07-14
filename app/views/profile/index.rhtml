@@ -343,9 +343,9 @@ person_id = @person['personID']
 		<div class="subboxheader2">Generate Forms</div>
 		<a href="/add_form/fill?id=<%=application_id%>">&nbsp;&nbsp;Add Form</a><br />
 		<a href="/salary_form/fill?id=<%=application_id%>">&nbsp;&nbsp;Salary Form</a><br />
-		<a href="javascript:additionalSalaryForm();">&nbsp;&nbsp;Additional Salary</a><br />
-		<a href="forms/updateform.php?applicationID=<%=application_id%>&personID=<%=person_id%>&action=prompt">&nbsp;&nbsp;ACOS Form</a><br />
-		<a href="forms/joinstaffform.php?applicationID=<%=application_id%>&personID=<%=person_id%>&action=prompt">&nbsp;&nbsp;Join Staff Form</a><br />
+		<a href="/additional_salary_form/fill/<%=application_id%>">&nbsp;&nbsp;Additional Salary</a><br />
+		<a href="/acos_form/fill/<%=application_id%>">&nbsp;&nbsp;ACOS Form</a><br />
+		<a href="/join_staff_form/fill/<%=application_id%>">&nbsp;&nbsp;Join Staff Form</a><br />
 
 		<%if @person_obj.image && !@person_obj.image.empty?-%>
 			<div class="subboxheader2">Picture</div>

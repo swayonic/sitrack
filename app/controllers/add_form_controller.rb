@@ -21,19 +21,22 @@ class AddFormController < ApplicationController
     setup
     var_hash = {'person' => @person,
                 'approver' => @approver}
-    form_html = render_to_string(:template => 'add_form/form', :layout => 'form')
+    form_html = render_to_string(:template => 'add_form/form', :layout => 'add_form_layout')
     @form.email(var_hash, form_html)
+    @form_type = 'Salary'
+    render(:template => 'shared/form_submitted')
   end
   
   private
   
   def preview
     setup
-    render(:action => 'preview', :layout => 'form')
+    render(:action => 'preview', :layout => 'add_form_layout')
   end
 
   # Create the instance variables needed in the views  
   def setup
+    @title = 'STAFF ADD NOTICE - Class A Only'
     @application = @form.hr_si_application
     @person = @application.person
     @current_address = (@person.current_address || Address.new)

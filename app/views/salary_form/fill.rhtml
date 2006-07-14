@@ -1,10 +1,18 @@
 <div class="center"> 
-	<div class="boxheader">Salary Form Information</div>
+	<div class="boxheader">Salary Form Information for <%= @person.full_name %></div>
+	<br/>
 	<%= error_messages_for 'form' %>
 	<%= start_form_tag :id => @application.id %>
 	<div class="box">
 		<div class="subboxheader">Information Fields</div>
 		<table>
+		<tr>
+			<td align="right">Type of Form: </td>
+			<td>
+				<%= radio_button 'form', 'payroll_action', 'New Hire'%> New Hire &nbsp;
+				<%= radio_button 'form', 'payroll_action', 'Payroll Change'%> Payroll Change
+			</td>
+		</tr>
 		<tr>
 			<td align="right">Account #: </td>
 			<td><%= text_field 'person', 'accountNo' %></td>
@@ -21,20 +29,17 @@
 		</tr>
 		<tr>
 			<td align="right">Birth Date: </td>
-			<td><%=date_select('person','birthDate', :order => [:month, :day, :year], :include_blank => true, :start_year => 1960)%></td>
+			<td><%=date_select('person','birthDate', :order => [:month, :day, :year], :start_year => 1960)%></td>
 		</tr>
 		<tr>
 			<td align="right">Hire Date (or Effective Date of Change): </td>
-			<td><%=date_select('form','date_of_change', :order => [:month, :day, :year], :include_blank => true, :start_year => Time.now.year)%></td>
-		</tr>
-		<tr>
-			<td align="right">Expected Date of Departure (If New Hire): </td>
-			<td><%=date_select('tracking','departureDate', :order => [:month, :day, :year], :include_blank => true, :start_year => Time.now.year)%></td>
+			<td><%=date_select('form','date_of_change', :order => [:month, :day, :year], :start_year => Time.now.year)%></td>
 		</tr>
 		<tr>
 			<td align="right">City: </td>
 			<td><%= text_field 'tracking', 'asgCity' %></td>
 		</tr>
+		<% if @tracking.is_stint? -%>
 		<tr>
 			<td align="right">Country: </td>
 			<td><%= text_field 'tracking', 'asgCountry' %></td>
@@ -43,6 +48,31 @@
 			<td align="right">AOA: </td>
 			<td><%= text_field 'tracking', 'asgContinent' %></td>
 		</tr>
+		<tr>
+			<td align="right">Expected Date of Departure (If New Hire): </td>
+			<td><%= date_select('tracking','departureDate', :order => [:month, :day, :year], :start_year => Time.now.year)%></td>
+		</tr>
+		<% else -%>
+		<tr>
+			<td align="right">State: </td>
+			<td><%= text_field 'tracking', 'asgState' %></td>
+		</tr>
+		<tr>
+			<td align="right">Intern Type: </td>
+			<td>
+				<%= radio_button 'tracking', 'internType', 'Internship'%> Full Time &nbsp;
+				<%= radio_button 'tracking', 'internType', 'Class B Intern'%> Part Time
+			</td>
+		</tr>
+		<tr>
+			<td align="right">Hours/Week: </td>
+			<td><%= text_field 'form', 'hours_per_week' %></td>
+		</tr>
+		<tr>
+			<td align="right">Is this person in New York: </td>
+			<td><%= select 'form', 'tax_rate', [['No', 28],['Yes', 33]]%></td>
+		</tr>
+		<% end -%>
 		<tr>
 			<td align="right">Reason for Change: </td>		
 			<td><%= text_field 'form', 'salary_reason' %></td>
@@ -53,7 +83,7 @@
 		</tr>
 		</table>
 	</div><br /><br />
-	<a href="javascript:submitForm();" class="button">Generate AND Submit Form</a>&nbsp;&nbsp;&nbsp;&nbsp;
-	<a href="../profile.php?personID={$personID}&applicationID={$applicationID}" class="button">Back to Profile</a>
+	<a href="javascript:document.forms[0].submit();" class="button">Preview Form</a>&nbsp;&nbsp;&nbsp;&nbsp;
+	<a href="/profile/<%=@application.id%>" class="button">Back to Profile</a>
 	</form>
 </div>

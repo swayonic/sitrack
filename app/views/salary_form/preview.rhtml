@@ -1,0 +1,11 @@
+<div id="preview_text">
+	Below is a preview of the form as it will look when staff services receives it.
+	Please make sure all the information is accurate before submitting it. <br/>
+	<%= link_to "| Submit the form |", :action => 'submit', :id => @form%> 
+	<%= link_to "| Go back and make changes |", :controller => 'profile', :id => @application%>
+</div>
+<%= if @tracking.is_stint?
+			render(:partial => 'stint_form') 
+		else
+			render(:partial => 'intern_form') 
+		end %>

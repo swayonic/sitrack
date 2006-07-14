@@ -1,0 +1,201 @@
+<p align="center"><b><span style='font-size:16.0pt;font-family:Arial'>Campus Crusade for Christ</span></b></p> 
+  <div style='border:none;border-bottom:solid windowtext 2.25pt;padding:0in 0in 1.0pt 0in'> 
+    <h2 align='center' style='border:none;padding:0in;'><span style='font-size:18.0pt;'>Additional Salary Request Form</span></h2> 
+  </div> 
+  
+  <table border="1" cellspacing="0" cellpadding="0" width=721> 
+    <tr> 
+      <td width=278 valign=top>
+
+	  	<span style='font-size:8.0pt;  font-family:Arial'>NAME</span><br />
+        <span style='font-size:11.0pt;  font-family:Arial'><%= @person.full_name%></span>
+	  </td> 
+      <td width=443 colspan=5 valign=top>
+	    <span style='font-size:8.0pt;  font-family:Arial'>STAFF ACCOUNT NUMBER</span><br />
+        <span style='font-family:Arial'><%= @person.accountNo%></span>
+	  </td> 
+    </tr> 
+    <tr> 
+      <td width='278'> &nbsp;
+
+	  	<span style='font-size:8.0pt;font-family:Arial'>MARITAL STATUS: </span>
+        <span style='font-size:10.0pt;font-family:Arial'><%= @person.fk_spouseID? ? 'TRUE' : 'FALSE'%></span>
+	  </td> 
+      <td width='443' colspan='5' rowspan='2'> 
+	  	<p><span style='font-size:10.0pt;font-family:Arial'>
+		&nbsp;[&nbsp;&nbsp;] New Staff
+		&nbsp;[<%= @tracking.is_stint? ? '&nbsp;&nbsp;' : 'X'%>] Intern 
+		&nbsp;[<%= @tracking.is_stint? ? 'X' : '&nbsp;&nbsp;'%>] STINT
+		</span></p>
+
+	  </td> 
+    </tr> 
+    <tr> 
+      <td width='278'>&nbsp;
+	  	<span style='font-size:8.0pt; font-family:Arial'>Email address:</span>
+        <span style='font-size:10.0pt; font-family:Arial'><%= @current_address.email%></span>
+	  </td> 
+    </tr> 
+    <tr> 
+      <td width='721' colspan='6'> 
+	  	<table  style='font-size:8.0pt;  font-family:Arial'>
+	  	<tr>
+			<td><i>Check here if you want a 403(b) contribution made on this Additional Salary Request, it will be deducted from the amount of your request </i></td>
+			<td>[  ]</td>
+		</tr>
+		<tr>
+			<td><i>Check here to cancel direct deposit (for this payment only) and receive a check</i></td>
+			<td>[  ]</td>
+		</tr>
+		</table>
+	  </td> 
+    </tr> 
+    <tr> 
+      <td width=721 colspan=6 valign=top class='Normal'> 
+	  <b>
+	  	<span style='font-size:10.0pt; font-family:Arial'>Section A</span>
+	    <i><span style='font-size:8.0pt;font-family:Arial'>In determining the amount of Additional Salary you need, keep in mind that taxes will come out of the amount you request.</span></i>
+   	  </b><br />
+        <span style='font-size:10.0pt; font-family:Arial'><strong>Reason(s) for request</strong></span>
+        <table style='font-size:8.0pt;font-family:Arial; margin-left:15px'>
+		<tr>
+			<td><%=@current_years_salary_x)%> Current year's salary not received due to inadequate support (i.e. short paychecks-no approval required)</td>
+			<td>$<%=@form.current_years_salary%> (BKP)</td>
+		</tr>
+		<tr>
+			<td><%=@previous_years_salary_x)%> Previous years salary not received due to inadequate support</td>
+			<td>$<%=@form.previous_years_salary%></td>
+		</tr>
+		<tr>
+			<td><%=@additional_salary_x)%> Additional salary not exceeding your Maximum Salary level</td>
+			<td>$<%=@form.additional_salary%></td>
+		</tr>
+		<tr>
+			<td><%=@adoption_x)%> Adoption</td>
+			<td>$<%=@form.adoption%></td>
+		</tr>
+		<tr>
+			<td><%=@counseling_x)%> Counseling that is not for the treatment of a medical condition (i.e. marital, family, or spiritual issues)</td>
+			<td>$<%=@form.counseling%></td>
+		</tr>
+		<tr>
+			<td><%=@childrens_expenses_x)%> Children's expenses on a ministry trip (support raising, CSU, etc.)</td>
+			<td>$<%=@form.childrens_expenses%></td>
+		</tr>
+		<tr>
+			<td><%=@college_x)%> Children's college education -- Maximum amount is $14,000 per year, per child</td>
+			<td>$<%=@form.college%></td>
+		</tr>
+		<tr>
+			<td><%=@private_school_x)%> Non-College Private School Expenses</td>
+			<td>$<%=@form.private_school%></td>
+		</tr>
+		<tr>
+			<td><%=@graduate_studies_x)%> Approved Graduate Studies</td>
+			<td>$<%=@form.graduate_studies%></td>
+		</tr>
+		<tr>
+			<td><%=@auto_purchase_x)%> Auto Purchase -- Maximum amount is $11,000 per year per family unit</td>
+			<td>$<%=@form.auto_purchase%></td>
+		</tr>
+		<tr>
+			<td><%=@settling_in_expenses_x)%> Settling-in expenses</td>
+			<td>$<%=@form.settling_in_expenses%></td>
+		</tr>
+		<tr>
+			<td><%=@reimbursable_expenses_x)%> Reimbursable expenses that were not approved within 90 days (attach copy of reimbursement)</td>
+			<td>$<%=@form.reimbursable_expenses%></td>
+		</tr>
+		</table>
+		</td> 
+    </tr> 
+    <tr> 
+      <td width=721 colspan=6 align='center'> 
+		<h4 style='font-family:Arial, Helvetica, sans-serif'>ADDITIONAL SALARY AMOUNT -- Taxes will be taken out of this amount $<%=@total%> ADS</h4>
+	  </td> 
+    </tr> 
+    <tr> 
+      <td width=421 colspan=3 valign=top class='Normal'> <p><span style='font-size:10.0pt;  font-family:Arial'>SECTION B</span></p></td> 
+      <td width=150 colspan=2 valign=top class='Normal'> <p align=center style='text-align:center'><b><span
+  style='font-size:9.0pt;font-family:Arial'>REQUESTOR/SINGLE</span></b></p></td> 
+      <td width=150 valign=top class='Normal'> <p align=center style='text-align:center'><b><span
+  style='font-size:9.0pt;font-family:Arial'>SPOUSE</span></b></p></td> 
+    </tr> 
+    <tr> 
+      <td width=421 colspan=3 valign=top class='Normal'> <p><span style='font-size:10.0pt;  font-family:Arial'>1. Maximum Allowable Salary -- Salary Calculation Form -- Line 10</span></p></td> 
+      <td width=150 colspan=2 valign=top class='Normal'> <p><span style='font-size:9.0pt;  font-family:Arial'>$</span><span style='font-size:9.0pt;font-family:Arial'><a name=Text14></a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span></p></td> 
+      <td width=150 valign=top class='Normal'> <p><span style='font-size:9.0pt;  font-family:Arial'>$</span><span style='font-size:9.0pt;font-family:Arial'><a name=Text19></a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span></p></td> 
+    </tr> 
+    <tr> 
+      <td width=421 colspan=3 valign=top class='Normal'> <p><span style='font-size:10.0pt;  font-family:Arial'>2. Gross Annual Salary -- Salary Calculation Form -- Line 15</span></p></td> 
+      <td width=150 colspan=2 valign=top class='Normal'> <p><span style='font-size:9.0pt;  font-family:Arial'>$</span><span style='font-size:9.0pt;font-family:Arial'><a name=Text15></a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span></p></td> 
+      <td width=150 valign=top class='Normal'> <p><span style='font-size:9.0pt;  font-family:Arial'>$</span><span style='font-size:9.0pt;font-family:Arial'><a name=Text20></a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span></p></td> 
+    </tr> 
+    <tr> 
+      <td width=421 colspan=3 valign=top class='Normal'> <p><span style='font-size:10.0pt;  font-family:Arial'>3. Additional salary already received this calendar year</span></p></td> 
+      <td width=150 colspan=2 valign=top class='Normal'> <p><span style='font-size:9.0pt;  font-family:Arial'>$</span><span style='font-size:9.0pt;font-family:Arial'><a name=Text16></a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span></p></td> 
+      <td width=150 valign=top class='Normal'> <p><span style='font-size:9.0pt;  font-family:Arial'>$</span><span style='font-size:9.0pt;font-family:Arial'><a name=Text21></a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span></p></td> 
+    </tr> 
+    <tr> 
+      <td width=421 colspan=3 valign=top class='Normal'> <p><span style='font-size:10.0pt;  font-family:Arial'>4. Additional salary requested on this form</span></p></td> 
+      <td width=150 colspan=2 valign=top class='Normal'> <p><span style='font-size:9.0pt;  font-family:Arial'>$</span><span style='font-size:9.0pt;font-family:Arial'><a name=Text17></a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span></p></td> 
+      <td width=150 valign=top class='Normal'> <p><span style='font-size:9.0pt;  font-family:Arial'>$</span><span style='font-size:9.0pt;font-family:Arial'><a name=Text22></a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span></p></td> 
+    </tr> 
+    <tr> 
+      <td width=421 colspan=3 valign=top class='Normal'> <p><span style='font-size:10.0pt;  font-family:Arial'>5. Total -- Add lines 2, 3 and 4</span></p></td> 
+      <td width=150 colspan=2 valign=top class='Normal'> <p><span style='font-size:9.0pt;  font-family:Arial'>$</span><span style='font-size:9.0pt;font-family:Arial'><a name=Text18></a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span></p></td> 
+      <td width=150 valign=top class='Normal'> <p><span style='font-size:9.0pt;  font-family:Arial'>$</span><span style='font-size:9.0pt;font-family:Arial'><a name=Text23></a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span></p></td> 
+    </tr> 
+    <tr> 
+      <td width=721 colspan=6 style='font-size:10.0pt;  font-family:Arial;'> 
+	  	Is Line 5 over your Maximum Allowable Salary (CAP) level or over 60,000<br />
+        For an individual/$100,000 for a couple? &nbsp; &nbsp; &nbsp; &nbsp;[X] NO &nbsp; &nbsp; &nbsp;[&nbsp;&nbsp;] YES
+	  </td> 
+    </tr> 
+    <tr> 
+      <td width=721 colspan=6 valign=top class='Normal'> <p><span style='font-size:10.0pt;  font-family:Arial'>If <b>NO</b>, sign below and mail, fax, or electronically submit this form.</span> <br />
+        <span style='font-size:10.0pt;  font-family:Arial'>If <b>YES</b>, by how much? $___. Because this request is taking you over your Maximum Allowable Salary or over $60,000 for an individual/$100,000 for a couple, sign below, get appropriate approval(s) and send to Staff Services.</span><br />
+        <span style='font-size:10.0pt;  font-family:Arial'>(If you are married, for one spouse to go over their Maximum Allowable Salary, the other spouse must also be at their Maximum Allowable Salary).</span></p></td> 
+    </tr> 
+    <tr> 
+      <td width=559 colspan=4 valign=top class='Normal'>
+        <h4 align='center' style='font-family:Arial, Helvetica, sans-serif'><span style='color:blue'><%=@approver.full_name%> </span><span style='color:blue;'> <%=@approver.accountNo%></span><br />
+        YOUR SIGNATURE</h4></td> 
+      <td width=162 colspan=2 valign=top class='Normal'> <p><span style='font-size:10.0pt;  font-family:Arial'>DATE: </span><span
+  style='font-size:10.0pt;font-family:Arial'><%=ApplicationController::formatted_date(Time.now)%></span></p></td> 
+    </tr> 
+    <tr> 
+      <td width=391 colspan=2 valign=top class='Normal'> <p><span style='font-size:10.0pt;  font-family:Arial'>DIRECTOR OF AFFAIRS APPROVAL</span></p> 
+        <p><span style='font-size:10.0pt;
+  font-family:Arial'>(Required if this request takes you over your Maximum Allowable Salary).</span></p></td> 
+      <td width=168 colspan=2 valign=top class='Normal'>&nbsp; </td> 
+      <td width=162 colspan=2 valign=top class='Normal'>&nbsp; </td> 
+    </tr> 
+    <tr> 
+      <td width=721 colspan=6 valign=top class='Normal'> <p><i><span style='font-size:10.0pt;  font-family:Arial;background:silver;'>A Salary Level Approval Form needs to be filled out and attached if a Vice President approval is needed.</span></i><i></i></p></td> 
+    </tr> 
+    <tr> 
+      <td width=391 colspan=2 valign=top class='Normal'> <p><span style='font-size:10.0pt;  font-family:Arial'>INTERNATIONAL VICE PRESIDENT APPROVAL</span></p> 
+        <p><span style='font-size:10.0pt;
+  font-family:Arial'>(Required if this request increases your total salary for the year to greater than $60,000 for an individual or $100,000 for a couple).</span></p></td> 
+      <td width=168 colspan=2 valign=top class='Normal'>&nbsp; </td> 
+      <td width=162 colspan=2 valign=top class='Normal'>&nbsp; </td> 
+    </tr> 
+    <tr> 
+      <td width=391 colspan=2 valign=top class='Normal'> <p><span style='font-size:10.0pt;  font-family:Arial'>BOARD COMPENSATION COMMITTEE APPROVAL</span></p> 
+        <p><span style='font-size:10.0pt;
+  font-family:Arial'>(Required if this request increases your total salary for the year to greater than $70,000 for an individual or $120,000 for a couple).</span></p></td> 
+      <td width=168 colspan=2 valign=top class='Normal'>&nbsp; </td> 
+      <td width=162 colspan=2 valign=top class='Normal'>&nbsp; </td> 
+    </tr> 
+    <tr height=0> 
+      <td width=278 class='Normal'></td> 
+      <td width=113 class='Normal'></td> 
+      <td width=30 class='Normal'></td> 
+      <td width=138 class='Normal'></td> 
+      <td width=12 class='Normal'></td> 
+      <td width=150 class='Normal'></td> 
+    </tr> 
+  </table> 
+  <p align=right style='text-align:right'><b><i><span
+style='font-size:8.0pt;font-family:Arial'>07/03</span></i></b></p>  

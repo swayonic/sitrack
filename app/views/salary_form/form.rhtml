@@ -1,0 +1,5 @@
+<%= if @tracking.is_stint?
+			render(:partial => 'stint_form') 
+		else
+			render(:partial => 'intern_form') 
+		end %>

@@ -1,0 +1,90 @@
+	<div align="center">
+
+	<h2 align="center">U.S. MINISTRY INTERN SALARY SETUP FORM</h2>
+
+<p align=center style='text-align:center'><span
+	style='font-size:13.0pt;'>
+	[ <%= 'X' if @form.payroll_action == 'New Hire'%> ] &nbsp;New Hire Setup
+	&nbsp;&nbsp;&nbsp;&nbsp;
+	[ <%= 'X' if @form.payroll_action == 'Payroll Change'%> ] Payroll Change
+</span></p>
+
+	<table border="1" cellspacing="0" cellpadding="0" style='border-collapse:collapse;'>
+	 <tr>
+	  <td width=325 valign=top style='padding:0in 5.4pt 0in 5.4pt'>
+		  <br/>
+		  <p><b><%=@person.accountNo%><br/>
+			Staff Memo Account</b></p>
+			
+	
+		  <p><%=@person.full_name%><br/>
+		  <b>Full Name</b></p>
+	
+		  <p><%=@application.ssn%><br/>
+			<b>Social Security Number</b></p>
+	
+		  <p><%=@person.birthDate%><br/>
+			<b>Birth Date</b></p>
+	
+		  <p><%=ApplicationController::formatted_date(@form.date_of_change)%><br/>
+			<b>Hire Date or Effective Date of Change</b></p>
+	
+		  <p><%= @tracking.asgCity %>, <%= @tracking.asgState%><br/>
+			<b>City and State</b></p>
+	
+		  <p><%=@form.salary_reason%><br/>
+			<b>Reason for Change</b></p>
+	
+			<p><b>
+			[</b> <%= 'X' if @tracking.internType == 'Internship'%> <b>] Full Time &nbsp;
+			[</b> <%= 'X' if @tracking.internType == 'Class B Intern'%> <b>] Part Time &nbsp; Hrs/week: </b><%= @form.hours_per_week %>
+			</p>
+		  
+		  <p><%=@approver.accountNo%> &nbsp;&nbsp;<%=ApplicationController::formatted_date(Time.now)%><br/>
+			<b>Approval Signature &amp; Date</b></p>
+	
+		  <p><%=@approver.full_name%><br/>
+			<b>Printed Approver's Name</b></p>
+	
+		  <p><%=@approver.current_address.email if @approver.current_address%><br/>
+			<b>Approver's E-Mail Address</b></p>
+			<br/>
+	  </td>
+	  <td width=409 valign=top style='padding:0in 5.4pt 0in 5.4pt'>
+  	  <br/>
+		  <p><b>1. Annual Base Salary: </b><u>$<%=@form.annual_salary%></u></p>
+	  	
+	  	<p><b>2. Adjustment to normal base salary: </b><u>$0</u></p>
+	  
+	  	<p><b>Reason: </b></p>
+	  	
+		  <p><b>3. Subtotal: (Lines 1+2): </b><u>$<%=@form.annual_salary%></u></p>
+			<% tax = (@form.annual_salary / ((100-@form.tax_rate).to_f/100)).round - @form.annual_salary%>
+	  	
+	  	<p><b>4. Add In Tax Allowance of <%=@form.tax_rate%>%: </b><u>$<%=tax%></u></p>
+	  
+	  	<p><b>5. Annual Compensation Rate: <u>$<%= @form.annual_salary + tax%></u></b></p>
+
+<h4><u>MINISTRY PLACEMENT</u></h4>
+  <table>
+  	<tr>
+  		<td>[ X ] Campus</td>
+  		<td>[&nbsp;&nbsp;&nbsp;&nbsp;] CoMission</td>
+  		<td>[&nbsp;&nbsp;&nbsp;&nbsp;] Student Venture</td>
+  	</tr>
+  	<tr>
+  		<td>[&nbsp;&nbsp;&nbsp;&nbsp;] AIA</td>
+  		<td>[&nbsp;&nbsp;&nbsp;&nbsp;] International</td>
+			<td>[&nbsp;&nbsp;&nbsp;&nbsp;] HLIC</td>
+		</tr>
+		<tr>
+			<td>[&nbsp;&nbsp;&nbsp;&nbsp;] Jesus Film</td>
+			<td>[&nbsp;&nbsp;&nbsp;&nbsp;] Other</td>
+			<td>&nbsp;</td>
+		</tr>
+	</table>
+
+
+	</table>
+
+	</div>
