@@ -1,0 +1,58 @@
+<div id="center">
+<div class="boxheader">Join Staff Form Information</div>
+	<h3>&nbsp;The following information is necessary to generate an update form:</h3>
+	<%= error_messages_for 'form' %>
+	<%= start_form_tag :id => @application.id %>
+	<div class="box">
+		<div class="subboxheader">Personal Information</div>
+		<table>
+		<tr>
+			<td align="right">Account Number: </td>		
+			<td><%= text_field(:person, :accountNo, :size => 8) %></td>
+		</tr>
+		<tr>
+			<td align="right">Effective date of change: </td>		
+			<td><%=date_select(:form, :date_of_change, :order => [:month, :day, :year], :start_year => Time.now.year-1)%></td>
+		</tr>
+		<tr>
+			<td align="right">New staff training date: </td>		
+			<td><%=date_select(:form, :new_staff_training_date, :order => [:month, :day, :year], :start_year => Time.now.year-1)%></td>
+		</tr>
+		<tr>
+			<td align="right">Payroll will: </td>		
+			<td>
+				<%= select(:form, :payroll_action, ['drop to the minimum of $100/month.','remain at the present level.*','change to the amount on attached salary form.*'])%>
+			</td>
+		</tr>
+		<tr>
+			<td align="right">* If pay rate will be set above the minimum, please select the criteria the STINT/Intern has met in order to do so: </td>		
+			<td>
+				<%= select(:form, :payroll_reason, ['CLICK HERE FOR OPTIONS.','Working 30 or more hours per week.','Minimum account balance of $1000.','Received approval from Ellis Goldstein (attached).'])%>
+			</td>
+		</tr>
+		<tr>
+			<td align="right">Name of approving HRD: </td>		
+			<td><%= text_field(:form, :hrd) %></td>
+		</tr>
+		<tr>
+			<td align="right">Spouse Name: </td>		
+			<td><%= text_field(:form, :spouse_name) %></td>
+		</tr>
+		<tr>
+			<td align="right">Spouse Transitioning? </td>		
+			<td>
+				<%= radio_button 'form', 'spouse_transitioning', '1'%> Yes			
+				<%= radio_button 'form', 'spouse_transitioning', '0'%> No
+			</td>
+		</tr>
+		<tr>
+			<td align="right">MPD Coach: </td>		
+			<td><%= text_field(:mpd, :coachName) %></td>
+		</tr>
+		</table>
+	</div><br /><br />
+	<a href="javascript:document.forms[0].submit();" class="button">Preview Form</a>&nbsp;&nbsp;&nbsp;&nbsp;
+	<a href="/profile/<%=@application.id%>" class="button">Back to Profile</a>
+	</form>
+</div>
+</div>
