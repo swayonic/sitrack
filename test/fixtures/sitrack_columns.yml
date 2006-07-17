@@ -608,10 +608,10 @@ sitrack_columns_119:
   writeable: "1"
   show_in_directory: "1"
   column_type: image
-  table_clause: SitrackTracking,HrSiApplication
+  table_clause: Person
   update_clause: 
   id: "134"
-  select_clause: picture
+  select_clause: image
   created_at: 0000-00-00 00:00:00
 sitrack_columns_005: 
   where_clause: 
