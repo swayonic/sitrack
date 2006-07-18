@@ -716,11 +716,11 @@ function appendOptions(field, fieldname, value) {
     	option.appendChild(option_value);
     	field.appendChild(option);
     	var option = document.createElement('option');
-    	option.setAttribute('value', 'Third Year');
-    	if ('Third Year' == value) {
+    	option.setAttribute('value', 'Exception');
+    	if ('Exception' == value) {
     		option.setAttribute("selected", "true");
     	}
-    	var option_value = document.createTextNode('Third Year');
+    	var option_value = document.createTextNode('Exception');
     	option.appendChild(option_value);
     	field.appendChild(option);
     	var option = document.createElement('option');
