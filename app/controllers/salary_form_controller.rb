@@ -38,7 +38,8 @@ class SalaryFormController < ApplicationController
     @form = SitrackForm.find(params[:id])
     setup
     var_hash = {'person' => @person,
-                'approver' => @approver}
+                'approver' => @approver,
+                'tracking' => @tracking}
     form_html = render_to_string(:template => 'salary_form/form', :layout => 'salary_form_layout')
     @form.email(var_hash, form_html)
     @form_type = 'Salary'

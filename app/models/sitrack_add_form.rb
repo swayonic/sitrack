@@ -16,5 +16,9 @@ class SitrackAddForm < SitrackForm
     to = 'Josh Starcher <josh.starcher@uscm.org>'
     email = FormMailer.create_form_email(to, var_hash, form_html, 'Add Form')
     FormMailer.deliver(email)
+    
+    # Stamp "form submitted" column
+    var_hash['tracking'].addForm = Time.now
+    var_hash['tracking'].save!
   end
 end

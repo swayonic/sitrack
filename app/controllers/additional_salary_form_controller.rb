@@ -27,7 +27,8 @@ class AdditionalSalaryFormController < ApplicationController
     setup
     add_tax
     var_hash = {'person' => @person,
-                'approver' => @approver}
+                'approver' => @approver,
+                'tracking' => @tracking}
     form_html = render_to_string(:template => 'additional_salary_form/form', :layout => 'additional_salary_form_layout')
     @form.email(var_hash, form_html)
     @form_type = 'Additioanl Salary'

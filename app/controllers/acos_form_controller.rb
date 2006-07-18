@@ -27,7 +27,8 @@ class AcosFormController < ApplicationController
     setup
     setup_action
     var_hash = {'person' => @person,
-                'approver' => @approver}
+                'approver' => @approver,
+                'tracking' => @tracking}
     form_html = render_to_string(:template => 'acos_form/form', :layout => 'add_form_layout')
     @form.email(var_hash, form_html)
     @form_type = 'ACOS'
