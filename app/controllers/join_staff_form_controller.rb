@@ -11,7 +11,7 @@ class JoinStaffFormController < ApplicationController
     setup
     unless request.get?
       # save and preview
-      expire_action(:controller => :profile, :action => :index, :id => app_id) # kill the profile cache
+      expire_action(:controller => 'profile', :action => 'index', :id => app_id) # kill the profile cache
 
       @person.update_attributes(params[:person])
       @mpd.update_attributes(params[:mpd])
