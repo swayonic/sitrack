@@ -18,6 +18,8 @@ class SalaryFormController < ApplicationController
     setup
     unless request.get?
       # save and preview
+      expire_action(:controller => :profile, :action => :index, :id => app_id) # kill the profile cache
+
       # Make birthDate a string
       params[:person][:birthDate] = params[:person]['birthDate(2i)'] +'/'+ params[:person]['birthDate(3i)'] +'/'+ params[:person]['birthDate(1i)']
       params[:person].delete('birthDate(1i)');params[:person].delete('birthDate(2i)');params[:person].delete('birthDate(3i)')
