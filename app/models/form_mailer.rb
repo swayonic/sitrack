@@ -12,5 +12,6 @@ class FormMailer < ActionMailer::Base
       a.body = form_html
       a.transfer_encoding = '7bit'
     end
+    @form_type = form_type
   end
 end
