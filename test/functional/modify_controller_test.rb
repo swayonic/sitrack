@@ -5,6 +5,7 @@ require 'modify_controller'
 class ModifyController; def rescue_action(e) raise e end; end
 
 class ModifyControllerTest < Test::Unit::TestCase
+  fixtures :simplesecuritymanager_user
   def setup
     @controller = ModifyController.new
     @request    = ActionController::TestRequest.new

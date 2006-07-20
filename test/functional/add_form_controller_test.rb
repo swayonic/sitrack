@@ -5,7 +5,7 @@ require 'add_form_controller'
 class AddFormController; def rescue_action(e) raise e end; end
 
 class AddFormControllerTest < Test::Unit::TestCase
-  fixtures :hr_si_applications, :ministry_person, :sitrack_tracking, :ministry_newaddress
+  fixtures :hr_si_applications, :ministry_person, :sitrack_tracking, :ministry_newaddress, :simplesecuritymanager_user
   
   def setup
     @controller = AddFormController.new

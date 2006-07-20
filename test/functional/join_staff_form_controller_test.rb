@@ -5,7 +5,7 @@ require 'join_staff_form_controller'
 class JoinStaffFormController; def rescue_action(e) raise e end; end
 
 class JoinStaffFormControllerTest < Test::Unit::TestCase
-  fixtures :hr_si_applications, :ministry_person, :sitrack_tracking
+  fixtures :hr_si_applications, :ministry_person, :sitrack_tracking, :simplesecuritymanager_user
   
   def setup
     @controller = JoinStaffFormController.new

@@ -5,7 +5,7 @@ require 'child_controller'
 class ChildController; def rescue_action(e) raise e end; end
 
 class ChildControllerTest < Test::Unit::TestCase
-  fixtures :sitrack_children, :ministry_person
+  fixtures :sitrack_children, :ministry_person, :simplesecuritymanager_user
   def setup
     @controller = ChildController.new
     @request    = ActionController::TestRequest.new
