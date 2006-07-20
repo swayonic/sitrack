@@ -1,5 +1,71 @@
-# Read about fixtures at http://ar.rubyonrails.org/classes/Fixtures.html
-first:
-  id: 1
-another:
-  id: 2
+--- 
+sitrack_tracking_001: 
+  mpdEmailSent: 
+  picture: 
+  asgYear: 2005-2006
+  summer_assignment: 
+  evalStartDate: 
+  changedByPerson: 
+  acosForm: 1900-01-01 00:00:00
+  confirmReturnDate: 
+  maidenName: 
+  preIKWSent: 
+  futurePlan: 
+  teamLeader: 
+  caringRegion: RR
+  birthCity: 
+  birthState: 
+  playbookSent: 
+  medPsychDate: 
+  sendLane: 
+  needsDebtCheck: 
+  tenure: First Year
+  terminationDate: 
+  ikw_location: 
+  placementComments: 
+  status: On Assignment
+  joinStaffForm: 
+  salaryForm: 2005-10-11 16:21:11
+  asgTeam: 
+  medPsychSent: 
+  effectiveChange: 
+  ssn: 
+  oneCard: 
+  departureDate: 
+  preADate: 2005-02-22 00:00:00
+  readyDate: 
+  acceptanceLetter: 
+  asgCountry: Russia
+  notes: 
+  expectReturnDate: 
+  evalType: 
+  application_id: "1922"
+  appReadyDate: 
+  evaluator: Laura/Russ Yeager
+  addFormSent: 
+  physicalSent: 
+  summer_preference: 
+  restint: 
+  debt: 
+  asgCity: Moscow
+  asgSchool: 
+  internType: STINT
+  asgContinent: EEUR
+  passportNo: "300526703"
+  addForm: 2005-06-16 13:12:26
+  fieldCoach: 
+  person_id: "50069"
+  spouseName: 
+  mpReceived: 
+  miniPref: 
+  kickoffRoomate: 
+  returnDate: 
+  evalSummary: 
+  updateFormSent: 
+  finalADate: 2005-03-02 00:00:00
+  evalDocsRec: 
+  asgState: 
+  physicalReceived: 2005-08-26 00:00:00
+  kickoffNotes: 
+  additionalSalaryForm: 2005-11-23 22:41:44
+  id: "34"

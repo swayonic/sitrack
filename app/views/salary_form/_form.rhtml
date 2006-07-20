@@ -1,14 +1,20 @@
 	<div align="center">
+	<% if @tracking.is_stint? -%>
+	<h2 align="center">2005 STINT SALARY SETUP FORM</h2>
 
+<p><span style='font-size:13.0pt;'>
+		<em>For married STINT two salary setup forms must be completed, one for each spouse.</em>
+	</span></p>
+	<% else -%>
 	<h2 align="center">U.S. MINISTRY INTERN SALARY SETUP FORM</h2>
-
+	
 <p align=center style='text-align:center'><span
 	style='font-size:13.0pt;'>
 	[ <%= 'X' if @form.payroll_action == 'New Hire'%> ] &nbsp;New Hire Setup
 	&nbsp;&nbsp;&nbsp;&nbsp;
 	[ <%= 'X' if @form.payroll_action == 'Payroll Change'%> ] Payroll Change
 </span></p>
-
+	<% end -%>
 	<table border="1" cellspacing="0" cellpadding="0" style='border-collapse:collapse;'>
 	 <tr>
 	  <td width=325 valign=top style='padding:0in 5.4pt 0in 5.4pt'>
@@ -23,23 +29,30 @@
 		  <p><%=@application.ssn%><br/>
 			<b>Social Security Number</b></p>
 	
-		  <p><%=@person.birthDate%><br/>
+		  <p><%=@person.birth_date%><br/>
 			<b>Birth Date</b></p>
 	
 		  <p><%=ApplicationController::formatted_date(@form.date_of_change)%><br/>
 			<b>Hire Date or Effective Date of Change</b></p>
+			
+			<% if @tracking.is_stint? -%>
+			<p><%=ApplicationController::formatted_date(@tracking.departureDate)%><br/>
+			<b>Expected Date of Departure(If New Hire)</b></p>
 	
+		  <p><%= @tracking.asgCity %>, <%= @tracking.asgCountry%>, <%= @tracking.asgContinent%><br/>
+			<b>City/Country/AOA</b></p>
+			<% else -%>
 		  <p><%= @tracking.asgCity %>, <%= @tracking.asgState%><br/>
 			<b>City and State</b></p>
-	
+			<% end -%>
 		  <p><%=@form.salary_reason%><br/>
 			<b>Reason for Change</b></p>
-	
+			<% if @tracking.is_stint? -%>
 			<p><b>
 			[</b> <%= 'X' if @tracking.internType == 'Internship'%> <b>] Full Time &nbsp;
 			[</b> <%= 'X' if @tracking.internType == 'Class B Intern'%> <b>] Part Time &nbsp; Hrs/week: </b><%= @form.hours_per_week %>
 			</p>
-		  
+		  <% end -%>
 		  <p><%=@approver.accountNo%> &nbsp;&nbsp;<%=ApplicationController::formatted_date(Time.now)%><br/>
 			<b>Approval Signature &amp; Date</b></p>
 	
@@ -67,6 +80,12 @@
 
 <h4><u>MINISTRY PLACEMENT</u></h4>
   <table>
+  	<% if @tracking.is_stint? -%>
+  	<tr>
+  		<td>[ X ] Campus STINT</td>
+  		<td>[&nbsp;&nbsp;&nbsp;&nbsp;] Community STINT</td>
+  	</tr>
+  	<% else -%>
   	<tr>
   		<td>[ X ] Campus</td>
   		<td>[&nbsp;&nbsp;&nbsp;&nbsp;] CoMission</td>
@@ -82,6 +101,7 @@
 			<td>[&nbsp;&nbsp;&nbsp;&nbsp;] Other</td>
 			<td>&nbsp;</td>
 		</tr>
+		<% end -%>
 	</table>
 
 

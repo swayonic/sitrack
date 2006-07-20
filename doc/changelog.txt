@@ -1,11 +1,12 @@
 Version 1.2
 * Rewrite in ruby/rails
-* Removed ICS as a status option
-* Changed Tenure options to 'First Year', 'Second Year', 'Exception'
+* Changed Tenure option "Third Year" to "Exception"
 * You can no longer change an applicant's preferences. The "Placement Comments" column should be used to note any needed changes.
 * You can no longer add people manually. All entries must come through the front door (the Stint Application Tool).
 * You can no longer delete people.
 * Improved the display of uploaded pictures in the directory.
+* Improved the display of certain columns (dollar signs, rounded percentages, etc)
+* Standardized the previewing and submitting of forms.
 
 Version 1.1
 * Rewrote the PSW SI Tracker in php.

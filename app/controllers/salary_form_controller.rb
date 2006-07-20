@@ -7,7 +7,7 @@ class SalaryFormController < ApplicationController
       @application = HrSiApplication.find(app_id)
       @form = @application.sitrack_salary_forms.first
       if !@form
-        if @application.sitrack_tracking.is_stint?
+        if @application.sitrack_tracking && @application.sitrack_tracking.is_stint?
           @form = SitrackStintSalaryForm.new(:hr_si_application_id => app_id, :approver_id => session[:user].person.id)
         else
           @form = SitrackInternSalaryForm.new(:hr_si_application_id => app_id, :approver_id => session[:user].person.id)
@@ -21,8 +21,6 @@ class SalaryFormController < ApplicationController
       expire_action(:controller => 'profile', :action => 'index', :id => app_id) # kill the profile cache
 
       # Make birthDate a string
-      params[:person][:birthDate] = params[:person]['birthDate(2i)'] +'/'+ params[:person]['birthDate(3i)'] +'/'+ params[:person]['birthDate(1i)']
-      params[:person].delete('birthDate(1i)');params[:person].delete('birthDate(2i)');params[:person].delete('birthDate(3i)')
       params[:form][:annual_salary].gsub!(/[$,]/, '')
       @person.update_attributes(params[:person])
       @application.update_attributes(params[:application])
@@ -31,10 +29,7 @@ class SalaryFormController < ApplicationController
       
       preview if @form.update_attributes(params[:form])
     end
-    # make birthDate a Time
-  	@person.birthDate = Time.parse(@person.birthDate) if @person.birthDate
   end
-  
     
   def submit
     @form = SitrackForm.find(params[:id])
@@ -70,7 +65,7 @@ class SalaryFormController < ApplicationController
   		date = Time.local(year, month, 1)
   	end
     @form.date_of_change ||= date
-    @tracking = @application.sitrack_tracking
+    @tracking = @application.sitrack_tracking || SitrackTracking.new
     @approver = @form.approver
   end
 

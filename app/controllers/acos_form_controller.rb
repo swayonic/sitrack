@@ -52,7 +52,7 @@ class AcosFormController < ApplicationController
     @person = @application.person
     @spouse = @person.spouse || Person.new
     @current_address = (@person.current_address || Address.new)
-    @tracking = @application.sitrack_tracking
+    @tracking = (@application.sitrack_tracking || SitrackTracking.new)
     @region = (Region.find_by_region(@person.region) || Region.new)
     @approver = @form.approver
   end

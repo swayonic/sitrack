@@ -1,0 +1,233 @@
+--- 
+ministry_newaddress_006: 
+  end_date: 
+  start_date: 
+  changedBy: CRS
+  contactName: ''
+  workPhone: ''
+  city: Davis
+  address1: 336 J St. No. 21
+  deprecated_endDate: 
+  cellPhone: ''
+  zip: "95616"
+  address2: ''
+  address3: ''
+  fk_PersonID: "102546"
+  email2: 
+  url: ''
+  country: USA
+  address4: ''
+  dateChanged: 2006-05-30 14:31:30
+  contactRelationship: ''
+  addressType: permanent
+  fax: ''
+  dateCreated: 
+  homePhone: 407-826-2523
+  deprecated_startDate: 
+  AddressID: "126583"
+  createdBy: ''
+  email: ''
+  state: CA
+ministry_newaddress_007: 
+  end_date: 
+  start_date: 
+  changedBy: SP
+  contactName: ''
+  workPhone: ''
+  city: ''
+  address1: ''
+  deprecated_endDate: 
+  cellPhone: ''
+  zip: ''
+  address2: ''
+  address3: ''
+  fk_PersonID: "102546"
+  email2: 
+  url: ''
+  country: ''
+  address4: ''
+  dateChanged: 2006-05-24 11:52:08
+  contactRelationship: ''
+  addressType: emergency1
+  fax: ''
+  dateCreated: 
+  homePhone: ''
+  deprecated_startDate: 
+  AddressID: "177125"
+  createdBy: ''
+  email: ''
+  state: ''
+ministry_newaddress_008: 
+  end_date: 
+  start_date: 
+  changedBy: STINT
+  contactName: ''
+  workPhone: ''
+  city: ''
+  address1: ''
+  deprecated_endDate: 
+  cellPhone: ''
+  zip: ''
+  address2: ''
+  address3: ''
+  fk_PersonID: "102546"
+  email2: 
+  url: ''
+  country: ''
+  address4: ''
+  dateChanged: 2006-05-03 09:29:51
+  contactRelationship: ''
+  addressType: emergency2
+  fax: ''
+  dateCreated: 2006-03-22 00:00:00
+  homePhone: ''
+  deprecated_startDate: 
+  AddressID: "198114"
+  createdBy: STINT
+  email: ''
+  state: ''
+ministry_newaddress_001: 
+  end_date: 
+  start_date: 
+  changedBy: 
+  contactName: ''
+  workPhone: ''
+  city: Norman
+  address1: 222 E Lindsey St.
+  deprecated_endDate: 
+  cellPhone: ''
+  zip: "73069"
+  address2: ''
+  address3: ''
+  fk_PersonID: "50069"
+  email2: 
+  url: ''
+  country: USA
+  address4: ''
+  dateChanged: 
+  contactRelationship: ''
+  addressType: current
+  fax: ''
+  dateCreated: 
+  homePhone: "4052059372"
+  deprecated_startDate: 
+  AddressID: "9181"
+  createdBy: 
+  email: joelblackstone@yahoo.com
+  state: OK
+ministry_newaddress_002: 
+  end_date: 
+  start_date: 
+  changedBy: 
+  contactName: ''
+  workPhone: ''
+  city: Plano
+  address1: 6604 Bermuda Dunes Dr
+  deprecated_endDate: 
+  cellPhone: ''
+  zip: "75093"
+  address2: ''
+  address3: ''
+  fk_PersonID: "50069"
+  email2: 
+  url: ''
+  country: USA
+  address4: ''
+  dateChanged: 
+  contactRelationship: ''
+  addressType: permanent
+  fax: ''
+  dateCreated: 
+  homePhone: "9723065653"
+  deprecated_startDate: 
+  AddressID: "9182"
+  createdBy: 
+  email: joelblackstone@yahoo.com
+  state: TX
+ministry_newaddress_003: 
+  end_date: 
+  start_date: 
+  changedBy: 
+  contactName: Phil Blackstone
+  workPhone: ''
+  city: Plano
+  address1: 6604 Bermuda Dunes Dr
+  deprecated_endDate: 
+  cellPhone: ''
+  zip: "75093"
+  address2: ''
+  address3: ''
+  fk_PersonID: "50069"
+  email2: 
+  url: ''
+  country: ''
+  address4: ''
+  dateChanged: 
+  contactRelationship: Dad
+  addressType: emergency1
+  fax: ''
+  dateCreated: 
+  homePhone: "9723065653"
+  deprecated_startDate: 
+  AddressID: "9183"
+  createdBy: 
+  email: ''
+  state: TX
+ministry_newaddress_004: 
+  end_date: 
+  start_date: 
+  changedBy: 
+  contactName: Suzanne Blackstone
+  workPhone: ''
+  city: Plano
+  address1: 6604 Bermuda Dunes Dr
+  deprecated_endDate: 
+  cellPhone: ''
+  zip: "75093"
+  address2: ''
+  address3: ''
+  fk_PersonID: "50069"
+  email2: 
+  url: ''
+  country: ''
+  address4: ''
+  dateChanged: 
+  contactRelationship: Mom
+  addressType: emergency2
+  fax: ''
+  dateCreated: 
+  homePhone: "9723065653"
+  deprecated_startDate: 
+  AddressID: "9184"
+  createdBy: 
+  email: suz925@yahoo.com
+  state: TX
+ministry_newaddress_005: 
+  end_date: 
+  start_date: 
+  changedBy: CRS
+  contactName: ''
+  workPhone: ''
+  city: Orlando
+  address1: 5996 Bent Pine Dr
+  deprecated_endDate: 
+  cellPhone: 530-574-1365
+  zip: "32822"
+  address2: "#3304"
+  address3: ''
+  fk_PersonID: "102546"
+  email2: 
+  url: ''
+  country: ''
+  address4: ''
+  dateChanged: 2006-05-30 14:31:30
+  contactRelationship: ''
+  addressType: current
+  fax: ''
+  dateCreated: 
+  homePhone: "5305741365"
+  deprecated_startDate: 
+  AddressID: "126582"
+  createdBy: ''
+  email: josh.starcher@uscm.org
+  state: FL

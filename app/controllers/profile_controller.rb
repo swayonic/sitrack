@@ -27,7 +27,7 @@ class ProfileController < ApplicationController
     @options = get_options
     
     @address_types = ['current','permanent','emergency1']
-    @address_columns = %w{address1 address2 city state zip country homePhone cellPhone workPhone fax email contactName contactRelationship startdate enddate}
+    @address_columns = %w{address1 address2 city state zip country homePhone cellPhone workPhone fax email contactName contactRelationship start_date end_date}
     
     # make sure we have all 3 types of addresses
     @address_types.each do |type|
@@ -39,7 +39,7 @@ class ProfileController < ApplicationController
     @addresses = Hash.new
     @sql = "SELECT	addressType, address1, address2, city, state, zip, country, homePhone, cellPhone, "+
 					 "workPhone, fax, email, contactName, contactRelationship, "+
-					 "startdate, enddate, addressID "+
+					 "start_date, end_date, addressID "+
 			     "FROM	#{Address.table_name} "+
 			     "WHERE	fk_PersonID = #{@person['personID']}"
     Address.find_by_sql(@sql).each {|address| @addresses[address.addressType] = address}

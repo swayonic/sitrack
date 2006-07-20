@@ -15,7 +15,6 @@ class AddFormController < ApplicationController
     end
   end
   
-    
   def submit
     @form = SitrackAddForm.find(params[:id])
     setup
@@ -44,7 +43,7 @@ class AddFormController < ApplicationController
     @emergency_address = (@person.emergency_address1 || Address.new)
     @permanent_address = (@person.permanent_address || Address.new)
     @region = (Region.find_by_region(@person.region) || Region.new)
-    @tracking = @application.sitrack_tracking
+    @tracking = @application.sitrack_tracking || SitrackTracking.new
     @spouse = (@person.spouse || Person.new)
     @stint = @tracking.is_stint?
     @location = @stint ? [@tracking.asgCity, @tracking.asgCountry].join(', ') : @tracking.asgTeam

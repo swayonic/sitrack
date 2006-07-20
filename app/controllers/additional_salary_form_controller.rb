@@ -19,8 +19,6 @@ class AdditionalSalaryFormController < ApplicationController
       
       preview if @form.update_attributes(params[:form])
     end
-    # make birthDate a Time
-  	@person.birthDate = Time.parse(@person.birthDate) if @person.birthDate
   end
   
     

@@ -105,10 +105,10 @@ sitrack_columns_025:
   show_in_directory: "1"
   column_type: date
   table_clause: ''
-  update_clause: "UPDATE $table_address SET startdate = ?, dateChanged = NOW(), changedBy =
+  update_clause: "UPDATE $table_address SET start_date = ?, dateChanged = NOW(), changedBy =
     'SITRACK' WHERE fk_PersonID = ? AND addressType='current'"
   id: "28"
-  select_clause: "(SELECT MIN(startdate)\r
+  select_clause: "(SELECT MIN(start_date)\r
 
     FROM   ministry_NewAddress\r
 
@@ -148,10 +148,10 @@ sitrack_columns_026:
   show_in_directory: "1"
   column_type: date
   table_clause: ''
-  update_clause: "UPDATE $table_address SET enddate = ?, dateChanged = NOW(), changedBy =
+  update_clause: "UPDATE $table_address SET end_date = ?, dateChanged = NOW(), changedBy =
     'SITRACK' WHERE fk_PersonID = ? AND addressType='current'"
   id: "29"
-  select_clause: "(SELECT MIN(enddate)\r
+  select_clause: "(SELECT MIN(end_date)\r
 
     FROM ministry_NewAddress\r
 
@@ -527,7 +527,7 @@ sitrack_columns_003:
   table_clause: Person
   update_clause: ''
   id: "4"
-  select_clause: birthDate
+  select_clause: birth_date
   created_at: 0000-00-00 00:00:00
 sitrack_columns_060: 
   where_clause: 

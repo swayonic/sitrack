@@ -4,8 +4,4 @@
 	<%= link_to "| Submit the form |", :action => 'submit', :id => @form%> 
 	<%= link_to "| Go back and make changes |", :controller => 'profile', :id => @application%>
 </div>
-<%= if @tracking.is_stint?
-			render(:partial => 'stint_form') 
-		else
-			render(:partial => 'intern_form') 
-		end %>
+<%= render(:partial => 'form') %>

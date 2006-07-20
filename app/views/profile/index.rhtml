@@ -309,7 +309,7 @@ person_id = @person['personID']
 						<%else -%>
 							<br />
 						<%end -%>
-						<%=column_name.camelize %>: 
+						<%=column_name.titleize %>: 
 						<span id="c<%=column_name%><%=person_id%>c<%=this_address.addressID%>">
 						<span id="<%=column_name%><%=person_id%>c<%=this_address.addressID%>">
 						<a href="javascript:edit_value('<%=column_name%>',<%=person_id%>,'<%=escape_javascript(value.to_s)%>',<%=this_address.addressID%>,'address')">
