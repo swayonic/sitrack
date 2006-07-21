@@ -554,7 +554,7 @@ span.run100 {
       </head>
       <body>
         <h3>C0 code coverage information</h3>
-        <p>Generated on Fri Jul 21 00:56:27 EDT 2006 with <a href='http://eigenclass.org/hiki.rb?rcov'>rcov 0.6.0</a>
+        <p>Generated on Fri Jul 21 01:39:09 EDT 2006 with <a href='http://eigenclass.org/hiki.rb?rcov'>rcov 0.6.0</a>
         </p>
         <hr /><pre><span class='marked0'>Code reported as executed by Ruby looks like this...
 </span><span class='marked1'>and this: this line is also marked as covered.
@@ -587,12 +587,12 @@ span.run100 {
             <table cellspacing='0' cellpadding='0' align='right'>
               <tr>
                 <td>
-                  <tt>59.4%</tt>&nbsp;</td>
+                  <tt>88.5%</tt>&nbsp;</td>
                 <td>
                   <table cellspacing='0' class='percent_graph' cellpadding='0' width='100'>
                     <tr>
-                      <td class='covered' width='59' />
-                      <td class='uncovered' width='41' />
+                      <td class='covered' width='89' />
+                      <td class='uncovered' width='11' />
                     </tr>
                   </table>
                 </td>
@@ -603,12 +603,12 @@ span.run100 {
             <table cellspacing='0' cellpadding='0' align='right'>
               <tr>
                 <td>
-                  <tt>49.3%</tt>&nbsp;</td>
+                  <tt>86.3%</tt>&nbsp;</td>
                 <td>
                   <table cellspacing='0' class='percent_graph' cellpadding='0' width='100'>
                     <tr>
-                      <td class='covered' width='49' />
-                      <td class='uncovered' width='51' />
+                      <td class='covered' width='86' />
+                      <td class='uncovered' width='14' />
                     </tr>
                   </table>
                 </td>
@@ -633,8 +633,8 @@ span.run100 {
 </span><span class="inferred1"><a name="line14" />14     # if we don't have a person, go back to the directory
 </span><span class="marked0"><a name="line15" />15     @person = ActiveRecord::Base.connection.select_one(@sql)
 </span><span class="marked1"><a name="line16" />16     if !@person
-</span><span class="uncovered0"><a name="line17" />17       redirect_to(:controller =&gt; 'directory'); return; 
-</span><span class="uncovered1"><a name="line18" />18     end
+</span><span class="marked0"><a name="line17" />17       redirect_to(:controller =&gt; 'directory'); return; 
+</span><span class="marked1"><a name="line18" />18     end
 </span><span class="inferred0"><a name="line19" />19     
 </span><span class="inferred1"><a name="line20" />20     # sometimes it's useful to have the person as an object instead of a hash
 </span><span class="marked0"><a name="line21" />21     @person_obj = Person.find(@person['personID'])
@@ -672,14 +672,14 @@ span.run100 {
 </span><span class="inferred0"><a name="line53" />53 
 </span><span class="marked1"><a name="line54" />54   def edit_image
 </span><span class="marked0"><a name="line55" />55     @person = Person.find(params[:id])
-</span><span class="uncovered1"><a name="line56" />56     render(:action =&gt; :edit_image, :layout =&gt; false)
-</span><span class="uncovered0"><a name="line57" />57   end
+</span><span class="marked1"><a name="line56" />56     render(:action =&gt; :edit_image, :layout =&gt; false)
+</span><span class="marked0"><a name="line57" />57   end
 </span><span class="inferred1"><a name="line58" />58   
 </span><span class="marked0"><a name="line59" />59   def update_image
 </span><span class="marked1"><a name="line60" />60   	#make sure we have a person in the params
-</span><span class="uncovered0"><a name="line61" />61   	@person = Person.find(params[:id])
-</span><span class="uncovered1"><a name="line62" />62   	if params[:person] &amp;&amp; @person
-</span><span class="uncovered0"><a name="line63" />63 	    @person.image = params[:person][:image]
+</span><span class="marked0"><a name="line61" />61   	@person = Person.find(params[:id])
+</span><span class="marked1"><a name="line62" />62   	if params[:person] &amp;&amp; @person
+</span><span class="marked0"><a name="line63" />63 	    @person.image = params[:person][:image]
 </span><span class="uncovered1"><a name="line64" />64 	    if @person.save
 </span><span class="uncovered0"><a name="line65" />65         # clear page caches
 </span><span class="uncovered1"><a name="line66" />66         @person.hr_si_applications do |app|
@@ -689,30 +689,30 @@ span.run100 {
 </span><span class="uncovered1"><a name="line70" />70       else 
 </span><span class="uncovered0"><a name="line71" />71     	  edit_image
 </span><span class="uncovered1"><a name="line72" />72 	    end
-</span><span class="uncovered0"><a name="line73" />73 	  else
-</span><span class="uncovered1"><a name="line74" />74 	   edit_image
-</span><span class="uncovered0"><a name="line75" />75     end
-</span><span class="uncovered1"><a name="line76" />76   end  
+</span><span class="inferred0"><a name="line73" />73 	  else
+</span><span class="marked1"><a name="line74" />74 	   edit_image
+</span><span class="marked0"><a name="line75" />75     end
+</span><span class="inferred1"><a name="line76" />76   end  
 </span><span class="inferred0"><a name="line77" />77   
 </span><span class="marked1"><a name="line78" />78   def create_second_year
 </span><span class="marked0"><a name="line79" />79     @first_year = HrSiApplication.find(params[:id])
-</span><span class="uncovered1"><a name="line80" />80     @second_year = @first_year.clone
-</span><span class="uncovered0"><a name="line81" />81     @tracking = @first_year.sitrack_tracking ? @first_year.sitrack_tracking.clone : SitrackTracking.new
-</span><span class="uncovered1"><a name="line82" />82     @tracking.asgYear = &quot;#{Time.now.year}-#{Time.now.year+1}&quot;
-</span><span class="uncovered0"><a name="line83" />83     @tracking.tenure = 'Second Year'
-</span><span class="uncovered1"><a name="line84" />84     @tracking.status = 'Re-Applied'
-</span><span class="uncovered0"><a name="line85" />85     @second_year.sitrack_tracking = @tracking
-</span><span class="uncovered1"><a name="line86" />86     @mpd = @first_year.sitrack_mpd ? @first_year.sitrack_mpd.clone : SitrackMpd.new
-</span><span class="uncovered0"><a name="line87" />87     @mpd.monthlyRaised = 0
-</span><span class="uncovered1"><a name="line88" />88     @mpd.oneTimeRaised = 0
-</span><span class="uncovered0"><a name="line89" />89     @mpd.totalRaised = 0
-</span><span class="uncovered1"><a name="line90" />90     @mpd.percentRaised = 0
-</span><span class="uncovered0"><a name="line91" />91     @second_year.sitrack_mpd = @mpd
-</span><span class="uncovered1"><a name="line92" />92     @second_year.save!
-</span><span class="uncovered0"><a name="line93" />93     # go to the new profile
-</span><span class="uncovered1"><a name="line94" />94     redirect_to(:action =&gt; :index, :id =&gt; @second_year.id)
-</span><span class="uncovered0"><a name="line95" />95   end
-</span><span class="uncovered1"><a name="line96" />96 end
+</span><span class="marked1"><a name="line80" />80     @second_year = @first_year.clone
+</span><span class="marked0"><a name="line81" />81     @tracking = @first_year.sitrack_tracking ? @first_year.sitrack_tracking.clone : SitrackTracking.new
+</span><span class="marked1"><a name="line82" />82     @tracking.asgYear = &quot;#{Time.now.year}-#{Time.now.year+1}&quot;
+</span><span class="marked0"><a name="line83" />83     @tracking.tenure = 'Second Year'
+</span><span class="marked1"><a name="line84" />84     @tracking.status = 'Re-Applied'
+</span><span class="marked0"><a name="line85" />85     @second_year.sitrack_tracking = @tracking
+</span><span class="marked1"><a name="line86" />86     @mpd = @first_year.sitrack_mpd ? @first_year.sitrack_mpd.clone : SitrackMpd.new
+</span><span class="marked0"><a name="line87" />87     @mpd.monthlyRaised = 0
+</span><span class="marked1"><a name="line88" />88     @mpd.oneTimeRaised = 0
+</span><span class="marked0"><a name="line89" />89     @mpd.totalRaised = 0
+</span><span class="marked1"><a name="line90" />90     @mpd.percentRaised = 0
+</span><span class="marked0"><a name="line91" />91     @second_year.sitrack_mpd = @mpd
+</span><span class="marked1"><a name="line92" />92     @second_year.save!
+</span><span class="marked0"><a name="line93" />93     # go to the new profile
+</span><span class="marked1"><a name="line94" />94     redirect_to(:action =&gt; :index, :id =&gt; @second_year.id)
+</span><span class="marked0"><a name="line95" />95   end
+</span><span class="inferred1"><a name="line96" />96 end
 </span></pre><hr />    <p>Generated using the <a href='http://eigenclass.org/hiki.rb?rcov'>rcov code coverage analysis tool for Ruby</a> version 0.6.0.</p><p>
           <a href='http://validator.w3.org/check/referer'>
             <img src='http://www.w3.org/Icons/valid-xhtml10' height='31' alt='Valid XHTML 1.0!' width='88' />
