@@ -8,11 +8,7 @@ class AddFormController < ApplicationController
                 SitrackAddForm.create(:hr_si_application_id => app_id,
                                       :approver_id => session[:user].person.id))
     end
-    if @form.valid?
-      preview
-    else
-      render
-    end
+    preview if @form.valid?
   end
   
   def submit
