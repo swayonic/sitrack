@@ -26,7 +26,7 @@ class JoinStaffFormController < ApplicationController
     var_hash = {'person' => @person,
                 'approver' => @approver,
                 'tracking' => @tracking}
-    form_html = render_to_string(:template => 'acos_form/form', :layout => 'add_form_layout')
+    form_html = render_to_string(:template => 'shared/form', :layout => 'add_form_layout')
     @form.email(var_hash, form_html)
     @form_type = 'Join Staff'
     render(:template => 'shared/form_submitted', :layout => 'application')
@@ -35,7 +35,7 @@ class JoinStaffFormController < ApplicationController
   private
   
   def preview
-    render(:action => 'preview', :layout => 'add_form_layout')
+    render(:template => 'shared/preview', :layout => 'add_form_layout')
   end
   
   # Create the instance variables needed in the views  

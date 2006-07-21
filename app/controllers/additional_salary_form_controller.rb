@@ -29,7 +29,7 @@ class AdditionalSalaryFormController < ApplicationController
     var_hash = {'person' => @person,
                 'approver' => @approver,
                 'tracking' => @tracking}
-    form_html = render_to_string(:template => 'additional_salary_form/form', :layout => 'additional_salary_form_layout')
+    form_html = render_to_string(:template => 'shared/form', :layout => 'additional_salary_form_layout')
     @form.email(var_hash, form_html)
     @form_type = 'Additioanl Salary'
     render(:template => 'shared/form_submitted', :layout => 'application')
@@ -39,7 +39,7 @@ class AdditionalSalaryFormController < ApplicationController
   
   def preview
     add_tax
-    render(:action => 'preview', :layout => 'additional_salary_form_layout')
+    render(:template => 'shared/preview', :layout => 'additional_salary_form_layout')
   end
   
   # Create the instance variables needed in the views  

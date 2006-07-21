@@ -25,4 +25,16 @@ class Test::Unit::TestCase
   self.use_instantiated_fixtures  = false
 
   # Add more helper methods to be used by all tests here...
+  def preview
+    post :fill, @preview_options
+    assert_response :success
+    assert_template 'shared/preview'
+  end
+  def submit
+    preview
+    form_id = assigns(:form).id
+    get :submit, :id => form_id
+    assert_response :success
+    assert_template 'shared/form'
+  end
 end

@@ -14,6 +14,8 @@ class SalaryFormControllerTest < Test::Unit::TestCase
     # fake cas
     @request.session[:cas_receipt] = {:user => 'josh.starcher@uscm.org',
                                       :ssoGuid => 'F167605D-94A4-7121-2A58-8D0F2CA6E026'}
+    #Intern preview options
+    @preview_options = {:id => hr_si_applications(:hero).id, :form => {:annual_salary => "600"}, :tracking => {:internType => 'Internship'}}
   end
 
   def test_fill_get
@@ -22,14 +24,15 @@ class SalaryFormControllerTest < Test::Unit::TestCase
   end
   
   def test_preview_stint
-    post :fill, :id => hr_si_applications(:hero).id, :form => {:annual_salary => "600"}
-    assert_response :success
-    assert_template 'salary_form/preview'
+    @preview_options = {:id => hr_si_applications(:hero).id, :form => {:annual_salary => "600"}}
+    preview
   end
   
   def test_preview_intern
-    post :fill, :id => hr_si_applications(:hero).id, :form => {:annual_salary => "600"}, :tracking => {:internType => 'Internship'}
-    assert_response :success
-    assert_template 'salary_form/preview'
+    preview
+  end
+  
+  def test_submit
+    submit
   end
 end
