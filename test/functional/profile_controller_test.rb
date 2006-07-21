@@ -21,8 +21,28 @@ class ProfileControllerTest < Test::Unit::TestCase
     assert_response :redirect
   end
   
+  def test_bad_id
+    get :index, :id => 555 # smooth
+    assert_response :redirect
+  end
+  
   def test_index
     get :index, :id => 1922
     assert_response :success
+  end
+  
+  def test_edit_image
+    get :edit_image, :id => 50069
+    assert_response :success
+  end
+  
+  def test_update_image
+    post :update_image, :id => 50069
+    assert_response :success
+  end
+  
+  def test_create_second_year
+    get :create_second_year, :id => hr_si_applications(:hero).id
+    assert_response :redirect
   end
 end
