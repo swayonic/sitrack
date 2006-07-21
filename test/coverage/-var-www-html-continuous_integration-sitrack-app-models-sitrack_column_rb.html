@@ -554,7 +554,7 @@ span.run100 {
       </head>
       <body>
         <h3>C0 code coverage information</h3>
-        <p>Generated on Thu Jul 20 21:43:50 EDT 2006 with <a href='http://eigenclass.org/hiki.rb?rcov'>rcov 0.6.0</a>
+        <p>Generated on Fri Jul 21 00:56:28 EDT 2006 with <a href='http://eigenclass.org/hiki.rb?rcov'>rcov 0.6.0</a>
         </p>
         <hr /><pre><span class='marked0'>Code reported as executed by Ruby looks like this...
 </span><span class='marked1'>and this: this line is also marked as covered.
@@ -578,10 +578,10 @@ span.run100 {
             <a href='-var-www-html-continuous_integration-sitrack-app-models-sitrack_column_rb.html'>/var/www/html/continuous_integration/sitrack/app/models/sitrack_column.rb</a>
           </td>
           <td class='value'>
-            <tt>32</tt>
+            <tt>30</tt>
           </td>
           <td class='value'>
-            <tt>28</tt>
+            <tt>27</tt>
           </td>
           <td>
             <table cellspacing='0' cellpadding='0' align='right'>
@@ -617,38 +617,36 @@ span.run100 {
           </td>
         </tr>
       </tbody>
-    </table><pre><span class="marked1"><a name="line1" /> 1 require 'ajax_scaffold'
-</span><span class="marked0"><a name="line2" /> 2 
-</span><span class="marked1"><a name="line3" /> 3 class SitrackColumn &lt; ActiveRecord::Base
-</span><span class="marked0"><a name="line4" /> 4   has_many   :sitrack_view_columns
-</span><span class="marked1"><a name="line5" /> 5   has_many   :sitrack_views, :through =&gt; :sitrack_view_columns
-</span><span class="marked0"><a name="line6" /> 6   has_many   :sitrack_enum_values
-</span><span class="marked1"><a name="line7" /> 7   
-</span><span class="marked0"><a name="line8" /> 8   cattr_reader :all_columns
-</span><span class="marked1"><a name="line9" /> 9   def safe_name
-</span><span class="marked0"><a name="line10" />10     name.gsub(' ','_')
-</span><span class="marked1"><a name="line11" />11   end
-</span><span class="inferred0"><a name="line12" />12   
-</span><span class="marked1"><a name="line13" />13   def self.all_select_clauses
-</span><span class="marked0"><a name="line14" />14     @@all_columns = self.find(:all) if !@@all_columns
-</span><span class="marked1"><a name="line15" />15     select_clauses = []
-</span><span class="marked0"><a name="line16" />16     @@all_columns.each do |column| 
-</span><span class="marked1"><a name="line17" />17       if column
-</span><span class="marked0"><a name="line18" />18         table = '(' == column.select_clause.first ? '' : column.table
-</span><span class="marked1"><a name="line19" />19         select_clauses &lt;&lt; table + column.select_clause+' as '+column.safe_name 
-</span><span class="marked0"><a name="line20" />20       end
-</span><span class="inferred1"><a name="line21" />21     end
-</span><span class="marked0"><a name="line22" />22     return select_clauses.join(', ')
-</span><span class="inferred1"><a name="line23" />23   end
-</span><span class="inferred0"><a name="line24" />24   
-</span><span class="marked1"><a name="line25" />25   def table
-</span><span class="marked0"><a name="line26" />26     if (table_clause &amp;&amp; table_clause.length != 0)
-</span><span class="marked1"><a name="line27" />27       return eval(table_clause.split(',')[0]+'.table_name')+'.' 
-</span><span class="marked0"><a name="line28" />28     else 
-</span><span class="marked1"><a name="line29" />29       return ''
-</span><span class="inferred0"><a name="line30" />30     end
-</span><span class="marked1"><a name="line31" />31   end
-</span><span class="inferred0"><a name="line32" />32 end
+    </table><pre><span class="marked1"><a name="line1" /> 1 class SitrackColumn &lt; ActiveRecord::Base
+</span><span class="marked0"><a name="line2" /> 2   has_many   :sitrack_view_columns
+</span><span class="marked1"><a name="line3" /> 3   has_many   :sitrack_views, :through =&gt; :sitrack_view_columns
+</span><span class="marked0"><a name="line4" /> 4   has_many   :sitrack_enum_values
+</span><span class="marked1"><a name="line5" /> 5   
+</span><span class="marked0"><a name="line6" /> 6   cattr_reader :all_columns
+</span><span class="marked1"><a name="line7" /> 7   def safe_name
+</span><span class="marked0"><a name="line8" /> 8     name.gsub(' ','_')
+</span><span class="marked1"><a name="line9" /> 9   end
+</span><span class="inferred0"><a name="line10" />10   
+</span><span class="marked1"><a name="line11" />11   def self.all_select_clauses
+</span><span class="marked0"><a name="line12" />12     @@all_columns = self.find(:all) if !@@all_columns
+</span><span class="marked1"><a name="line13" />13     select_clauses = []
+</span><span class="marked0"><a name="line14" />14     @@all_columns.each do |column| 
+</span><span class="marked1"><a name="line15" />15       if column
+</span><span class="marked0"><a name="line16" />16         table = '(' == column.select_clause.first ? '' : column.table
+</span><span class="marked1"><a name="line17" />17         select_clauses &lt;&lt; table + column.select_clause+' as '+column.safe_name 
+</span><span class="marked0"><a name="line18" />18       end
+</span><span class="inferred1"><a name="line19" />19     end
+</span><span class="marked0"><a name="line20" />20     return select_clauses.join(', ')
+</span><span class="inferred1"><a name="line21" />21   end
+</span><span class="inferred0"><a name="line22" />22   
+</span><span class="marked1"><a name="line23" />23   def table
+</span><span class="marked0"><a name="line24" />24     if (table_clause &amp;&amp; table_clause.length != 0)
+</span><span class="marked1"><a name="line25" />25       return eval(table_clause.split(',')[0]+'.table_name')+'.' 
+</span><span class="marked0"><a name="line26" />26     else 
+</span><span class="marked1"><a name="line27" />27       return ''
+</span><span class="inferred0"><a name="line28" />28     end
+</span><span class="marked1"><a name="line29" />29   end
+</span><span class="inferred0"><a name="line30" />30 end
 </span></pre><hr />    <p>Generated using the <a href='http://eigenclass.org/hiki.rb?rcov'>rcov code coverage analysis tool for Ruby</a> version 0.6.0.</p><p>
           <a href='http://validator.w3.org/check/referer'>
             <img src='http://www.w3.org/Icons/valid-xhtml10' height='31' alt='Valid XHTML 1.0!' width='88' />

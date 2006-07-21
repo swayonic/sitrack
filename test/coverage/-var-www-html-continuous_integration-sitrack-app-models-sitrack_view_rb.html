@@ -554,7 +554,7 @@ span.run100 {
       </head>
       <body>
         <h3>C0 code coverage information</h3>
-        <p>Generated on Thu Jul 20 21:43:50 EDT 2006 with <a href='http://eigenclass.org/hiki.rb?rcov'>rcov 0.6.0</a>
+        <p>Generated on Fri Jul 21 00:56:29 EDT 2006 with <a href='http://eigenclass.org/hiki.rb?rcov'>rcov 0.6.0</a>
         </p>
         <hr /><pre><span class='marked0'>Code reported as executed by Ruby looks like this...
 </span><span class='marked1'>and this: this line is also marked as covered.
@@ -578,21 +578,21 @@ span.run100 {
             <a href='-var-www-html-continuous_integration-sitrack-app-models-sitrack_view_rb.html'>/var/www/html/continuous_integration/sitrack/app/models/sitrack_view.rb</a>
           </td>
           <td class='value'>
-            <tt>50</tt>
+            <tt>48</tt>
           </td>
           <td class='value'>
-            <tt>43</tt>
+            <tt>42</tt>
           </td>
           <td>
             <table cellspacing='0' cellpadding='0' align='right'>
               <tr>
                 <td>
-                  <tt>84.0%</tt>&nbsp;</td>
+                  <tt>83.3%</tt>&nbsp;</td>
                 <td>
                   <table cellspacing='0' class='percent_graph' cellpadding='0' width='100'>
                     <tr>
-                      <td class='covered' width='84' />
-                      <td class='uncovered' width='16' />
+                      <td class='covered' width='83' />
+                      <td class='uncovered' width='17' />
                     </tr>
                   </table>
                 </td>
@@ -603,7 +603,7 @@ span.run100 {
             <table cellspacing='0' cellpadding='0' align='right'>
               <tr>
                 <td>
-                  <tt>81.4%</tt>&nbsp;</td>
+                  <tt>81.0%</tt>&nbsp;</td>
                 <td>
                   <table cellspacing='0' class='percent_graph' cellpadding='0' width='100'>
                     <tr>
@@ -617,56 +617,54 @@ span.run100 {
           </td>
         </tr>
       </tbody>
-    </table><pre><span class="marked0"><a name="line1" /> 1 require 'ajax_scaffold'
-</span><span class="marked1"><a name="line2" /> 2 
-</span><span class="marked0"><a name="line3" /> 3 class SitrackView &lt; ActiveRecord::Base
-</span><span class="marked1"><a name="line4" /> 4   has_many   :sitrack_view_columns, :order =&gt; :position, :include =&gt; :sitrack_column, :dependent =&gt; true
-</span><span class="marked0"><a name="line5" /> 5   has_many   :sitrack_columns, :through =&gt; :sitrack_view_columns
-</span><span class="marked1"><a name="line6" /> 6   belongs_to :sitrack_user
-</span><span class="marked0"><a name="line7" /> 7     
-</span><span class="marked1"><a name="line8" /> 8   validates_presence_of :name
-</span><span class="marked0"><a name="line9" /> 9   
-</span><span class="marked1"><a name="line10" />10   def display_columns
-</span><span class="marked0"><a name="line11" />11     out = Person.table_name+'.personID as id, '+HrSiApplication.table_name+'.applicationID, '
-</span><span class="marked1"><a name="line12" />12     out += '(SELECT email FROM '+Address.table_name+' WHERE fk_personID = '+Person.table_name+&quot;.personID AND addressType = 'current') as email, &quot;
-</span><span class="marked0"><a name="line13" />13     sitrack_view_columns.each do |vc|
-</span><span class="marked1"><a name="line14" />14       column = vc.sitrack_column
-</span><span class="marked0"><a name="line15" />15       unless column.select_clause.first == '('
-</span><span class="marked1"><a name="line16" />16         out += column.table
-</span><span class="marked0"><a name="line17" />17       end
-</span><span class="marked1"><a name="line18" />18       out += column.select_clause+ ' as ' +column.safe_name
-</span><span class="marked0"><a name="line19" />19       out += ', ' unless vc == sitrack_view_columns.last
-</span><span class="marked1"><a name="line20" />20     end
-</span><span class="marked0"><a name="line21" />21     return out
-</span><span class="inferred1"><a name="line22" />22   end
-</span><span class="inferred0"><a name="line23" />23   
-</span><span class="marked1"><a name="line24" />24   def self.join_tables
-</span><span class="marked0"><a name="line25" />25     out = Person.table_name
-</span><span class="marked1"><a name="line26" />26     out += &quot; JOIN #{HrSiApplication.table_name} on #{Person.table_name}.personID = #{HrSiApplication.table_name}.fk_personID &quot;
-</span><span class="marked0"><a name="line27" />27     out += &quot; LEFT JOIN #{Staff.table_name} on #{Person.table_name}.accountNo = #{Staff.table_name}.accountNo &quot;
-</span><span class="marked1"><a name="line28" />28     out += &quot; LEFT JOIN #{SitrackMpd.table_name} on #{HrSiApplication.table_name}.applicationID = #{SitrackMpd.table_name}.application_id &quot;
-</span><span class="marked0"><a name="line29" />29     out += &quot; LEFT JOIN #{SitrackTracking.table_name} on #{HrSiApplication.table_name}.applicationID = #{SitrackTracking.table_name}.application_id &quot;
-</span><span class="marked1"><a name="line30" />30     return out
-</span><span class="inferred0"><a name="line31" />31   end
-</span><span class="inferred1"><a name="line32" />32   
-</span><span class="inferred0"><a name="line33" />33   # returns an array of tables needed for this view
-</span><span class="marked1"><a name="line34" />34   def tables
-</span><span class="marked0"><a name="line35" />35     @tables = []
-</span><span class="uncovered1"><a name="line36" />36     sitrack_view_columns.each do |vc|
-</span><span class="uncovered0"><a name="line37" />37       column = vc.sitrack_column
-</span><span class="uncovered1"><a name="line38" />38       column.table_clause.split(',').each  do |table|
-</span><span class="uncovered0"><a name="line39" />39         @tables &lt;&lt; table  unless @tables.include?(table)
-</span><span class="uncovered1"><a name="line40" />40       end
-</span><span class="uncovered0"><a name="line41" />41     end
-</span><span class="uncovered1"><a name="line42" />42     return @tables
-</span><span class="uncovered0"><a name="line43" />43   end
-</span><span class="inferred1"><a name="line44" />44   
-</span><span class="marked0"><a name="line45" />45   def safe_column_names
-</span><span class="marked1"><a name="line46" />46     names = []
-</span><span class="marked0"><a name="line47" />47     sitrack_view_columns.each { |vc| names &lt;&lt; vc.sitrack_column.safe_name if vc.sitrack_column }
-</span><span class="marked1"><a name="line48" />48     return names
-</span><span class="inferred0"><a name="line49" />49   end
-</span><span class="inferred1"><a name="line50" />50 end
+    </table><pre><span class="marked0"><a name="line1" /> 1 class SitrackView &lt; ActiveRecord::Base
+</span><span class="marked1"><a name="line2" /> 2   has_many   :sitrack_view_columns, :order =&gt; :position, :include =&gt; :sitrack_column, :dependent =&gt; true
+</span><span class="marked0"><a name="line3" /> 3   has_many   :sitrack_columns, :through =&gt; :sitrack_view_columns
+</span><span class="marked1"><a name="line4" /> 4   belongs_to :sitrack_user
+</span><span class="marked0"><a name="line5" /> 5     
+</span><span class="marked1"><a name="line6" /> 6   validates_presence_of :name
+</span><span class="marked0"><a name="line7" /> 7   
+</span><span class="marked1"><a name="line8" /> 8   def display_columns
+</span><span class="marked0"><a name="line9" /> 9     out = Person.table_name+'.personID as id, '+HrSiApplication.table_name+'.applicationID, '
+</span><span class="marked1"><a name="line10" />10     out += '(SELECT email FROM '+Address.table_name+' WHERE fk_personID = '+Person.table_name+&quot;.personID AND addressType = 'current') as email, &quot;
+</span><span class="marked0"><a name="line11" />11     sitrack_view_columns.each do |vc|
+</span><span class="marked1"><a name="line12" />12       column = vc.sitrack_column
+</span><span class="marked0"><a name="line13" />13       unless column.select_clause.first == '('
+</span><span class="marked1"><a name="line14" />14         out += column.table
+</span><span class="marked0"><a name="line15" />15       end
+</span><span class="marked1"><a name="line16" />16       out += column.select_clause+ ' as ' +column.safe_name
+</span><span class="marked0"><a name="line17" />17       out += ', ' unless vc == sitrack_view_columns.last
+</span><span class="marked1"><a name="line18" />18     end
+</span><span class="marked0"><a name="line19" />19     return out
+</span><span class="inferred1"><a name="line20" />20   end
+</span><span class="inferred0"><a name="line21" />21   
+</span><span class="marked1"><a name="line22" />22   def self.join_tables
+</span><span class="marked0"><a name="line23" />23     out = Person.table_name
+</span><span class="marked1"><a name="line24" />24     out += &quot; JOIN #{HrSiApplication.table_name} on #{Person.table_name}.personID = #{HrSiApplication.table_name}.fk_personID &quot;
+</span><span class="marked0"><a name="line25" />25     out += &quot; LEFT JOIN #{Staff.table_name} on #{Person.table_name}.accountNo = #{Staff.table_name}.accountNo &quot;
+</span><span class="marked1"><a name="line26" />26     out += &quot; LEFT JOIN #{SitrackMpd.table_name} on #{HrSiApplication.table_name}.applicationID = #{SitrackMpd.table_name}.application_id &quot;
+</span><span class="marked0"><a name="line27" />27     out += &quot; LEFT JOIN #{SitrackTracking.table_name} on #{HrSiApplication.table_name}.applicationID = #{SitrackTracking.table_name}.application_id &quot;
+</span><span class="marked1"><a name="line28" />28     return out
+</span><span class="inferred0"><a name="line29" />29   end
+</span><span class="inferred1"><a name="line30" />30   
+</span><span class="inferred0"><a name="line31" />31   # returns an array of tables needed for this view
+</span><span class="marked1"><a name="line32" />32   def tables
+</span><span class="marked0"><a name="line33" />33     @tables = []
+</span><span class="uncovered1"><a name="line34" />34     sitrack_view_columns.each do |vc|
+</span><span class="uncovered0"><a name="line35" />35       column = vc.sitrack_column
+</span><span class="uncovered1"><a name="line36" />36       column.table_clause.split(',').each  do |table|
+</span><span class="uncovered0"><a name="line37" />37         @tables &lt;&lt; table  unless @tables.include?(table)
+</span><span class="uncovered1"><a name="line38" />38       end
+</span><span class="uncovered0"><a name="line39" />39     end
+</span><span class="uncovered1"><a name="line40" />40     return @tables
+</span><span class="uncovered0"><a name="line41" />41   end
+</span><span class="inferred1"><a name="line42" />42   
+</span><span class="marked0"><a name="line43" />43   def safe_column_names
+</span><span class="marked1"><a name="line44" />44     names = []
+</span><span class="marked0"><a name="line45" />45     sitrack_view_columns.each { |vc| names &lt;&lt; vc.sitrack_column.safe_name if vc.sitrack_column }
+</span><span class="marked1"><a name="line46" />46     return names
+</span><span class="inferred0"><a name="line47" />47   end
+</span><span class="inferred1"><a name="line48" />48 end
 </span></pre><hr />    <p>Generated using the <a href='http://eigenclass.org/hiki.rb?rcov'>rcov code coverage analysis tool for Ruby</a> version 0.6.0.</p><p>
           <a href='http://validator.w3.org/check/referer'>
             <img src='http://www.w3.org/Icons/valid-xhtml10' height='31' alt='Valid XHTML 1.0!' width='88' />
