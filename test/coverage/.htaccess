@@ -1,0 +1,4 @@
+AuthType Basic
+AuthName "Code Coverage Access"
+AuthUserFile /var/www/html/config/htpasswd
+require valid-user
