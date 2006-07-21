@@ -554,7 +554,7 @@ span.run100 {
       </head>
       <body>
         <h3>C0 code coverage information</h3>
-        <p>Generated on Fri Jul 21 08:04:08 EDT 2006 with <a href='http://eigenclass.org/hiki.rb?rcov'>rcov 0.6.0</a>
+        <p>Generated on Fri Jul 21 12:09:09 EDT 2006 with <a href='http://eigenclass.org/hiki.rb?rcov'>rcov 0.6.0</a>
         </p>
         <hr /><pre><span class='marked0'>Code reported as executed by Ruby looks like this...
 </span><span class='marked1'>and this: this line is also marked as covered.
@@ -617,58 +617,128 @@ span.run100 {
           </td>
         </tr>
       </tbody>
-    </table><pre><span class="marked0"><a name="line1" /> 1 class ChildController &lt; ApplicationController
+    </table><pre><span class="marked0"><a name="line1" /> 1 <a class="crossref-toggle" href="#" onclick="toggleCode('XREF-116'); return false;">class ChildController &lt; ApplicationController</a><span class="cross-ref" id="XREF-116">
+<span class="cross-ref-title">Calls</span>
+      1   ActionWebService::Dispatcher::ActionController::ClassMethods#inherited at /usr/lib64/ruby/gems/1.8/gems/actionwebservice-1.1.2/lib/action_web_service/dispatcher/action_controller_dispatcher.rb:33
+</span>
 </span><span class="marked1"><a name="line2" /> 2   
-</span><span class="marked0"><a name="line3" /> 3   def add_child
-</span><span class="marked1"><a name="line4" /> 4     if params[:personID]
+</span><span class="marked0"><a name="line3" /> 3 <a class="crossref-toggle" href="#" onclick="toggleCode('XREF-117'); return false;">  def add_child</a><span class="cross-ref" id="XREF-117">
+<span class="cross-ref-title">Calls</span>
+      1   #&lt;Class:Object&gt;#method_added at /usr/lib64/ruby/gems/1.8/gems/activesupport-1.3.1/lib/active_support/vendor/builder/blankslate.rb:47
+<span class="cross-ref-title">Called by</span>
+      1   /usr/lib64/ruby/gems/1.8/gems/actionpack-1.12.1/lib/action_controller/base.rb:910 in 'ActionController::Base#perform_action_without_filters'
+</span>
+</span><span class="marked1"><a name="line4" /> 4 <a class="crossref-toggle" href="#" onclick="toggleCode('XREF-118'); return false;">    if params[:personID]</a><span class="cross-ref" id="XREF-118">
+<span class="cross-ref-title">Calls</span>
+      1   HashWithIndifferentAccess#default at /usr/lib64/ruby/gems/1.8/gems/activesupport-1.3.1/lib/active_support/core_ext/hash/indifferent_access.rb:14
+</span>
 </span><span class="marked0"><a name="line5" /> 5       @child = SitrackChild.new(:person_id =&gt; params[:personID])
 </span><span class="uncovered1"><a name="line6" /> 6       render(:action =&gt; :child, :layout =&gt; false)
 </span><span class="inferred0"><a name="line7" /> 7     else
-</span><span class="marked1"><a name="line8" /> 8       close_window
+</span><span class="marked1"><a name="line8" /> 8 <a class="crossref-toggle" href="#" onclick="toggleCode('XREF-119'); return false;">      close_window</a><span class="cross-ref" id="XREF-119">
+<span class="cross-ref-title">Calls</span>
+<a href="-var-www-html-continuous_integration-sitrack-app-controllers-child_controller_rb.html#line51">      1   ChildController#close_window at /var/www/html/continuous_integration/sitrack/app/controllers/child_controller.rb:51</a>
+</span>
 </span><span class="marked0"><a name="line9" /> 9     end
 </span><span class="marked1"><a name="line10" />10   end
 </span><span class="inferred0"><a name="line11" />11   
-</span><span class="marked1"><a name="line12" />12   def edit_child
-</span><span class="marked0"><a name="line13" />13     if params[:childID]
+</span><span class="marked1"><a name="line12" />12 <a class="crossref-toggle" href="#" onclick="toggleCode('XREF-120'); return false;">  def edit_child</a><span class="cross-ref" id="XREF-120">
+<span class="cross-ref-title">Calls</span>
+      1   #&lt;Class:Object&gt;#method_added at /usr/lib64/ruby/gems/1.8/gems/activesupport-1.3.1/lib/active_support/vendor/builder/blankslate.rb:47
+<span class="cross-ref-title">Called by</span>
+      1   /usr/lib64/ruby/gems/1.8/gems/actionpack-1.12.1/lib/action_controller/base.rb:910 in 'ActionController::Base#perform_action_without_filters'
+</span>
+</span><span class="marked0"><a name="line13" />13 <a class="crossref-toggle" href="#" onclick="toggleCode('XREF-121'); return false;">    if params[:childID]</a><span class="cross-ref" id="XREF-121">
+<span class="cross-ref-title">Calls</span>
+      1   HashWithIndifferentAccess#default at /usr/lib64/ruby/gems/1.8/gems/activesupport-1.3.1/lib/active_support/core_ext/hash/indifferent_access.rb:14
+</span>
 </span><span class="marked1"><a name="line14" />14       @child = SitrackChild.find(params[:childID])
 </span><span class="uncovered0"><a name="line15" />15       render(:action =&gt; :child, :layout =&gt; false)    
 </span><span class="inferred1"><a name="line16" />16     else
-</span><span class="marked0"><a name="line17" />17       close_window
+</span><span class="marked0"><a name="line17" />17 <a class="crossref-toggle" href="#" onclick="toggleCode('XREF-122'); return false;">      close_window</a><span class="cross-ref" id="XREF-122">
+<span class="cross-ref-title">Calls</span>
+<a href="-var-www-html-continuous_integration-sitrack-app-controllers-child_controller_rb.html#line51">      1   ChildController#close_window at /var/www/html/continuous_integration/sitrack/app/controllers/child_controller.rb:51</a>
+</span>
 </span><span class="marked1"><a name="line18" />18     end
 </span><span class="marked0"><a name="line19" />19   end
 </span><span class="inferred1"><a name="line20" />20   
-</span><span class="marked0"><a name="line21" />21   def save_child
-</span><span class="marked1"><a name="line22" />22     unless params[:child] &amp;&amp; params[:child][:person_id] 
+</span><span class="marked0"><a name="line21" />21 <a class="crossref-toggle" href="#" onclick="toggleCode('XREF-123'); return false;">  def save_child</a><span class="cross-ref" id="XREF-123">
+<span class="cross-ref-title">Calls</span>
+      1   #&lt;Class:Object&gt;#method_added at /usr/lib64/ruby/gems/1.8/gems/activesupport-1.3.1/lib/active_support/vendor/builder/blankslate.rb:47
+<span class="cross-ref-title">Called by</span>
+      1   /usr/lib64/ruby/gems/1.8/gems/actionpack-1.12.1/lib/action_controller/base.rb:910 in 'ActionController::Base#perform_action_without_filters'
+</span>
+</span><span class="marked1"><a name="line22" />22 <a class="crossref-toggle" href="#" onclick="toggleCode('XREF-124'); return false;">    unless params[:child] &amp;&amp; params[:child][:person_id] </a><span class="cross-ref" id="XREF-124">
+<span class="cross-ref-title">Calls</span>
+      3   HashWithIndifferentAccess#default at /usr/lib64/ruby/gems/1.8/gems/activesupport-1.3.1/lib/active_support/core_ext/hash/indifferent_access.rb:14
+</span>
 </span><span class="marked0"><a name="line23" />23       raise &quot;Bad form post: &quot;+params.inspect
 </span><span class="inferred1"><a name="line24" />24     end
-</span><span class="marked0"><a name="line25" />25     if params[:id]
+</span><span class="marked0"><a name="line25" />25 <a class="crossref-toggle" href="#" onclick="toggleCode('XREF-125'); return false;">    if params[:id]</a><span class="cross-ref" id="XREF-125">
+<span class="cross-ref-title">Calls</span>
+      1   HashWithIndifferentAccess#default at /usr/lib64/ruby/gems/1.8/gems/activesupport-1.3.1/lib/active_support/core_ext/hash/indifferent_access.rb:14
+</span>
 </span><span class="marked1"><a name="line26" />26       #update
 </span><span class="uncovered0"><a name="line27" />27       @child = SitrackChild.find(params[:id])
 </span><span class="uncovered1"><a name="line28" />28       @child.update_attributes(params[:child])
 </span><span class="inferred0"><a name="line29" />29     else
 </span><span class="inferred1"><a name="line30" />30       #insert
-</span><span class="marked0"><a name="line31" />31       @child = SitrackChild.create(params[&quot;child&quot;])
+</span><span class="marked0"><a name="line31" />31 <a class="crossref-toggle" href="#" onclick="toggleCode('XREF-126'); return false;">      @child = SitrackChild.create(params[&quot;child&quot;])</a><span class="cross-ref" id="XREF-126">
+<span class="cross-ref-title">Calls</span>
+      1   #&lt;Class:ActiveRecord::Base&gt;#create at /usr/lib64/ruby/gems/1.8/gems/activerecord-1.14.2/lib/active_record/base.rb:402
+</span>
 </span><span class="marked1"><a name="line32" />32     end
-</span><span class="marked0"><a name="line33" />33     if @child.valid?
+</span><span class="marked0"><a name="line33" />33 <a class="crossref-toggle" href="#" onclick="toggleCode('XREF-127'); return false;">    if @child.valid?</a><span class="cross-ref" id="XREF-127">
+<span class="cross-ref-title">Calls</span>
+      1   ActiveRecord::Callbacks#valid? at /usr/lib64/ruby/gems/1.8/gems/activerecord-1.14.2/lib/active_record/callbacks.rb:301
+</span>
 </span><span class="marked1"><a name="line34" />34       # clear page caches
-</span><span class="marked0"><a name="line35" />35       @child.person.hr_si_applications do |app|
+</span><span class="marked0"><a name="line35" />35 <a class="crossref-toggle" href="#" onclick="toggleCode('XREF-128'); return false;">      @child.person.hr_si_applications do |app|</a><span class="cross-ref" id="XREF-128">
+<span class="cross-ref-title">Calls</span>
+      1   ActiveRecord::Associations::AssociationProxy#method_missing at /usr/lib64/ruby/gems/1.8/gems/activerecord-1.14.2/lib/active_record/associations/association_proxy.rb:108
+</span>
 </span><span class="marked1"><a name="line36" />36 	      expire_action(:action =&gt; :index, :id =&gt; app.id)
 </span><span class="inferred0"><a name="line37" />37 	    end
-</span><span class="marked1"><a name="line38" />38       close_window
+</span><span class="marked1"><a name="line38" />38 <a class="crossref-toggle" href="#" onclick="toggleCode('XREF-129'); return false;">      close_window</a><span class="cross-ref" id="XREF-129">
+<span class="cross-ref-title">Calls</span>
+<a href="-var-www-html-continuous_integration-sitrack-app-controllers-child_controller_rb.html#line51">      1   ChildController#close_window at /var/www/html/continuous_integration/sitrack/app/controllers/child_controller.rb:51</a>
+</span>
 </span><span class="marked0"><a name="line39" />39     else 
 </span><span class="uncovered1"><a name="line40" />40       render(:action =&gt; :child, :layout =&gt; false)
 </span><span class="uncovered0"><a name="line41" />41     end
 </span><span class="uncovered1"><a name="line42" />42   end
 </span><span class="inferred0"><a name="line43" />43   
-</span><span class="marked1"><a name="line44" />44   def delete_child
-</span><span class="marked0"><a name="line45" />45     SitrackChild.destroy(params[:id]) if params[:id]
-</span><span class="marked1"><a name="line46" />46     render :nothing =&gt; true
+</span><span class="marked1"><a name="line44" />44 <a class="crossref-toggle" href="#" onclick="toggleCode('XREF-130'); return false;">  def delete_child</a><span class="cross-ref" id="XREF-130">
+<span class="cross-ref-title">Calls</span>
+      1   #&lt;Class:Object&gt;#method_added at /usr/lib64/ruby/gems/1.8/gems/activesupport-1.3.1/lib/active_support/vendor/builder/blankslate.rb:47
+<span class="cross-ref-title">Called by</span>
+      1   /usr/lib64/ruby/gems/1.8/gems/actionpack-1.12.1/lib/action_controller/base.rb:910 in 'ActionController::Base#perform_action_without_filters'
+</span>
+</span><span class="marked0"><a name="line45" />45 <a class="crossref-toggle" href="#" onclick="toggleCode('XREF-131'); return false;">    SitrackChild.destroy(params[:id]) if params[:id]</a><span class="cross-ref" id="XREF-131">
+<span class="cross-ref-title">Calls</span>
+      2   HashWithIndifferentAccess#default at /usr/lib64/ruby/gems/1.8/gems/activesupport-1.3.1/lib/active_support/core_ext/hash/indifferent_access.rb:14
+      1   #&lt;Class:ActiveRecord::Base&gt;#destroy at /usr/lib64/ruby/gems/1.8/gems/activerecord-1.14.2/lib/active_record/base.rb:444
+</span>
+</span><span class="marked1"><a name="line46" />46 <a class="crossref-toggle" href="#" onclick="toggleCode('XREF-132'); return false;">    render :nothing =&gt; true</a><span class="cross-ref" id="XREF-132">
+<span class="cross-ref-title">Calls</span>
+      1   ActionController::Benchmarking#render at /usr/lib64/ruby/gems/1.8/gems/actionpack-1.12.1/lib/action_controller/benchmarking.rb:46
+</span>
 </span><span class="marked0"><a name="line47" />47   end
 </span><span class="inferred1"><a name="line48" />48   
 </span><span class="marked0"><a name="line49" />49   private 
 </span><span class="inferred1"><a name="line50" />50   
-</span><span class="marked0"><a name="line51" />51   def close_window
-</span><span class="marked1"><a name="line52" />52       render(:template =&gt; '/shared/close_window', :layout =&gt; false)
+</span><span class="marked0"><a name="line51" />51 <a class="crossref-toggle" href="#" onclick="toggleCode('XREF-133'); return false;">  def close_window</a><span class="cross-ref" id="XREF-133">
+<span class="cross-ref-title">Calls</span>
+      1   #&lt;Class:Object&gt;#method_added at /usr/lib64/ruby/gems/1.8/gems/activesupport-1.3.1/lib/active_support/vendor/builder/blankslate.rb:47
+<span class="cross-ref-title">Called by</span>
+<a href="-var-www-html-continuous_integration-sitrack-app-controllers-child_controller_rb.html#line38">      1   /var/www/html/continuous_integration/sitrack/app/controllers/child_controller.rb:38 in 'ChildController#save_child'</a>
+<a href="-var-www-html-continuous_integration-sitrack-app-controllers-child_controller_rb.html#line8">      1   /var/www/html/continuous_integration/sitrack/app/controllers/child_controller.rb:8 in 'ChildController#add_child'</a>
+<a href="-var-www-html-continuous_integration-sitrack-app-controllers-child_controller_rb.html#line17">      1   /var/www/html/continuous_integration/sitrack/app/controllers/child_controller.rb:17 in 'ChildController#edit_child'</a>
+</span>
+</span><span class="marked1"><a name="line52" />52 <a class="crossref-toggle" href="#" onclick="toggleCode('XREF-134'); return false;">      render(:template =&gt; '/shared/close_window', :layout =&gt; false)</a><span class="cross-ref" id="XREF-134">
+<span class="cross-ref-title">Calls</span>
+      3   ActionController::Benchmarking#render at /usr/lib64/ruby/gems/1.8/gems/actionpack-1.12.1/lib/action_controller/benchmarking.rb:46
+</span>
 </span><span class="marked0"><a name="line53" />53   end
 </span><span class="inferred1"><a name="line54" />54 end
 </span></pre><hr />    <p>Generated using the <a href='http://eigenclass.org/hiki.rb?rcov'>rcov code coverage analysis tool for Ruby</a> version 0.6.0.</p><p>

@@ -554,7 +554,7 @@ span.run100 {
       </head>
       <body>
         <h3>C0 code coverage information</h3>
-        <p>Generated on Fri Jul 21 08:04:10 EDT 2006 with <a href='http://eigenclass.org/hiki.rb?rcov'>rcov 0.6.0</a>
+        <p>Generated on Fri Jul 21 12:09:12 EDT 2006 with <a href='http://eigenclass.org/hiki.rb?rcov'>rcov 0.6.0</a>
         </p>
         <hr /><pre><span class='marked0'>Code reported as executed by Ruby looks like this...
 </span><span class='marked1'>and this: this line is also marked as covered.
@@ -618,8 +618,14 @@ span.run100 {
         </tr>
       </tbody>
     </table><pre><span class="marked0"><a name="line1" /> 1 ENV[&quot;RAILS_ENV&quot;] = &quot;test&quot;
-</span><span class="marked1"><a name="line2" /> 2 require File.expand_path(File.dirname(__FILE__) + &quot;/../config/environment&quot;)
-</span><span class="marked0"><a name="line3" /> 3 require 'test_help'
+</span><span class="marked1"><a name="line2" /> 2 <a class="crossref-toggle" href="#" onclick="toggleCode('XREF-517'); return false;">require File.expand_path(File.dirname(__FILE__) + &quot;/../config/environment&quot;)</a><span class="cross-ref" id="XREF-517">
+<span class="cross-ref-title">Calls</span>
+      1   Kernel#require at /usr/lib64/site_ruby/1.8/rubygems/custom_require.rb:20
+</span>
+</span><span class="marked0"><a name="line3" /> 3 <a class="crossref-toggle" href="#" onclick="toggleCode('XREF-518'); return false;">require 'test_help'</a><span class="cross-ref" id="XREF-518">
+<span class="cross-ref-title">Calls</span>
+      1   Object#require at /usr/lib64/ruby/gems/1.8/gems/activesupport-1.3.1/lib/active_support/dependencies.rb:146
+</span>
 </span><span class="marked1"><a name="line4" /> 4 
 </span><span class="marked0"><a name="line5" /> 5 class Test::Unit::TestCase
 </span><span class="inferred1"><a name="line6" /> 6   # Transactional fixtures accelerate your tests by wrapping each test method
@@ -634,27 +640,82 @@ span.run100 {
 </span><span class="inferred0"><a name="line15" />15   # in MySQL.  Turn off transactional fixtures in this case; however, if you
 </span><span class="inferred1"><a name="line16" />16   # don't care one way or the other, switching from MyISAM to InnoDB tables
 </span><span class="inferred0"><a name="line17" />17   # is recommended.
-</span><span class="marked1"><a name="line18" />18   self.use_transactional_fixtures = true
+</span><span class="marked1"><a name="line18" />18 <a class="crossref-toggle" href="#" onclick="toggleCode('XREF-519'); return false;">  self.use_transactional_fixtures = true</a><span class="cross-ref" id="XREF-519">
+<span class="cross-ref-title">Calls</span>
+      1   #&lt;Class:Test::Unit::TestCase&gt;#use_transactional_fixtures= at (eval):1
+</span>
 </span><span class="marked0"><a name="line19" />19 
 </span><span class="inferred1"><a name="line20" />20   # Instantiated fixtures are slow, but give you @david where otherwise you
 </span><span class="inferred0"><a name="line21" />21   # would need people(:david).  If you don't want to migrate your existing
 </span><span class="inferred1"><a name="line22" />22   # test cases which use the @david style and don't mind the speed hit (each
 </span><span class="inferred0"><a name="line23" />23   # instantiated fixtures translates to a database query per test method),
 </span><span class="inferred1"><a name="line24" />24   # then set this back to true.
-</span><span class="marked0"><a name="line25" />25   self.use_instantiated_fixtures  = false
+</span><span class="marked0"><a name="line25" />25 <a class="crossref-toggle" href="#" onclick="toggleCode('XREF-520'); return false;">  self.use_instantiated_fixtures  = false</a><span class="cross-ref" id="XREF-520">
+<span class="cross-ref-title">Calls</span>
+      1   #&lt;Class:Test::Unit::TestCase&gt;#use_instantiated_fixtures= at (eval):1
+</span>
 </span><span class="marked1"><a name="line26" />26 
 </span><span class="inferred0"><a name="line27" />27   # Add more helper methods to be used by all tests here...
-</span><span class="marked1"><a name="line28" />28   def preview
-</span><span class="marked0"><a name="line29" />29     post :fill, @preview_options
-</span><span class="marked1"><a name="line30" />30     assert_response :success
-</span><span class="marked0"><a name="line31" />31     assert_template 'shared/preview'
+</span><span class="marked1"><a name="line28" />28 <a class="crossref-toggle" href="#" onclick="toggleCode('XREF-521'); return false;">  def preview</a><span class="cross-ref" id="XREF-521">
+<span class="cross-ref-title">Calls</span>
+      1   #&lt;Class:Test::Unit::TestCase&gt;#method_added at /usr/lib64/ruby/gems/1.8/gems/activerecord-1.14.2/lib/active_record/fixtures.rb:541
+<span class="cross-ref-title">Called by</span>
+<a href="test_helper_rb.html#line34">      5   test_helper.rb:34 in 'Test::Unit::TestCase#submit'</a>
+      1   functional/salary_form_controller_test.rb:32 in 'SalaryFormControllerTest#test_preview_intern'
+      1   functional/acos_form_controller_test.rb:27 in 'AcosFormControllerTest#test_preview'
+      1   functional/additional_salary_form_controller_test.rb:27 in 'AdditionalSalaryFormControllerTest#test_preview'
+      1   functional/join_staff_form_controller_test.rb:27 in 'JoinStaffFormControllerTest#test_preview'
+      1   functional/salary_form_controller_test.rb:28 in 'SalaryFormControllerTest#test_preview_stint'
+      1   functional/add_form_controller_test.rb:21 in 'AddFormControllerTest#test_preview'
+</span>
+</span><span class="marked0"><a name="line29" />29 <a class="crossref-toggle" href="#" onclick="toggleCode('XREF-522'); return false;">    post :fill, @preview_options</a><span class="cross-ref" id="XREF-522">
+<span class="cross-ref-title">Calls</span>
+     11   Test::Unit::TestCase#post at /usr/lib64/ruby/gems/1.8/gems/actionpack-1.12.1/lib/action_controller/test_process.rb:334
+</span>
+</span><span class="marked1"><a name="line30" />30 <a class="crossref-toggle" href="#" onclick="toggleCode('XREF-523'); return false;">    assert_response :success</a><span class="cross-ref" id="XREF-523">
+<span class="cross-ref-title">Calls</span>
+     11   Test::Unit::Assertions#assert_response at /usr/lib64/ruby/gems/1.8/gems/actionpack-1.12.1/lib/action_controller/assertions.rb:58
+</span>
+</span><span class="marked0"><a name="line31" />31 <a class="crossref-toggle" href="#" onclick="toggleCode('XREF-524'); return false;">    assert_template 'shared/preview'</a><span class="cross-ref" id="XREF-524">
+<span class="cross-ref-title">Calls</span>
+     11   Test::Unit::Assertions#assert_template at /usr/lib64/ruby/gems/1.8/gems/actionpack-1.12.1/lib/action_controller/assertions.rb:108
+</span>
 </span><span class="marked1"><a name="line32" />32   end
-</span><span class="marked0"><a name="line33" />33   def submit
-</span><span class="marked1"><a name="line34" />34     preview
-</span><span class="marked0"><a name="line35" />35     form_id = assigns(:form).id
-</span><span class="marked1"><a name="line36" />36     get :submit, :id =&gt; form_id
-</span><span class="marked0"><a name="line37" />37     assert_response :success
-</span><span class="marked1"><a name="line38" />38     assert_template 'shared/form'
+</span><span class="marked0"><a name="line33" />33 <a class="crossref-toggle" href="#" onclick="toggleCode('XREF-525'); return false;">  def submit</a><span class="cross-ref" id="XREF-525">
+<span class="cross-ref-title">Calls</span>
+      1   #&lt;Class:Test::Unit::TestCase&gt;#method_added at /usr/lib64/ruby/gems/1.8/gems/activerecord-1.14.2/lib/active_record/fixtures.rb:541
+<span class="cross-ref-title">Called by</span>
+      1   functional/acos_form_controller_test.rb:31 in 'AcosFormControllerTest#test_submit'
+      1   functional/join_staff_form_controller_test.rb:31 in 'JoinStaffFormControllerTest#test_submit'
+      1   functional/salary_form_controller_test.rb:36 in 'SalaryFormControllerTest#test_submit'
+      1   functional/add_form_controller_test.rb:25 in 'AddFormControllerTest#test_submit'
+      1   functional/additional_salary_form_controller_test.rb:31 in 'AdditionalSalaryFormControllerTest#test_submit'
+</span>
+</span><span class="marked1"><a name="line34" />34 <a class="crossref-toggle" href="#" onclick="toggleCode('XREF-526'); return false;">    preview</a><span class="cross-ref" id="XREF-526">
+<span class="cross-ref-title">Calls</span>
+<a href="test_helper_rb.html#line28">      5   Test::Unit::TestCase#preview at test_helper.rb:28</a>
+</span>
+</span><span class="marked0"><a name="line35" />35 <a class="crossref-toggle" href="#" onclick="toggleCode('XREF-527'); return false;">    form_id = assigns(:form).id</a><span class="cross-ref" id="XREF-527">
+<span class="cross-ref-title">Calls</span>
+      5   ActionController::TestProcess#assigns at /usr/lib64/ruby/gems/1.8/gems/actionpack-1.12.1/lib/action_controller/test_process.rb:384
+      1   SitrackAdditionalSalaryForm#id at (eval):1
+      1   SitrackJoinStaffForm#id at (eval):1
+      1   SitrackAddForm#id at (eval):1
+      1   SitrackACOSForm#id at (eval):1
+      1   SitrackStintSalaryForm#id at (eval):1
+</span>
+</span><span class="marked1"><a name="line36" />36 <a class="crossref-toggle" href="#" onclick="toggleCode('XREF-528'); return false;">    get :submit, :id =&gt; form_id</a><span class="cross-ref" id="XREF-528">
+<span class="cross-ref-title">Calls</span>
+      5   Test::Unit::TestCase#get at /usr/lib64/ruby/gems/1.8/gems/actionpack-1.12.1/lib/action_controller/test_process.rb:334
+</span>
+</span><span class="marked0"><a name="line37" />37 <a class="crossref-toggle" href="#" onclick="toggleCode('XREF-529'); return false;">    assert_response :success</a><span class="cross-ref" id="XREF-529">
+<span class="cross-ref-title">Calls</span>
+      5   Test::Unit::Assertions#assert_response at /usr/lib64/ruby/gems/1.8/gems/actionpack-1.12.1/lib/action_controller/assertions.rb:58
+</span>
+</span><span class="marked1"><a name="line38" />38 <a class="crossref-toggle" href="#" onclick="toggleCode('XREF-530'); return false;">    assert_template 'shared/form'</a><span class="cross-ref" id="XREF-530">
+<span class="cross-ref-title">Calls</span>
+      5   Test::Unit::Assertions#assert_template at /usr/lib64/ruby/gems/1.8/gems/actionpack-1.12.1/lib/action_controller/assertions.rb:108
+</span>
 </span><span class="marked0"><a name="line39" />39   end
 </span><span class="inferred1"><a name="line40" />40 end
 </span></pre><hr />    <p>Generated using the <a href='http://eigenclass.org/hiki.rb?rcov'>rcov code coverage analysis tool for Ruby</a> version 0.6.0.</p><p>

@@ -554,7 +554,7 @@ span.run100 {
       </head>
       <body>
         <h3>C0 code coverage information</h3>
-        <p>Generated on Fri Jul 21 08:04:07 EDT 2006 with <a href='http://eigenclass.org/hiki.rb?rcov'>rcov 0.6.0</a>
+        <p>Generated on Fri Jul 21 12:09:08 EDT 2006 with <a href='http://eigenclass.org/hiki.rb?rcov'>rcov 0.6.0</a>
         </p>
         <hr /><pre><span class='marked0'>Code reported as executed by Ruby looks like this...
 </span><span class='marked1'>and this: this line is also marked as covered.
@@ -617,78 +617,214 @@ span.run100 {
           </td>
         </tr>
       </tbody>
-    </table><pre><span class="marked1"><a name="line1" /> 1 class AcosFormController &lt; ApplicationController
-</span><span class="marked0"><a name="line2" /> 2   def fill
-</span><span class="marked1"><a name="line3" /> 3     if params[:form_id]
+    </table><pre><span class="marked1"><a name="line1" /> 1 <a class="crossref-toggle" href="#" onclick="toggleCode('XREF-1'); return false;">class AcosFormController &lt; ApplicationController</a><span class="cross-ref" id="XREF-1">
+<span class="cross-ref-title">Calls</span>
+      1   ActionWebService::Dispatcher::ActionController::ClassMethods#inherited at /usr/lib64/ruby/gems/1.8/gems/actionwebservice-1.1.2/lib/action_web_service/dispatcher/action_controller_dispatcher.rb:33
+</span>
+</span><span class="marked0"><a name="line2" /> 2 <a class="crossref-toggle" href="#" onclick="toggleCode('XREF-2'); return false;">  def fill</a><span class="cross-ref" id="XREF-2">
+<span class="cross-ref-title">Calls</span>
+      1   #&lt;Class:Object&gt;#method_added at /usr/lib64/ruby/gems/1.8/gems/activesupport-1.3.1/lib/active_support/vendor/builder/blankslate.rb:47
+<span class="cross-ref-title">Called by</span>
+      3   /usr/lib64/ruby/gems/1.8/gems/actionpack-1.12.1/lib/action_controller/base.rb:910 in 'ActionController::Base#perform_action_without_filters'
+</span>
+</span><span class="marked1"><a name="line3" /> 3 <a class="crossref-toggle" href="#" onclick="toggleCode('XREF-3'); return false;">    if params[:form_id]</a><span class="cross-ref" id="XREF-3">
+<span class="cross-ref-title">Calls</span>
+      3   HashWithIndifferentAccess#default at /usr/lib64/ruby/gems/1.8/gems/activesupport-1.3.1/lib/active_support/core_ext/hash/indifferent_access.rb:14
+</span>
 </span><span class="marked0"><a name="line4" /> 4       @form = SitrackForm.find(params[:form_id])
 </span><span class="inferred1"><a name="line5" /> 5     else
-</span><span class="marked0"><a name="line6" /> 6       app_id = params[:id]
-</span><span class="marked1"><a name="line7" /> 7       @application = HrSiApplication.find(app_id)
-</span><span class="marked0"><a name="line8" /> 8       @form = SitrackACOSForm.new(:hr_si_application_id =&gt; app_id, :approver_id =&gt; session[:user].person.id)
+</span><span class="marked0"><a name="line6" /> 6 <a class="crossref-toggle" href="#" onclick="toggleCode('XREF-4'); return false;">      app_id = params[:id]</a><span class="cross-ref" id="XREF-4">
+<span class="cross-ref-title">Calls</span>
+      3   HashWithIndifferentAccess#default at /usr/lib64/ruby/gems/1.8/gems/activesupport-1.3.1/lib/active_support/core_ext/hash/indifferent_access.rb:14
+</span>
+</span><span class="marked1"><a name="line7" /> 7 <a class="crossref-toggle" href="#" onclick="toggleCode('XREF-5'); return false;">      @application = HrSiApplication.find(app_id)</a><span class="cross-ref" id="XREF-5">
+<span class="cross-ref-title">Calls</span>
+      3   #&lt;Class:ActiveRecord::Base&gt;#find at /usr/lib64/ruby/gems/1.8/gems/activerecord-1.14.2/lib/active_record/base.rb:374
+</span>
+</span><span class="marked0"><a name="line8" /> 8 <a class="crossref-toggle" href="#" onclick="toggleCode('XREF-6'); return false;">      @form = SitrackACOSForm.new(:hr_si_application_id =&gt; app_id, :approver_id =&gt; session[:user].person.id)</a><span class="cross-ref" id="XREF-6">
+<span class="cross-ref-title">Calls</span>
+      3   ActionController::TestSession#[] at /usr/lib64/ruby/gems/1.8/gems/actionpack-1.12.1/lib/action_controller/test_process.rb:279
+      3   ActiveRecord::Associations::AssociationProxy#method_missing at /usr/lib64/ruby/gems/1.8/gems/activerecord-1.14.2/lib/active_record/associations/association_proxy.rb:108
+      3   ActiveRecord::Callbacks#initialize at /usr/lib64/ruby/gems/1.8/gems/activerecord-1.14.2/lib/active_record/callbacks.rb:235
+      1   Class#const_missing at /usr/lib64/ruby/gems/1.8/gems/activesupport-1.3.1/lib/active_support/dependencies.rb:129
+</span>
 </span><span class="marked1"><a name="line9" /> 9     end
 </span><span class="inferred0"><a name="line10" />10     # display form
-</span><span class="marked1"><a name="line11" />11     setup
-</span><span class="marked0"><a name="line12" />12     @form.change_assignment_from_location ||= [@tracking.asgTeam, @tracking.asgCity, @tracking.asgCountry].join(', ')
-</span><span class="marked1"><a name="line13" />13     @form.restint_location ||= @form.change_assignment_from_location
-</span><span class="marked0"><a name="line14" />14     unless request.get?
+</span><span class="marked1"><a name="line11" />11 <a class="crossref-toggle" href="#" onclick="toggleCode('XREF-7'); return false;">    setup</a><span class="cross-ref" id="XREF-7">
+<span class="cross-ref-title">Calls</span>
+<a href="-var-www-html-continuous_integration-sitrack-app-controllers-acos_form_controller_rb.html#line48">      3   AcosFormController#setup at /var/www/html/continuous_integration/sitrack/app/controllers/acos_form_controller.rb:48</a>
+</span>
+</span><span class="marked0"><a name="line12" />12 <a class="crossref-toggle" href="#" onclick="toggleCode('XREF-8'); return false;">    @form.change_assignment_from_location ||= [@tracking.asgTeam, @tracking.asgCity, @tracking.asgCountry].join(', ')</a><span class="cross-ref" id="XREF-8">
+<span class="cross-ref-title">Calls</span>
+      9   ActiveRecord::Associations::AssociationProxy#method_missing at /usr/lib64/ruby/gems/1.8/gems/activerecord-1.14.2/lib/active_record/associations/association_proxy.rb:108
+      4   ActiveRecord::Base#method_missing at /usr/lib64/ruby/gems/1.8/gems/activerecord-1.14.2/lib/active_record/base.rb:1770
+      2   SitrackACOSForm#change_assignment_from_location at (eval):1
+</span>
+</span><span class="marked1"><a name="line13" />13 <a class="crossref-toggle" href="#" onclick="toggleCode('XREF-9'); return false;">    @form.restint_location ||= @form.change_assignment_from_location</a><span class="cross-ref" id="XREF-9">
+<span class="cross-ref-title">Calls</span>
+      3   SitrackACOSForm#restint_location at (eval):1
+      3   SitrackACOSForm#change_assignment_from_location at (eval):1
+      3   ActiveRecord::Base#method_missing at /usr/lib64/ruby/gems/1.8/gems/activerecord-1.14.2/lib/active_record/base.rb:1770
+</span>
+</span><span class="marked0"><a name="line14" />14 <a class="crossref-toggle" href="#" onclick="toggleCode('XREF-10'); return false;">    unless request.get?</a><span class="cross-ref" id="XREF-10">
+<span class="cross-ref-title">Calls</span>
+      3   ActionController::AbstractRequest#get? at /usr/lib64/ruby/gems/1.8/gems/actionpack-1.12.1/lib/action_controller/request.rb:21
+</span>
 </span><span class="marked1"><a name="line15" />15       # save and preview
-</span><span class="marked0"><a name="line16" />16       expire_action(:controller =&gt; 'profile', :action =&gt; 'index', :id =&gt; app_id) # kill the profile cache
+</span><span class="marked0"><a name="line16" />16 <a class="crossref-toggle" href="#" onclick="toggleCode('XREF-11'); return false;">      expire_action(:controller =&gt; 'profile', :action =&gt; 'index', :id =&gt; app_id) # kill the profile cache</a><span class="cross-ref" id="XREF-11">
+<span class="cross-ref-title">Calls</span>
+      2   ActionController::Caching::Actions#expire_action at /usr/lib64/ruby/gems/1.8/gems/actionpack-1.12.1/lib/action_controller/caching.rb:172
+</span>
 </span><span class="marked1"><a name="line17" />17 
-</span><span class="marked0"><a name="line18" />18       @person.update_attributes(params[:person])
-</span><span class="marked1"><a name="line19" />19       @application.update_attributes(params[:application])
-</span><span class="marked0"><a name="line20" />20       @tracking.update_attributes(params[:tracking])
+</span><span class="marked0"><a name="line18" />18 <a class="crossref-toggle" href="#" onclick="toggleCode('XREF-12'); return false;">      @person.update_attributes(params[:person])</a><span class="cross-ref" id="XREF-12">
+<span class="cross-ref-title">Calls</span>
+      2   HashWithIndifferentAccess#default at /usr/lib64/ruby/gems/1.8/gems/activesupport-1.3.1/lib/active_support/core_ext/hash/indifferent_access.rb:14
+      2   ActiveRecord::Associations::AssociationProxy#method_missing at /usr/lib64/ruby/gems/1.8/gems/activerecord-1.14.2/lib/active_record/associations/association_proxy.rb:108
+</span>
+</span><span class="marked1"><a name="line19" />19 <a class="crossref-toggle" href="#" onclick="toggleCode('XREF-13'); return false;">      @application.update_attributes(params[:application])</a><span class="cross-ref" id="XREF-13">
+<span class="cross-ref-title">Calls</span>
+      2   HashWithIndifferentAccess#default at /usr/lib64/ruby/gems/1.8/gems/activesupport-1.3.1/lib/active_support/core_ext/hash/indifferent_access.rb:14
+      2   ActiveRecord::Associations::AssociationProxy#method_missing at /usr/lib64/ruby/gems/1.8/gems/activerecord-1.14.2/lib/active_record/associations/association_proxy.rb:108
+</span>
+</span><span class="marked0"><a name="line20" />20 <a class="crossref-toggle" href="#" onclick="toggleCode('XREF-14'); return false;">      @tracking.update_attributes(params[:tracking])</a><span class="cross-ref" id="XREF-14">
+<span class="cross-ref-title">Calls</span>
+      2   HashWithIndifferentAccess#default at /usr/lib64/ruby/gems/1.8/gems/activesupport-1.3.1/lib/active_support/core_ext/hash/indifferent_access.rb:14
+      2   ActiveRecord::Associations::AssociationProxy#method_missing at /usr/lib64/ruby/gems/1.8/gems/activerecord-1.14.2/lib/active_record/associations/association_proxy.rb:108
+</span>
 </span><span class="marked1"><a name="line21" />21       
-</span><span class="marked0"><a name="line22" />22       preview if @form.update_attributes(params[:form])
+</span><span class="marked0"><a name="line22" />22 <a class="crossref-toggle" href="#" onclick="toggleCode('XREF-15'); return false;">      preview if @form.update_attributes(params[:form])</a><span class="cross-ref" id="XREF-15">
+<span class="cross-ref-title">Calls</span>
+      2   HashWithIndifferentAccess#default at /usr/lib64/ruby/gems/1.8/gems/activesupport-1.3.1/lib/active_support/core_ext/hash/indifferent_access.rb:14
+      2   ActiveRecord::Base#update_attributes at /usr/lib64/ruby/gems/1.8/gems/activerecord-1.14.2/lib/active_record/base.rb:1437
+<a href="-var-www-html-continuous_integration-sitrack-app-controllers-acos_form_controller_rb.html#line42">      2   AcosFormController#preview at /var/www/html/continuous_integration/sitrack/app/controllers/acos_form_controller.rb:42</a>
+</span>
 </span><span class="marked1"><a name="line23" />23     end
 </span><span class="inferred0"><a name="line24" />24   end
 </span><span class="inferred1"><a name="line25" />25   
 </span><span class="inferred0"><a name="line26" />26     
-</span><span class="marked1"><a name="line27" />27   def submit
-</span><span class="marked0"><a name="line28" />28     @form = SitrackForm.find(params[:id])
-</span><span class="marked1"><a name="line29" />29     setup
-</span><span class="marked0"><a name="line30" />30     setup_action
+</span><span class="marked1"><a name="line27" />27 <a class="crossref-toggle" href="#" onclick="toggleCode('XREF-16'); return false;">  def submit</a><span class="cross-ref" id="XREF-16">
+<span class="cross-ref-title">Calls</span>
+      1   #&lt;Class:Object&gt;#method_added at /usr/lib64/ruby/gems/1.8/gems/activesupport-1.3.1/lib/active_support/vendor/builder/blankslate.rb:47
+<span class="cross-ref-title">Called by</span>
+      1   /usr/lib64/ruby/gems/1.8/gems/actionpack-1.12.1/lib/action_controller/base.rb:910 in 'ActionController::Base#perform_action_without_filters'
+</span>
+</span><span class="marked0"><a name="line28" />28 <a class="crossref-toggle" href="#" onclick="toggleCode('XREF-17'); return false;">    @form = SitrackForm.find(params[:id])</a><span class="cross-ref" id="XREF-17">
+<span class="cross-ref-title">Calls</span>
+      1   HashWithIndifferentAccess#default at /usr/lib64/ruby/gems/1.8/gems/activesupport-1.3.1/lib/active_support/core_ext/hash/indifferent_access.rb:14
+      1   #&lt;Class:ActiveRecord::Base&gt;#find at /usr/lib64/ruby/gems/1.8/gems/activerecord-1.14.2/lib/active_record/base.rb:374
+</span>
+</span><span class="marked1"><a name="line29" />29 <a class="crossref-toggle" href="#" onclick="toggleCode('XREF-18'); return false;">    setup</a><span class="cross-ref" id="XREF-18">
+<span class="cross-ref-title">Calls</span>
+<a href="-var-www-html-continuous_integration-sitrack-app-controllers-acos_form_controller_rb.html#line48">      1   AcosFormController#setup at /var/www/html/continuous_integration/sitrack/app/controllers/acos_form_controller.rb:48</a>
+</span>
+</span><span class="marked0"><a name="line30" />30 <a class="crossref-toggle" href="#" onclick="toggleCode('XREF-19'); return false;">    setup_action</a><span class="cross-ref" id="XREF-19">
+<span class="cross-ref-title">Calls</span>
+<a href="-var-www-html-continuous_integration-sitrack-app-controllers-acos_form_controller_rb.html#line60">      1   AcosFormController#setup_action at /var/www/html/continuous_integration/sitrack/app/controllers/acos_form_controller.rb:60</a>
+</span>
 </span><span class="marked1"><a name="line31" />31     var_hash = {'person' =&gt; @person,
 </span><span class="inferred0"><a name="line32" />32                 'approver' =&gt; @approver,
 </span><span class="inferred1"><a name="line33" />33                 'tracking' =&gt; @tracking}
-</span><span class="marked0"><a name="line34" />34     form_html = render_to_string(:template =&gt; 'shared/form', :layout =&gt; 'add_form_layout')
-</span><span class="marked1"><a name="line35" />35     @form.email(var_hash, form_html)
+</span><span class="marked0"><a name="line34" />34 <a class="crossref-toggle" href="#" onclick="toggleCode('XREF-20'); return false;">    form_html = render_to_string(:template =&gt; 'shared/form', :layout =&gt; 'add_form_layout')</a><span class="cross-ref" id="XREF-20">
+<span class="cross-ref-title">Calls</span>
+      1   ActionController::Base#render_to_string at /usr/lib64/ruby/gems/1.8/gems/actionpack-1.12.1/lib/action_controller/base.rb:676
+</span>
+</span><span class="marked1"><a name="line35" />35 <a class="crossref-toggle" href="#" onclick="toggleCode('XREF-21'); return false;">    @form.email(var_hash, form_html)</a><span class="cross-ref" id="XREF-21">
+<span class="cross-ref-title">Calls</span>
+<a href="-var-www-html-continuous_integration-sitrack-app-models-sitrack_acos_form_rb.html#line7">      1   SitrackACOSForm#email at /var/www/html/continuous_integration/sitrack/app/models/sitrack_acos_form.rb:7</a>
+</span>
 </span><span class="marked0"><a name="line36" />36     @form_type = 'ACOS'
-</span><span class="marked1"><a name="line37" />37     render(:template =&gt; 'shared/form_submitted', :layout =&gt; 'application')
+</span><span class="marked1"><a name="line37" />37 <a class="crossref-toggle" href="#" onclick="toggleCode('XREF-22'); return false;">    render(:template =&gt; 'shared/form_submitted', :layout =&gt; 'application')</a><span class="cross-ref" id="XREF-22">
+<span class="cross-ref-title">Calls</span>
+      1   ActionController::Benchmarking#render at /usr/lib64/ruby/gems/1.8/gems/actionpack-1.12.1/lib/action_controller/benchmarking.rb:46
+</span>
 </span><span class="marked0"><a name="line38" />38   end
 </span><span class="inferred1"><a name="line39" />39   
 </span><span class="marked0"><a name="line40" />40   private
 </span><span class="inferred1"><a name="line41" />41   
-</span><span class="marked0"><a name="line42" />42   def preview
-</span><span class="marked1"><a name="line43" />43     setup_action
-</span><span class="marked0"><a name="line44" />44     render(:template =&gt; 'shared/preview', :layout =&gt; 'add_form_layout')
+</span><span class="marked0"><a name="line42" />42 <a class="crossref-toggle" href="#" onclick="toggleCode('XREF-23'); return false;">  def preview</a><span class="cross-ref" id="XREF-23">
+<span class="cross-ref-title">Calls</span>
+      1   #&lt;Class:Object&gt;#method_added at /usr/lib64/ruby/gems/1.8/gems/activesupport-1.3.1/lib/active_support/vendor/builder/blankslate.rb:47
+<span class="cross-ref-title">Called by</span>
+<a href="-var-www-html-continuous_integration-sitrack-app-controllers-acos_form_controller_rb.html#line22">      2   /var/www/html/continuous_integration/sitrack/app/controllers/acos_form_controller.rb:22 in 'AcosFormController#fill'</a>
+</span>
+</span><span class="marked1"><a name="line43" />43 <a class="crossref-toggle" href="#" onclick="toggleCode('XREF-24'); return false;">    setup_action</a><span class="cross-ref" id="XREF-24">
+<span class="cross-ref-title">Calls</span>
+<a href="-var-www-html-continuous_integration-sitrack-app-controllers-acos_form_controller_rb.html#line60">      2   AcosFormController#setup_action at /var/www/html/continuous_integration/sitrack/app/controllers/acos_form_controller.rb:60</a>
+</span>
+</span><span class="marked0"><a name="line44" />44 <a class="crossref-toggle" href="#" onclick="toggleCode('XREF-25'); return false;">    render(:template =&gt; 'shared/preview', :layout =&gt; 'add_form_layout')</a><span class="cross-ref" id="XREF-25">
+<span class="cross-ref-title">Calls</span>
+      2   ActionController::Benchmarking#render at /usr/lib64/ruby/gems/1.8/gems/actionpack-1.12.1/lib/action_controller/benchmarking.rb:46
+</span>
 </span><span class="marked1"><a name="line45" />45   end
 </span><span class="inferred0"><a name="line46" />46   
 </span><span class="inferred1"><a name="line47" />47   # Create the instance variables needed in the views  
-</span><span class="marked0"><a name="line48" />48   def setup
+</span><span class="marked0"><a name="line48" />48 <a class="crossref-toggle" href="#" onclick="toggleCode('XREF-26'); return false;">  def setup</a><span class="cross-ref" id="XREF-26">
+<span class="cross-ref-title">Calls</span>
+      1   #&lt;Class:Object&gt;#method_added at /usr/lib64/ruby/gems/1.8/gems/activesupport-1.3.1/lib/active_support/vendor/builder/blankslate.rb:47
+<span class="cross-ref-title">Called by</span>
+<a href="-var-www-html-continuous_integration-sitrack-app-controllers-acos_form_controller_rb.html#line11">      3   /var/www/html/continuous_integration/sitrack/app/controllers/acos_form_controller.rb:11 in 'AcosFormController#fill'</a>
+<a href="-var-www-html-continuous_integration-sitrack-app-controllers-acos_form_controller_rb.html#line29">      1   /var/www/html/continuous_integration/sitrack/app/controllers/acos_form_controller.rb:29 in 'AcosFormController#submit'</a>
+</span>
 </span><span class="marked1"><a name="line49" />49     @title = 'ACOS Form'
-</span><span class="marked0"><a name="line50" />50     @options_hash = get_option_hash
+</span><span class="marked0"><a name="line50" />50 <a class="crossref-toggle" href="#" onclick="toggleCode('XREF-27'); return false;">    @options_hash = get_option_hash</a><span class="cross-ref" id="XREF-27">
+<span class="cross-ref-title">Calls</span>
+<a href="-var-www-html-continuous_integration-sitrack-app-controllers-application_rb.html#line94">      4   ApplicationController#get_option_hash at /var/www/html/continuous_integration/sitrack/app/controllers/application.rb:94</a>
+</span>
 </span><span class="marked1"><a name="line51" />51     @application = @form.hr_si_application
-</span><span class="marked0"><a name="line52" />52     @person = @application.person
-</span><span class="marked1"><a name="line53" />53     @spouse = @person.spouse || Person.new
-</span><span class="marked0"><a name="line54" />54     @current_address = (@person.current_address || Address.new)
-</span><span class="marked1"><a name="line55" />55     @tracking = (@application.sitrack_tracking || SitrackTracking.new)
-</span><span class="marked0"><a name="line56" />56     @region = (Region.find_by_region(@person.region) || Region.new)
+</span><span class="marked0"><a name="line52" />52 <a class="crossref-toggle" href="#" onclick="toggleCode('XREF-28'); return false;">    @person = @application.person</a><span class="cross-ref" id="XREF-28">
+<span class="cross-ref-title">Calls</span>
+      4   ActiveRecord::Associations::AssociationProxy#method_missing at /usr/lib64/ruby/gems/1.8/gems/activerecord-1.14.2/lib/active_record/associations/association_proxy.rb:108
+</span>
+</span><span class="marked1"><a name="line53" />53 <a class="crossref-toggle" href="#" onclick="toggleCode('XREF-29'); return false;">    @spouse = @person.spouse || Person.new</a><span class="cross-ref" id="XREF-29">
+<span class="cross-ref-title">Calls</span>
+      4   ActiveRecord::Callbacks#initialize at /usr/lib64/ruby/gems/1.8/gems/activerecord-1.14.2/lib/active_record/callbacks.rb:235
+      4   ActiveRecord::Associations::AssociationProxy#method_missing at /usr/lib64/ruby/gems/1.8/gems/activerecord-1.14.2/lib/active_record/associations/association_proxy.rb:108
+</span>
+</span><span class="marked0"><a name="line54" />54 <a class="crossref-toggle" href="#" onclick="toggleCode('XREF-30'); return false;">    @current_address = (@person.current_address || Address.new)</a><span class="cross-ref" id="XREF-30">
+<span class="cross-ref-title">Calls</span>
+      4   ActiveRecord::Associations::AssociationProxy#method_missing at /usr/lib64/ruby/gems/1.8/gems/activerecord-1.14.2/lib/active_record/associations/association_proxy.rb:108
+</span>
+</span><span class="marked1"><a name="line55" />55 <a class="crossref-toggle" href="#" onclick="toggleCode('XREF-31'); return false;">    @tracking = (@application.sitrack_tracking || SitrackTracking.new)</a><span class="cross-ref" id="XREF-31">
+<span class="cross-ref-title">Calls</span>
+      4   ActiveRecord::Associations::AssociationProxy#method_missing at /usr/lib64/ruby/gems/1.8/gems/activerecord-1.14.2/lib/active_record/associations/association_proxy.rb:108
+</span>
+</span><span class="marked0"><a name="line56" />56 <a class="crossref-toggle" href="#" onclick="toggleCode('XREF-32'); return false;">    @region = (Region.find_by_region(@person.region) || Region.new)</a><span class="cross-ref" id="XREF-32">
+<span class="cross-ref-title">Calls</span>
+      4   #&lt;Class:ActiveRecord::Base&gt;#method_missing at /usr/lib64/ruby/gems/1.8/gems/activerecord-1.14.2/lib/active_record/base.rb:1090
+      4   ActiveRecord::Associations::AssociationProxy#method_missing at /usr/lib64/ruby/gems/1.8/gems/activerecord-1.14.2/lib/active_record/associations/association_proxy.rb:108
+      1   Class#const_missing at /usr/lib64/ruby/gems/1.8/gems/activesupport-1.3.1/lib/active_support/dependencies.rb:129
+</span>
 </span><span class="marked1"><a name="line57" />57     @approver = @form.approver
 </span><span class="inferred0"><a name="line58" />58   end
 </span><span class="inferred1"><a name="line59" />59   
-</span><span class="marked0"><a name="line60" />60   def setup_action
+</span><span class="marked0"><a name="line60" />60 <a class="crossref-toggle" href="#" onclick="toggleCode('XREF-33'); return false;">  def setup_action</a><span class="cross-ref" id="XREF-33">
+<span class="cross-ref-title">Calls</span>
+      1   #&lt;Class:Object&gt;#method_added at /usr/lib64/ruby/gems/1.8/gems/activesupport-1.3.1/lib/active_support/vendor/builder/blankslate.rb:47
+<span class="cross-ref-title">Called by</span>
+<a href="-var-www-html-continuous_integration-sitrack-app-controllers-acos_form_controller_rb.html#line43">      2   /var/www/html/continuous_integration/sitrack/app/controllers/acos_form_controller.rb:43 in 'AcosFormController#preview'</a>
+<a href="-var-www-html-continuous_integration-sitrack-app-controllers-acos_form_controller_rb.html#line30">      1   /var/www/html/continuous_integration/sitrack/app/controllers/acos_form_controller.rb:30 in 'AcosFormController#submit'</a>
+</span>
 </span><span class="marked1"><a name="line61" />61     statuses = ['termination','toIntern','toStint','withdrawal','changeLocation','restint','reintern','changeHours','other']
 </span><span class="marked0"><a name="line62" />62     statuses.each do |status|
-</span><span class="marked1"><a name="line63" />63       check = @form.action == status ? '[X]' : '[&amp;nbsp;&amp;nbsp;]'
+</span><span class="marked1"><a name="line63" />63 <a class="crossref-toggle" href="#" onclick="toggleCode('XREF-34'); return false;">      check = @form.action == status ? '[X]' : '[&amp;nbsp;&amp;nbsp;]'</a><span class="cross-ref" id="XREF-34">
+<span class="cross-ref-title">Calls</span>
+     27   SitrackACOSForm#action at (eval):1
+</span>
 </span><span class="marked0"><a name="line64" />64       eval(&quot;@#{status} = '#{check}'&quot;)
 </span><span class="inferred1"><a name="line65" />65     end
 </span><span class="marked0"><a name="line66" />66     reopen = ['staff', 'intern', 'stint', 'freeze']
 </span><span class="marked1"><a name="line67" />67     reopen.each do |as|
-</span><span class="marked0"><a name="line68" />68       check = @form.reopen_as == as ? '[X]' : '[&amp;nbsp;&amp;nbsp;]'
+</span><span class="marked0"><a name="line68" />68 <a class="crossref-toggle" href="#" onclick="toggleCode('XREF-35'); return false;">      check = @form.reopen_as == as ? '[X]' : '[&amp;nbsp;&amp;nbsp;]'</a><span class="cross-ref" id="XREF-35">
+<span class="cross-ref-title">Calls</span>
+     12   SitrackACOSForm#reopen_as at (eval):1
+</span>
 </span><span class="marked1"><a name="line69" />69       eval(&quot;@#{as} = '#{check}'&quot;)
 </span><span class="inferred0"><a name="line70" />70     end
 </span><span class="marked1"><a name="line71" />71     ['est','conf'].each do |certainty|
-</span><span class="marked0"><a name="line72" />72       check = @form.departure_date_certainty == certainty ? '[X]' : '[&amp;nbsp;&amp;nbsp;]'
+</span><span class="marked0"><a name="line72" />72 <a class="crossref-toggle" href="#" onclick="toggleCode('XREF-36'); return false;">      check = @form.departure_date_certainty == certainty ? '[X]' : '[&amp;nbsp;&amp;nbsp;]'</a><span class="cross-ref" id="XREF-36">
+<span class="cross-ref-title">Calls</span>
+      6   SitrackACOSForm#departure_date_certainty at (eval):1
+</span>
 </span><span class="marked1"><a name="line73" />73       eval(&quot;@#{certainty} = '#{check}'&quot;)
 </span><span class="inferred0"><a name="line74" />74     end
 </span><span class="inferred1"><a name="line75" />75   end

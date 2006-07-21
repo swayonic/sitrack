@@ -554,7 +554,7 @@ span.run100 {
       </head>
       <body>
         <h3>C0 code coverage information</h3>
-        <p>Generated on Fri Jul 21 08:04:08 EDT 2006 with <a href='http://eigenclass.org/hiki.rb?rcov'>rcov 0.6.0</a>
+        <p>Generated on Fri Jul 21 12:09:11 EDT 2006 with <a href='http://eigenclass.org/hiki.rb?rcov'>rcov 0.6.0</a>
         </p>
         <hr /><pre><span class='marked0'>Code reported as executed by Ruby looks like this...
 </span><span class='marked1'>and this: this line is also marked as covered.
@@ -620,7 +620,17 @@ span.run100 {
     </table><pre><span class="inferred0"><a name="line1" /> 1 # Methods added to this helper will be available to all templates in the application.
 </span><span class="marked1"><a name="line2" /> 2 module ApplicationHelper
 </span><span class="inferred0"><a name="line3" /> 3 
-</span><span class="marked1"><a name="line4" /> 4   def display_option_box(options, name='')
+</span><span class="marked1"><a name="line4" /> 4 <a class="crossref-toggle" href="#" onclick="toggleCode('XREF-351'); return false;">  def display_option_box(options, name='')</a><span class="cross-ref" id="XREF-351">
+<span class="cross-ref-title">Called by</span>
+     27   /var/www/html/continuous_integration/sitrack/app/views/directory/show_directory.rhtml:30 in 'ActionView::Base::CompiledTemplates#_run_rhtml_directory_show_directory'
+     27   /var/www/html/continuous_integration/sitrack/app/views/directory/show_directory.rhtml:27 in 'ActionView::Base::CompiledTemplates#_run_rhtml_directory_show_directory'
+     27   /var/www/html/continuous_integration/sitrack/app/views/directory/show_directory.rhtml:36 in 'ActionView::Base::CompiledTemplates#_run_rhtml_directory_show_directory'
+     27   /var/www/html/continuous_integration/sitrack/app/views/directory/show_directory.rhtml:33 in 'ActionView::Base::CompiledTemplates#_run_rhtml_directory_show_directory'
+     27   /var/www/html/continuous_integration/sitrack/app/views/directory/show_directory.rhtml:39 in 'ActionView::Base::CompiledTemplates#_run_rhtml_directory_show_directory'
+     27   /var/www/html/continuous_integration/sitrack/app/views/directory/show_directory.rhtml:42 in 'ActionView::Base::CompiledTemplates#_run_rhtml_directory_show_directory'
+     27   /var/www/html/continuous_integration/sitrack/app/views/directory/show_directory.rhtml:48 in 'ActionView::Base::CompiledTemplates#_run_rhtml_directory_show_directory'
+     27   /var/www/html/continuous_integration/sitrack/app/views/directory/show_directory.rhtml:45 in 'ActionView::Base::CompiledTemplates#_run_rhtml_directory_show_directory'
+</span>
 </span><span class="marked0"><a name="line5" /> 5     ret_val = ''
 </span><span class="marked1"><a name="line6" /> 6     options.each do |key, value|
 </span><span class="marked0"><a name="line7" /> 7       id = name+'_'+key
@@ -631,21 +641,42 @@ span.run100 {
 </span><span class="inferred1"><a name="line12" />12   end
 </span><span class="inferred0"><a name="line13" />13   
 </span><span class="inferred1"><a name="line14" />14   # add underscores
-</span><span class="marked0"><a name="line15" />15   def u(str)
+</span><span class="marked0"><a name="line15" />15 <a class="crossref-toggle" href="#" onclick="toggleCode('XREF-352'); return false;">  def u(str)</a><span class="cross-ref" id="XREF-352">
+<span class="cross-ref-title">Called by</span>
+     71   /var/www/html/continuous_integration/sitrack/app/views/profile/index.rhtml:182 in 'ActionView::Base::CompiledTemplates#_run_rhtml_profile_index'
+     11   /var/www/html/continuous_integration/sitrack/app/views/profile/index.rhtml:204 in 'ActionView::Base::CompiledTemplates#_run_rhtml_profile_index'
+</span>
 </span><span class="marked1"><a name="line16" />16     str.strip.gsub(/ /, '_')
 </span><span class="marked0"><a name="line17" />17   end
 </span><span class="inferred1"><a name="line18" />18   
 </span><span class="inferred0"><a name="line19" />19   # check for valid date
-</span><span class="marked1"><a name="line20" />20   def is_date(value)
+</span><span class="marked1"><a name="line20" />20 <a class="crossref-toggle" href="#" onclick="toggleCode('XREF-353'); return false;">  def is_date(value)</a><span class="cross-ref" id="XREF-353">
+<span class="cross-ref-title">Called by</span>
+     18   /var/www/html/continuous_integration/sitrack/app/views/profile/index.rhtml:194 in 'ActionView::Base::CompiledTemplates#_run_rhtml_profile_index'
+      3   /var/www/html/continuous_integration/sitrack/app/views/profile/index.rhtml:245 in 'ActionView::Base::CompiledTemplates#_run_rhtml_profile_index'
+</span>
 </span><span class="marked0"><a name="line21" />21     value != '' &amp;&amp; value != '1900-01-01 00:00:00' &amp;&amp; value != '0000-00-00 00:00:00' &amp;&amp; value != '1901-12-13 00:00:00' &amp;&amp; value != '1969-12-31 00:00:00'
 </span><span class="marked1"><a name="line22" />22   end
 </span><span class="inferred0"><a name="line23" />23   
 </span><span class="inferred1"><a name="line24" />24   # format date
-</span><span class="marked0"><a name="line25" />25   def formatted_date(value=nil)
-</span><span class="marked1"><a name="line26" />26     ApplicationController::formatted_date(value)
+</span><span class="marked0"><a name="line25" />25 <a class="crossref-toggle" href="#" onclick="toggleCode('XREF-354'); return false;">  def formatted_date(value=nil)</a><span class="cross-ref" id="XREF-354">
+<span class="cross-ref-title">Called by</span>
+     12   /var/www/html/continuous_integration/sitrack/app/views/profile/index.rhtml:198 in 'ActionView::Base::CompiledTemplates#_run_rhtml_profile_index'
+      6   /var/www/html/continuous_integration/sitrack/app/views/profile/index.rhtml:195 in 'ActionView::Base::CompiledTemplates#_run_rhtml_profile_index'
+      3   /var/www/html/continuous_integration/sitrack/app/views/add_form/_form.rhtml:115 in 'ActionView::Base::CompiledTemplates#_run_rhtml_add_form__form'
+      2   /var/www/html/continuous_integration/sitrack/app/views/profile/index.rhtml:245 in 'ActionView::Base::CompiledTemplates#_run_rhtml_profile_index'
+</span>
+</span><span class="marked1"><a name="line26" />26 <a class="crossref-toggle" href="#" onclick="toggleCode('XREF-355'); return false;">    ApplicationController::formatted_date(value)</a><span class="cross-ref" id="XREF-355">
+<span class="cross-ref-title">Calls</span>
+<a href="-var-www-html-continuous_integration-sitrack-app-controllers-application_rb.html#line21">     23   #&lt;Class:ApplicationController&gt;#formatted_date at /var/www/html/continuous_integration/sitrack/app/controllers/application.rb:21</a>
+</span>
 </span><span class="marked0"><a name="line27" />27   end
 </span><span class="inferred1"><a name="line28" />28   
-</span><span class="marked0"><a name="line29" />29   def date_edit_js(column_name, column_id, application_id, value)
+</span><span class="marked0"><a name="line29" />29 <a class="crossref-toggle" href="#" onclick="toggleCode('XREF-356'); return false;">  def date_edit_js(column_name, column_id, application_id, value)</a><span class="cross-ref" id="XREF-356">
+<span class="cross-ref-title">Called by</span>
+     12   /var/www/html/continuous_integration/sitrack/app/views/profile/index.rhtml:198 in 'ActionView::Base::CompiledTemplates#_run_rhtml_profile_index'
+      6   /var/www/html/continuous_integration/sitrack/app/views/profile/index.rhtml:196 in 'ActionView::Base::CompiledTemplates#_run_rhtml_profile_index'
+</span>
 </span><span class="marked1"><a name="line30" />30     &quot;\&quot;javascript:popCalendar('#{column_name}',#{application_id},#{column_id},'#{value}')\&quot;&quot;
 </span><span class="marked0"><a name="line31" />31   end
 </span><span class="inferred1"><a name="line32" />32   

@@ -554,7 +554,7 @@ span.run100 {
       </head>
       <body>
         <h3>C0 code coverage information</h3>
-        <p>Generated on Fri Jul 21 08:04:09 EDT 2006 with <a href='http://eigenclass.org/hiki.rb?rcov'>rcov 0.6.0</a>
+        <p>Generated on Fri Jul 21 12:09:12 EDT 2006 with <a href='http://eigenclass.org/hiki.rb?rcov'>rcov 0.6.0</a>
         </p>
         <hr /><pre><span class='marked0'>Code reported as executed by Ruby looks like this...
 </span><span class='marked1'>and this: this line is also marked as covered.
@@ -617,25 +617,72 @@ span.run100 {
           </td>
         </tr>
       </tbody>
-    </table><pre><span class="marked1"><a name="line1" /> 1 class SitrackSalaryForm &lt; SitrackForm
-</span><span class="marked0"><a name="line2" /> 2   def validate
-</span><span class="marked1"><a name="line3" /> 3     errors.add_on_empty('Account #') if hr_si_application.person.accountNo.empty?
-</span><span class="marked0"><a name="line4" /> 4     errors.add_on_empty('SSN') if hr_si_application.ssn.empty?
-</span><span class="marked1"><a name="line5" /> 5     errors.add_on_empty('Birth Date') if hr_si_application.person.birth_date.nil?
-</span><span class="marked0"><a name="line6" /> 6     errors.add_on_empty('Hire Date (Effective Date of Change)') if date_of_change.nil? || date_of_change.to_s.empty?
-</span><span class="marked1"><a name="line7" /> 7     errors.add_on_empty('City') if hr_si_application.sitrack_tracking.nil? || hr_si_application.sitrack_tracking.asgCity.nil? || hr_si_application.sitrack_tracking.asgCity.empty?
-</span><span class="marked0"><a name="line8" /> 8     errors.add('New Annual Base Salary (Net)', 'must be a number') if annual_salary.nil? || annual_salary.to_i == 0
-</span><span class="marked1"><a name="line9" /> 9     super
+    </table><pre><span class="marked1"><a name="line1" /> 1 <a class="crossref-toggle" href="#" onclick="toggleCode('XREF-441'); return false;">class SitrackSalaryForm &lt; SitrackForm</a><span class="cross-ref" id="XREF-441">
+<span class="cross-ref-title">Calls</span>
+      1   #&lt;Class:ActiveRecord::Base&gt;#inherited at /usr/lib64/ruby/gems/1.8/gems/activerecord-1.14.2/lib/active_record/base.rb:250
+</span>
+</span><span class="marked0"><a name="line2" /> 2 <a class="crossref-toggle" href="#" onclick="toggleCode('XREF-442'); return false;">  def validate</a><span class="cross-ref" id="XREF-442">
+<span class="cross-ref-title">Calls</span>
+      1   #&lt;Class:Object&gt;#method_added at /usr/lib64/ruby/gems/1.8/gems/activesupport-1.3.1/lib/active_support/vendor/builder/blankslate.rb:47
+<span class="cross-ref-title">Called by</span>
+<a href="-var-www-html-continuous_integration-sitrack-app-models-sitrack_stint_salary_form_rb.html#line3">      3   /var/www/html/continuous_integration/sitrack/app/models/sitrack_stint_salary_form.rb:3 in 'SitrackStintSalaryForm#validate'</a>
+</span>
+</span><span class="marked1"><a name="line3" /> 3 <a class="crossref-toggle" href="#" onclick="toggleCode('XREF-443'); return false;">    errors.add_on_empty('Account #') if hr_si_application.person.accountNo.empty?</a><span class="cross-ref" id="XREF-443">
+<span class="cross-ref-title">Calls</span>
+      6   ActiveRecord::Associations::AssociationProxy#method_missing at /usr/lib64/ruby/gems/1.8/gems/activerecord-1.14.2/lib/active_record/associations/association_proxy.rb:108
+</span>
+</span><span class="marked0"><a name="line4" /> 4 <a class="crossref-toggle" href="#" onclick="toggleCode('XREF-444'); return false;">    errors.add_on_empty('SSN') if hr_si_application.ssn.empty?</a><span class="cross-ref" id="XREF-444">
+<span class="cross-ref-title">Calls</span>
+      3   ActiveRecord::Associations::AssociationProxy#method_missing at /usr/lib64/ruby/gems/1.8/gems/activerecord-1.14.2/lib/active_record/associations/association_proxy.rb:108
+</span>
+</span><span class="marked1"><a name="line5" /> 5 <a class="crossref-toggle" href="#" onclick="toggleCode('XREF-445'); return false;">    errors.add_on_empty('Birth Date') if hr_si_application.person.birth_date.nil?</a><span class="cross-ref" id="XREF-445">
+<span class="cross-ref-title">Calls</span>
+      6   ActiveRecord::Associations::AssociationProxy#method_missing at /usr/lib64/ruby/gems/1.8/gems/activerecord-1.14.2/lib/active_record/associations/association_proxy.rb:108
+</span>
+</span><span class="marked0"><a name="line6" /> 6 <a class="crossref-toggle" href="#" onclick="toggleCode('XREF-446'); return false;">    errors.add_on_empty('Hire Date (Effective Date of Change)') if date_of_change.nil? || date_of_change.to_s.empty?</a><span class="cross-ref" id="XREF-446">
+<span class="cross-ref-title">Calls</span>
+      6   SitrackStintSalaryForm#date_of_change at (eval):1
+      3   ActiveSupport::CoreExtensions::Time::Conversions#to_s at /usr/lib64/ruby/gems/1.8/gems/activesupport-1.3.1/lib/active_support/core_ext/time/conversions.rb:22
+</span>
+</span><span class="marked1"><a name="line7" /> 7 <a class="crossref-toggle" href="#" onclick="toggleCode('XREF-447'); return false;">    errors.add_on_empty('City') if hr_si_application.sitrack_tracking.nil? || hr_si_application.sitrack_tracking.asgCity.nil? || hr_si_application.sitrack_tracking.asgCity.empty?</a><span class="cross-ref" id="XREF-447">
+<span class="cross-ref-title">Calls</span>
+     15   ActiveRecord::Associations::AssociationProxy#method_missing at /usr/lib64/ruby/gems/1.8/gems/activerecord-1.14.2/lib/active_record/associations/association_proxy.rb:108
+</span>
+</span><span class="marked0"><a name="line8" /> 8 <a class="crossref-toggle" href="#" onclick="toggleCode('XREF-448'); return false;">    errors.add('New Annual Base Salary (Net)', 'must be a number') if annual_salary.nil? || annual_salary.to_i == 0</a><span class="cross-ref" id="XREF-448">
+<span class="cross-ref-title">Calls</span>
+      6   SitrackStintSalaryForm#annual_salary at (eval):1
+</span>
+</span><span class="marked1"><a name="line9" /> 9 <a class="crossref-toggle" href="#" onclick="toggleCode('XREF-449'); return false;">    super</a><span class="cross-ref" id="XREF-449">
+<span class="cross-ref-title">Calls</span>
+<a href="-var-www-html-continuous_integration-sitrack-app-models-sitrack_form_rb.html#line5">      3   SitrackForm#validate at /var/www/html/continuous_integration/sitrack/app/models/sitrack_form.rb:5</a>
+</span>
 </span><span class="marked0"><a name="line10" />10   end 
 </span><span class="inferred1"><a name="line11" />11   
-</span><span class="marked0"><a name="line12" />12   def email(var_hash, form_html)
+</span><span class="marked0"><a name="line12" />12 <a class="crossref-toggle" href="#" onclick="toggleCode('XREF-450'); return false;">  def email(var_hash, form_html)</a><span class="cross-ref" id="XREF-450">
+<span class="cross-ref-title">Calls</span>
+      1   #&lt;Class:Object&gt;#method_added at /usr/lib64/ruby/gems/1.8/gems/activesupport-1.3.1/lib/active_support/vendor/builder/blankslate.rb:47
+<span class="cross-ref-title">Called by</span>
+<a href="-var-www-html-continuous_integration-sitrack-app-controllers-salary_form_controller_rb.html#line41">      1   /var/www/html/continuous_integration/sitrack/app/controllers/salary_form_controller.rb:41 in 'SalaryFormController#submit'</a>
+</span>
 </span><span class="marked1"><a name="line13" />13     to = 'Josh Starcher &lt;josh.starcher@uscm.org&gt;'
-</span><span class="marked0"><a name="line14" />14     email = FormMailer.create_form_email(to, var_hash, form_html, 'Salary Form')
-</span><span class="marked1"><a name="line15" />15     FormMailer.deliver(email)
+</span><span class="marked0"><a name="line14" />14 <a class="crossref-toggle" href="#" onclick="toggleCode('XREF-451'); return false;">    email = FormMailer.create_form_email(to, var_hash, form_html, 'Salary Form')</a><span class="cross-ref" id="XREF-451">
+<span class="cross-ref-title">Calls</span>
+      1   #&lt;Class:ActionMailer::Base&gt;#method_missing at /usr/lib64/ruby/gems/1.8/gems/actionmailer-1.2.1/lib/action_mailer/base.rb:224
+</span>
+</span><span class="marked1"><a name="line15" />15 <a class="crossref-toggle" href="#" onclick="toggleCode('XREF-452'); return false;">    FormMailer.deliver(email)</a><span class="cross-ref" id="XREF-452">
+<span class="cross-ref-title">Calls</span>
+      1   #&lt;Class:ActionMailer::Base&gt;#deliver at /usr/lib64/ruby/gems/1.8/gems/actionmailer-1.2.1/lib/action_mailer/base.rb:257
+</span>
 </span><span class="marked0"><a name="line16" />16     
 </span><span class="inferred1"><a name="line17" />17     # Stamp &quot;form submitted&quot; column
-</span><span class="marked0"><a name="line18" />18     var_hash['tracking'].salaryForm = Time.now
-</span><span class="marked1"><a name="line19" />19     var_hash['tracking'].save!
+</span><span class="marked0"><a name="line18" />18 <a class="crossref-toggle" href="#" onclick="toggleCode('XREF-453'); return false;">    var_hash['tracking'].salaryForm = Time.now</a><span class="cross-ref" id="XREF-453">
+<span class="cross-ref-title">Calls</span>
+      1   ActiveRecord::Associations::AssociationProxy#method_missing at /usr/lib64/ruby/gems/1.8/gems/activerecord-1.14.2/lib/active_record/associations/association_proxy.rb:108
+</span>
+</span><span class="marked1"><a name="line19" />19 <a class="crossref-toggle" href="#" onclick="toggleCode('XREF-454'); return false;">    var_hash['tracking'].save!</a><span class="cross-ref" id="XREF-454">
+<span class="cross-ref-title">Calls</span>
+      1   ActiveRecord::Associations::AssociationProxy#method_missing at /usr/lib64/ruby/gems/1.8/gems/activerecord-1.14.2/lib/active_record/associations/association_proxy.rb:108
+</span>
 </span><span class="marked0"><a name="line20" />20   end
 </span><span class="inferred1"><a name="line21" />21 end
 </span></pre><hr />    <p>Generated using the <a href='http://eigenclass.org/hiki.rb?rcov'>rcov code coverage analysis tool for Ruby</a> version 0.6.0.</p><p>

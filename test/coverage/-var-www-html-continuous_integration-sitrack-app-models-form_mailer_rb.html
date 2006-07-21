@@ -554,7 +554,7 @@ span.run100 {
       </head>
       <body>
         <h3>C0 code coverage information</h3>
-        <p>Generated on Fri Jul 21 08:04:09 EDT 2006 with <a href='http://eigenclass.org/hiki.rb?rcov'>rcov 0.6.0</a>
+        <p>Generated on Fri Jul 21 12:09:11 EDT 2006 with <a href='http://eigenclass.org/hiki.rb?rcov'>rcov 0.6.0</a>
         </p>
         <hr /><pre><span class='marked0'>Code reported as executed by Ruby looks like this...
 </span><span class='marked1'>and this: this line is also marked as covered.
@@ -617,17 +617,40 @@ span.run100 {
           </td>
         </tr>
       </tbody>
-    </table><pre><span class="marked0"><a name="line1" /> 1 class FormMailer &lt; ActionMailer::Base
-</span><span class="marked1"><a name="line2" /> 2   def form_email(to, var_hash, form_html, form_type)
-</span><span class="marked0"><a name="line3" /> 3     @subject = form_type + ' for '+var_hash['person'].full_name
-</span><span class="marked1"><a name="line4" /> 4     from_name = var_hash['approver'].full_name
-</span><span class="marked0"><a name="line5" /> 5     from_address = var_hash['approver'].current_address.email
+    </table><pre><span class="marked0"><a name="line1" /> 1 <a class="crossref-toggle" href="#" onclick="toggleCode('XREF-358'); return false;">class FormMailer &lt; ActionMailer::Base</a><span class="cross-ref" id="XREF-358">
+<span class="cross-ref-title">Calls</span>
+      1   ActionMailer::Helpers::ClassMethods#inherited at /usr/lib64/ruby/gems/1.8/gems/actionmailer-1.2.1/lib/action_mailer/helpers.rb:95
+</span>
+</span><span class="marked1"><a name="line2" /> 2 <a class="crossref-toggle" href="#" onclick="toggleCode('XREF-359'); return false;">  def form_email(to, var_hash, form_html, form_type)</a><span class="cross-ref" id="XREF-359">
+<span class="cross-ref-title">Calls</span>
+      1   #&lt;Class:Object&gt;#method_added at /usr/lib64/ruby/gems/1.8/gems/activesupport-1.3.1/lib/active_support/vendor/builder/blankslate.rb:47
+<span class="cross-ref-title">Called by</span>
+      5   /var/www/html/continuous_integration/sitrack/vendor/plugins/engines/lib/engines/action_mailer_extensions.rb:9 in 'ActionMailer::Base#create!'
+</span>
+</span><span class="marked0"><a name="line3" /> 3 <a class="crossref-toggle" href="#" onclick="toggleCode('XREF-360'); return false;">    @subject = form_type + ' for '+var_hash['person'].full_name</a><span class="cross-ref" id="XREF-360">
+<span class="cross-ref-title">Calls</span>
+      5   ActiveRecord::Associations::AssociationProxy#method_missing at /usr/lib64/ruby/gems/1.8/gems/activerecord-1.14.2/lib/active_record/associations/association_proxy.rb:108
+</span>
+</span><span class="marked1"><a name="line4" /> 4 <a class="crossref-toggle" href="#" onclick="toggleCode('XREF-361'); return false;">    from_name = var_hash['approver'].full_name</a><span class="cross-ref" id="XREF-361">
+<span class="cross-ref-title">Calls</span>
+      5   ActiveRecord::Associations::AssociationProxy#method_missing at /usr/lib64/ruby/gems/1.8/gems/activerecord-1.14.2/lib/active_record/associations/association_proxy.rb:108
+</span>
+</span><span class="marked0"><a name="line5" /> 5 <a class="crossref-toggle" href="#" onclick="toggleCode('XREF-362'); return false;">    from_address = var_hash['approver'].current_address.email</a><span class="cross-ref" id="XREF-362">
+<span class="cross-ref-title">Calls</span>
+     10   ActiveRecord::Associations::AssociationProxy#method_missing at /usr/lib64/ruby/gems/1.8/gems/activerecord-1.14.2/lib/active_record/associations/association_proxy.rb:108
+</span>
 </span><span class="marked1"><a name="line6" /> 6     @from = &quot;#{from_name} &lt;#{from_address}&gt;&quot;
 </span><span class="marked0"><a name="line7" /> 7     @cc = @from
 </span><span class="marked1"><a name="line8" /> 8     @recipients = to
 </span><span class="marked0"><a name="line9" /> 9     @body = var_hash
-</span><span class="marked1"><a name="line10" />10     attachment &quot;text/html&quot; do |a|
-</span><span class="marked0"><a name="line11" />11       a.filename = var_hash['person'].lastName + ', ' + var_hash['person'].firstName + ' - ' + form_type + '.html'
+</span><span class="marked1"><a name="line10" />10 <a class="crossref-toggle" href="#" onclick="toggleCode('XREF-363'); return false;">    attachment &quot;text/html&quot; do |a|</a><span class="cross-ref" id="XREF-363">
+<span class="cross-ref-title">Calls</span>
+      5   ActionMailer::PartContainer#attachment at /usr/lib64/ruby/gems/1.8/gems/actionmailer-1.2.1/lib/action_mailer/part_container.rb:34
+</span>
+</span><span class="marked0"><a name="line11" />11 <a class="crossref-toggle" href="#" onclick="toggleCode('XREF-364'); return false;">      a.filename = var_hash['person'].lastName + ', ' + var_hash['person'].firstName + ' - ' + form_type + '.html'</a><span class="cross-ref" id="XREF-364">
+<span class="cross-ref-title">Calls</span>
+     10   ActiveRecord::Associations::AssociationProxy#method_missing at /usr/lib64/ruby/gems/1.8/gems/activerecord-1.14.2/lib/active_record/associations/association_proxy.rb:108
+</span>
 </span><span class="marked1"><a name="line12" />12       a.body = form_html
 </span><span class="marked0"><a name="line13" />13       a.transfer_encoding = '7bit'
 </span><span class="inferred1"><a name="line14" />14     end

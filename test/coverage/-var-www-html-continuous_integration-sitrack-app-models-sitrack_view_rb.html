@@ -554,7 +554,7 @@ span.run100 {
       </head>
       <body>
         <h3>C0 code coverage information</h3>
-        <p>Generated on Fri Jul 21 08:04:10 EDT 2006 with <a href='http://eigenclass.org/hiki.rb?rcov'>rcov 0.6.0</a>
+        <p>Generated on Fri Jul 21 12:09:12 EDT 2006 with <a href='http://eigenclass.org/hiki.rb?rcov'>rcov 0.6.0</a>
         </p>
         <hr /><pre><span class='marked0'>Code reported as executed by Ruby looks like this...
 </span><span class='marked1'>and this: this line is also marked as covered.
@@ -617,38 +617,112 @@ span.run100 {
           </td>
         </tr>
       </tbody>
-    </table><pre><span class="marked0"><a name="line1" /> 1 class SitrackView &lt; ActiveRecord::Base
-</span><span class="marked1"><a name="line2" /> 2   has_many   :sitrack_view_columns, :order =&gt; :position, :include =&gt; :sitrack_column, :dependent =&gt; true
-</span><span class="marked0"><a name="line3" /> 3   has_many   :sitrack_columns, :through =&gt; :sitrack_view_columns
-</span><span class="marked1"><a name="line4" /> 4   belongs_to :sitrack_user
+    </table><pre><span class="marked0"><a name="line1" /> 1 <a class="crossref-toggle" href="#" onclick="toggleCode('XREF-482'); return false;">class SitrackView &lt; ActiveRecord::Base</a><span class="cross-ref" id="XREF-482">
+<span class="cross-ref-title">Calls</span>
+      1   #&lt;Class:ActiveRecord::Base&gt;#inherited at /usr/lib64/ruby/gems/1.8/gems/activerecord-1.14.2/lib/active_record/base.rb:250
+</span>
+</span><span class="marked1"><a name="line2" /> 2 <a class="crossref-toggle" href="#" onclick="toggleCode('XREF-483'); return false;">  has_many   :sitrack_view_columns, :order =&gt; :position, :include =&gt; :sitrack_column, :dependent =&gt; true</a><span class="cross-ref" id="XREF-483">
+<span class="cross-ref-title">Calls</span>
+      1   ActiveRecord::Associations::ClassMethods#has_many at /usr/lib64/ruby/gems/1.8/gems/activerecord-1.14.2/lib/active_record/associations.rb:519
+</span>
+</span><span class="marked0"><a name="line3" /> 3 <a class="crossref-toggle" href="#" onclick="toggleCode('XREF-484'); return false;">  has_many   :sitrack_columns, :through =&gt; :sitrack_view_columns</a><span class="cross-ref" id="XREF-484">
+<span class="cross-ref-title">Calls</span>
+      1   ActiveRecord::Associations::ClassMethods#has_many at /usr/lib64/ruby/gems/1.8/gems/activerecord-1.14.2/lib/active_record/associations.rb:519
+</span>
+</span><span class="marked1"><a name="line4" /> 4 <a class="crossref-toggle" href="#" onclick="toggleCode('XREF-485'); return false;">  belongs_to :sitrack_user</a><span class="cross-ref" id="XREF-485">
+<span class="cross-ref-title">Calls</span>
+      1   ActiveRecord::Associations::ClassMethods#belongs_to at /usr/lib64/ruby/gems/1.8/gems/activerecord-1.14.2/lib/active_record/associations.rb:646
+</span>
 </span><span class="marked0"><a name="line5" /> 5     
-</span><span class="marked1"><a name="line6" /> 6   validates_presence_of :name
+</span><span class="marked1"><a name="line6" /> 6 <a class="crossref-toggle" href="#" onclick="toggleCode('XREF-486'); return false;">  validates_presence_of :name</a><span class="cross-ref" id="XREF-486">
+<span class="cross-ref-title">Calls</span>
+      1   ActiveRecord::Validations::ClassMethods#validates_presence_of at /usr/lib64/ruby/gems/1.8/gems/activerecord-1.14.2/lib/active_record/validations.rb:384
+</span>
 </span><span class="marked0"><a name="line7" /> 7   
-</span><span class="marked1"><a name="line8" /> 8   def display_columns
-</span><span class="marked0"><a name="line9" /> 9     out = Person.table_name+'.personID as id, '+HrSiApplication.table_name+'.applicationID, '
-</span><span class="marked1"><a name="line10" />10     out += '(SELECT email FROM '+Address.table_name+' WHERE fk_personID = '+Person.table_name+&quot;.personID AND addressType = 'current') as email, &quot;
-</span><span class="marked0"><a name="line11" />11     sitrack_view_columns.each do |vc|
+</span><span class="marked1"><a name="line8" /> 8 <a class="crossref-toggle" href="#" onclick="toggleCode('XREF-487'); return false;">  def display_columns</a><span class="cross-ref" id="XREF-487">
+<span class="cross-ref-title">Calls</span>
+      1   #&lt;Class:Object&gt;#method_added at /usr/lib64/ruby/gems/1.8/gems/activesupport-1.3.1/lib/active_support/vendor/builder/blankslate.rb:47
+<span class="cross-ref-title">Called by</span>
+<a href="-var-www-html-continuous_integration-sitrack-app-controllers-directory_controller_rb.html#line350">     28   /var/www/html/continuous_integration/sitrack/app/controllers/directory_controller.rb:350 in 'DirectoryController#build_query'</a>
+</span>
+</span><span class="marked0"><a name="line9" /> 9 <a class="crossref-toggle" href="#" onclick="toggleCode('XREF-488'); return false;">    out = Person.table_name+'.personID as id, '+HrSiApplication.table_name+'.applicationID, '</a><span class="cross-ref" id="XREF-488">
+<span class="cross-ref-title">Calls</span>
+     28   #&lt;Class:Person&gt;#table_name at (eval):1
+     28   #&lt;Class:HrSiApplication&gt;#table_name at (eval):1
+</span>
+</span><span class="marked1"><a name="line10" />10 <a class="crossref-toggle" href="#" onclick="toggleCode('XREF-489'); return false;">    out += '(SELECT email FROM '+Address.table_name+' WHERE fk_personID = '+Person.table_name+&quot;.personID AND addressType = 'current') as email, &quot;</a><span class="cross-ref" id="XREF-489">
+<span class="cross-ref-title">Calls</span>
+     28   #&lt;Class:Person&gt;#table_name at (eval):1
+     28   #&lt;Class:Address&gt;#table_name at (eval):1
+</span>
+</span><span class="marked0"><a name="line11" />11 <a class="crossref-toggle" href="#" onclick="toggleCode('XREF-490'); return false;">    sitrack_view_columns.each do |vc|</a><span class="cross-ref" id="XREF-490">
+<span class="cross-ref-title">Calls</span>
+     28   ActiveRecord::Associations::HasManyAssociation#method_missing at /usr/lib64/ruby/gems/1.8/gems/activerecord-1.14.2/lib/active_record/associations/has_many_association.rb:88
+</span>
 </span><span class="marked1"><a name="line12" />12       column = vc.sitrack_column
-</span><span class="marked0"><a name="line13" />13       unless column.select_clause.first == '('
-</span><span class="marked1"><a name="line14" />14         out += column.table
+</span><span class="marked0"><a name="line13" />13 <a class="crossref-toggle" href="#" onclick="toggleCode('XREF-491'); return false;">      unless column.select_clause.first == '('</a><span class="cross-ref" id="XREF-491">
+<span class="cross-ref-title">Calls</span>
+    229   ActiveSupport::CoreExtensions::String::Access#first at /usr/lib64/ruby/gems/1.8/gems/activesupport-1.3.1/lib/active_support/core_ext/string/access.rb:42
+    229   ActiveRecord::Associations::AssociationProxy#method_missing at /usr/lib64/ruby/gems/1.8/gems/activerecord-1.14.2/lib/active_record/associations/association_proxy.rb:108
+</span>
+</span><span class="marked1"><a name="line14" />14 <a class="crossref-toggle" href="#" onclick="toggleCode('XREF-492'); return false;">        out += column.table</a><span class="cross-ref" id="XREF-492">
+<span class="cross-ref-title">Calls</span>
+    211   ActiveRecord::Associations::AssociationProxy#method_missing at /usr/lib64/ruby/gems/1.8/gems/activerecord-1.14.2/lib/active_record/associations/association_proxy.rb:108
+</span>
 </span><span class="marked0"><a name="line15" />15       end
-</span><span class="marked1"><a name="line16" />16       out += column.select_clause+ ' as ' +column.safe_name
-</span><span class="marked0"><a name="line17" />17       out += ', ' unless vc == sitrack_view_columns.last
+</span><span class="marked1"><a name="line16" />16 <a class="crossref-toggle" href="#" onclick="toggleCode('XREF-493'); return false;">      out += column.select_clause+ ' as ' +column.safe_name</a><span class="cross-ref" id="XREF-493">
+<span class="cross-ref-title">Calls</span>
+    458   ActiveRecord::Associations::AssociationProxy#method_missing at /usr/lib64/ruby/gems/1.8/gems/activerecord-1.14.2/lib/active_record/associations/association_proxy.rb:108
+</span>
+</span><span class="marked0"><a name="line17" />17 <a class="crossref-toggle" href="#" onclick="toggleCode('XREF-494'); return false;">      out += ', ' unless vc == sitrack_view_columns.last</a><span class="cross-ref" id="XREF-494">
+<span class="cross-ref-title">Calls</span>
+    229   ActiveRecord::Base#== at /usr/lib64/ruby/gems/1.8/gems/activerecord-1.14.2/lib/active_record/base.rb:1566
+    229   ActiveRecord::Associations::HasManyAssociation#method_missing at /usr/lib64/ruby/gems/1.8/gems/activerecord-1.14.2/lib/active_record/associations/has_many_association.rb:88
+</span>
 </span><span class="marked1"><a name="line18" />18     end
 </span><span class="marked0"><a name="line19" />19     return out
 </span><span class="inferred1"><a name="line20" />20   end
 </span><span class="inferred0"><a name="line21" />21   
-</span><span class="marked1"><a name="line22" />22   def self.join_tables
-</span><span class="marked0"><a name="line23" />23     out = Person.table_name
-</span><span class="marked1"><a name="line24" />24     out += &quot; JOIN #{HrSiApplication.table_name} on #{Person.table_name}.personID = #{HrSiApplication.table_name}.fk_personID &quot;
-</span><span class="marked0"><a name="line25" />25     out += &quot; LEFT JOIN #{Staff.table_name} on #{Person.table_name}.accountNo = #{Staff.table_name}.accountNo &quot;
-</span><span class="marked1"><a name="line26" />26     out += &quot; LEFT JOIN #{SitrackMpd.table_name} on #{HrSiApplication.table_name}.applicationID = #{SitrackMpd.table_name}.application_id &quot;
-</span><span class="marked0"><a name="line27" />27     out += &quot; LEFT JOIN #{SitrackTracking.table_name} on #{HrSiApplication.table_name}.applicationID = #{SitrackTracking.table_name}.application_id &quot;
+</span><span class="marked1"><a name="line22" />22 <a class="crossref-toggle" href="#" onclick="toggleCode('XREF-495'); return false;">  def self.join_tables</a><span class="cross-ref" id="XREF-495">
+<span class="cross-ref-title">Called by</span>
+<a href="-var-www-html-continuous_integration-sitrack-app-controllers-directory_controller_rb.html#line351">     28   /var/www/html/continuous_integration/sitrack/app/controllers/directory_controller.rb:351 in 'DirectoryController#build_query'</a>
+<a href="-var-www-html-continuous_integration-sitrack-app-controllers-profile_controller_rb.html#line11">      2   /var/www/html/continuous_integration/sitrack/app/controllers/profile_controller.rb:11 in 'ProfileController#index'</a>
+</span>
+</span><span class="marked0"><a name="line23" />23 <a class="crossref-toggle" href="#" onclick="toggleCode('XREF-496'); return false;">    out = Person.table_name</a><span class="cross-ref" id="XREF-496">
+<span class="cross-ref-title">Calls</span>
+     30   #&lt;Class:Person&gt;#table_name at (eval):1
+</span>
+</span><span class="marked1"><a name="line24" />24 <a class="crossref-toggle" href="#" onclick="toggleCode('XREF-497'); return false;">    out += &quot; JOIN #{HrSiApplication.table_name} on #{Person.table_name}.personID = #{HrSiApplication.table_name}.fk_personID &quot;</a><span class="cross-ref" id="XREF-497">
+<span class="cross-ref-title">Calls</span>
+     60   #&lt;Class:HrSiApplication&gt;#table_name at (eval):1
+     30   #&lt;Class:Person&gt;#table_name at (eval):1
+</span>
+</span><span class="marked0"><a name="line25" />25 <a class="crossref-toggle" href="#" onclick="toggleCode('XREF-498'); return false;">    out += &quot; LEFT JOIN #{Staff.table_name} on #{Person.table_name}.accountNo = #{Staff.table_name}.accountNo &quot;</a><span class="cross-ref" id="XREF-498">
+<span class="cross-ref-title">Calls</span>
+     60   #&lt;Class:Staff&gt;#table_name at (eval):1
+     30   #&lt;Class:Person&gt;#table_name at (eval):1
+      1   Class#const_missing at /usr/lib64/ruby/gems/1.8/gems/activesupport-1.3.1/lib/active_support/dependencies.rb:129
+</span>
+</span><span class="marked1"><a name="line26" />26 <a class="crossref-toggle" href="#" onclick="toggleCode('XREF-499'); return false;">    out += &quot; LEFT JOIN #{SitrackMpd.table_name} on #{HrSiApplication.table_name}.applicationID = #{SitrackMpd.table_name}.application_id &quot;</a><span class="cross-ref" id="XREF-499">
+<span class="cross-ref-title">Calls</span>
+     59   #&lt;Class:SitrackMpd&gt;#table_name at (eval):1
+     30   #&lt;Class:HrSiApplication&gt;#table_name at (eval):1
+      1   Class#const_missing at /usr/lib64/ruby/gems/1.8/gems/activesupport-1.3.1/lib/active_support/dependencies.rb:129
+      1   #&lt;Class:ActiveRecord::Base&gt;#table_name at /usr/lib64/ruby/gems/1.8/gems/activerecord-1.14.2/lib/active_record/base.rb:560
+</span>
+</span><span class="marked0"><a name="line27" />27 <a class="crossref-toggle" href="#" onclick="toggleCode('XREF-500'); return false;">    out += &quot; LEFT JOIN #{SitrackTracking.table_name} on #{HrSiApplication.table_name}.applicationID = #{SitrackTracking.table_name}.application_id &quot;</a><span class="cross-ref" id="XREF-500">
+<span class="cross-ref-title">Calls</span>
+     60   #&lt;Class:SitrackTracking&gt;#table_name at (eval):1
+     30   #&lt;Class:HrSiApplication&gt;#table_name at (eval):1
+</span>
 </span><span class="marked1"><a name="line28" />28     return out
 </span><span class="inferred0"><a name="line29" />29   end
 </span><span class="inferred1"><a name="line30" />30   
 </span><span class="inferred0"><a name="line31" />31   # returns an array of tables needed for this view
-</span><span class="marked1"><a name="line32" />32   def tables
+</span><span class="marked1"><a name="line32" />32 <a class="crossref-toggle" href="#" onclick="toggleCode('XREF-501'); return false;">  def tables</a><span class="cross-ref" id="XREF-501">
+<span class="cross-ref-title">Calls</span>
+      1   #&lt;Class:Object&gt;#method_added at /usr/lib64/ruby/gems/1.8/gems/activesupport-1.3.1/lib/active_support/vendor/builder/blankslate.rb:47
+</span>
 </span><span class="marked0"><a name="line33" />33     @tables = []
 </span><span class="uncovered1"><a name="line34" />34     sitrack_view_columns.each do |vc|
 </span><span class="uncovered0"><a name="line35" />35       column = vc.sitrack_column
@@ -659,9 +733,18 @@ span.run100 {
 </span><span class="uncovered1"><a name="line40" />40     return @tables
 </span><span class="uncovered0"><a name="line41" />41   end
 </span><span class="inferred1"><a name="line42" />42   
-</span><span class="marked0"><a name="line43" />43   def safe_column_names
+</span><span class="marked0"><a name="line43" />43 <a class="crossref-toggle" href="#" onclick="toggleCode('XREF-502'); return false;">  def safe_column_names</a><span class="cross-ref" id="XREF-502">
+<span class="cross-ref-title">Calls</span>
+      1   #&lt;Class:Object&gt;#method_added at /usr/lib64/ruby/gems/1.8/gems/activesupport-1.3.1/lib/active_support/vendor/builder/blankslate.rb:47
+<span class="cross-ref-title">Called by</span>
+<a href="-var-www-html-continuous_integration-sitrack-app-controllers-directory_controller_rb.html#line385">     28   /var/www/html/continuous_integration/sitrack/app/controllers/directory_controller.rb:385 in 'DirectoryController#get_order_by'</a>
+</span>
 </span><span class="marked1"><a name="line44" />44     names = []
-</span><span class="marked0"><a name="line45" />45     sitrack_view_columns.each { |vc| names &lt;&lt; vc.sitrack_column.safe_name if vc.sitrack_column }
+</span><span class="marked0"><a name="line45" />45 <a class="crossref-toggle" href="#" onclick="toggleCode('XREF-503'); return false;">    sitrack_view_columns.each { |vc| names &lt;&lt; vc.sitrack_column.safe_name if vc.sitrack_column }</a><span class="cross-ref" id="XREF-503">
+<span class="cross-ref-title">Calls</span>
+    229   ActiveRecord::Associations::AssociationProxy#method_missing at /usr/lib64/ruby/gems/1.8/gems/activerecord-1.14.2/lib/active_record/associations/association_proxy.rb:108
+     28   ActiveRecord::Associations::HasManyAssociation#method_missing at /usr/lib64/ruby/gems/1.8/gems/activerecord-1.14.2/lib/active_record/associations/has_many_association.rb:88
+</span>
 </span><span class="marked1"><a name="line46" />46     return names
 </span><span class="inferred0"><a name="line47" />47   end
 </span><span class="inferred1"><a name="line48" />48 end
