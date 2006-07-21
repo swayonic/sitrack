@@ -1,5 +1,3 @@
-require 'ajax_scaffold'
-
 class SitrackUser < ActiveRecord::Base
   has_many                  :sitrack_views, :dependent => true
   has_one                   :sitrack_session, :dependent => true
