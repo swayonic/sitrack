@@ -64,6 +64,7 @@ class ModifyController < ApplicationController
         when HrSiApplication.table_name
           where = HrSiApplication.primary_key
         end
+        value.gsub!(/_/,' ')
         @sql = "UPDATE #{table} SET #{column.select_clause} = #{value ? "'#{value}'" : NULL} #{set} WHERE #{where} = #{id}"
         @result = ActiveRecord::Base.connection.update(@sql)
     	end
