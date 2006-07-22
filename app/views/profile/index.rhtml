@@ -353,7 +353,7 @@ person_id = @person['personID']
 		<%end-%>
 	</div>
 </div> 
-<div id="modify_value">
+<div <% if ENV['RAILS_ENV'] == 'development' %> id="modify_value" <% else %>style="display:none"<% end %>>
 	<iframe src="" width="1000px" height="500px" frameborder="0" scrolling="yes" name="modify_frame"></iframe>
 </div>
 </form>
