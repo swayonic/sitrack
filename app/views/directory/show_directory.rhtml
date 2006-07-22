@@ -152,13 +152,15 @@
 								 	 href += " onclick=\"nd();\" onmouseover=\"return overlib('#{escape_javascript(value)}',LEFT);\" onmouseout=\"nd();\""
 							   	 value = value[0..27]+'...'
 							   end 
-					  when 'image' -%>
-						<% href="\"javascript:pictureWindow(#{@person['id']})\"" -%>
-						<% value = "<img src=\"#{url_for_picture(@person['id'], value)}\" border=\"0\" />" if value && value != '' -%>
-					<% else 
-						   href = "\"javascript:edit_value('#{column.name}',#{@person['applicationID']},'#{escape_javascript(@person[column.safe_name])}','#{column.id}','#{column.column_type}')\"" 
-						   value = @option_hash[column.name][u(value)] if 'enum' == column.column_type  
-						   value = value.to_i.dollars if 'dollar' == column.column_type -%>
+					  when 'image' 
+						  href="\"javascript:pictureWindow(#{@person['id']})\"" 
+						  value = "<img src=\"#{url_for_picture(@person['id'], value)}\" border=\"0\" />" if value && value != '' 
+						when 'enum'
+							href = "\"javascript:edit_value('#{column.name}',#{@person['applicationID']},'#{escape_javascript(u(value))}','#{column.id}','#{column.column_type}')\"" 
+							value = @option_hash[column.name][u(value)] if 'enum' == column.column_type  
+					  else 
+						  href = "\"javascript:edit_value('#{column.name}',#{@person['applicationID']},'#{escape_javascript(value)}','#{column.id}','#{column.column_type}')\"" 
+						  value = value.to_i.dollars if 'dollar' == column.column_type -%>
 					<% end -%>
 					<a href=<%=href%>>
 					<% if value && value != '' %>
@@ -238,6 +240,6 @@
 	align_menu();
 	var ol_fgcolor = "#eeeeee";
 </script>
-<div id="modify_value">
+<div <% if ENV['RAILS_ENV'] == 'development' %> id="modify_value" <% else %>style="display:none"<% end %>>
 	<iframe src="" width="1000px" height="500px" frameborder="0" scrolling="yes" name="modify_frame"></iframe>
 </div>
