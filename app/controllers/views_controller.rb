@@ -16,6 +16,8 @@ class ViewsController < ApplicationController
       @view = SitrackView.new(:name => params[:view][:name])
       @view.sitrack_user = session[:sitrack_user]
       if @view.save
+        # reset the user object in the session
+        session[:sitrack_user] = SitrackUser.find_by_ssm_id(session[:user].id, :include => :sitrack_views)
         redirect_to(:action => :edit, :id => @view.id)
       end
     end
