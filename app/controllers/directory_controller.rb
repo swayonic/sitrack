@@ -1,4 +1,6 @@
 class DirectoryController < ApplicationController
+  caches_action :index
+  
   def index
     show_directory
   end       
@@ -10,11 +12,11 @@ class DirectoryController < ApplicationController
     view_id = session[:session].get_value('view_id') 
     
     # set up the view
-    @view ||= view_id ? SitrackView.find(view_id, :include => [:sitrack_view_columns, :sitrack_columns], :order => 'sitrack_view_columns.position') :
+    @view ||= view_id ? SitrackView.find(view_id, :include => [{:sitrack_view_columns => :sitrack_column}, :sitrack_columns], :order => 'sitrack_view_columns.position') :
           session[:sitrack_user].sitrack_views.find(:first, :include => [:sitrack_view_columns, :sitrack_columns])
     
-    session[:session].save_value('view_id', @view.id) unless @view.id == view_id
-    
+    session[:session].save_value('view_id', @view.id) unless @view.id == view_id.to_i
+
     # if we have a query_id in the session, use the saved list
     if (query_id = session[:session].get_value('query_id'))
       @current_query = SitrackQuery.find_by_id(query_id)
@@ -46,8 +48,6 @@ class DirectoryController < ApplicationController
     @saved_queries = SitrackQuery.find_all_by_owner(session[:sitrack_user].id, :order => :name)
     @saved_criteria = SitrackSavedCriteria.find_all_by_owner(session[:sitrack_user].id, :conditions => 'saved = 1', :order => :name)
     @sel_region_name ||= '%'
-    
-    get_projects
     
     # get the search options
     @options = get_options
@@ -277,32 +277,32 @@ class DirectoryController < ApplicationController
     render(:layout => false)
   end
   
-  def fix_criteria
-    @options_hash = get_option_hash
-    @criteria = SitrackSavedCriteria.find_all
-    @criteria.each do |c|
-      ['Status', 'Intern Type', 'Position', 'Tenure', 'App Year'].each do |field|
-        raise field.inspect unless @options_hash[field]
-        @options_hash[field].each do |value|
-          c.options.gsub!('['+value[1]+']', '['+u(field.downcase)+'_'+value[0]+']')
-        end
-      end
-      c.options.gsub!('[o_', '[region_of_origin_')
-      c.options.gsub!('[c_', '[caring_region_')
-      c.options.gsub!('[y','[app_year_')
-      c.options.gsub!('[team_leader]','[misc_team_leader]')
-      c.options.gsub!('[monthly_birthday]','[misc_monthly_birthday]')
-      c.options.gsub!('[staff]','[position_1]')
-      c.options.gsub!('[not_staff]','[position_0]')
-      
-      # fix criteria
-      c.criteria.gsub!('t.', 'sitrack_tracking.')
-      c.criteria.gsub!('l.', 'hr_si_applications.')
-      c.criteria.gsub!('p.', 'ministry_person.')
-      c.save!
-    end
-    render_nothing
-  end
+#  def fix_criteria
+#    @options_hash = get_option_hash
+#    @criteria = SitrackSavedCriteria.find_all
+#    @criteria.each do |c|
+#      ['Status', 'Intern Type', 'Position', 'Tenure', 'App Year'].each do |field|
+#        raise field.inspect unless @options_hash[field]
+#        @options_hash[field].each do |value|
+#          c.options.gsub!('['+value[1]+']', '['+u(field.downcase)+'_'+value[0]+']')
+#        end
+#      end
+#      c.options.gsub!('[o_', '[region_of_origin_')
+#      c.options.gsub!('[c_', '[caring_region_')
+#      c.options.gsub!('[y','[app_year_')
+#      c.options.gsub!('[team_leader]','[misc_team_leader]')
+#      c.options.gsub!('[monthly_birthday]','[misc_monthly_birthday]')
+#      c.options.gsub!('[staff]','[position_1]')
+#      c.options.gsub!('[not_staff]','[position_0]')
+#      
+#      # fix criteria
+#      c.criteria.gsub!('t.', 'sitrack_tracking.')
+#      c.criteria.gsub!('l.', 'hr_si_applications.')
+#      c.criteria.gsub!('p.', 'ministry_person.')
+#      c.save!
+#    end
+#    render_nothing
+#  end
   
   def excel_download
     #get the view
@@ -356,15 +356,6 @@ class DirectoryController < ApplicationController
     @sql += @qs if @qs
     @order_by = get_order_by(@view)
     @people = ActiveRecord::Base.connection.select_all(@sql+' ORDER BY '+@order_by)
-  end
-  
-  # get all the project, and create an array of id => name pairs
-  def get_projects
-    if @view.sitrack_columns.detect {|c| 'project' == c.column_type}
-      projects_hash = ActiveRecord::Base.connection.select_all("SELECT SIProjectID, name FROM #{HrSiProject.table_name}")
-      @projects = Array.new
-      projects_hash.each {|p| @projects[p['SIProjectID'].to_i] = p['name']}
-    end
   end
   
   # Replace spaces with underlines

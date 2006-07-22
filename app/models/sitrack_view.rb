@@ -12,6 +12,7 @@ class SitrackView < ActiveRecord::Base
       out += ', '
       sitrack_view_columns.each do |vc|
         column = vc.sitrack_column
+        raise vc.inspect if column.nil?
         unless column.select_clause.first == '('
           out += column.table
         end

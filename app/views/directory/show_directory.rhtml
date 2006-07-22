@@ -175,7 +175,7 @@
 						 when 'date' 
 					   	value = is_date(value) ? formatted_date(value) : ''
 					  when 'project' 
-							 value = @projects[value.to_i]
+							 value = get_project(value.to_i)
 						when 'percent'
 							value = value.to_i.round.to_s+'%'
 						when 'dollars'
