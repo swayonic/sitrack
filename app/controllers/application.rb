@@ -94,15 +94,15 @@ class ApplicationController < ActionController::Base
     return session[:options]
   end
   def get_option_hash
-    if !session[:options_hash]
+    if !session[:option_hash]
       @options = get_options
       @option_hash = {}
       @options.each do |column_name, column_array|
         @option_hash[column_name] = {}
         column_array.each { |options| @option_hash[column_name][options[0]] = options[1]}
       end
-      session[:options_hash] = @options_hash
+      session[:option_hash] = @option_hash
     end
-    return session[:options_hash]
+    return session[:option_hash]
   end
 end
