@@ -70,6 +70,7 @@ class ApplicationController < ActionController::Base
   				 "LEFT JOIN #{table_tracking} t on l.applicationID = t.fk_applicationID "
   end
   
+  # since i'm doing a lot of raw SQL, i need to do my own escaping.
   def escape_string(str)
     str.gsub(/([\0\n\r\032\'\"\\])/) do
       case $1
@@ -83,21 +84,25 @@ class ApplicationController < ActionController::Base
   end
   
   def get_options
-    if !@options
+    if !session[:options]
       @options = Hash.new
       SitrackColumn.find(:all, :include => :sitrack_enum_values).each do |column|
         @options[column.name] = column.sitrack_enum_values.collect {|option| [option.value, option.name]} if column.column_type == 'enum'
       end
+      session[:options] = @options
     end
-    return @options
+    return session[:options]
   end
   def get_option_hash
-    @options = get_options
-    @option_hash = {}
-    @options.each do |column_name, column_array|
-      @option_hash[column_name] = {}
-      column_array.each { |options| @option_hash[column_name][options[0]] = options[1]}
+    if !session[:options_hash]
+      @options = get_options
+      @option_hash = {}
+      @options.each do |column_name, column_array|
+        @option_hash[column_name] = {}
+        column_array.each { |options| @option_hash[column_name][options[0]] = options[1]}
+      end
+      session[:options_hash] = @options_hash
     end
-    return @option_hash
+    return session[:options_hash]
   end
 end

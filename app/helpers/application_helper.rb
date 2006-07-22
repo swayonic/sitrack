@@ -38,11 +38,11 @@ module ApplicationHelper
   # get the name of a project
   def get_project(id)
     return '' if  0 == id # an id of 0 is useless. you're useless too
-    @projects ||= Array.new
+    session[:projects] ||= Array.new
     # early return if we have this project name cached
-    return @projects[id] if @projects[id]
+    return session[:projects][id] if session[:projects][id]
     # if it's not cached, look up the name, cache, and return it.
-    @projects[id] = ActiveRecord::Base.connection.select_value("SELECT name FROM #{HrSiProject.table_name} where SIProjectID = #{id}")
-    return @projects[id]
+    session[:projects][id] = ActiveRecord::Base.connection.select_value("SELECT name FROM #{HrSiProject.table_name} where SIProjectID = #{id}")
+    return session[:projects][id]
   end
 end
