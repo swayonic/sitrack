@@ -1,7 +1,7 @@
 class SitrackColumn < ActiveRecord::Base
   has_many   :sitrack_view_columns
   has_many   :sitrack_views, :through => :sitrack_view_columns
-  has_many   :sitrack_enum_values
+  has_many   :sitrack_enum_values, :order => :position
   
   cattr_reader :all_columns
   def safe_name
