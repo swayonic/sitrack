@@ -7,14 +7,17 @@ class SitrackView < ActiveRecord::Base
   
   def display_columns
     out = Person.table_name+'.personID as id, '+HrSiApplication.table_name+'.applicationID, '
-    out += '(SELECT email FROM '+Address.table_name+' WHERE fk_personID = '+Person.table_name+".personID AND addressType = 'current') as email, "
-    sitrack_view_columns.each do |vc|
-      column = vc.sitrack_column
-      unless column.select_clause.first == '('
-        out += column.table
+    out += '(SELECT email FROM '+Address.table_name+' WHERE fk_personID = '+Person.table_name+".personID AND addressType = 'current') as email "
+    if sitrack_view_columns.size > 0 
+      out += ', '
+      sitrack_view_columns.each do |vc|
+        column = vc.sitrack_column
+        unless column.select_clause.first == '('
+          out += column.table
+        end
+        out += column.select_clause+ ' as ' +column.safe_name
+        out += ', ' unless vc == sitrack_view_columns.last
       end
-      out += column.select_clause+ ' as ' +column.safe_name
-      out += ', ' unless vc == sitrack_view_columns.last
     end
     return out
   end
