@@ -326,8 +326,6 @@ class DirectoryController < ApplicationController
     
     @options_hash = get_option_hash
     
-    get_projects
-    
     headers['Content-Type'] = "application/vnd.ms-excel" 
     headers['Content-Disposition'] = "attachment; filename=\"#{name}.xls\""
     headers['Cache-Control'] = ''

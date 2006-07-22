@@ -48,7 +48,7 @@ xml.Workbook({
             when 'enum'
               value = @option_hash[column.name][u(value)]
             when 'project'
-              value = @projects[value.to_i]
+              value = get_project(value.to_i)
             end
             xml.Cell('ss:StyleID'=>'Default') {xml.Data value, 'ss:Type' => 'String'}
           end
