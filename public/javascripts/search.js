@@ -153,7 +153,7 @@ function selected(form) {
 	if (selected_options != '') {
 		sel_ptr.innerHTML = selected_options;
 		sel_ptr.style.visibility = 'visible';
-		$('toggle_options').innerHTML = '(hide seach options)';
+		$('toggle_options').innerHTML = '(hide search options)';
 		return true;
 	} else {
 		sel_ptr.innerHTML = '';
@@ -167,10 +167,10 @@ function toggle_options()
 {   
     if ($('selected_options').style.visibility=='hidden') {
         $('selected_options').style.visibility='visible';
-        $('toggle_options').innerHTML = '(hide seach options)';
+        $('toggle_options').innerHTML = '(hide search options)';
     } else {
         $('selected_options').style.visibility='hidden';
-        $('toggle_options').innerHTML = '(show seach options)';
+        $('toggle_options').innerHTML = '(show search options)';
     }
     return false;
 }
