@@ -7,6 +7,10 @@ class SitrackJoinStaffForm < SitrackForm
     super
   end
   
+  def to
+    'Personel Records <personel.records@ccci.org>'
+  end
+  
   def email(var_hash, form_html)
     email = FormMailer.create_form_email(to, var_hash, form_html, 'Join Staff Form')
     FormMailer.deliver(email)
