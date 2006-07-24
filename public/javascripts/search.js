@@ -152,8 +152,8 @@ function selected(form) {
     sel_ptr.style.display = 'block';
 	if (selected_options != '') {
 		sel_ptr.innerHTML = selected_options;
-		sel_ptr.style.visibility = 'visible';
-		$('toggle_options').innerHTML = '(hide search options)';
+		sel_ptr.style.visibility = 'hidden';
+		$('toggle_options').innerHTML = '(show search options)';
 		return true;
 	} else {
 		sel_ptr.innerHTML = '';
