@@ -554,7 +554,7 @@ span.run100 {
       </head>
       <body>
         <h3>C0 code coverage information</h3>
-        <p>Generated on Fri Jul 21 12:09:11 EDT 2006 with <a href='http://eigenclass.org/hiki.rb?rcov'>rcov 0.6.0</a>
+        <p>Generated on Sun Jul 23 18:50:41 EDT 2006 with <a href='http://eigenclass.org/hiki.rb?rcov'>rcov 0.6.0</a>
         </p>
         <hr /><pre><span class='marked0'>Code reported as executed by Ruby looks like this...
 </span><span class='marked1'>and this: this line is also marked as covered.
@@ -617,24 +617,12 @@ span.run100 {
           </td>
         </tr>
       </tbody>
-    </table><pre><span class="marked1"><a name="line1" />1 <a class="crossref-toggle" href="#" onclick="toggleCode('XREF-400'); return false;">class SitrackChild &lt; ActiveRecord::Base</a><span class="cross-ref" id="XREF-400">
-<span class="cross-ref-title">Calls</span>
-      1   #&lt;Class:ActiveRecord::Base&gt;#inherited at /usr/lib64/ruby/gems/1.8/gems/activerecord-1.14.2/lib/active_record/base.rb:250
-</span>
-</span><span class="marked0"><a name="line2" />2 <a class="crossref-toggle" href="#" onclick="toggleCode('XREF-401'); return false;">  belongs_to    :person</a><span class="cross-ref" id="XREF-401">
-<span class="cross-ref-title">Calls</span>
-      1   ActiveRecord::Associations::ClassMethods#belongs_to at /usr/lib64/ruby/gems/1.8/gems/activerecord-1.14.2/lib/active_record/associations.rb:646
-</span>
-</span><span class="marked1"><a name="line3" />3   
-</span><span class="marked0"><a name="line4" />4 <a class="crossref-toggle" href="#" onclick="toggleCode('XREF-402'); return false;">  validates_presence_of :name</a><span class="cross-ref" id="XREF-402">
-<span class="cross-ref-title">Calls</span>
-      1   ActiveRecord::Validations::ClassMethods#validates_presence_of at /usr/lib64/ruby/gems/1.8/gems/activerecord-1.14.2/lib/active_record/validations.rb:384
-</span>
-</span><span class="marked1"><a name="line5" />5 <a class="crossref-toggle" href="#" onclick="toggleCode('XREF-403'); return false;">  validates_presence_of :birthday</a><span class="cross-ref" id="XREF-403">
-<span class="cross-ref-title">Calls</span>
-      1   ActiveRecord::Validations::ClassMethods#validates_presence_of at /usr/lib64/ruby/gems/1.8/gems/activerecord-1.14.2/lib/active_record/validations.rb:384
-</span>
-</span><span class="marked0"><a name="line6" />6 end
+    </table><pre><span class="marked0"><a name="line1" />1 class SitrackChild &lt; ActiveRecord::Base
+</span><span class="marked1"><a name="line2" />2   belongs_to    :person
+</span><span class="marked0"><a name="line3" />3   
+</span><span class="marked1"><a name="line4" />4   validates_presence_of :name
+</span><span class="marked0"><a name="line5" />5   validates_presence_of :birthday
+</span><span class="marked1"><a name="line6" />6 end
 </span></pre><hr />    <p>Generated using the <a href='http://eigenclass.org/hiki.rb?rcov'>rcov code coverage analysis tool for Ruby</a> version 0.6.0.</p><p>
           <a href='http://validator.w3.org/check/referer'>
             <img src='http://www.w3.org/Icons/valid-xhtml10' height='31' alt='Valid XHTML 1.0!' width='88' />

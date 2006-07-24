@@ -554,7 +554,7 @@ span.run100 {
       </head>
       <body>
         <h3>C0 code coverage information</h3>
-        <p>Generated on Fri Jul 21 01:39:10 EDT 2006 with <a href='http://eigenclass.org/hiki.rb?rcov'>rcov 0.6.0</a>
+        <p>Generated on Sat Jul 22 15:41:28 EDT 2006 with <a href='http://eigenclass.org/hiki.rb?rcov'>rcov 0.6.0</a>
         </p>
         <hr /><pre><span class='marked0'>Code reported as executed by Ruby looks like this...
 </span><span class='marked1'>and this: this line is also marked as covered.
@@ -617,79 +617,79 @@ span.run100 {
           </td>
         </tr>
       </tbody>
-    </table><pre><span class="marked1"><a name="line1" /> 1 module Engines
-</span><span class="marked0"><a name="line2" /> 2   CONFIG = {:edge =&gt; true}
-</span><span class="inferred1"><a name="line3" /> 3 end
-</span><span class="inferred0"><a name="line4" /> 4 # Be sure to restart your web server when you modify this file.
-</span><span class="inferred1"><a name="line5" /> 5 
-</span><span class="inferred0"><a name="line6" /> 6 # Uncomment below to force Rails into production mode when 
-</span><span class="inferred1"><a name="line7" /> 7 # you don't control web/app server and can't set it the proper way
-</span><span class="inferred0"><a name="line8" /> 8 # ENV['RAILS_ENV'] ||= 'production'
-</span><span class="inferred1"><a name="line9" /> 9 
-</span><span class="inferred0"><a name="line10" />10 # Specifies gem version of Rails to use when vendor/rails is not present
-</span><span class="marked1"><a name="line11" />11 RAILS_GEM_VERSION = '1.1.2'
-</span><span class="inferred0"><a name="line12" />12 
-</span><span class="inferred1"><a name="line13" />13 # Bootstrap the Rails environment, frameworks, and default configuration
-</span><span class="marked0"><a name="line14" />14 require File.join(File.dirname(__FILE__), 'boot')
-</span><span class="marked1"><a name="line15" />15 
-</span><span class="marked0"><a name="line16" />16 Rails::Initializer.run do |config|
-</span><span class="marked1"><a name="line17" />17   # Settings in config/environments/* take precedence those specified here
-</span><span class="inferred0"><a name="line18" />18   
-</span><span class="inferred1"><a name="line19" />19   # Skip frameworks you're not going to use
-</span><span class="inferred0"><a name="line20" />20   # config.frameworks -= [ :action_web_service, :action_mailer ]
-</span><span class="inferred1"><a name="line21" />21 
-</span><span class="inferred0"><a name="line22" />22   # Add additional load paths for your own custom dirs
-</span><span class="inferred1"><a name="line23" />23   # config.load_paths += %W( #{RAILS_ROOT}/extras )
-</span><span class="inferred0"><a name="line24" />24 
-</span><span class="inferred1"><a name="line25" />25   # Force all environments to use the same logger level 
-</span><span class="inferred0"><a name="line26" />26   # (by default production uses :info, the others :debug)
-</span><span class="inferred1"><a name="line27" />27   # config.log_level = :debug
-</span><span class="inferred0"><a name="line28" />28 
-</span><span class="inferred1"><a name="line29" />29   # Use the database for sessions instead of the file system
-</span><span class="inferred0"><a name="line30" />30   # (create the session table with 'rake db:sessions:create')
-</span><span class="inferred1"><a name="line31" />31   # config.action_controller.session_store = :active_record_store
-</span><span class="inferred0"><a name="line32" />32 
-</span><span class="inferred1"><a name="line33" />33   # Use SQL instead of Active Record's schema dumper when creating the test database.
-</span><span class="inferred0"><a name="line34" />34   # This is necessary if your schema can't be completely dumped by the schema dumper, 
-</span><span class="inferred1"><a name="line35" />35   # like if you have constraints or database-specific column types
-</span><span class="inferred0"><a name="line36" />36   # config.active_record.schema_format = :sql
-</span><span class="inferred1"><a name="line37" />37 
-</span><span class="inferred0"><a name="line38" />38   # Activate observers that should always be running
-</span><span class="inferred1"><a name="line39" />39   # config.active_record.observers = :cacher, :garbage_collector
-</span><span class="inferred0"><a name="line40" />40 
-</span><span class="inferred1"><a name="line41" />41   # Make Active Record use UTC-base instead of local time
-</span><span class="inferred0"><a name="line42" />42   # config.active_record.default_timezone = :utc
-</span><span class="inferred1"><a name="line43" />43   
-</span><span class="inferred0"><a name="line44" />44   # See Rails::Configuration for more options
-</span><span class="inferred1"><a name="line45" />45 end
-</span><span class="inferred0"><a name="line46" />46 
-</span><span class="inferred1"><a name="line47" />47 # Add new inflection rules using the following format 
-</span><span class="inferred0"><a name="line48" />48 # (all these examples are active by default):
-</span><span class="marked1"><a name="line49" />49 Inflector.inflections do |inflect|
-</span><span class="marked0"><a name="line50" />50 #   inflect.plural /^(ox)$/i, '\1en'
-</span><span class="inferred1"><a name="line51" />51 #   inflect.singular /^(ox)en/i, '\1'
-</span><span class="inferred0"><a name="line52" />52 #   inflect.irregular 'person', 'people'
-</span><span class="marked1"><a name="line53" />53    inflect.uncountable %w( sitrack_saved_criteria sitrack_tracking sitrack_mpd )
-</span><span class="marked0"><a name="line54" />54 end
-</span><span class="inferred1"><a name="line55" />55 
-</span><span class="inferred0"><a name="line56" />56 # Include your application configuration below
-</span><span class="marked1"><a name="line57" />57 Engines.start :common_engine
-</span><span class="marked0"><a name="line58" />58 ActionMailer::Base.server_settings = {
-</span><span class="marked1"><a name="line59" />59   :addres   =&gt; &quot;smtp1.ccci.org&quot;,
-</span><span class="inferred0"><a name="line60" />60   :domain   =&gt; &quot;ccci.org&quot;
-</span><span class="inferred1"><a name="line61" />61 }
-</span><span class="marked0"><a name="line62" />62 ExceptionNotifier.exception_recipients = %w(josh.starcher@uscm.org)
-</span><span class="marked1"><a name="line63" />63 ExceptionNotifier.sender_address = %(&quot;Application Error&quot; &lt;sitrack@uscm.org&gt;)
-</span><span class="marked0"><a name="line64" />64 ExceptionNotifier.email_prefix = &quot;[SITRACK] &quot;
-</span><span class="marked1"><a name="line65" />65 
-</span><span class="inferred0"><a name="line66" />66 # Set the default place to find file_column files.
-</span><span class="marked1"><a name="line67" />67 FILE_COLUMN_PREFIX = 'files'
-</span><span class="marked0"><a name="line68" />68 module FileColumn
-</span><span class="marked1"><a name="line69" />69   module ClassMethods
-</span><span class="marked0"><a name="line70" />70     DEFAULT_OPTIONS[:root_path] = File.join(RAILS_ROOT, &quot;public&quot;, FILE_COLUMN_PREFIX)
-</span><span class="marked1"><a name="line71" />71     DEFAULT_OPTIONS[:web_root] = &quot;#{FILE_COLUMN_PREFIX}/&quot;
-</span><span class="inferred0"><a name="line72" />72   end
-</span><span class="inferred1"><a name="line73" />73 end
+    </table><pre><span class="marked0"><a name="line1" /> 1 module Engines
+</span><span class="marked1"><a name="line2" /> 2   CONFIG = {:edge =&gt; true}
+</span><span class="inferred0"><a name="line3" /> 3 end
+</span><span class="inferred1"><a name="line4" /> 4 # Be sure to restart your web server when you modify this file.
+</span><span class="inferred0"><a name="line5" /> 5 
+</span><span class="inferred1"><a name="line6" /> 6 # Uncomment below to force Rails into production mode when 
+</span><span class="inferred0"><a name="line7" /> 7 # you don't control web/app server and can't set it the proper way
+</span><span class="inferred1"><a name="line8" /> 8 # ENV['RAILS_ENV'] ||= 'production'
+</span><span class="inferred0"><a name="line9" /> 9 
+</span><span class="inferred1"><a name="line10" />10 # Specifies gem version of Rails to use when vendor/rails is not present
+</span><span class="marked0"><a name="line11" />11 RAILS_GEM_VERSION = '1.1.2'
+</span><span class="inferred1"><a name="line12" />12 
+</span><span class="inferred0"><a name="line13" />13 # Bootstrap the Rails environment, frameworks, and default configuration
+</span><span class="marked1"><a name="line14" />14 require File.join(File.dirname(__FILE__), 'boot')
+</span><span class="marked0"><a name="line15" />15 
+</span><span class="marked1"><a name="line16" />16 Rails::Initializer.run do |config|
+</span><span class="marked0"><a name="line17" />17   # Settings in config/environments/* take precedence those specified here
+</span><span class="inferred1"><a name="line18" />18   
+</span><span class="inferred0"><a name="line19" />19   # Skip frameworks you're not going to use
+</span><span class="inferred1"><a name="line20" />20   # config.frameworks -= [ :action_web_service, :action_mailer ]
+</span><span class="inferred0"><a name="line21" />21 
+</span><span class="inferred1"><a name="line22" />22   # Add additional load paths for your own custom dirs
+</span><span class="inferred0"><a name="line23" />23   # config.load_paths += %W( #{RAILS_ROOT}/extras )
+</span><span class="inferred1"><a name="line24" />24 
+</span><span class="inferred0"><a name="line25" />25   # Force all environments to use the same logger level 
+</span><span class="inferred1"><a name="line26" />26   # (by default production uses :info, the others :debug)
+</span><span class="inferred0"><a name="line27" />27   # config.log_level = :debug
+</span><span class="inferred1"><a name="line28" />28 
+</span><span class="inferred0"><a name="line29" />29   # Use the database for sessions instead of the file system
+</span><span class="inferred1"><a name="line30" />30   # (create the session table with 'rake db:sessions:create')
+</span><span class="inferred0"><a name="line31" />31   # config.action_controller.session_store = :active_record_store
+</span><span class="inferred1"><a name="line32" />32 
+</span><span class="inferred0"><a name="line33" />33   # Use SQL instead of Active Record's schema dumper when creating the test database.
+</span><span class="inferred1"><a name="line34" />34   # This is necessary if your schema can't be completely dumped by the schema dumper, 
+</span><span class="inferred0"><a name="line35" />35   # like if you have constraints or database-specific column types
+</span><span class="inferred1"><a name="line36" />36   # config.active_record.schema_format = :sql
+</span><span class="inferred0"><a name="line37" />37 
+</span><span class="inferred1"><a name="line38" />38   # Activate observers that should always be running
+</span><span class="inferred0"><a name="line39" />39   # config.active_record.observers = :cacher, :garbage_collector
+</span><span class="inferred1"><a name="line40" />40 
+</span><span class="inferred0"><a name="line41" />41   # Make Active Record use UTC-base instead of local time
+</span><span class="inferred1"><a name="line42" />42   # config.active_record.default_timezone = :utc
+</span><span class="inferred0"><a name="line43" />43   
+</span><span class="inferred1"><a name="line44" />44   # See Rails::Configuration for more options
+</span><span class="inferred0"><a name="line45" />45 end
+</span><span class="inferred1"><a name="line46" />46 
+</span><span class="inferred0"><a name="line47" />47 # Add new inflection rules using the following format 
+</span><span class="inferred1"><a name="line48" />48 # (all these examples are active by default):
+</span><span class="marked0"><a name="line49" />49 Inflector.inflections do |inflect|
+</span><span class="marked1"><a name="line50" />50 #   inflect.plural /^(ox)$/i, '\1en'
+</span><span class="inferred0"><a name="line51" />51 #   inflect.singular /^(ox)en/i, '\1'
+</span><span class="inferred1"><a name="line52" />52 #   inflect.irregular 'person', 'people'
+</span><span class="marked0"><a name="line53" />53    inflect.uncountable %w( sitrack_saved_criteria sitrack_tracking sitrack_mpd )
+</span><span class="marked1"><a name="line54" />54 end
+</span><span class="inferred0"><a name="line55" />55 
+</span><span class="inferred1"><a name="line56" />56 # Include your application configuration below
+</span><span class="marked0"><a name="line57" />57 Engines.start :common_engine
+</span><span class="marked1"><a name="line58" />58 ActionMailer::Base.server_settings = {
+</span><span class="marked0"><a name="line59" />59   :addres   =&gt; &quot;smtp1.ccci.org&quot;,
+</span><span class="inferred1"><a name="line60" />60   :domain   =&gt; &quot;ccci.org&quot;
+</span><span class="inferred0"><a name="line61" />61 }
+</span><span class="marked1"><a name="line62" />62 ExceptionNotifier.exception_recipients = %w(josh.starcher@uscm.org)
+</span><span class="marked0"><a name="line63" />63 ExceptionNotifier.sender_address = %(&quot;Application Error&quot; &lt;sitrack@uscm.org&gt;)
+</span><span class="marked1"><a name="line64" />64 ExceptionNotifier.email_prefix = &quot;[SITRACK] &quot;
+</span><span class="marked0"><a name="line65" />65 
+</span><span class="inferred1"><a name="line66" />66 # Set the default place to find file_column files.
+</span><span class="marked0"><a name="line67" />67 FILE_COLUMN_PREFIX = 'files'
+</span><span class="marked1"><a name="line68" />68 module FileColumn
+</span><span class="marked0"><a name="line69" />69   module ClassMethods
+</span><span class="marked1"><a name="line70" />70     DEFAULT_OPTIONS[:root_path] = File.join(RAILS_ROOT, &quot;public&quot;, FILE_COLUMN_PREFIX)
+</span><span class="marked0"><a name="line71" />71     DEFAULT_OPTIONS[:web_root] = &quot;#{FILE_COLUMN_PREFIX}/&quot;
+</span><span class="inferred1"><a name="line72" />72   end
+</span><span class="inferred0"><a name="line73" />73 end
 </span></pre><hr />    <p>Generated using the <a href='http://eigenclass.org/hiki.rb?rcov'>rcov code coverage analysis tool for Ruby</a> version 0.6.0.</p><p>
           <a href='http://validator.w3.org/check/referer'>
             <img src='http://www.w3.org/Icons/valid-xhtml10' height='31' alt='Valid XHTML 1.0!' width='88' />

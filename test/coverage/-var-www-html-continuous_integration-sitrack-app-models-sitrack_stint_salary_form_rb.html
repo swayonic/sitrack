@@ -554,7 +554,7 @@ span.run100 {
       </head>
       <body>
         <h3>C0 code coverage information</h3>
-        <p>Generated on Fri Jul 21 12:09:12 EDT 2006 with <a href='http://eigenclass.org/hiki.rb?rcov'>rcov 0.6.0</a>
+        <p>Generated on Sun Jul 23 18:50:42 EDT 2006 with <a href='http://eigenclass.org/hiki.rb?rcov'>rcov 0.6.0</a>
         </p>
         <hr /><pre><span class='marked0'>Code reported as executed by Ruby looks like this...
 </span><span class='marked1'>and this: this line is also marked as covered.
@@ -617,40 +617,17 @@ span.run100 {
           </td>
         </tr>
       </tbody>
-    </table><pre><span class="marked0"><a name="line1" /> 1 <a class="crossref-toggle" href="#" onclick="toggleCode('XREF-468'); return false;">class SitrackStintSalaryForm &lt; SitrackSalaryForm</a><span class="cross-ref" id="XREF-468">
-<span class="cross-ref-title">Calls</span>
-      1   #&lt;Class:ActiveRecord::Base&gt;#inherited at /usr/lib64/ruby/gems/1.8/gems/activerecord-1.14.2/lib/active_record/base.rb:250
-</span>
-</span><span class="marked1"><a name="line2" /> 2 <a class="crossref-toggle" href="#" onclick="toggleCode('XREF-469'); return false;">  def validate</a><span class="cross-ref" id="XREF-469">
-<span class="cross-ref-title">Calls</span>
-      1   #&lt;Class:Object&gt;#method_added at /usr/lib64/ruby/gems/1.8/gems/activesupport-1.3.1/lib/active_support/vendor/builder/blankslate.rb:47
-<span class="cross-ref-title">Called by</span>
-      3   /usr/lib64/ruby/gems/1.8/gems/activerecord-1.14.2/lib/active_record/validations.rb:753 in 'ActiveRecord::Validations#valid_without_callbacks'
-</span>
-</span><span class="marked0"><a name="line3" /> 3 <a class="crossref-toggle" href="#" onclick="toggleCode('XREF-470'); return false;">    super</a><span class="cross-ref" id="XREF-470">
-<span class="cross-ref-title">Calls</span>
-<a href="-var-www-html-continuous_integration-sitrack-app-models-sitrack_salary_form_rb.html#line2">      3   SitrackSalaryForm#validate at /var/www/html/continuous_integration/sitrack/app/models/sitrack_salary_form.rb:2</a>
-</span>
-</span><span class="marked1"><a name="line4" /> 4 <a class="crossref-toggle" href="#" onclick="toggleCode('XREF-471'); return false;">    errors.add_on_empty('AOA') if hr_si_application.sitrack_tracking.asgContinent.nil? || hr_si_application.sitrack_tracking.asgContinent.empty?</a><span class="cross-ref" id="XREF-471">
-<span class="cross-ref-title">Calls</span>
-     12   ActiveRecord::Associations::AssociationProxy#method_missing at /usr/lib64/ruby/gems/1.8/gems/activerecord-1.14.2/lib/active_record/associations/association_proxy.rb:108
-</span>
-</span><span class="marked0"><a name="line5" /> 5 <a class="crossref-toggle" href="#" onclick="toggleCode('XREF-472'); return false;">    errors.add_on_empty('Country') if hr_si_application.sitrack_tracking.asgCountry.nil? || hr_si_application.sitrack_tracking.asgCountry.empty?</a><span class="cross-ref" id="XREF-472">
-<span class="cross-ref-title">Calls</span>
-     12   ActiveRecord::Associations::AssociationProxy#method_missing at /usr/lib64/ruby/gems/1.8/gems/activerecord-1.14.2/lib/active_record/associations/association_proxy.rb:108
-</span>
-</span><span class="marked1"><a name="line6" /> 6   end
-</span><span class="inferred0"><a name="line7" /> 7   
-</span><span class="marked1"><a name="line8" /> 8 <a class="crossref-toggle" href="#" onclick="toggleCode('XREF-473'); return false;">  def tax_rate</a><span class="cross-ref" id="XREF-473">
-<span class="cross-ref-title">Calls</span>
-      1   #&lt;Class:Object&gt;#method_added at /usr/lib64/ruby/gems/1.8/gems/activesupport-1.3.1/lib/active_support/vendor/builder/blankslate.rb:47
-<span class="cross-ref-title">Called by</span>
-      4   /var/www/html/continuous_integration/sitrack/app/views/salary_form/_form.rhtml:75 in 'ActionView::Base::CompiledTemplates#_run_rhtml_salary_form__form'
-      4   /var/www/html/continuous_integration/sitrack/app/views/salary_form/_form.rhtml:77 in 'ActionView::Base::CompiledTemplates#_run_rhtml_salary_form__form'
-</span>
-</span><span class="marked0"><a name="line9" /> 9     18
-</span><span class="marked1"><a name="line10" />10   end
-</span><span class="inferred0"><a name="line11" />11 end
+    </table><pre><span class="marked1"><a name="line1" /> 1 class SitrackStintSalaryForm &lt; SitrackSalaryForm
+</span><span class="marked0"><a name="line2" /> 2   def validate
+</span><span class="marked1"><a name="line3" /> 3     super
+</span><span class="marked0"><a name="line4" /> 4     errors.add_on_empty('AOA') if hr_si_application.sitrack_tracking.asgContinent.nil? || hr_si_application.sitrack_tracking.asgContinent.empty?
+</span><span class="marked1"><a name="line5" /> 5     errors.add_on_empty('Country') if hr_si_application.sitrack_tracking.asgCountry.nil? || hr_si_application.sitrack_tracking.asgCountry.empty?
+</span><span class="marked0"><a name="line6" /> 6   end
+</span><span class="inferred1"><a name="line7" /> 7   
+</span><span class="marked0"><a name="line8" /> 8   def tax_rate
+</span><span class="marked1"><a name="line9" /> 9     18
+</span><span class="marked0"><a name="line10" />10   end
+</span><span class="inferred1"><a name="line11" />11 end
 </span></pre><hr />    <p>Generated using the <a href='http://eigenclass.org/hiki.rb?rcov'>rcov code coverage analysis tool for Ruby</a> version 0.6.0.</p><p>
           <a href='http://validator.w3.org/check/referer'>
             <img src='http://www.w3.org/Icons/valid-xhtml10' height='31' alt='Valid XHTML 1.0!' width='88' />

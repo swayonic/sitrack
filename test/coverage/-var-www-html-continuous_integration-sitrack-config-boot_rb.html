@@ -554,7 +554,7 @@ span.run100 {
       </head>
       <body>
         <h3>C0 code coverage information</h3>
-        <p>Generated on Fri Jul 21 01:39:10 EDT 2006 with <a href='http://eigenclass.org/hiki.rb?rcov'>rcov 0.6.0</a>
+        <p>Generated on Sat Jul 22 15:41:28 EDT 2006 with <a href='http://eigenclass.org/hiki.rb?rcov'>rcov 0.6.0</a>
         </p>
         <hr /><pre><span class='marked0'>Code reported as executed by Ruby looks like this...
 </span><span class='marked1'>and this: this line is also marked as covered.
@@ -617,50 +617,50 @@ span.run100 {
           </td>
         </tr>
       </tbody>
-    </table><pre><span class="inferred1"><a name="line1" /> 1 # Don't change this file. Configuration is done in config/environment.rb and config/environments/*.rb
-</span><span class="inferred0"><a name="line2" /> 2 
-</span><span class="marked1"><a name="line3" /> 3 unless defined?(RAILS_ROOT)
-</span><span class="marked0"><a name="line4" /> 4   root_path = File.join(File.dirname(__FILE__), '..')
-</span><span class="inferred1"><a name="line5" /> 5 
-</span><span class="marked0"><a name="line6" /> 6   unless RUBY_PLATFORM =~ /mswin32/
-</span><span class="marked1"><a name="line7" /> 7     require 'pathname'
-</span><span class="marked0"><a name="line8" /> 8     root_path = Pathname.new(root_path).cleanpath(true).to_s
-</span><span class="marked1"><a name="line9" /> 9   end
-</span><span class="inferred0"><a name="line10" />10 
-</span><span class="marked1"><a name="line11" />11   RAILS_ROOT = root_path
-</span><span class="inferred0"><a name="line12" />12 end
-</span><span class="inferred1"><a name="line13" />13 
-</span><span class="marked0"><a name="line14" />14 unless defined?(Rails::Initializer)
-</span><span class="marked1"><a name="line15" />15   if File.directory?(&quot;#{RAILS_ROOT}/vendor/rails&quot;)
-</span><span class="uncovered0"><a name="line16" />16     require &quot;#{RAILS_ROOT}/vendor/rails/railties/lib/initializer&quot;
-</span><span class="inferred1"><a name="line17" />17   else
-</span><span class="marked0"><a name="line18" />18     require 'rubygems'
-</span><span class="marked1"><a name="line19" />19 
-</span><span class="marked0"><a name="line20" />20     environment_without_comments = IO.readlines(File.dirname(__FILE__) + '/environment.rb').reject { |l| l =~ /^#/ }.join
-</span><span class="marked1"><a name="line21" />21     environment_without_comments =~ /[^#]RAILS_GEM_VERSION = '([\d.]+)'/
-</span><span class="marked0"><a name="line22" />22     rails_gem_version = $1
-</span><span class="inferred1"><a name="line23" />23 
-</span><span class="marked0"><a name="line24" />24     if version = defined?(RAILS_GEM_VERSION) ? RAILS_GEM_VERSION : rails_gem_version
-</span><span class="marked1"><a name="line25" />25       rails_gem = Gem.cache.search('rails', &quot;=#{version}&quot;).first
-</span><span class="marked0"><a name="line26" />26 
-</span><span class="marked1"><a name="line27" />27       if rails_gem
-</span><span class="marked0"><a name="line28" />28         require_gem &quot;rails&quot;, &quot;=#{version}&quot;
-</span><span class="marked1"><a name="line29" />29         require rails_gem.full_gem_path + '/lib/initializer'
-</span><span class="marked0"><a name="line30" />30       else
-</span><span class="uncovered1"><a name="line31" />31         STDERR.puts %(Cannot find gem for Rails =#{version}:
-</span><span class="uncovered0"><a name="line32" />32     Install the missing gem with 'gem install -v=#{version} rails', or
-</span><span class="uncovered1"><a name="line33" />33     change environment.rb to define RAILS_GEM_VERSION with your desired version.
-</span><span class="uncovered0"><a name="line34" />34   )
-</span><span class="uncovered1"><a name="line35" />35         exit 1
-</span><span class="uncovered0"><a name="line36" />36       end
-</span><span class="uncovered1"><a name="line37" />37     else
-</span><span class="uncovered0"><a name="line38" />38       require_gem &quot;rails&quot;
-</span><span class="uncovered1"><a name="line39" />39       require 'initializer'
-</span><span class="uncovered0"><a name="line40" />40     end
-</span><span class="uncovered1"><a name="line41" />41   end
-</span><span class="inferred0"><a name="line42" />42 
-</span><span class="marked1"><a name="line43" />43   Rails::Initializer.run(:set_load_path)
-</span><span class="marked0"><a name="line44" />44 end
+    </table><pre><span class="inferred0"><a name="line1" /> 1 # Don't change this file. Configuration is done in config/environment.rb and config/environments/*.rb
+</span><span class="inferred1"><a name="line2" /> 2 
+</span><span class="marked0"><a name="line3" /> 3 unless defined?(RAILS_ROOT)
+</span><span class="marked1"><a name="line4" /> 4   root_path = File.join(File.dirname(__FILE__), '..')
+</span><span class="inferred0"><a name="line5" /> 5 
+</span><span class="marked1"><a name="line6" /> 6   unless RUBY_PLATFORM =~ /mswin32/
+</span><span class="marked0"><a name="line7" /> 7     require 'pathname'
+</span><span class="marked1"><a name="line8" /> 8     root_path = Pathname.new(root_path).cleanpath(true).to_s
+</span><span class="marked0"><a name="line9" /> 9   end
+</span><span class="inferred1"><a name="line10" />10 
+</span><span class="marked0"><a name="line11" />11   RAILS_ROOT = root_path
+</span><span class="inferred1"><a name="line12" />12 end
+</span><span class="inferred0"><a name="line13" />13 
+</span><span class="marked1"><a name="line14" />14 unless defined?(Rails::Initializer)
+</span><span class="marked0"><a name="line15" />15   if File.directory?(&quot;#{RAILS_ROOT}/vendor/rails&quot;)
+</span><span class="uncovered1"><a name="line16" />16     require &quot;#{RAILS_ROOT}/vendor/rails/railties/lib/initializer&quot;
+</span><span class="inferred0"><a name="line17" />17   else
+</span><span class="marked1"><a name="line18" />18     require 'rubygems'
+</span><span class="marked0"><a name="line19" />19 
+</span><span class="marked1"><a name="line20" />20     environment_without_comments = IO.readlines(File.dirname(__FILE__) + '/environment.rb').reject { |l| l =~ /^#/ }.join
+</span><span class="marked0"><a name="line21" />21     environment_without_comments =~ /[^#]RAILS_GEM_VERSION = '([\d.]+)'/
+</span><span class="marked1"><a name="line22" />22     rails_gem_version = $1
+</span><span class="inferred0"><a name="line23" />23 
+</span><span class="marked1"><a name="line24" />24     if version = defined?(RAILS_GEM_VERSION) ? RAILS_GEM_VERSION : rails_gem_version
+</span><span class="marked0"><a name="line25" />25       rails_gem = Gem.cache.search('rails', &quot;=#{version}&quot;).first
+</span><span class="marked1"><a name="line26" />26 
+</span><span class="marked0"><a name="line27" />27       if rails_gem
+</span><span class="marked1"><a name="line28" />28         require_gem &quot;rails&quot;, &quot;=#{version}&quot;
+</span><span class="marked0"><a name="line29" />29         require rails_gem.full_gem_path + '/lib/initializer'
+</span><span class="marked1"><a name="line30" />30       else
+</span><span class="uncovered0"><a name="line31" />31         STDERR.puts %(Cannot find gem for Rails =#{version}:
+</span><span class="uncovered1"><a name="line32" />32     Install the missing gem with 'gem install -v=#{version} rails', or
+</span><span class="uncovered0"><a name="line33" />33     change environment.rb to define RAILS_GEM_VERSION with your desired version.
+</span><span class="uncovered1"><a name="line34" />34   )
+</span><span class="uncovered0"><a name="line35" />35         exit 1
+</span><span class="uncovered1"><a name="line36" />36       end
+</span><span class="uncovered0"><a name="line37" />37     else
+</span><span class="uncovered1"><a name="line38" />38       require_gem &quot;rails&quot;
+</span><span class="uncovered0"><a name="line39" />39       require 'initializer'
+</span><span class="uncovered1"><a name="line40" />40     end
+</span><span class="uncovered0"><a name="line41" />41   end
+</span><span class="inferred1"><a name="line42" />42 
+</span><span class="marked0"><a name="line43" />43   Rails::Initializer.run(:set_load_path)
+</span><span class="marked1"><a name="line44" />44 end
 </span></pre><hr />    <p>Generated using the <a href='http://eigenclass.org/hiki.rb?rcov'>rcov code coverage analysis tool for Ruby</a> version 0.6.0.</p><p>
           <a href='http://validator.w3.org/check/referer'>
             <img src='http://www.w3.org/Icons/valid-xhtml10' height='31' alt='Valid XHTML 1.0!' width='88' />

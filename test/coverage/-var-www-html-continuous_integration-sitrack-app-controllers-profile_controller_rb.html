@@ -554,7 +554,7 @@ span.run100 {
       </head>
       <body>
         <h3>C0 code coverage information</h3>
-        <p>Generated on Fri Jul 21 12:09:10 EDT 2006 with <a href='http://eigenclass.org/hiki.rb?rcov'>rcov 0.6.0</a>
+        <p>Generated on Sun Jul 23 18:50:41 EDT 2006 with <a href='http://eigenclass.org/hiki.rb?rcov'>rcov 0.6.0</a>
         </p>
         <hr /><pre><span class='marked0'>Code reported as executed by Ruby looks like this...
 </span><span class='marked1'>and this: this line is also marked as covered.
@@ -617,240 +617,102 @@ span.run100 {
           </td>
         </tr>
       </tbody>
-    </table><pre><span class="marked0"><a name="line1" /> 1 <a class="crossref-toggle" href="#" onclick="toggleCode('XREF-283'); return false;">class ProfileController &lt; ApplicationController</a><span class="cross-ref" id="XREF-283">
-<span class="cross-ref-title">Calls</span>
-      1   ActionWebService::Dispatcher::ActionController::ClassMethods#inherited at /usr/lib64/ruby/gems/1.8/gems/actionwebservice-1.1.2/lib/action_web_service/dispatcher/action_controller_dispatcher.rb:33
-</span>
-</span><span class="marked1"><a name="line2" /> 2 <a class="crossref-toggle" href="#" onclick="toggleCode('XREF-284'); return false;">  caches_action :index</a><span class="cross-ref" id="XREF-284">
-<span class="cross-ref-title">Calls</span>
-      1   ActionController::Caching::Actions::ClassMethods#caches_action at /usr/lib64/ruby/gems/1.8/gems/actionpack-1.12.1/lib/action_controller/caching.rb:166
-</span>
-</span><span class="marked0"><a name="line3" /> 3   
-</span><span class="marked1"><a name="line4" /> 4 <a class="crossref-toggle" href="#" onclick="toggleCode('XREF-285'); return false;">  def index</a><span class="cross-ref" id="XREF-285">
-<span class="cross-ref-title">Calls</span>
-      1   #&lt;Class:Object&gt;#method_added at /usr/lib64/ruby/gems/1.8/gems/activesupport-1.3.1/lib/active_support/vendor/builder/blankslate.rb:47
-<span class="cross-ref-title">Called by</span>
-      3   /usr/lib64/ruby/gems/1.8/gems/actionpack-1.12.1/lib/action_controller/base.rb:910 in 'ActionController::Base#perform_action_without_filters'
-</span>
-</span><span class="marked0"><a name="line5" /> 5     # if we don't have an id in the request, go back to the directory
-</span><span class="marked1"><a name="line6" /> 6 <a class="crossref-toggle" href="#" onclick="toggleCode('XREF-286'); return false;">    unless params[:id]</a><span class="cross-ref" id="XREF-286">
-<span class="cross-ref-title">Calls</span>
-      3   HashWithIndifferentAccess#default at /usr/lib64/ruby/gems/1.8/gems/activesupport-1.3.1/lib/active_support/core_ext/hash/indifferent_access.rb:14
-</span>
-</span><span class="marked0"><a name="line7" /> 7 <a class="crossref-toggle" href="#" onclick="toggleCode('XREF-287'); return false;">      redirect_to(:controller =&gt; 'directory'); return;</a><span class="cross-ref" id="XREF-287">
-<span class="cross-ref-title">Calls</span>
-      1   ActionController::Base#redirect_to at /usr/lib64/ruby/gems/1.8/gems/actionpack-1.12.1/lib/action_controller/base.rb:806
-</span>
-</span><span class="marked1"><a name="line8" /> 8     end
-</span><span class="inferred0"><a name="line9" /> 9     # build query
-</span><span class="marked1"><a name="line10" />10 <a class="crossref-toggle" href="#" onclick="toggleCode('XREF-288'); return false;">    @sql =  &quot;SELECT personID, applicationID, &quot;+SitrackColumn.all_select_clauses</a><span class="cross-ref" id="XREF-288">
-<span class="cross-ref-title">Calls</span>
-<a href="-var-www-html-continuous_integration-sitrack-app-models-sitrack_column_rb.html#line11">      2   #&lt;Class:SitrackColumn&gt;#all_select_clauses at /var/www/html/continuous_integration/sitrack/app/models/sitrack_column.rb:11</a>
-</span>
-</span><span class="marked0"><a name="line11" />11 <a class="crossref-toggle" href="#" onclick="toggleCode('XREF-289'); return false;">    @sql += &quot; FROM &quot;+SitrackView.join_tables</a><span class="cross-ref" id="XREF-289">
-<span class="cross-ref-title">Calls</span>
-<a href="-var-www-html-continuous_integration-sitrack-app-models-sitrack_view_rb.html#line22">      2   #&lt;Class:SitrackView&gt;#join_tables at /var/www/html/continuous_integration/sitrack/app/models/sitrack_view.rb:22</a>
-</span>
-</span><span class="marked1"><a name="line12" />12 <a class="crossref-toggle" href="#" onclick="toggleCode('XREF-290'); return false;">    @sql += &quot; WHERE applicationID = &quot;+escape_string(params[:id])</a><span class="cross-ref" id="XREF-290">
-<span class="cross-ref-title">Calls</span>
-      2   HashWithIndifferentAccess#default at /usr/lib64/ruby/gems/1.8/gems/activesupport-1.3.1/lib/active_support/core_ext/hash/indifferent_access.rb:14
-<a href="-var-www-html-continuous_integration-sitrack-app-controllers-application_rb.html#line73">      2   ApplicationController#escape_string at /var/www/html/continuous_integration/sitrack/app/controllers/application.rb:73</a>
-</span>
-</span><span class="marked0"><a name="line13" />13     
-</span><span class="inferred1"><a name="line14" />14     # if we don't have a person, go back to the directory
-</span><span class="marked0"><a name="line15" />15 <a class="crossref-toggle" href="#" onclick="toggleCode('XREF-291'); return false;">    @person = ActiveRecord::Base.connection.select_one(@sql)</a><span class="cross-ref" id="XREF-291">
-<span class="cross-ref-title">Calls</span>
-      2   ActiveRecord::ConnectionAdapters::MysqlAdapter#select_one at /usr/lib64/ruby/gems/1.8/gems/activerecord-1.14.2/lib/active_record/connection_adapters/mysql_adapter.rb:179
-      2   #&lt;Class:ActiveRecord::Base&gt;#connection at /usr/lib64/ruby/gems/1.8/gems/activerecord-1.14.2/lib/active_record/connection_adapters/abstract/connection_specification.rb:73
-</span>
-</span><span class="marked1"><a name="line16" />16     if !@person
-</span><span class="marked0"><a name="line17" />17 <a class="crossref-toggle" href="#" onclick="toggleCode('XREF-292'); return false;">      redirect_to(:controller =&gt; 'directory'); return; </a><span class="cross-ref" id="XREF-292">
-<span class="cross-ref-title">Calls</span>
-      1   ActionController::Base#redirect_to at /usr/lib64/ruby/gems/1.8/gems/actionpack-1.12.1/lib/action_controller/base.rb:806
-</span>
-</span><span class="marked1"><a name="line18" />18     end
-</span><span class="inferred0"><a name="line19" />19     
-</span><span class="inferred1"><a name="line20" />20     # sometimes it's useful to have the person as an object instead of a hash
-</span><span class="marked0"><a name="line21" />21 <a class="crossref-toggle" href="#" onclick="toggleCode('XREF-293'); return false;">    @person_obj = Person.find(@person['personID'])</a><span class="cross-ref" id="XREF-293">
-<span class="cross-ref-title">Calls</span>
-      1   #&lt;Class:ActiveRecord::Base&gt;#find at /usr/lib64/ruby/gems/1.8/gems/activerecord-1.14.2/lib/active_record/base.rb:374
-</span>
-</span><span class="marked1"><a name="line22" />22     
-</span><span class="inferred0"><a name="line23" />23     # get all the columns and create an hash of name=&gt; column pairs
-</span><span class="marked1"><a name="line24" />24     @columns = Hash.new
-</span><span class="marked0"><a name="line25" />25 <a class="crossref-toggle" href="#" onclick="toggleCode('XREF-294'); return false;">    SitrackColumn.find_all.each {|c| @columns[c.name] = c}</a><span class="cross-ref" id="XREF-294">
-<span class="cross-ref-title">Calls</span>
-    121   SitrackColumn#name at (eval):1
-      1   #&lt;Class:ActiveRecord::Base&gt;#find_all at /usr/lib64/ruby/gems/1.8/gems/activerecord-1.14.2/lib/active_record/deprecated_finders.rb:35
-</span>
-</span><span class="marked1"><a name="line26" />26     # set up options, first looking in the database
-</span><span class="marked0"><a name="line27" />27 <a class="crossref-toggle" href="#" onclick="toggleCode('XREF-295'); return false;">    @options = get_options</a><span class="cross-ref" id="XREF-295">
-<span class="cross-ref-title">Calls</span>
-<a href="-var-www-html-continuous_integration-sitrack-app-controllers-application_rb.html#line85">      1   ApplicationController#get_options at /var/www/html/continuous_integration/sitrack/app/controllers/application.rb:85</a>
-</span>
-</span><span class="marked1"><a name="line28" />28     
-</span><span class="marked0"><a name="line29" />29     @address_types = ['current','permanent','emergency1']
-</span><span class="marked1"><a name="line30" />30     @address_columns = %w{address1 address2 city state zip country homePhone cellPhone workPhone fax email contactName contactRelationship start_date end_date}
-</span><span class="inferred0"><a name="line31" />31     
-</span><span class="inferred1"><a name="line32" />32     # make sure we have all 3 types of addresses
-</span><span class="marked0"><a name="line33" />33     @address_types.each do |type|
-</span><span class="uncovered1"><a name="line34" />34       Address.create(:fk_PersonID =&gt; @person['personID'], :createdBy =&gt; 'SITRACK', :changedBy =&gt; 'SITRACK',
-</span><span class="uncovered0"><a name="line35" />35                    :dateCreated =&gt; Time.now, :dateChanged =&gt; Time.now, :addressType =&gt; type
-</span><span class="marked1"><a name="line36" />36 <a class="crossref-toggle" href="#" onclick="toggleCode('XREF-296'); return false;">                   ) unless Address.find(:first, :conditions =&gt; [&quot;addressType = ? and fk_PersonID = ?&quot;, type, @person['personID']])</a><span class="cross-ref" id="XREF-296">
-<span class="cross-ref-title">Calls</span>
-      3   #&lt;Class:ActiveRecord::Base&gt;#find at /usr/lib64/ruby/gems/1.8/gems/activerecord-1.14.2/lib/active_record/base.rb:374
-</span>
-</span><span class="marked0"><a name="line37" />37     end
-</span><span class="inferred1"><a name="line38" />38     # create a hash of addresses
-</span><span class="marked0"><a name="line39" />39     @addresses = Hash.new
-</span><span class="marked1"><a name="line40" />40     @sql = &quot;SELECT	addressType, address1, address2, city, state, zip, country, homePhone, cellPhone, &quot;+
-</span><span class="inferred0"><a name="line41" />41 					 &quot;workPhone, fax, email, contactName, contactRelationship, &quot;+
-</span><span class="inferred1"><a name="line42" />42 					 &quot;start_date, end_date, addressID &quot;+
-</span><span class="inferred0"><a name="line43" />43 <a class="crossref-toggle" href="#" onclick="toggleCode('XREF-297'); return false;">			     &quot;FROM	#{Address.table_name} &quot;+</a><span class="cross-ref" id="XREF-297">
-<span class="cross-ref-title">Calls</span>
-      1   #&lt;Class:Address&gt;#table_name at (eval):1
-</span>
-</span><span class="marked1"><a name="line44" />44 			     &quot;WHERE	fk_PersonID = #{@person['personID']}&quot;
-</span><span class="marked0"><a name="line45" />45 <a class="crossref-toggle" href="#" onclick="toggleCode('XREF-298'); return false;">    Address.find_by_sql(@sql).each {|address| @addresses[address.addressType] = address}</a><span class="cross-ref" id="XREF-298">
-<span class="cross-ref-title">Calls</span>
-      3   Address#addressType at (eval):1
-      1   ActiveRecord::Base#method_missing at /usr/lib64/ruby/gems/1.8/gems/activerecord-1.14.2/lib/active_record/base.rb:1770
-      1   #&lt;Class:ActiveRecord::Base&gt;#find_by_sql at /usr/lib64/ruby/gems/1.8/gems/activerecord-1.14.2/lib/active_record/base.rb:389
-</span>
-</span><span class="marked1"><a name="line46" />46     
-</span><span class="marked0"><a name="line47" />47 <a class="crossref-toggle" href="#" onclick="toggleCode('XREF-299'); return false;">    @children = SitrackChild.find(:all, :conditions =&gt; ['person_id = ?', @person['personID']])</a><span class="cross-ref" id="XREF-299">
-<span class="cross-ref-title">Calls</span>
-      1   #&lt;Class:ActiveRecord::Base&gt;#find at /usr/lib64/ruby/gems/1.8/gems/activerecord-1.14.2/lib/active_record/base.rb:374
-</span>
-</span><span class="marked1"><a name="line48" />48     
-</span><span class="inferred0"><a name="line49" />49     # get the enum options
-</span><span class="marked1"><a name="line50" />50 <a class="crossref-toggle" href="#" onclick="toggleCode('XREF-300'); return false;">    @option_hash = get_option_hash</a><span class="cross-ref" id="XREF-300">
-<span class="cross-ref-title">Calls</span>
-<a href="-var-www-html-continuous_integration-sitrack-app-controllers-application_rb.html#line94">      1   ApplicationController#get_option_hash at /var/www/html/continuous_integration/sitrack/app/controllers/application.rb:94</a>
-</span>
-</span><span class="marked0"><a name="line51" />51 <a class="crossref-toggle" href="#" onclick="toggleCode('XREF-301'); return false;">    render(:action =&gt; :index)</a><span class="cross-ref" id="XREF-301">
-<span class="cross-ref-title">Calls</span>
-      1   ActionController::Benchmarking#render at /usr/lib64/ruby/gems/1.8/gems/actionpack-1.12.1/lib/action_controller/benchmarking.rb:46
-</span>
-</span><span class="marked1"><a name="line52" />52   end
-</span><span class="inferred0"><a name="line53" />53 
-</span><span class="marked1"><a name="line54" />54 <a class="crossref-toggle" href="#" onclick="toggleCode('XREF-302'); return false;">  def edit_image</a><span class="cross-ref" id="XREF-302">
-<span class="cross-ref-title">Calls</span>
-      1   #&lt;Class:Object&gt;#method_added at /usr/lib64/ruby/gems/1.8/gems/activesupport-1.3.1/lib/active_support/vendor/builder/blankslate.rb:47
-<span class="cross-ref-title">Called by</span>
-      1   /usr/lib64/ruby/gems/1.8/gems/actionpack-1.12.1/lib/action_controller/base.rb:910 in 'ActionController::Base#perform_action_without_filters'
-<a href="-var-www-html-continuous_integration-sitrack-app-controllers-profile_controller_rb.html#line74">      1   /var/www/html/continuous_integration/sitrack/app/controllers/profile_controller.rb:74 in 'ProfileController#update_image'</a>
-</span>
-</span><span class="marked0"><a name="line55" />55 <a class="crossref-toggle" href="#" onclick="toggleCode('XREF-303'); return false;">    @person = Person.find(params[:id])</a><span class="cross-ref" id="XREF-303">
-<span class="cross-ref-title">Calls</span>
-      2   HashWithIndifferentAccess#default at /usr/lib64/ruby/gems/1.8/gems/activesupport-1.3.1/lib/active_support/core_ext/hash/indifferent_access.rb:14
-      2   #&lt;Class:ActiveRecord::Base&gt;#find at /usr/lib64/ruby/gems/1.8/gems/activerecord-1.14.2/lib/active_record/base.rb:374
-</span>
-</span><span class="marked1"><a name="line56" />56 <a class="crossref-toggle" href="#" onclick="toggleCode('XREF-304'); return false;">    render(:action =&gt; :edit_image, :layout =&gt; false)</a><span class="cross-ref" id="XREF-304">
-<span class="cross-ref-title">Calls</span>
-      2   ActionController::Benchmarking#render at /usr/lib64/ruby/gems/1.8/gems/actionpack-1.12.1/lib/action_controller/benchmarking.rb:46
-</span>
-</span><span class="marked0"><a name="line57" />57   end
-</span><span class="inferred1"><a name="line58" />58   
-</span><span class="marked0"><a name="line59" />59 <a class="crossref-toggle" href="#" onclick="toggleCode('XREF-305'); return false;">  def update_image</a><span class="cross-ref" id="XREF-305">
-<span class="cross-ref-title">Calls</span>
-      1   #&lt;Class:Object&gt;#method_added at /usr/lib64/ruby/gems/1.8/gems/activesupport-1.3.1/lib/active_support/vendor/builder/blankslate.rb:47
-<span class="cross-ref-title">Called by</span>
-      1   /usr/lib64/ruby/gems/1.8/gems/actionpack-1.12.1/lib/action_controller/base.rb:910 in 'ActionController::Base#perform_action_without_filters'
-</span>
-</span><span class="marked1"><a name="line60" />60   	#make sure we have a person in the params
-</span><span class="marked0"><a name="line61" />61 <a class="crossref-toggle" href="#" onclick="toggleCode('XREF-306'); return false;">  	@person = Person.find(params[:id])</a><span class="cross-ref" id="XREF-306">
-<span class="cross-ref-title">Calls</span>
-      1   HashWithIndifferentAccess#default at /usr/lib64/ruby/gems/1.8/gems/activesupport-1.3.1/lib/active_support/core_ext/hash/indifferent_access.rb:14
-      1   #&lt;Class:ActiveRecord::Base&gt;#find at /usr/lib64/ruby/gems/1.8/gems/activerecord-1.14.2/lib/active_record/base.rb:374
-</span>
-</span><span class="marked1"><a name="line62" />62 <a class="crossref-toggle" href="#" onclick="toggleCode('XREF-307'); return false;">  	if params[:person] &amp;&amp; @person</a><span class="cross-ref" id="XREF-307">
-<span class="cross-ref-title">Calls</span>
-      1   HashWithIndifferentAccess#default at /usr/lib64/ruby/gems/1.8/gems/activesupport-1.3.1/lib/active_support/core_ext/hash/indifferent_access.rb:14
-</span>
-</span><span class="marked0"><a name="line63" />63 	    @person.image = params[:person][:image]
-</span><span class="uncovered1"><a name="line64" />64 	    if @person.save
-</span><span class="uncovered0"><a name="line65" />65         # clear page caches
-</span><span class="uncovered1"><a name="line66" />66         @person.hr_si_applications do |app|
-</span><span class="uncovered0"><a name="line67" />67   	      expire_action(:action =&gt; :index, :id =&gt; app.id)
-</span><span class="uncovered1"><a name="line68" />68   	    end
-</span><span class="uncovered0"><a name="line69" />69         render(:template =&gt; '/shared/close_window', :layout =&gt; false)
-</span><span class="uncovered1"><a name="line70" />70       else 
-</span><span class="uncovered0"><a name="line71" />71     	  edit_image
-</span><span class="uncovered1"><a name="line72" />72 	    end
-</span><span class="inferred0"><a name="line73" />73 	  else
-</span><span class="marked1"><a name="line74" />74 <a class="crossref-toggle" href="#" onclick="toggleCode('XREF-308'); return false;">	   edit_image</a><span class="cross-ref" id="XREF-308">
-<span class="cross-ref-title">Calls</span>
-<a href="-var-www-html-continuous_integration-sitrack-app-controllers-profile_controller_rb.html#line54">      1   ProfileController#edit_image at /var/www/html/continuous_integration/sitrack/app/controllers/profile_controller.rb:54</a>
-</span>
-</span><span class="marked0"><a name="line75" />75     end
-</span><span class="inferred1"><a name="line76" />76   end  
-</span><span class="inferred0"><a name="line77" />77   
-</span><span class="marked1"><a name="line78" />78 <a class="crossref-toggle" href="#" onclick="toggleCode('XREF-309'); return false;">  def create_second_year</a><span class="cross-ref" id="XREF-309">
-<span class="cross-ref-title">Calls</span>
-      1   #&lt;Class:Object&gt;#method_added at /usr/lib64/ruby/gems/1.8/gems/activesupport-1.3.1/lib/active_support/vendor/builder/blankslate.rb:47
-<span class="cross-ref-title">Called by</span>
-      1   /usr/lib64/ruby/gems/1.8/gems/actionpack-1.12.1/lib/action_controller/base.rb:910 in 'ActionController::Base#perform_action_without_filters'
-</span>
-</span><span class="marked0"><a name="line79" />79 <a class="crossref-toggle" href="#" onclick="toggleCode('XREF-310'); return false;">    @first_year = HrSiApplication.find(params[:id])</a><span class="cross-ref" id="XREF-310">
-<span class="cross-ref-title">Calls</span>
-      1   HashWithIndifferentAccess#default at /usr/lib64/ruby/gems/1.8/gems/activesupport-1.3.1/lib/active_support/core_ext/hash/indifferent_access.rb:14
-      1   #&lt;Class:ActiveRecord::Base&gt;#find at /usr/lib64/ruby/gems/1.8/gems/activerecord-1.14.2/lib/active_record/base.rb:374
-</span>
-</span><span class="marked1"><a name="line80" />80 <a class="crossref-toggle" href="#" onclick="toggleCode('XREF-311'); return false;">    @second_year = @first_year.clone</a><span class="cross-ref" id="XREF-311">
-<span class="cross-ref-title">Calls</span>
-      1   ActiveRecord::Base#clone at /usr/lib64/ruby/gems/1.8/gems/activerecord-1.14.2/lib/active_record/base.rb:1419
-</span>
-</span><span class="marked0"><a name="line81" />81 <a class="crossref-toggle" href="#" onclick="toggleCode('XREF-312'); return false;">    @tracking = @first_year.sitrack_tracking ? @first_year.sitrack_tracking.clone : SitrackTracking.new</a><span class="cross-ref" id="XREF-312">
-<span class="cross-ref-title">Calls</span>
-      1   ActiveRecord::Associations::AssociationProxy#method_missing at /usr/lib64/ruby/gems/1.8/gems/activerecord-1.14.2/lib/active_record/associations/association_proxy.rb:108
-</span>
-</span><span class="marked1"><a name="line82" />82 <a class="crossref-toggle" href="#" onclick="toggleCode('XREF-313'); return false;">    @tracking.asgYear = &quot;#{Time.now.year}-#{Time.now.year+1}&quot;</a><span class="cross-ref" id="XREF-313">
-<span class="cross-ref-title">Calls</span>
-      1   ActiveRecord::Base#method_missing at /usr/lib64/ruby/gems/1.8/gems/activerecord-1.14.2/lib/active_record/base.rb:1770
-</span>
-</span><span class="marked0"><a name="line83" />83 <a class="crossref-toggle" href="#" onclick="toggleCode('XREF-314'); return false;">    @tracking.tenure = 'Second Year'</a><span class="cross-ref" id="XREF-314">
-<span class="cross-ref-title">Calls</span>
-      1   ActiveRecord::Base#method_missing at /usr/lib64/ruby/gems/1.8/gems/activerecord-1.14.2/lib/active_record/base.rb:1770
-</span>
-</span><span class="marked1"><a name="line84" />84 <a class="crossref-toggle" href="#" onclick="toggleCode('XREF-315'); return false;">    @tracking.status = 'Re-Applied'</a><span class="cross-ref" id="XREF-315">
-<span class="cross-ref-title">Calls</span>
-      1   ActiveRecord::Base#method_missing at /usr/lib64/ruby/gems/1.8/gems/activerecord-1.14.2/lib/active_record/base.rb:1770
-</span>
-</span><span class="marked0"><a name="line85" />85     @second_year.sitrack_tracking = @tracking
-</span><span class="marked1"><a name="line86" />86 <a class="crossref-toggle" href="#" onclick="toggleCode('XREF-316'); return false;">    @mpd = @first_year.sitrack_mpd ? @first_year.sitrack_mpd.clone : SitrackMpd.new</a><span class="cross-ref" id="XREF-316">
-<span class="cross-ref-title">Calls</span>
-      1   ActiveRecord::Callbacks#initialize at /usr/lib64/ruby/gems/1.8/gems/activerecord-1.14.2/lib/active_record/callbacks.rb:235
-</span>
-</span><span class="marked0"><a name="line87" />87 <a class="crossref-toggle" href="#" onclick="toggleCode('XREF-317'); return false;">    @mpd.monthlyRaised = 0</a><span class="cross-ref" id="XREF-317">
-<span class="cross-ref-title">Calls</span>
-      1   ActiveRecord::Base#method_missing at /usr/lib64/ruby/gems/1.8/gems/activerecord-1.14.2/lib/active_record/base.rb:1770
-</span>
-</span><span class="marked1"><a name="line88" />88 <a class="crossref-toggle" href="#" onclick="toggleCode('XREF-318'); return false;">    @mpd.oneTimeRaised = 0</a><span class="cross-ref" id="XREF-318">
-<span class="cross-ref-title">Calls</span>
-      1   ActiveRecord::Base#method_missing at /usr/lib64/ruby/gems/1.8/gems/activerecord-1.14.2/lib/active_record/base.rb:1770
-</span>
-</span><span class="marked0"><a name="line89" />89 <a class="crossref-toggle" href="#" onclick="toggleCode('XREF-319'); return false;">    @mpd.totalRaised = 0</a><span class="cross-ref" id="XREF-319">
-<span class="cross-ref-title">Calls</span>
-      1   ActiveRecord::Base#method_missing at /usr/lib64/ruby/gems/1.8/gems/activerecord-1.14.2/lib/active_record/base.rb:1770
-</span>
-</span><span class="marked1"><a name="line90" />90 <a class="crossref-toggle" href="#" onclick="toggleCode('XREF-320'); return false;">    @mpd.percentRaised = 0</a><span class="cross-ref" id="XREF-320">
-<span class="cross-ref-title">Calls</span>
-      1   ActiveRecord::Base#method_missing at /usr/lib64/ruby/gems/1.8/gems/activerecord-1.14.2/lib/active_record/base.rb:1770
-</span>
-</span><span class="marked0"><a name="line91" />91     @second_year.sitrack_mpd = @mpd
-</span><span class="marked1"><a name="line92" />92 <a class="crossref-toggle" href="#" onclick="toggleCode('XREF-321'); return false;">    @second_year.save!</a><span class="cross-ref" id="XREF-321">
-<span class="cross-ref-title">Calls</span>
-      1   ActiveRecord::Validations#save! at /usr/lib64/ruby/gems/1.8/gems/activerecord-1.14.2/lib/active_record/validations.rb:732
-</span>
-</span><span class="marked0"><a name="line93" />93     # go to the new profile
-</span><span class="marked1"><a name="line94" />94 <a class="crossref-toggle" href="#" onclick="toggleCode('XREF-322'); return false;">    redirect_to(:action =&gt; :index, :id =&gt; @second_year.id)</a><span class="cross-ref" id="XREF-322">
-<span class="cross-ref-title">Calls</span>
-      1   HrSiApplication#id at (eval):1
-      1   ActionController::Base#redirect_to at /usr/lib64/ruby/gems/1.8/gems/actionpack-1.12.1/lib/action_controller/base.rb:806
-</span>
-</span><span class="marked0"><a name="line95" />95   end
-</span><span class="inferred1"><a name="line96" />96 end
+    </table><pre><span class="marked1"><a name="line1" /> 1 class ProfileController &lt; ApplicationController
+</span><span class="marked0"><a name="line2" /> 2   caches_action :index
+</span><span class="marked1"><a name="line3" /> 3   
+</span><span class="marked0"><a name="line4" /> 4   def index
+</span><span class="marked1"><a name="line5" /> 5     # if we don't have an id in the request, go back to the directory
+</span><span class="marked0"><a name="line6" /> 6     unless params[:id]
+</span><span class="marked1"><a name="line7" /> 7       redirect_to(:controller =&gt; 'directory'); return;
+</span><span class="marked0"><a name="line8" /> 8     end
+</span><span class="inferred1"><a name="line9" /> 9     # build query
+</span><span class="marked0"><a name="line10" />10     @sql =  &quot;SELECT personID, applicationID, &quot;+SitrackColumn.all_select_clauses
+</span><span class="marked1"><a name="line11" />11     @sql += &quot; FROM &quot;+SitrackView.join_tables
+</span><span class="marked0"><a name="line12" />12     @sql += &quot; WHERE applicationID = &quot;+escape_string(params[:id])
+</span><span class="marked1"><a name="line13" />13     
+</span><span class="inferred0"><a name="line14" />14     # if we don't have a person, go back to the directory
+</span><span class="marked1"><a name="line15" />15     @person = ActiveRecord::Base.connection.select_one(@sql)
+</span><span class="marked0"><a name="line16" />16     if !@person
+</span><span class="marked1"><a name="line17" />17       redirect_to(:controller =&gt; 'directory'); return; 
+</span><span class="marked0"><a name="line18" />18     end
+</span><span class="inferred1"><a name="line19" />19     
+</span><span class="inferred0"><a name="line20" />20     # sometimes it's useful to have the person as an object instead of a hash
+</span><span class="marked1"><a name="line21" />21     @person_obj = Person.find(@person['personID'])
+</span><span class="marked0"><a name="line22" />22     
+</span><span class="inferred1"><a name="line23" />23     # get all the columns and create an hash of name=&gt; column pairs
+</span><span class="marked0"><a name="line24" />24     @columns = Hash.new
+</span><span class="marked1"><a name="line25" />25     SitrackColumn.find_all.each {|c| @columns[c.name] = c}
+</span><span class="marked0"><a name="line26" />26     # set up options, first looking in the database
+</span><span class="marked1"><a name="line27" />27     @options = get_options
+</span><span class="marked0"><a name="line28" />28     
+</span><span class="marked1"><a name="line29" />29     @address_types = ['current','permanent','emergency1']
+</span><span class="marked0"><a name="line30" />30     @address_columns = %w{address1 address2 city state zip country homePhone cellPhone workPhone fax email contactName contactRelationship start_date end_date}
+</span><span class="inferred1"><a name="line31" />31     
+</span><span class="inferred0"><a name="line32" />32     # make sure we have all 3 types of addresses
+</span><span class="marked1"><a name="line33" />33     @address_types.each do |type|
+</span><span class="uncovered0"><a name="line34" />34       Address.create(:fk_PersonID =&gt; @person['personID'], :createdBy =&gt; 'SITRACK', :changedBy =&gt; 'SITRACK',
+</span><span class="uncovered1"><a name="line35" />35                    :dateCreated =&gt; Time.now, :dateChanged =&gt; Time.now, :addressType =&gt; type
+</span><span class="marked0"><a name="line36" />36                    ) unless Address.find(:first, :conditions =&gt; [&quot;addressType = ? and fk_PersonID = ?&quot;, type, @person['personID']])
+</span><span class="marked1"><a name="line37" />37     end
+</span><span class="inferred0"><a name="line38" />38     # create a hash of addresses
+</span><span class="marked1"><a name="line39" />39     @addresses = Hash.new
+</span><span class="marked0"><a name="line40" />40     @sql = &quot;SELECT	addressType, address1, address2, city, state, zip, country, homePhone, cellPhone, &quot;+
+</span><span class="inferred1"><a name="line41" />41 					 &quot;workPhone, fax, email, contactName, contactRelationship, &quot;+
+</span><span class="inferred0"><a name="line42" />42 					 &quot;start_date, end_date, addressID &quot;+
+</span><span class="inferred1"><a name="line43" />43 			     &quot;FROM	#{Address.table_name} &quot;+
+</span><span class="marked0"><a name="line44" />44 			     &quot;WHERE	fk_PersonID = #{@person['personID']}&quot;
+</span><span class="marked1"><a name="line45" />45     Address.find_by_sql(@sql).each {|address| @addresses[address.addressType] = address}
+</span><span class="marked0"><a name="line46" />46     
+</span><span class="marked1"><a name="line47" />47     @children = SitrackChild.find(:all, :conditions =&gt; ['person_id = ?', @person['personID']])
+</span><span class="marked0"><a name="line48" />48     
+</span><span class="inferred1"><a name="line49" />49     # get the enum options
+</span><span class="marked0"><a name="line50" />50     @option_hash = get_option_hash
+</span><span class="marked1"><a name="line51" />51     render(:action =&gt; :index)
+</span><span class="marked0"><a name="line52" />52   end
+</span><span class="inferred1"><a name="line53" />53 
+</span><span class="marked0"><a name="line54" />54   def edit_image
+</span><span class="marked1"><a name="line55" />55     @person = Person.find(params[:id])
+</span><span class="marked0"><a name="line56" />56     render(:action =&gt; :edit_image, :layout =&gt; false)
+</span><span class="marked1"><a name="line57" />57   end
+</span><span class="inferred0"><a name="line58" />58   
+</span><span class="marked1"><a name="line59" />59   def update_image
+</span><span class="marked0"><a name="line60" />60   	#make sure we have a person in the params
+</span><span class="marked1"><a name="line61" />61   	@person = Person.find(params[:id])
+</span><span class="marked0"><a name="line62" />62   	if params[:person] &amp;&amp; @person
+</span><span class="marked1"><a name="line63" />63 	    @person.image = params[:person][:image]
+</span><span class="uncovered0"><a name="line64" />64 	    if @person.save
+</span><span class="uncovered1"><a name="line65" />65         # clear page caches
+</span><span class="uncovered0"><a name="line66" />66         @person.hr_si_applications do |app|
+</span><span class="uncovered1"><a name="line67" />67   	      expire_action(:action =&gt; :index, :id =&gt; app.id)
+</span><span class="uncovered0"><a name="line68" />68   	    end
+</span><span class="uncovered1"><a name="line69" />69         render(:template =&gt; '/shared/close_window', :layout =&gt; false)
+</span><span class="uncovered0"><a name="line70" />70       else 
+</span><span class="uncovered1"><a name="line71" />71     	  edit_image
+</span><span class="uncovered0"><a name="line72" />72 	    end
+</span><span class="inferred1"><a name="line73" />73 	  else
+</span><span class="marked0"><a name="line74" />74 	   edit_image
+</span><span class="marked1"><a name="line75" />75     end
+</span><span class="inferred0"><a name="line76" />76   end  
+</span><span class="inferred1"><a name="line77" />77   
+</span><span class="marked0"><a name="line78" />78   def create_second_year
+</span><span class="marked1"><a name="line79" />79     @first_year = HrSiApplication.find(params[:id])
+</span><span class="marked0"><a name="line80" />80     @second_year = @first_year.clone
+</span><span class="marked1"><a name="line81" />81     @tracking = @first_year.sitrack_tracking ? @first_year.sitrack_tracking.clone : SitrackTracking.new
+</span><span class="marked0"><a name="line82" />82     @tracking.asgYear = &quot;#{Time.now.year}-#{Time.now.year+1}&quot;
+</span><span class="marked1"><a name="line83" />83     @tracking.tenure = 'Second Year'
+</span><span class="marked0"><a name="line84" />84     @tracking.status = 'Re-Applied'
+</span><span class="marked1"><a name="line85" />85     @second_year.sitrack_tracking = @tracking
+</span><span class="marked0"><a name="line86" />86     @mpd = @first_year.sitrack_mpd ? @first_year.sitrack_mpd.clone : SitrackMpd.new
+</span><span class="marked1"><a name="line87" />87     @mpd.monthlyRaised = 0
+</span><span class="marked0"><a name="line88" />88     @mpd.oneTimeRaised = 0
+</span><span class="marked1"><a name="line89" />89     @mpd.totalRaised = 0
+</span><span class="marked0"><a name="line90" />90     @mpd.percentRaised = 0
+</span><span class="marked1"><a name="line91" />91     @second_year.sitrack_mpd = @mpd
+</span><span class="marked0"><a name="line92" />92     @second_year.save!
+</span><span class="marked1"><a name="line93" />93     # go to the new profile
+</span><span class="marked0"><a name="line94" />94     redirect_to(:action =&gt; :index, :id =&gt; @second_year.id)
+</span><span class="marked1"><a name="line95" />95   end
+</span><span class="inferred0"><a name="line96" />96 end
 </span></pre><hr />    <p>Generated using the <a href='http://eigenclass.org/hiki.rb?rcov'>rcov code coverage analysis tool for Ruby</a> version 0.6.0.</p><p>
           <a href='http://validator.w3.org/check/referer'>
             <img src='http://www.w3.org/Icons/valid-xhtml10' height='31' alt='Valid XHTML 1.0!' width='88' />
