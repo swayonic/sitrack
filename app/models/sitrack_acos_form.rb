@@ -5,7 +5,7 @@ class SitrackACOSForm < SitrackForm
   end
   
   def to
-    if hr_si_application.sitrack_tracking.is_stint?
+    if 'restint' == action?
       'Celeste Allison <celeste.allison@ccci.org>'
     else
       'Personel Records <personel.records@ccci.org>'
