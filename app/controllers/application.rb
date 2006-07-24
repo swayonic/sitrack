@@ -90,25 +90,23 @@ class ApplicationController < ActionController::Base
   end
   
   def get_options
-    if !session[:options]
+    if !@options
       @options = Hash.new
       SitrackColumn.find(:all, :include => :sitrack_enum_values).each do |column|
         @options[column.name] = column.sitrack_enum_values.collect {|option| [option.value, option.name]} if column.column_type == 'enum'
       end
-      session[:options] = @options
     end
-    return session[:options]
+    @options
   end
   def get_option_hash
-    if !session[:option_hash]
+    if !@option_hash
       @options = get_options
       @option_hash = {}
       @options.each do |column_name, column_array|
         @option_hash[column_name] = {}
         column_array.each { |options| @option_hash[column_name][options[0]] = options[1]}
       end
-      session[:option_hash] = @option_hash
     end
-    return session[:option_hash]
+    return @option_hash
   end
 end
