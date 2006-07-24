@@ -3,7 +3,7 @@ class SitrackAdditionalSalaryForm < SitrackForm
     if hr_si_application.sitrack_tracking.is_stint?
       'Celeste Allison <celeste.allison@ccci.org>'
     else
-      'Personel Records <personel.records@ccci.org>'
+      'Susan Palocin <susan.palocin@ccci.org>'
     end
   end
   def email(var_hash, form_html)

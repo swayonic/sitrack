@@ -4,8 +4,15 @@ class SitrackACOSForm < SitrackForm
     super
   end
   
+  def to
+    if hr_si_application.sitrack_tracking.is_stint?
+      'Celeste Allison <celeste.allison@ccci.org>'
+    else
+      'Personel Records <personel.records@ccci.org>'
+    end
+  end  
+  
   def email(var_hash, form_html)
-    to = 'Josh Starcher <josh.starcher@uscm.org>'
     email = FormMailer.create_form_email(to, var_hash, form_html, 'ACOS Form')
     FormMailer.deliver(email)
     

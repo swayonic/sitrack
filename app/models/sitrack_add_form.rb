@@ -12,8 +12,11 @@ class SitrackAddForm < SitrackForm
     super
   end 
   
+  def to
+    'Personel Records <personel.records@ccci.org>'
+  end
+  
   def email(var_hash, form_html)
-    to = 'Josh Starcher <josh.starcher@uscm.org>'
     email = FormMailer.create_form_email(to, var_hash, form_html, 'Add Form')
     FormMailer.deliver(email)
     

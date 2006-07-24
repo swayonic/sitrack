@@ -8,7 +8,6 @@ class SitrackJoinStaffForm < SitrackForm
   end
   
   def email(var_hash, form_html)
-    to = 'Josh Starcher <josh.starcher@uscm.org>'
     email = FormMailer.create_form_email(to, var_hash, form_html, 'Join Staff Form')
     FormMailer.deliver(email)
     
