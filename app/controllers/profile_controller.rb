@@ -47,7 +47,7 @@ class ProfileController < ApplicationController
     @children = SitrackChild.find(:all, :conditions => ['person_id = ?', @person['personID']])
     
     # get the enum options
-    @option_hash = get_option_hash
+    @options_hash = get_option_hash
     render(:action => :index)
   end
 
