@@ -31,7 +31,7 @@ class AdditionalSalaryFormController < ApplicationController
                 'tracking' => @tracking}
     form_html = render_to_string(:template => 'shared/form', :layout => 'additional_salary_form_layout')
     @form.email(var_hash, form_html)
-    @form_type = 'Additioanl Salary'
+    @form_type = 'Additional Salary'
     render(:template => 'shared/form_submitted', :layout => 'application')
   end
   
@@ -58,10 +58,11 @@ class AdditionalSalaryFormController < ApplicationController
                 settling_in_expenses reimbursable_expenses}
     @total = 0
     columns.each do |c|
-      if @form[c]
-        @form[c] = (@form[c] / (1-(@form.tax_rate.to_f/100))).round 
+      amount = @form[c].to_i
+      if amount != 0
+        amount = (amount / (1-(@form.tax_rate.to_f/100))).round 
         eval("@#{c}_x = '[X]'")
-        @total += @form[c].to_i
+        @total += amount
       else
         eval("@#{c}_x = '[&nbsp;&nbsp;]'")
       end
