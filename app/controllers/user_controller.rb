@@ -7,10 +7,10 @@ class UserController < ApplicationController
     	if (names.size > 1)
 	    	first = names[0]
     		last = names[1].empty? ? first : names[1]
-	    	@conditions = [ "lastName LIKE ? AND firstName LIKE ? AND isStaff = 1 ", last + "%", first + "%" ]
+	    	@conditions = [ "lastName LIKE ? AND firstName LIKE ? ", last + "%", first + "%" ]
 	   	else 
 	   	  name = names.join
-	   		@conditions = [ "(lastName LIKE ? OR firstName LIKE ?) AND isStaff = 1 ", name+'%',name+'%' ]
+	   		@conditions = [ "(lastName LIKE ? OR firstName LIKE ?) ", name+'%',name+'%' ]
 	   	end
 	   	@conditions[0] + " AND isStaff = 1 AND fk_ssmUserId <> 0 AND fk_ssmUserId is NOT NULL "
 	  	@people = Person.find(:all, :order => "lastName, firstName", :conditions => @conditions)

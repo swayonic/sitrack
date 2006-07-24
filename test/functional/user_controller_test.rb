@@ -9,6 +9,9 @@ class UserControllerTest < Test::Unit::TestCase
     @controller = UserController.new
     @request    = ActionController::TestRequest.new
     @response   = ActionController::TestResponse.new
+    # fake cas
+    @request.session[:cas_receipt] = {:user => 'josh.starcher@uscm.org',
+                                      :ssoGuid => 'F167605D-94A4-7121-2A58-8D0F2CA6E026'}
   end
 
   # Replace this with your real tests.

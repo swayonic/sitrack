@@ -2,29 +2,28 @@
 	<div class="boxheader">Create Directory Listings</div>
 	<br>
 	<div class="insidebox">
-	<form name="views" action="directory_views.php" method="post">
-		<input type="hidden" name="view_id">
+	<a href="/views/new">Create a new view</a> &nbsp; &nbsp;
+	<a href="/views/borrow">Copy someone else's view</a>
+	<br>
 	<!--  =============== BEGIN Layout existing views =============== -->
-		<table>
-		<%if @views.size
-			@views.each do |view|%>
-				<tr>
-					<td><strong><%=view.name%></strong> &nbsp;&nbsp;&nbsp;&nbsp;</td>
-					<td><a href="/views/edit/<%=view.id%>">edit</a>&nbsp;&nbsp;</td>
-					<td><a href="javascript:delete_view(<%=view.id%>,'<%=escape_javascript(view.name)%>');">remove</a></td>
-					<td><a href="/directory/change_view?view_id=<%=view.id%>">go to</a></td>
-				</tr>
-			<%
-			end
-		else%>
+	<table>
+	<%if @views.size
+		@views.each do |view|%>
 			<tr>
-				<td>No views have been created.</td>
+				<td><strong><%=view.name%></strong> &nbsp;&nbsp;&nbsp;&nbsp;</td>
+				<td><a href="/views/edit/<%=view.id%>">edit</a>&nbsp;&nbsp;</td>
+				<td><a href="javascript:delete_view(<%=view.id%>,'<%=escape_javascript(view.name)%>');">remove</a></td>
+				<td><a href="/directory/change_view?view_id=<%=view.id%>">go to</a></td>
 			</tr>
-		<%end%>
-		</table>
+		<%
+		end
+	else%>
+		<tr>
+			<td>No views have been created.</td>
+		</tr>
+	<%end%>
+	</table>
 	<!--  =============== END Layout existing views =============== -->
-	<br><a href="/views/new">Create a new view</a>
-	</form>
 	</div>
 	</div>
 </div>

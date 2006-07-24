@@ -16,11 +16,17 @@ class ViewsController < ApplicationController
       @view = SitrackView.new(:name => params[:view][:name])
       @view.sitrack_user = session[:sitrack_user]
       if @view.save
-        # reset the user object in the session
-        session[:sitrack_user] = SitrackUser.find_by_ssm_id(session[:user].id, :include => :sitrack_views)
+        reset_user # defined in application.rb
         redirect_to(:action => :edit, :id => @view.id)
       end
     end
+  end
+  
+  def delete
+    @view = session[:sitrack_user].sitrack_views.find(params[:id])
+    @view.destroy
+    reset_user # defined in application.rb
+    redirect_to(:action => :index)
   end
   
   def reorder
@@ -58,5 +64,47 @@ class ViewsController < ApplicationController
     @column = @view_column.sitrack_column
     @view = @view_column.sitrack_view
     @view_column.destroy
+  end
+  
+  def search
+    @people = ''
+    @name = request.raw_post || request.query_string
+    if @name and !@name.empty? 
+    	names = @name.strip.split(' ')
+    	if (names.size > 1)
+	    	first = names[0]
+    		last = names[1].empty? ? first : names[1]
+	    	@conditions = [ "lastName LIKE ? AND firstName LIKE ? ", last + "%", first + "%" ]
+	   	else 
+	   	  name = names.join
+	   		@conditions = [ "(lastName LIKE ? OR firstName LIKE ?) ", name+'%',name+'%' ]
+	   	end
+	  	@people = SitrackUser.find(:all, :order => "lastName, firstName", 
+	  	                                 :conditions => @conditions, 
+	  	                                 :include => {:user => :person})
+	  end
+	  render(:layout => false)
+  end
+  
+  def friend
+    unless params[:id]
+      redirect_to(:action => :borrow); return;
+    end
+    @user = SitrackUser.find(params[:id], :include => {:user => :person})
+    @person = @user.user.person
+    @views = @user.sitrack_views
+  end
+  
+  def import
+    unless params[:id]
+      redirect_to(:action => :borrow); return;
+    end
+    @view = SitrackView.find(params[:id])
+    @new_view = @view.clone
+    @view.sitrack_view_columns.each do |vc|
+      @new_view.sitrack_view_columns << vc.clone
+    end
+    session[:sitrack_user].sitrack_views << @new_view
+    redirect_to(:action => :index)
   end
 end

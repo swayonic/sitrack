@@ -28,6 +28,12 @@ class ApplicationController < ActionController::Base
   end
   
   private
+  
+  # reset the user object in the session
+  def reset_user
+    session[:sitrack_user] = SitrackUser.find_by_ssm_id(session[:user].id, :include => :sitrack_views)
+  end
+  
   def dummy_cas
     session[:cas_receipt] = {}
     session[:cas_receipt][:user] = 'Scott.Santee@uscm.org'

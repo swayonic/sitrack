@@ -1,0 +1,19 @@
+<div id="center">
+	<div class="boxheader"><%=@person.full_name%>'s views</div>
+	<br>
+	<div class="insidebox">
+	Click on one of the views below to add it to your own tracker. Once you add it
+	to your tracker any changes you make will only affect your own copy. By the same
+	token, any future changes <%=@person.full_name%> makes to the view you choose 
+	won't affect your copy.
+	<hr/>
+	<%if @views.size
+		@views.each do |view|%>
+			<%=link_to(view.name, :action => 'import', :id => view.id)%><br/>
+	<%end
+	else%>
+			<strong>No views have been created.</strong>
+	<%end%>
+	</div>
+	</div>
+</div>
