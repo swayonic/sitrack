@@ -1,4 +1,4 @@
-<%#=debug(@option_hash)%>
+<%#=debug(@options_hash)%>
 <%
 # define which fields go in which boxes
 common = ['First Name',
@@ -201,7 +201,7 @@ person_id = @person['personID']
 				<%  when "enum" -%>
 							<a id="link<%=column_name%><%=application_id%>c<%=column_id%>" href="javascript:edit_value('<%=column_name%>','<%=application_id%>','<%=escape_javascript(value)%>',<%=column_id%>,'enum','', true)">
 							<%if value && !value.empty? -%>
-								<%=@option_hash[column_name][u(value)]%>
+								<%=@options_hash[column_name][u(value)]%>
 							<%else%>
 								<img src="/images/edit.png" border="0"/>
 							<%end -%>
