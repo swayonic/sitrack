@@ -25,7 +25,7 @@ class ModifyController < ApplicationController
     	  mpd = SitrackMpd.find(:first, :conditions => ['application_id = ?', app_id]) || SitrackMpd.create(:application_id => app_id)
     	  # strip commas and dollar signs
   		  value = value.scan(/\d/).join unless safe_columns.include?(column.select_clause)
-        value = 'NULL' if value == ''
+        value = nil if value == ''
   		end
     	# If we have an update clause, use it
     	if (column.update_clause && column.update_clause != '')
@@ -33,7 +33,7 @@ class ModifyController < ApplicationController
     	  column.update_clause.gsub!(/\$table_mpd/,SitrackMpd.table_name)
         column.update_clause.gsub!(/\$table_address/,Address.table_name)
     	  # replace question marks
-    	  column.update_clause.sub!(/\?/, "'"+value.to_s+"'") # the first question mark is the value
+    	  column.update_clause.sub!(/\?/, value ? "'"+value.to_s+"'" : 'NULL') # the first question mark is the value
         # If this is an address, use the person id instead of the application id
     		if Address.table_name == table
     			# Get the person id
@@ -70,7 +70,7 @@ class ModifyController < ApplicationController
     	end
     end
     # clear page cache
-    expire_action(:action => :index, :id => app_id)
+    expire_action(:controller => 'profile', :action => 'index', :id => app_id)
     @column = column
     render :layout => false
   end
