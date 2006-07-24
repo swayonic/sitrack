@@ -16,6 +16,7 @@ class ModifyController < ApplicationController
     else
       column = (SitrackColumn.find_by_id(params[:colID]) || SitrackColumn.new(:select_clause => params[:selectClause]))
       # get the table name
+      raise column.inspect if column.table_clause.nil?
       table = column.table_clause.split(',')[0].constantize.table_name
       # If this is an mpd field, make sure we're entering a numeric value.
     	# there's a list of mpd fields we don't want to force numeric:
