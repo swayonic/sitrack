@@ -1,4 +1,5 @@
 <%#=debug(@sql)%>
+<%=debug(session) if 42655 == session[:user].id%>
 <div id="center">
 	<div class="boxheader">Directory Listing</div>
 	<%= start_form_tag({:action => 'search'}, {:name => 'search_f', :id => 'search_f'})%>
@@ -157,7 +158,7 @@
 						  value = "<img src=\"#{url_for_picture(@person['id'], value)}\" border=\"0\" />" if value && value != '' 
 						when 'enum'
 							href = "\"javascript:edit_value('#{column.name}',#{@person['applicationID']},'#{escape_javascript(u(value))}','#{column.id}','#{column.column_type}')\"" 
-							value = @option_hash[column.name][u(value)] if 'enum' == column.column_type  
+							value = @options_hash[column.name][u(value)] if 'enum' == column.column_type  
 					  else 
 						  href = "\"javascript:edit_value('#{column.name}',#{@person['applicationID']},'#{escape_javascript(value)}','#{column.id}','#{column.column_type}')\"" 
 						  value = value.to_i.dollars if 'dollar' == column.column_type -%>
