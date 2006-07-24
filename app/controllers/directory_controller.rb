@@ -1,5 +1,4 @@
 class DirectoryController < ApplicationController
-  caches_action :index
   
   def index
     show_directory
