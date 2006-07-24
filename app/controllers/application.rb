@@ -50,6 +50,7 @@ class ApplicationController < ActionController::Base
       sitrack_session ||= SitrackSession.create(:sitrack_user_id => session[:sitrack_user].id)
       session[:session] = sitrack_session
     end
+    return true
   end
   
   def all_tables
@@ -90,23 +91,25 @@ class ApplicationController < ActionController::Base
   end
   
   def get_options
-    if !@options
-      @options = Hash.new
+    if !session[:options]
+      options = Hash.new
       SitrackColumn.find(:all, :include => :sitrack_enum_values).each do |column|
-        @options[column.name] = column.sitrack_enum_values.collect {|option| [option.value, option.name]} if column.column_type == 'enum'
+        options[column.name] = column.sitrack_enum_values.collect {|option| [option.value, option.name]} if column.column_type == 'enum'
       end
+      session[:options] = options
     end
-    @options
+    return session[:options]
   end
   def get_option_hash
-    if !@option_hash
-      @options = get_options
-      @option_hash = {}
-      @options.each do |column_name, column_array|
-        @option_hash[column_name] = {}
-        column_array.each { |options| @option_hash[column_name][options[0]] = options[1]}
+    if !session[:option_hash]
+      options = get_options
+      option_hash = {}
+      options.each do |column_name, column_array|
+        option_hash[column_name] = {}
+        column_array.each { |options| option_hash[column_name][options[0]] = options[1]}
       end
+      session[:option_hash] = option_hash
     end
-    return @option_hash
+    return session[:option_hash]
   end
 end
