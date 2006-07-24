@@ -46,7 +46,7 @@ xml.Workbook({
             when 'date'
               value = formatted_date(value) 
             when 'enum'
-              value = @option_hash[column.name][u(value)]
+              value = @options_hash[column.name][u(value)]
             when 'project'
               value = get_project(value.to_i)
             end
