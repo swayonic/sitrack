@@ -7,8 +7,8 @@ class ModifyController < ApplicationController
     # if this is an address field from the profile table, handle it differently
     if type == 'address'
       field = params[:fieldname]
-      value = value.length > 0 ? "'#{value}'" : nil
-      Time.parse(value).strftime('%Y-%m-%d') if ['start_date', 'end_date'].include?(field) && value
+      value = value.length > 0 ? "'#{value}'" : 'NULL'
+      Time.parse(value).strftime('%Y-%m-%d') if ['start_date', 'end_date'].include?(field) && value != 'NULL'
       @sql = "UPDATE #{Address.table_name} "+
              "SET #{field} = #{value}, "+
              "    dateChanged = NOW(), "+
