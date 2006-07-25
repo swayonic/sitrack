@@ -10,7 +10,7 @@ class ModifyController < ApplicationController
       value = value.length > 0 ? "'#{value}'" : nil
       Time.parse(value).strftime('%Y-%m-%d') if ['start_date', 'end_date'].include?(field) && value
       @sql = "UPDATE #{Address.table_name} "+
-             "SET #{field} = '#{value}', "+
+             "SET #{field} = #{value}, "+
              "    dateChanged = NOW(), "+
              "    changedBy = 'SITRACK' "+
              "WHERE addressID = #{params[:colID]}"
