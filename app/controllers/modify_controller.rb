@@ -1,19 +1,26 @@
 class ModifyController < ApplicationController
   
   def update
-    app_id = params[:id]
     value = escape_string(params[:value].to_s.strip)
     type = params[:type]
     value = (value != '' ? Time.parse(value).strftime('%Y-%m-%d') : '') if type == 'date'
     # if this is an address field from the profile table, handle it differently
     if type == 'address'
+      field = params[:fieldname]
+      value = value.length > 0 ? "'#{value}'" : nil
+      Time.parse(value).strftime('%Y-%m-%d') if ['start_date', 'end_date'].include?(field) && value
       @sql = "UPDATE #{Address.table_name} "+
-             "SET #{params[:fieldname]} = '#{value}', "+
+             "SET #{field} = '#{value}', "+
              "    dateChanged = NOW(), "+
              "    changedBy = 'SITRACK' "+
              "WHERE addressID = #{params[:colID]}"
-       @result = ActiveRecord::Base.connection.update(@sql)
+      @result = ActiveRecord::Base.connection.update(@sql)
+      # clear page cache
+      Person.find(params[:id]).hr_si_applications.each do |app|
+        clear_cache(app.id)
+      end
     else
+      app_id = params[:id]
       column = (SitrackColumn.find_by_id(params[:colID]) || SitrackColumn.new(:select_clause => params[:selectClause]))
       # get the table name
       raise column.inspect if column.table_clause.nil?
@@ -56,24 +63,32 @@ class ModifyController < ApplicationController
         # First, perform some extra logic depeding on which table we're updating
         case table
         when Person.table_name
-          id = HrSiApplication.find(app_id).fk_personID
+          person = HrSiApplication.find(app_id).person
+          id = person.id
           where = Person.primary_key
           set = ", changedBy = 'SITRACK', dateChanged = NOW() "
+          person.hr_si_applications.each do |app|
+            clear_cache(app.id)
+          end
         when SitrackTracking.table_name
           # make sure they have a tracking row
           SitrackTracking.find(:first, :conditions => ['application_id = ?', app_id]) || SitrackTracking.create(:application_id => app_id)
         when HrSiApplication.table_name
           where = HrSiApplication.primary_key
         end
-        value.gsub!(/_/,' ')
-        @sql = "UPDATE #{table} SET #{column.select_clause} = #{value ? "'#{value}'" : NULL} #{set} WHERE #{where} = #{id}"
+        value.gsub!(/_/,' ') if value
+        @sql = "UPDATE #{table} SET #{column.select_clause} = #{value ? "'#{value}'" : 'NULL'} #{set} WHERE #{where} = #{id}"
         @result = ActiveRecord::Base.connection.update(@sql)
     	end
+      clear_cache(app_id)
     end
-    # clear page cache
-    expire_action(:controller => 'profile', :action => 'index', :id => app_id)
     @column = column
     render :layout => false
   end
-
+  
+  private
+  # clear page cache
+  def clear_cache(id)
+    expire_action(:controller => 'profile', :action => 'index', :id => id)
+  end
 end
