@@ -8,7 +8,7 @@ class SitrackJoinStaffForm < SitrackForm
   end
   
   def to
-    'Personel Records <personel.records@ccci.org>'
+      'Personel Records <personnel.records@ccci.org>'
   end
   
   def email(var_hash, form_html)

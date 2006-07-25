@@ -6,7 +6,7 @@ class SitrackForm < ActiveRecord::Base
     if hr_si_application.sitrack_tracking.is_stint?
       'Celeste Allison <celeste.allison@ccci.org>'
     else
-      'Personel Records <personel.records@ccci.org>'
+      'Personel Records <personnel.records@ccci.org>'
     end
   end
   

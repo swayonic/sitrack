@@ -8,7 +8,7 @@ class SitrackACOSForm < SitrackForm
     if 'restint' == action
       'Celeste Allison <celeste.allison@ccci.org>'
     else
-      'Personel Records <personel.records@ccci.org>'
+      'Personel Records <personnel.records@ccci.org>'
     end
   end  
   
