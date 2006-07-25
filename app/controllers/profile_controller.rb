@@ -6,6 +6,9 @@ class ProfileController < ApplicationController
     unless params[:id]
       redirect_to(:controller => 'directory'); return;
     end
+    
+    # if they don't have a tracking record, now would be a good time to create one.
+    @tracking = SitrackTracking.find_by_application_id(params[:id]) || SitrackTracking.create(:application_id => params[:id])
     # build query
     @sql =  "SELECT personID, applicationID, "+SitrackColumn.all_select_clauses
     @sql += " FROM "+SitrackView.join_tables

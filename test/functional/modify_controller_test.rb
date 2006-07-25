@@ -5,7 +5,7 @@ require 'modify_controller'
 class ModifyController; def rescue_action(e) raise e end; end
 
 class ModifyControllerTest < Test::Unit::TestCase
-  fixtures :simplesecuritymanager_user
+  fixtures :simplesecuritymanager_user, :ministry_person, :ministry_newaddress
   def setup
     @controller = ModifyController.new
     @request    = ActionController::TestRequest.new
@@ -22,7 +22,7 @@ class ModifyControllerTest < Test::Unit::TestCase
   end
   
   def test_modify_value_address
-    get :update, :value => 'somewhere', :id => 50831, :type => 'address', :fieldname => 'address1', :colID => 12229
+    get :update, :value => 'somewhere', :id => 50069, :type => 'address', :fieldname => 'address1', :colID => 12229
     assert_response :success
   end
   
