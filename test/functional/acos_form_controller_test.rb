@@ -27,6 +27,11 @@ class AcosFormControllerTest < Test::Unit::TestCase
     preview
   end
   
+  def test_change_region
+    @preview_options = {"id" => hr_si_applications(:travis).id, "tracking"=>{"departureDate(1i)"=>"2006", "departureDate(2i)"=>"9", "departureDate(3i)"=>"19", "caringRegion"=>"SW"}, "form"=>{"change_assignment_to_location"=>"", "freeze_end(2i)"=>"7", "date_of_change(3i)"=>"26", "freeze_end(3i)"=>"26", "other_explanation"=>"", "restint_location"=>"DES, BZH1, BZH", "action"=>"toStint", "freeze_start(1i)"=>"2006", "change_assignment_from_location"=>"DES, BZH1, BZH", "freeze_start(2i)"=>"7", "date_of_change(1i)"=>"2006", "freeze_start(3i)"=>"26", "freeze_end(1i)"=>"2006", "date_of_change(2i)"=>"7", "hours_per_week"=>""}, "person"=>{"region"=>"MS"}}
+    preview
+  end
+  
   def test_submit
     submit
   end
