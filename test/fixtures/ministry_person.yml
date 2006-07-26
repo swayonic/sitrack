@@ -79,3 +79,47 @@ ministry_person_002:
   personID: "102546"
   fk_spouseID: "77512"
   minor: Computer Science
+  
+travis: 
+  changedBy: sitrack
+  cruCommonsInvite: 
+  blogfeed: 
+  occupation: 
+  isChild: "0"
+  isStaff: "0"
+  deprecated_birthDate: 09/21/1973
+  preferredName: Travis
+  lastName: Morris
+  graduation_date: 
+  title: Mr.
+  region: NW
+  universityState: KY
+  usCitizen: "1"
+  yearInSchool: Graduate
+  citizenship: USA
+  middleName: Travis
+  fk_StaffSiteProfileID: "0"
+  greekAffiliation: ''
+  gender: "1"
+  firstName: William
+  dateChanged: 
+  cruCommonsLastLogin: 
+  maritalStatus: M
+  birth_date: 
+  fk_childOf: 
+  fk_ssmUserId: "26437"
+  major: Master of Science in Criminal Justice
+  accountNo: 000558390
+  date_became_christian: 
+  dateCreated: 2003-08-02 00:00:00
+  bio: 
+  numberChildren: "0"
+  deprecated_graduationDate: Jul 30 2004 12:00AM
+  createdBy: ''
+  image: 
+  campus: Eastern Kentucky University
+  workInUS: "1"
+  personID: "50943"
+  fk_spouseID: "51364"
+  minor: 
+  deprecated_dateBecameChristian: 
