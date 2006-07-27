@@ -27,6 +27,18 @@ class ApplicationController < ActionController::Base
     time.strftime('%m/%d/%Y')
   end
   
+  def get_project(id)
+    return '' if  0 == id || id.nil? || '' == id.to_s.strip # an id of 0 is useless. you're useless too
+    session[:projects] ||= []
+    # early return if we have this project name cached
+    return session[:projects][id] if session[:projects][id]
+    # if it's not cached, look up the name, cache, and return it.
+    project_name = ActiveRecord::Base.connection.select_value("SELECT name FROM #{HrSiProject.table_name} where SIProjectID = #{id}")
+    return '' if project_name.nil? || project_name.strip == ''
+    session[:projects][id] = project_name
+    return project_name
+  end
+  
   private
   
   # reset the user object in the session
