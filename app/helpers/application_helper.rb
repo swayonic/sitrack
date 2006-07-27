@@ -37,13 +37,13 @@ module ApplicationHelper
     
   # get the name of a project
   def get_project(id)
-    project(id)
+    self.project(id)
   end
   def self.get_project(id)
-    project(id)
+    self.project(id)
   end
   
-  def project(id)
+  def self.project(id)
     return '' if  0 == id || id.nil? || '' == id.to_s.strip # an id of 0 is useless. you're useless too
     session[:projects] ||= []
     # early return if we have this project name cached
