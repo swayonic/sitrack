@@ -304,34 +304,36 @@ class DirectoryController < ApplicationController
 #  end
   
   def excel_download
-    #get the view
-    @view = SitrackView.find(session[:session].get_value('view_id'), 
-                            :include => [:sitrack_view_columns, :sitrack_columns], 
-                            :order => 'sitrack_view_columns.position')
-    # figure out what to call the downlaod
-    if params[:id_list] != ''
-      @where_clause = " #{HrSiApplication.table_name}.applicationID in( #{params[:id_list]} ) "
-    elsif (id = session[:session].get_value('query_id'))
-      query = SitrackQuery.find(id)
-      name = query.name
-      @where_clause = " #{HrSiApplication.table_name}.applicationID in( #{query.persons} ) "
-    elsif (id = session[:session].get_value('criteria_id'))
-      criteria = SitrackSavedCriteria.find(id)
-      name = criteria.name
-      @qs = criteria.criteria
+    if request.post?
+      #get the view
+      @view = SitrackView.find(session[:session].get_value('view_id'), 
+                              :include => [:sitrack_view_columns, :sitrack_columns], 
+                              :order => 'sitrack_view_columns.position')
+      # figure out what to call the downlaod
+      if params[:id_list] && params[:id_list] != ''
+        @where_clause = " #{HrSiApplication.table_name}.applicationID in( #{params[:id_list]} ) "
+      elsif (id = session[:session].get_value('query_id'))
+        query = SitrackQuery.find(id)
+        name = query.name
+        @where_clause = " #{HrSiApplication.table_name}.applicationID in( #{query.persons} ) "
+      elsif (id = session[:session].get_value('criteria_id'))
+        criteria = SitrackSavedCriteria.find(id)
+        name = criteria.name
+        @qs = criteria.criteria
+      end
+      name = @view.name if !name || name.empty?
+      where ||= ''
+      
+      build_query
+      
+      @options_hash = get_option_hash
+      
+      headers['Content-Type'] = "application/vnd.ms-excel" 
+      headers['Content-Disposition'] = "attachment; filename=\"#{name}.xls\""
+      headers['Cache-Control'] = ''
+  
+      render_without_layout
     end
-    name = @view.name if !name || name.empty?
-    where ||= ''
-    
-    build_query
-    
-    @options_hash = get_option_hash
-    
-    headers['Content-Type'] = "application/vnd.ms-excel" 
-    headers['Content-Disposition'] = "attachment; filename=\"#{name}.xls\""
-    headers['Cache-Control'] = ''
-
-    render_without_layout
   end
   
   #####################
