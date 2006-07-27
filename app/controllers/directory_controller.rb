@@ -304,12 +304,18 @@ class DirectoryController < ApplicationController
 #  end
   
   def excel_download
+    if params[:id_list] != ''
+      query = SitrackQuery.create(:name => params[:name], :owner => session[:sitrack_user].id, :persons => params[:id_list])
+      session[:session].save_value('query_id', query.id)
+    end
     #get the view
     @view = SitrackView.find(session[:session].get_value('view_id'), 
                             :include => [:sitrack_view_columns, :sitrack_columns], 
                             :order => 'sitrack_view_columns.position')
     # figure out what to call the downlaod
-    if (id = session[:session].get_value('query_id'))
+    if params[:id_list] != ''
+      @where_clause = " #{HrSiApplication.table_name}.applicationID in( #{params[:id_list]} ) "
+    elsif (id = session[:session].get_value('query_id'))
       query = SitrackQuery.find(id)
       name = query.name
       @where_clause = " #{HrSiApplication.table_name}.applicationID in( #{query.persons} ) "

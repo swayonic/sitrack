@@ -129,16 +129,16 @@ function checkAll()
 }
 function perform_action()
 {
-	var f = document.search_f;
+    var f = document.search_f;
 	var action = f.do_something.options[f.do_something.selectedIndex].value;
 	f.do_something.selectedIndex = 0;
 	var count = 0;
 	// perform the action selected
+	var f = document.participants_f;
 	switch (action)	{
 	case 'email':
 		var punc = ';'
 		// concat the emails for each checked person
-		f = document.participants_f;
 		var email_list = '';
 		if (f["id_array[]"]) {
 			if (f["id_array[]"].length) {
@@ -167,8 +167,12 @@ function perform_action()
 		}
 		break;
 	case 'excel':
-		document.location = '/directory/excel_download';
-		return;
+	    var id_list = get_id_list();
+    	if (id_list != '0') {
+    		f.id_list.value = id_list;
+    	}
+	    f.action = '/directory/excel_download';
+		f.submit();
 		break;
 	case 'delete':
 		var id_list = get_id_list();
