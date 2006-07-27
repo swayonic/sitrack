@@ -12,7 +12,7 @@ class UserController < ApplicationController
 	   	  name = names.join
 	   		@conditions = [ "(lastName LIKE ? OR firstName LIKE ?) ", name+'%',name+'%' ]
 	   	end
-	   	@conditions[0] + " AND isStaff = 1 AND fk_ssmUserId <> 0 AND fk_ssmUserId is NOT NULL "
+	   	@conditions[0] += " AND fk_ssmUserId <> 0 AND fk_ssmUserId is NOT NULL "
 	  	@people = Person.find(:all, :order => "lastName, firstName", :conditions => @conditions)
 	  end
 	  render(:layout => false)
