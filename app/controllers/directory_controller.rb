@@ -329,9 +329,9 @@ class DirectoryController < ApplicationController
       @options_hash = get_option_hash
       
 #      headers['Content-Type'] = "application/vnd.ms-excel" 
-#      headers['Content-Type'] = "text/tab-separated-values" 
-#      headers['Content-Disposition'] = "attachment; filename=\"#{name}.xls\""
-#      headers['Cache-Control'] = ''
+      headers['Content-Type'] = "text/tab-separated-values" 
+      headers['Content-Disposition'] = "attachment; filename=\"#{name}.xls\""
+      headers['Cache-Control'] = ''
       @sheet = ''
       @view.sitrack_view_columns.each do |vc|
         column = vc.sitrack_column
