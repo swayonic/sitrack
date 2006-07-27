@@ -328,10 +328,33 @@ class DirectoryController < ApplicationController
       
       @options_hash = get_option_hash
       
-      headers['Content-Type'] = "application/vnd.ms-excel" 
+#      headers['Content-Type'] = "application/vnd.ms-excel" 
+      headers['Content-Type'] = "text/tab-separated-values" 
       headers['Content-Disposition'] = "attachment; filename=\"#{name}.xls\""
       headers['Cache-Control'] = ''
-  
+      @sheet = ''
+      @view.sitrack_view_columns.each do |vc|
+        column = vc.sitrack_column
+        @sheet += column.name+"\t"
+      end
+      @sheet += "\n"
+      @people.each do |person|
+        @view.sitrack_view_columns.each do |vc|
+          column = vc.sitrack_column
+          value = person[column.safe_name] || ''
+          raise column.safe_name.inspect if value.nil?
+          case column.column_type
+          when 'date'
+            value = formatted_date(value) 
+          when 'enum'
+            value = @options_hash[column.name][u(value)]
+          when 'project'
+            value = ApplicationHelper.get_project(value.to_i)
+          end
+          @sheet += value+"\t"
+        end
+        @sheet += "\n"
+      end
       render_without_layout
     end
   end

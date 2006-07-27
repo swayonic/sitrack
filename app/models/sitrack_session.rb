@@ -1,3 +1,13 @@
+# == Schema Information
+# Schema version: 17
+#
+# Table name: sitrack_sessions
+#
+#  id              :integer(10)   not null, primary key
+#  sitrack_user_id :integer(10)   default(0), not null
+#  created_at      :datetime      not null
+#
+
 class SitrackSession < ActiveRecord::Base
   has_many  :sitrack_session_values, :dependent => true
   

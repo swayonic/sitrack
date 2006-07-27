@@ -1,3 +1,13 @@
+# == Schema Information
+# Schema version: 17
+#
+# Table name: sitrack_views
+#
+#  id              :integer(10)   not null, primary key
+#  sitrack_user_id :integer(10)   default(0), not null
+#  name            :string(255)   default(), not null
+#
+
 class SitrackView < ActiveRecord::Base
   has_many   :sitrack_view_columns, :order => :position, :include => :sitrack_column, :dependent => true
   has_many   :sitrack_columns, :through => :sitrack_view_columns

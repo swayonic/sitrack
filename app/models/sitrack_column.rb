@@ -1,3 +1,21 @@
+# == Schema Information
+# Schema version: 17
+#
+# Table name: sitrack_columns
+#
+#  id                :integer(10)   not null, primary key
+#  name              :string(30)    default(), not null
+#  column_type       :string(20)    default(), not null
+#  select_clause     :string(7000)  default(), not null
+#  where_clause      :string(255)   
+#  update_clause     :string(255)   
+#  table_clause      :string(100)   
+#  show_in_directory :integer(3)    default(1), not null
+#  writeable         :integer(3)    default(1), not null
+#  created_at        :datetime      
+#  updated_at        :datetime      
+#
+
 class SitrackColumn < ActiveRecord::Base
   has_many   :sitrack_view_columns
   has_many   :sitrack_views, :through => :sitrack_view_columns

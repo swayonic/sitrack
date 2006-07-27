@@ -15,7 +15,7 @@ class ApplicationController < ActionController::Base
   end
   
   def boom
-    raise boom
+    raise "boom"
   end
   
   def self.formatted_date(value=nil)
