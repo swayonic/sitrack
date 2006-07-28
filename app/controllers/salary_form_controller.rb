@@ -53,6 +53,7 @@ class SalaryFormController < ApplicationController
   def setup
     @application = @form.hr_si_application
     @person = @application.person
+    @current_address = @person.current_address || CurrentAddress.create(:person_id => @person.id)
     # If current date is >= 5th and <= 20th, put the 16th. Else put 1st
     day = Time.now.day
     month = Time.now.month

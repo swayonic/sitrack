@@ -81,6 +81,13 @@
 			<td align="right">New Annual Base Salary (Net): </td>
 			<td><%= text_field 'form', 'annual_salary', :size => 30, :maxlength => 200 %></td>
 		</tr>
+		<tr>
+			<td align="right">Current Address: (If this is wrong, go back and change it on the profile)</td>
+			<td>
+				<%= @current_address.display_html %><br/>
+				Home Phone: <%= @current_address.homePhone %>
+			</td>
+		</tr>
 		</table>
 	</div><br /><br />
 	<a href="javascript:document.forms[0].submit();" class="button">Preview Form</a>&nbsp;&nbsp;&nbsp;&nbsp;
