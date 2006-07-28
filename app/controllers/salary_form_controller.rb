@@ -67,6 +67,9 @@ class SalaryFormController < ApplicationController
   	end
     @form.date_of_change ||= date
     @tracking = @application.sitrack_tracking || SitrackTracking.new
+    @tracking.asgCity  = @current_address.city if @tracking.asgCity.nil? || @tracking.asgCity.empty?
+    @tracking.asgState  = @current_address.state if @tracking.asgState.nil? || @tracking.asgState.empty?
+    @tracking.asgCountry  = @current_address.country if @tracking.asgCountry.nil? || @tracking.asgCountry.empty?
     @approver = @form.approver
   end
 
