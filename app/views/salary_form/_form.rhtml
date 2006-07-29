@@ -47,7 +47,7 @@
 			<% end -%>
 		  <p><%=@form.salary_reason%><br/>
 			<b>Reason for Change</b></p>
-			<% if @tracking.is_stint? -%>
+			<% unless @tracking.is_stint? -%>
 			<p><b>
 			[</b> <%= 'X' if @tracking.internType == 'Internship'%> <b>] Full Time &nbsp;
 			[</b> <%= 'X' if @tracking.internType == 'Class B Intern'%> <b>] Part Time &nbsp; Hrs/week: </b><%= @form.hours_per_week %>
