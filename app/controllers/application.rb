@@ -14,6 +14,7 @@ class ApplicationController < ActionController::Base
     redirect_to('https://signin.mygcx.org/cas/logout?service='+url_for(:controller => 'directory', :only_path => false ))
   end
   
+  # this action just exists to test our error handling.
   def boom
     raise "boom"
   end
@@ -29,7 +30,7 @@ class ApplicationController < ActionController::Base
   
   def get_project(id)
     return '' if  0 == id || id.nil? || '' == id.to_s.strip # an id of 0 is useless. you're useless too
-    session[:projects] ||= []
+    session[:projects] ||= {}
     # early return if we have this project name cached
     return session[:projects][id] if session[:projects][id]
     # if it's not cached, look up the name, cache, and return it.
