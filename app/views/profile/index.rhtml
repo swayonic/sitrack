@@ -1,4 +1,4 @@
-<%#=debug(@options_hash)%>
+<%#=debug(@address_columns.size)%>
 <%
 # define which fields go in which boxes
 common = ['First Name',
@@ -304,7 +304,7 @@ person_id = @person['personID']
 				<%this_address = @addresses[address_type]
 					@address_columns.each_with_index do |column_name, i| 
 						value = (this_address.send(column_name) || '').to_s -%>
-						<%if i == 0 || i == 8 -%>
+						<%if i == 0 || i == (@address_columns.size / 2).floor -%>
 							<td>
 						<%else -%>
 							<br />
@@ -321,7 +321,7 @@ person_id = @person['personID']
 						</a>
 						</span>
 						</span>
-						<%if i == 7 || i == 14%>
+						<%if i == (@address_columns.size / 2).floor-1 || i == @address_columns.size-1%>
 							</td>
 						<%end -%>
 				<%end -%>
