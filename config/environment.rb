@@ -8,7 +8,6 @@ end
 # ENV['RAILS_ENV'] ||= 'production'
 
 # Specifies gem version of Rails to use when vendor/rails is not present
-RAILS_GEM_VERSION = '1.1.2'
 
 # Bootstrap the Rails environment, frameworks, and default configuration
 require File.join(File.dirname(__FILE__), 'boot')
@@ -54,7 +53,7 @@ Inflector.inflections do |inflect|
 end
 
 # Include your application configuration below
-Engines.start :common_engine
+Engines.start :common
 ActionMailer::Base.server_settings = {
   :addres   => "smtp1.ccci.org",
   :domain   => "ccci.org"
