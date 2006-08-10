@@ -54,6 +54,12 @@ class SalaryFormController < ApplicationController
     @application = @form.hr_si_application
     @person = @application.person
     @current_address = @person.current_address || CurrentAddress.create(:person_id => @person.id)
+    @tracking = @application.sitrack_tracking || SitrackTracking.new
+    @tracking.asgCity  = @current_address.city if @tracking.asgCity.nil? || @tracking.asgCity.empty?
+    @tracking.asgState  = @current_address.state if @tracking.asgState.nil? || @tracking.asgState.empty?
+    @tracking.asgCountry  = @current_address.country if @tracking.asgCountry.nil? || @tracking.asgCountry.empty?
+    @mpd = @application.sitrack_mpd
+    @approver = @form.approver
     # If current date is >= 5th and <= 20th, put the 16th. Else put 1st
     day = Time.now.day
     month = Time.now.month
@@ -66,11 +72,7 @@ class SalaryFormController < ApplicationController
   		date = Time.local(year, month, 1)
   	end
     @form.date_of_change ||= date
-    @tracking = @application.sitrack_tracking || SitrackTracking.new
-    @tracking.asgCity  = @current_address.city if @tracking.asgCity.nil? || @tracking.asgCity.empty?
-    @tracking.asgState  = @current_address.state if @tracking.asgState.nil? || @tracking.asgState.empty?
-    @tracking.asgCountry  = @current_address.country if @tracking.asgCountry.nil? || @tracking.asgCountry.empty?
-    @approver = @form.approver
+    @form.annual_salary ||= @mpd.salary.to_i * 12 if @mpd.salary
   end
 
 end
