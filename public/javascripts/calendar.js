@@ -15,7 +15,7 @@ function clearDate(today)
 	var href = 'href="javascript:popCalendar('+params+')"';
 	oDateTarget.innerHTML = '<a '+href+'"><img src="/images/edit.png" border="0"/></a>';
 	// use the iframe
-	var loc = '/directory/save_value?value=&id='+id+'&type=date&colID='+colID+'&fieldname='+fieldname;
+	var loc = '/modify/update?value=&id='+id+'&type=date&colID='+colID+'&fieldname='+fieldname;
 	var frame = window.frames["modify_frame"];
 	frame.document.location = loc;
 }
