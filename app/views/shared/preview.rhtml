@@ -2,6 +2,8 @@
 	Below is a preview of the form as it will look when staff services receives it.
 	Please make sure all the information is accurate before submitting it. <br/>
 	<%= link_to "| Submit the form |", :action => 'submit', :id => @form%> 
-	<%= link_to "| Go back and make changes |", :controller => 'profile', :id => @application%>
+	<% back_url = @controller.controller_name == 'add_form' ? {:controller => 'profile'} : {:action => 'fill'}
+		 back_url[:id] = @application%>
+	<%= link_to "| Go back and make changes |", back_url %>
 </div>
 <%= render(:partial => 'form') %>
