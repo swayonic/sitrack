@@ -2,9 +2,8 @@ require 'numeric'
 # Filters added to this controller will be run for all controllers in the application.
 # Likewise, all the methods added will be available for all controllers.
 class ApplicationController < ActionController::Base
-  before_filter CAS::CASFilter, AuthenticationFilter, :authorize, :except => ['no_access','logout']
+  before_filter AuthenticationFilter, :authorize, :except => ['no_access','logout']
   include ExceptionNotifiable	#Automatically generates emails of errors
-  #CAS::CASFilter
   # Define the app name. This is used in authentication_filter
   @@application_name = "sitrack"
   cattr_accessor :application_name
