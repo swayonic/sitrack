@@ -351,7 +351,7 @@ class DirectoryController < ApplicationController
           when 'project'
             value = get_project(value.to_i)
           end
-          @sheet += value+"\t"
+          @sheet += "#{value}\t"
         end
         @sheet += "\n"
       end
