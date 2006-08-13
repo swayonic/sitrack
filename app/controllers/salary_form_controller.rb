@@ -58,7 +58,7 @@ class SalaryFormController < ApplicationController
     @tracking.asgCity  = @current_address.city if @tracking.asgCity.nil? || @tracking.asgCity.empty?
     @tracking.asgState  = @current_address.state if @tracking.asgState.nil? || @tracking.asgState.empty?
     @tracking.asgCountry  = @current_address.country if @tracking.asgCountry.nil? || @tracking.asgCountry.empty?
-    @mpd = @application.sitrack_mpd
+    @mpd = @application.sitrack_mpd || SitrackMpd.new
     @approver = @form.approver
     # If current date is >= 5th and <= 20th, put the 16th. Else put 1st
     day = Time.now.day
