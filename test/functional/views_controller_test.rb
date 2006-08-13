@@ -5,17 +5,33 @@ require 'views_controller'
 class ViewsController; def rescue_action(e) raise e end; end
 
 class ViewsControllerTest < Test::Unit::TestCase
+  fixtures :simplesecuritymanager_user, :sitrack_users, :sitrack_views, 
+           :sitrack_view_columns, :sitrack_columns
   def setup
     @controller = ViewsController.new
     @request    = ActionController::TestRequest.new
     @response   = ActionController::TestResponse.new
     # fake cas
-    @request.session[:cas_receipt] = {:user => 'josh.starcher@uscm.org',
-                                      :ssoGuid => 'F167605D-94A4-7121-2A58-8D0F2CA6E026'}
+    CAS::Filter.fake = true
+    @request.session[:user] = User.find(:first)
   end
 
-  # Replace this with your real tests.
-  def test_truth
-    assert true
+  def test_index
+    get :index
+    assert_response :success
+    assert_template 'views/index'
+  end
+  
+  def test_new_get
+    get :new
+    assert_response :success
+    assert_template 'views/new'
+  end
+  
+  def test_new_post
+    post :new, :view => {:name => 'new_view'}
+    assert_response :redirect
+    
+    assert_redirected_to(:action => :edit)
   end
 end

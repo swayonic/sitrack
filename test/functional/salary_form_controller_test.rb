@@ -12,8 +12,8 @@ class SalaryFormControllerTest < Test::Unit::TestCase
     @request    = ActionController::TestRequest.new
     @response   = ActionController::TestResponse.new
     # fake cas
-    @request.session[:cas_receipt] = {:user => 'josh.starcher@uscm.org',
-                                      :ssoGuid => 'F167605D-94A4-7121-2A58-8D0F2CA6E026'}
+    CAS::Filter.fake = true
+    @request.session[:user] = User.find(:first)
     #Intern preview options
     @preview_options = {:id => hr_si_applications(:hero).id, :form => {:annual_salary => "600"}, :tracking => {:internType => 'Internship'}}
   end
