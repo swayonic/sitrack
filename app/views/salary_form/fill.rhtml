@@ -2,6 +2,9 @@
 	<div class="boxheader">Salary Form Information for <%= @person.full_name %></div>
 	<br/>
 	<%= error_messages_for 'form' %>
+	<%= error_messages_for 'person' %>
+	<%= error_messages_for 'application' %>
+	<%= error_messages_for 'tracking' %>
 	<%= start_form_tag :id => @application.id %>
 	<div class="box">
 		<div class="subboxheader">Information Fields</div>
