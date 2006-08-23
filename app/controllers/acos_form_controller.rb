@@ -5,7 +5,8 @@ class AcosFormController < ApplicationController
     else
       app_id = params[:id]
       @application = HrSiApplication.find(app_id)
-      @form = SitrackACOSForm.new(:hr_si_application_id => app_id, :approver_id => session[:user].person.id)
+      @form = SitrackACOSForm.new(:hr_si_application_id => app_id)
+      @form.approver = session[:user].person
     end
     # display form
     setup

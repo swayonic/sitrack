@@ -5,8 +5,8 @@ class AddFormController < ApplicationController
     else
       app_id = params[:id]
       @form = (SitrackAddForm.find(:first, :conditions => ['hr_si_application_id = ?', app_id]) || 
-                SitrackAddForm.create(:hr_si_application_id => app_id,
-                                      :approver_id => session[:user].person.id))
+                SitrackAddForm.create(:hr_si_application_id => app_id))
+      @form.approver = session[:user].person
     end
     preview if @form.valid?
   end
