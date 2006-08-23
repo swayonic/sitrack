@@ -2,7 +2,7 @@
 # migrations feature of ActiveRecord to incrementally modify your database, and
 # then regenerate this schema definition.
 
-ActiveRecord::Schema.define(:version => 14) do
+ActiveRecord::Schema.define(:version => 20) do
 
   create_table "am_friends_people", :id => false, :force => true do |t|
     t.column "friend_id", :integer, :limit => 10, :default => 0, :null => false
@@ -107,6 +107,8 @@ ActiveRecord::Schema.define(:version => 14) do
 
   add_index "cms_cmsfile", ["accessCount"], :name => "index1"
 
+ 
+
   create_table "crs_answer", :id => false, :force => true do |t|
     t.column "answerID", :integer, :limit => 10, :null => false
     t.column "body", :string, :limit => 7000
@@ -140,7 +142,7 @@ ActiveRecord::Schema.define(:version => 14) do
     t.column "password", :string, :limit => 20
     t.column "staffPassword", :string, :limit => 20
     t.column "region", :string, :limit => 3
-    t.column "briefDescription", :string, :limit => 8000
+    t.column "briefDescription", :text
     t.column "contactName", :string, :limit => 60
     t.column "contactEmail", :string, :limit => 50
     t.column "contactPhone", :string, :limit => 24
@@ -349,185 +351,6 @@ ActiveRecord::Schema.define(:version => 14) do
     t.column "sortNames", :string, :limit => 1000
   end
 
-  create_table "crs_viewmerchandisechoice", :id => false, :force => true do |t|
-    t.column "registrationID", :integer, :limit => 10, :default => 0, :null => false
-    t.column "registrationDate", :datetime
-    t.column "preRegistered", :string, :limit => 1
-    t.column "fk_PersonID", :integer, :limit => 10
-    t.column "displayOrder", :integer, :limit => 10
-    t.column "registrationType", :string, :limit => 50
-    t.column "required", :string, :limit => 1
-    t.column "amount", :float
-    t.column "note", :string
-    t.column "name", :string, :limit => 128
-    t.column "merchandiseID", :integer, :limit => 10, :default => 0, :null => false
-    t.column "fk_ConferenceID", :integer, :limit => 10
-    t.column "fk_RegistrationTypeID", :integer, :limit => 10
-  end
-
-  create_table "crs_viewquestion", :id => false, :force => true do |t|
-    t.column "registrationType", :string, :limit => 50
-    t.column "required", :string, :limit => 1
-    t.column "displayOrder", :integer, :limit => 10
-    t.column "fk_ConferenceID", :integer, :limit => 10
-    t.column "body", :string, :limit => 7000
-    t.column "answerType", :string, :limit => 50
-    t.column "status", :string, :limit => 50
-    t.column "questionID", :integer, :limit => 10, :default => 0, :null => false
-    t.column "fk_QuestionTextID", :integer, :limit => 10
-    t.column "questionTextID", :integer, :limit => 10, :default => 0, :null => false
-    t.column "fk_RegistrationTypeID", :integer, :limit => 10
-  end
-
-  create_table "crs_viewregistration", :id => false, :force => true do |t|
-    t.column "preRegistered", :string, :limit => 1
-    t.column "registrationDate", :datetime
-    t.column "registrationID", :integer, :limit => 10, :default => 0, :null => false
-    t.column "fk_ConferenceID", :integer, :limit => 10
-    t.column "createdDate", :datetime
-    t.column "firstName", :string, :limit => 50
-    t.column "lastName", :string, :limit => 50
-    t.column "middleInitial", :string, :limit => 50
-    t.column "birthDate", :string, :limit => 25
-    t.column "campus", :string, :limit => 128
-    t.column "yearInSchool", :string, :limit => 20
-    t.column "graduationDate", :string, :limit => 25
-    t.column "greekAffiliation", :string, :limit => 50
-    t.column "personID", :integer, :limit => 10
-    t.column "gender", :string, :limit => 1
-    t.column "address1", :string, :limit => 55
-    t.column "address2", :string, :limit => 55
-    t.column "city", :string, :limit => 50
-    t.column "state", :string, :limit => 50
-    t.column "zip", :string, :limit => 10
-    t.column "homePhone", :string, :limit => 25
-    t.column "country", :string, :limit => 64
-    t.column "email", :string, :limit => 200
-    t.column "permanentAddress1", :string, :limit => 55
-    t.column "permanentAddress2", :string, :limit => 55
-    t.column "permanentCity", :string, :limit => 50
-    t.column "permanentState", :string, :limit => 50
-    t.column "permanentZip", :string, :limit => 10
-    t.column "permanentPhone", :string, :limit => 25
-    t.column "permanentCountry", :string, :limit => 64
-    t.column "maritalStatus", :string, :limit => 20
-    t.column "numberOfKids", :string, :limit => 2
-    t.column "fk_PersonID", :integer, :limit => 10
-    t.column "accountNo", :string, :limit => 11
-    t.column "additionalRooms", :integer, :limit => 10
-    t.column "leaveDate", :datetime
-    t.column "arriveDate", :datetime
-    t.column "spouseID", :integer, :limit => 10
-    t.column "spouseComing", :integer, :limit => 10
-    t.column "spouseRegistrationID", :integer, :limit => 10
-    t.column "registeredFirst", :string, :limit => 1
-    t.column "isOnsite", :string, :limit => 1
-    t.column "fk_RegistrationTypeID", :integer, :limit => 10
-    t.column "registrationType", :string, :limit => 64
-    t.column "newPersonID", :integer, :limit => 10
-  end
-
-  create_table "crs_viewregistrationlocallevel", :id => false, :force => true do |t|
-    t.column "registrationID", :integer, :limit => 10, :default => 0, :null => false
-    t.column "registrationDate", :datetime
-    t.column "registrationType", :string, :limit => 80
-    t.column "preRegistered", :string, :limit => 1
-    t.column "fk_PersonID", :integer, :limit => 10
-    t.column "fk_ConferenceID", :integer, :limit => 10
-    t.column "lastName", :string, :limit => 50
-    t.column "personID", :integer, :limit => 10, :default => 0, :null => false
-    t.column "createdDate", :datetime
-    t.column "firstName", :string, :limit => 50
-    t.column "middleInitial", :string, :limit => 50
-    t.column "birthDate", :string, :limit => 25
-    t.column "campus", :string, :limit => 128
-    t.column "yearInSchool", :string, :limit => 20
-    t.column "graduationDate", :string, :limit => 25
-    t.column "greekAffiliation", :string, :limit => 50
-    t.column "gender", :string, :limit => 1
-    t.column "address1", :string, :limit => 55
-    t.column "address2", :string, :limit => 55
-    t.column "city", :string, :limit => 50
-    t.column "state", :string, :limit => 50
-    t.column "zip", :string, :limit => 10
-    t.column "homePhone", :string, :limit => 25
-    t.column "country", :string, :limit => 64
-    t.column "email", :string, :limit => 200
-    t.column "permanentAddress1", :string, :limit => 55
-    t.column "permanentAddress2", :string, :limit => 55
-    t.column "permanentCity", :string, :limit => 50
-    t.column "permanentState", :string, :limit => 50
-    t.column "permanentZip", :string, :limit => 10
-    t.column "permanentPhone", :string, :limit => 25
-    t.column "permanentCountry", :string, :limit => 64
-    t.column "maritalStatus", :string, :limit => 20
-    t.column "numberOfKids", :string, :limit => 2
-    t.column "localLevelId", :integer, :limit => 10, :default => 0, :null => false
-    t.column "region", :string, :limit => 2
-    t.column "llstate", :string, :limit => 6
-    t.column "accountNo", :string, :limit => 11
-    t.column "additionalRooms", :integer, :limit => 10
-    t.column "leaveDate", :datetime
-    t.column "arriveDate", :datetime
-    t.column "fk_RegistrationTypeID", :integer, :limit => 10
-    t.column "spouseComing", :integer, :limit => 10
-    t.column "spouseRegistrationID", :integer, :limit => 10
-    t.column "registeredFirst", :string, :limit => 1
-    t.column "isOnsite", :string, :limit => 1
-    t.column "spouseID", :integer, :limit => 10
-    t.column "newPersonID", :integer, :limit => 10
-  end
-
-  create_table "crs_viewregistrationtargetarea", :id => false, :force => true do |t|
-    t.column "registrationID", :integer, :limit => 10, :default => 0, :null => false
-    t.column "registrationDate", :datetime
-    t.column "registrationType", :string, :limit => 80
-    t.column "preRegistered", :string, :limit => 1
-    t.column "fk_PersonID", :integer, :limit => 10
-    t.column "fk_ConferenceID", :integer, :limit => 10
-    t.column "lastName", :string, :limit => 50
-    t.column "personID", :integer, :limit => 10, :default => 0, :null => false
-    t.column "createdDate", :datetime
-    t.column "firstName", :string, :limit => 50
-    t.column "middleInitial", :string, :limit => 50
-    t.column "birthDate", :string, :limit => 25
-    t.column "campus", :string, :limit => 128
-    t.column "yearInSchool", :string, :limit => 20
-    t.column "graduationDate", :string, :limit => 25
-    t.column "greekAffiliation", :string, :limit => 50
-    t.column "gender", :string, :limit => 1
-    t.column "address1", :string, :limit => 55
-    t.column "address2", :string, :limit => 55
-    t.column "city", :string, :limit => 50
-    t.column "state", :string, :limit => 50
-    t.column "zip", :string, :limit => 10
-    t.column "homePhone", :string, :limit => 25
-    t.column "country", :string, :limit => 64
-    t.column "email", :string, :limit => 200
-    t.column "permanentAddress1", :string, :limit => 55
-    t.column "permanentAddress2", :string, :limit => 55
-    t.column "permanentCity", :string, :limit => 50
-    t.column "permanentState", :string, :limit => 50
-    t.column "permanentZip", :string, :limit => 10
-    t.column "permanentPhone", :string, :limit => 25
-    t.column "permanentCountry", :string, :limit => 64
-    t.column "maritalStatus", :string, :limit => 20
-    t.column "numberOfKids", :string, :limit => 2
-    t.column "campusName", :string, :limit => 100
-    t.column "tastate", :string, :limit => 32
-    t.column "additionalRooms", :integer, :limit => 10
-    t.column "leaveDate", :datetime
-    t.column "arriveDate", :datetime
-    t.column "accountNo", :string, :limit => 11
-    t.column "fk_RegistrationTypeID", :integer, :limit => 10
-    t.column "spouseComing", :integer, :limit => 10
-    t.column "spouseRegistrationID", :integer, :limit => 10
-    t.column "registeredFirst", :string, :limit => 1
-    t.column "isOnsite", :string, :limit => 1
-    t.column "spouseID", :integer, :limit => 10
-    t.column "newPersonID", :integer, :limit => 10
-  end
-
   create_table "fsk_allocations", :force => true do |t|
     t.column "ssm_id", :integer, :limit => 10
     t.column "region_id", :integer, :limit => 10
@@ -607,6 +430,7 @@ ActiveRecord::Schema.define(:version => 14) do
     t.column "lock_version", :integer, :limit => 10, :default => 0, :null => false
     t.column "created_at", :datetime
     t.column "ship_last_name", :string
+    t.column "freeze_order", :boolean, :default => false
   end
 
   add_index "fsk_orders", ["ssm_id"], :name => "FK_fsk_orders_simplesecuritymanager_user"
@@ -771,7 +595,693 @@ ActiveRecord::Schema.define(:version => 14) do
     t.column "requestedByID", :string, :limit => 128
   end
 
-  create_table "hr_si_application", :id => false, :force => true do |t|
+  create_table "hr_si_application_2003", :id => false, :force => true do |t|
+    t.column "applicationID", :integer, :limit => 10, :null => false
+    t.column "locationA", :integer
+    t.column "locationAExplanation", :string, :limit => 90
+    t.column "locationB", :integer
+    t.column "locationBExplanation", :string, :limit => 90
+    t.column "locationC", :integer
+    t.column "locationCExplanation", :string, :limit => 90
+    t.column "availableMonth", :string, :limit => 2
+    t.column "availableYear", :string, :limit => 4
+    t.column "hasMinistryConflict", :integer, :limit => 10
+    t.column "ministryConflictExplanation", :text
+    t.column "hasSpecificLocation", :integer, :limit => 10
+    t.column "specificLocationRecruiterName", :string, :limit => 50
+    t.column "teamMembers", :text
+    t.column "isDating", :integer, :limit => 10
+    t.column "datingLocation", :text
+    t.column "hasCampusPartnership", :integer, :limit => 10
+    t.column "isDatingStint", :integer, :limit => 10
+    t.column "datingStintName", :text
+    t.column "language1", :string, :limit => 50
+    t.column "language1YearsStudied", :string, :limit => 20
+    t.column "language1Fluency", :integer, :limit => 10
+    t.column "language2", :string, :limit => 50
+    t.column "language2YearsStudied", :string, :limit => 20
+    t.column "language2Fluency", :integer, :limit => 10
+    t.column "previousMinistryExperience", :text
+    t.column "ministryTraining", :text
+    t.column "evangelismAttitude", :text
+    t.column "isEvangelismTrainable", :integer, :limit => 10
+    t.column "participationExplanation", :text
+    t.column "isFamiliarFourSpiritualLaws", :integer, :limit => 10
+    t.column "hasExperienceFourSpiritualLaws", :integer, :limit => 10
+    t.column "confidenceFourSpiritualLaws", :integer, :limit => 10
+    t.column "isFamiliarLifeAtLarge", :integer, :limit => 10
+    t.column "hasExperienceLifeAtLarge", :integer, :limit => 10
+    t.column "confidenceLifeAtLarge", :integer, :limit => 10
+    t.column "isFamiliarPersonalTestimony", :integer, :limit => 10
+    t.column "hasExperiencePersonalTestimony", :integer, :limit => 10
+    t.column "confidencePersonalTestimony", :integer, :limit => 10
+    t.column "isFamiliarExplainingGospel", :integer, :limit => 10
+    t.column "hasExperienceExplainingGospel", :integer, :limit => 10
+    t.column "confidenceExplainingGospel", :integer, :limit => 10
+    t.column "isFamiliarSharingFaith", :integer, :limit => 10
+    t.column "hasExperienceSharingFaith", :integer, :limit => 10
+    t.column "confidenceSharingFaith", :integer, :limit => 10
+    t.column "isFamiliarHolySpiritBooklet", :integer, :limit => 10
+    t.column "hasExperienceHolySpiritBooklet", :integer, :limit => 10
+    t.column "confidenceHolySpiritBooklet", :integer, :limit => 10
+    t.column "isFamiliarFollowUp", :integer, :limit => 10
+    t.column "hasExperienceFollowUp", :integer, :limit => 10
+    t.column "confidenceFollowUp", :integer, :limit => 10
+    t.column "isFamiliarHelpGrowInFaith", :integer, :limit => 10
+    t.column "hasExperienceHelpGrowInFaith", :integer, :limit => 10
+    t.column "confidenceHelpGrowInFaith", :integer, :limit => 10
+    t.column "isFamiliarTrainShareFaith", :integer, :limit => 10
+    t.column "hasExperienceTrainShareFaith", :integer, :limit => 10
+    t.column "confidenceTrainShareFaith", :integer, :limit => 10
+    t.column "isFamiliarOtherReligions", :integer, :limit => 10
+    t.column "hasExperienceOtherReligions", :integer, :limit => 10
+    t.column "confidenceOtherReligions", :integer, :limit => 10
+    t.column "leadershipPositions", :text
+    t.column "hasLedDiscipleshipGroup", :integer, :limit => 10
+    t.column "discipleshipGroupSize", :string, :limit => 50
+    t.column "leadershipEvaluation", :text
+    t.column "conversionMonth", :integer, :limit => 10
+    t.column "conversionYear", :integer, :limit => 10
+    t.column "memberChurchDenomination", :string, :limit => 50
+    t.column "memberChurchDuration", :string, :limit => 50
+    t.column "attendingChurchDenomination", :string, :limit => 50
+    t.column "attendingChurchDuration", :string, :limit => 50
+    t.column "attendingChurchInvolvement", :text
+    t.column "quietTimeQuantity", :text
+    t.column "quietTimeDescription", :text
+    t.column "explanationOfSalvation", :text
+    t.column "explanationOfSpiritFilled", :text
+    t.column "hasInvolvementSpeakingTongues", :integer, :limit => 10
+    t.column "differenceIndwellingFilled", :text
+    t.column "hasCrimeConviction", :integer, :limit => 10
+    t.column "crimeConvictionExplanation", :text
+    t.column "hasDrugUse", :integer, :limit => 10
+    t.column "isTobaccoUser", :integer, :limit => 10
+    t.column "isWillingChangeHabits", :integer, :limit => 10
+    t.column "authorityResponseExplanation", :text
+    t.column "alcoholUseFrequency", :text
+    t.column "alcoholUseDecision", :text
+    t.column "isWillingRefrainAlcohol", :integer, :limit => 10
+    t.column "unwillingRefrainAlcoholExplanation", :text
+    t.column "drugUseExplanation", :text
+    t.column "tobaccoUseExplanation", :text
+    t.column "isWillingAbstainTobacco", :integer, :limit => 10
+    t.column "hasRequestedPhoneCall", :integer, :limit => 10
+    t.column "contactPhoneNumber", :string, :limit => 50
+    t.column "contactBestTime", :string, :limit => 50
+    t.column "contactTimeZone", :string, :limit => 50
+    t.column "sexualInvolvementExplanation", :text
+    t.column "hasSexualGuidelines", :integer, :limit => 10
+    t.column "sexualGuidelineExplanation", :text
+    t.column "isCurrentlyDating", :integer, :limit => 10
+    t.column "currentlyDatingLocation", :text
+    t.column "hasHomosexualInvolvement", :integer, :limit => 10
+    t.column "homosexualInvolvementExplanation", :text
+    t.column "hasRecentPornographicInvolvement", :integer, :limit => 10
+    t.column "pornographicInvolvementMonth", :integer, :limit => 10
+    t.column "pornographicInvolvementYear", :integer, :limit => 10
+    t.column "pornographicInvolvementExplanation", :text
+    t.column "hasRecentSexualImmorality", :integer, :limit => 10
+    t.column "sexualImmoralityMonth", :integer, :limit => 10
+    t.column "sexualImmoralityYear", :integer, :limit => 10
+    t.column "sexualImmoralityExplanation", :text
+    t.column "hasOtherDateSinceImmorality", :integer, :limit => 10
+    t.column "singleImmoralityResultsExplanation", :text
+    t.column "marriedImmoralityResultsExplanation", :text
+    t.column "immoralityLifeChangeExplanation", :text
+    t.column "immoralityCurrentStrugglesExplanation", :text
+    t.column "additionalMoralComments", :text
+    t.column "isAwareMustRaiseSupport", :integer, :limit => 10
+    t.column "isInDebt", :integer, :limit => 10
+    t.column "debtNature1", :string, :limit => 50
+    t.column "debtTotal1", :string, :limit => 50
+    t.column "debtMonthlyPayment1", :string, :limit => 50
+    t.column "debtNature2", :string, :limit => 50
+    t.column "debtTotal2", :string, :limit => 50
+    t.column "debtMonthlyPayment2", :string, :limit => 50
+    t.column "debtNature3", :string, :limit => 50
+    t.column "debtTotal3", :string, :limit => 50
+    t.column "debtMonthlyPayment3", :string, :limit => 50
+    t.column "hasOtherFinancialResponsibility", :integer, :limit => 10
+    t.column "otherFinancialResponsibilityExplanation", :text
+    t.column "debtPaymentPlan", :text
+    t.column "debtPaymentTimeframe", :text
+    t.column "developingPartnersExplanation", :text
+    t.column "isWillingDevelopPartners", :integer, :limit => 10
+    t.column "unwillingDevelopPartnersExplanation", :text
+    t.column "isCommittedDevelopPartners", :integer, :limit => 10
+    t.column "uncommittedDevelopPartnersExplanation", :text
+    t.column "personalTestimonyGrowth", :text
+    t.column "internshipParticipationExplanation", :text
+    t.column "internshipObjectives", :text
+    t.column "currentMinistryDescription", :text
+    t.column "personalStrengthA", :text
+    t.column "personalStrengthB", :text
+    t.column "personalStrengthC", :text
+    t.column "personalDevelopmentA", :text
+    t.column "personalDevelopmentB", :text
+    t.column "personalDevelopmentC", :text
+    t.column "personalDescriptionA", :text
+    t.column "personalDescriptionB", :text
+    t.column "personalDescriptionC", :text
+    t.column "familyRelationshipDescription", :text
+    t.column "electronicSignature", :string, :limit => 90
+    t.column "ssn", :string, :limit => 50
+    t.column "fk_ssmUserID", :integer, :limit => 10
+    t.column "fk_PersonID", :integer, :limit => 10, :default => 0, :null => false
+    t.column "isPaid", :boolean
+    t.column "appFee", :float, :limit => 18
+    t.column "dateAppLastChanged", :datetime
+    t.column "dateAppStarted", :datetime
+    t.column "dateSubmitted", :datetime
+    t.column "isSubmitted", :boolean
+    t.column "appStatus", :string, :limit => 15
+    t.column "assignedToProject", :integer
+    t.column "finalProject", :integer
+    t.column "siYear", :string, :limit => 50
+    t.column "submitDate", :datetime
+    t.column "status", :string, :limit => 22
+    t.column "appType", :string, :limit => 64
+  end
+
+  add_index "hr_si_application_2003", ["fk_ssmUserID"], :name => "fk_ssmUserID"
+
+  create_table "hr_si_application_2004", :id => false, :force => true do |t|
+    t.column "applicationID", :integer, :limit => 10, :null => false
+    t.column "locationA", :integer
+    t.column "locationAExplanation", :string, :limit => 90
+    t.column "locationB", :integer
+    t.column "locationBExplanation", :string, :limit => 90
+    t.column "locationC", :integer
+    t.column "locationCExplanation", :string, :limit => 90
+    t.column "availableMonth", :string, :limit => 2
+    t.column "availableYear", :string, :limit => 4
+    t.column "hasMinistryConflict", :integer, :limit => 10
+    t.column "ministryConflictExplanation", :text
+    t.column "hasSpecificLocation", :integer, :limit => 10
+    t.column "specificLocationRecruiterName", :string, :limit => 50
+    t.column "teamMembers", :text
+    t.column "isDating", :integer, :limit => 10
+    t.column "datingLocation", :text
+    t.column "hasCampusPartnership", :integer, :limit => 10
+    t.column "isDatingStint", :integer, :limit => 10
+    t.column "datingStintName", :text
+    t.column "language1", :string, :limit => 50
+    t.column "language1YearsStudied", :string, :limit => 20
+    t.column "language1Fluency", :integer, :limit => 10
+    t.column "language2", :string, :limit => 50
+    t.column "language2YearsStudied", :string, :limit => 20
+    t.column "language2Fluency", :integer, :limit => 10
+    t.column "previousMinistryExperience", :text
+    t.column "ministryTraining", :text
+    t.column "evangelismAttitude", :text
+    t.column "isEvangelismTrainable", :integer, :limit => 10
+    t.column "participationExplanation", :text
+    t.column "isFamiliarFourSpiritualLaws", :integer, :limit => 10
+    t.column "hasExperienceFourSpiritualLaws", :integer, :limit => 10
+    t.column "confidenceFourSpiritualLaws", :integer, :limit => 10
+    t.column "isFamiliarLifeAtLarge", :integer, :limit => 10
+    t.column "hasExperienceLifeAtLarge", :integer, :limit => 10
+    t.column "confidenceLifeAtLarge", :integer, :limit => 10
+    t.column "isFamiliarPersonalTestimony", :integer, :limit => 10
+    t.column "hasExperiencePersonalTestimony", :integer, :limit => 10
+    t.column "confidencePersonalTestimony", :integer, :limit => 10
+    t.column "isFamiliarExplainingGospel", :integer, :limit => 10
+    t.column "hasExperienceExplainingGospel", :integer, :limit => 10
+    t.column "confidenceExplainingGospel", :integer, :limit => 10
+    t.column "isFamiliarSharingFaith", :integer, :limit => 10
+    t.column "hasExperienceSharingFaith", :integer, :limit => 10
+    t.column "confidenceSharingFaith", :integer, :limit => 10
+    t.column "isFamiliarHolySpiritBooklet", :integer, :limit => 10
+    t.column "hasExperienceHolySpiritBooklet", :integer, :limit => 10
+    t.column "confidenceHolySpiritBooklet", :integer, :limit => 10
+    t.column "isFamiliarFollowUp", :integer, :limit => 10
+    t.column "hasExperienceFollowUp", :integer, :limit => 10
+    t.column "confidenceFollowUp", :integer, :limit => 10
+    t.column "isFamiliarHelpGrowInFaith", :integer, :limit => 10
+    t.column "hasExperienceHelpGrowInFaith", :integer, :limit => 10
+    t.column "confidenceHelpGrowInFaith", :integer, :limit => 10
+    t.column "isFamiliarTrainShareFaith", :integer, :limit => 10
+    t.column "hasExperienceTrainShareFaith", :integer, :limit => 10
+    t.column "confidenceTrainShareFaith", :integer, :limit => 10
+    t.column "isFamiliarOtherReligions", :integer, :limit => 10
+    t.column "hasExperienceOtherReligions", :integer, :limit => 10
+    t.column "confidenceOtherReligions", :integer, :limit => 10
+    t.column "leadershipPositions", :text
+    t.column "hasLedDiscipleshipGroup", :integer, :limit => 10
+    t.column "discipleshipGroupSize", :string, :limit => 50
+    t.column "leadershipEvaluation", :text
+    t.column "conversionMonth", :integer, :limit => 10
+    t.column "conversionYear", :integer, :limit => 10
+    t.column "memberChurchDenomination", :string, :limit => 50
+    t.column "memberChurchDuration", :string, :limit => 50
+    t.column "attendingChurchDenomination", :string, :limit => 50
+    t.column "attendingChurchDuration", :string, :limit => 50
+    t.column "attendingChurchInvolvement", :text
+    t.column "quietTimeQuantity", :text
+    t.column "quietTimeDescription", :text
+    t.column "explanationOfSalvation", :text
+    t.column "explanationOfSpiritFilled", :text
+    t.column "hasInvolvementSpeakingTongues", :integer, :limit => 10
+    t.column "differenceIndwellingFilled", :text
+    t.column "hasCrimeConviction", :integer, :limit => 10
+    t.column "crimeConvictionExplanation", :text
+    t.column "hasDrugUse", :integer, :limit => 10
+    t.column "isTobaccoUser", :integer, :limit => 10
+    t.column "isWillingChangeHabits", :integer, :limit => 10
+    t.column "authorityResponseExplanation", :text
+    t.column "alcoholUseFrequency", :text
+    t.column "alcoholUseDecision", :text
+    t.column "isWillingRefrainAlcohol", :integer, :limit => 10
+    t.column "unwillingRefrainAlcoholExplanation", :text
+    t.column "drugUseExplanation", :text
+    t.column "tobaccoUseExplanation", :text
+    t.column "isWillingAbstainTobacco", :integer, :limit => 10
+    t.column "hasRequestedPhoneCall", :integer, :limit => 10
+    t.column "contactPhoneNumber", :string, :limit => 50
+    t.column "contactBestTime", :string, :limit => 50
+    t.column "contactTimeZone", :string, :limit => 50
+    t.column "sexualInvolvementExplanation", :text
+    t.column "hasSexualGuidelines", :integer, :limit => 10
+    t.column "sexualGuidelineExplanation", :text
+    t.column "isCurrentlyDating", :integer, :limit => 10
+    t.column "currentlyDatingLocation", :text
+    t.column "hasHomosexualInvolvement", :integer, :limit => 10
+    t.column "homosexualInvolvementExplanation", :text
+    t.column "hasRecentPornographicInvolvement", :integer, :limit => 10
+    t.column "pornographicInvolvementMonth", :integer, :limit => 10
+    t.column "pornographicInvolvementYear", :integer, :limit => 10
+    t.column "pornographicInvolvementExplanation", :text
+    t.column "hasRecentSexualImmorality", :integer, :limit => 10
+    t.column "sexualImmoralityMonth", :integer, :limit => 10
+    t.column "sexualImmoralityYear", :integer, :limit => 10
+    t.column "sexualImmoralityExplanation", :text
+    t.column "hasOtherDateSinceImmorality", :integer, :limit => 10
+    t.column "singleImmoralityResultsExplanation", :text
+    t.column "marriedImmoralityResultsExplanation", :text
+    t.column "immoralityLifeChangeExplanation", :text
+    t.column "immoralityCurrentStrugglesExplanation", :text
+    t.column "additionalMoralComments", :text
+    t.column "isAwareMustRaiseSupport", :integer, :limit => 10
+    t.column "isInDebt", :integer, :limit => 10
+    t.column "debtNature1", :string, :limit => 50
+    t.column "debtTotal1", :string, :limit => 50
+    t.column "debtMonthlyPayment1", :string, :limit => 50
+    t.column "debtNature2", :string, :limit => 50
+    t.column "debtTotal2", :string, :limit => 50
+    t.column "debtMonthlyPayment2", :string, :limit => 50
+    t.column "debtNature3", :string, :limit => 50
+    t.column "debtTotal3", :string, :limit => 50
+    t.column "debtMonthlyPayment3", :string, :limit => 50
+    t.column "hasOtherFinancialResponsibility", :integer, :limit => 10
+    t.column "otherFinancialResponsibilityExplanation", :text
+    t.column "debtPaymentPlan", :text
+    t.column "debtPaymentTimeframe", :text
+    t.column "developingPartnersExplanation", :text
+    t.column "isWillingDevelopPartners", :integer, :limit => 10
+    t.column "unwillingDevelopPartnersExplanation", :text
+    t.column "isCommittedDevelopPartners", :integer, :limit => 10
+    t.column "uncommittedDevelopPartnersExplanation", :text
+    t.column "personalTestimonyGrowth", :text
+    t.column "internshipParticipationExplanation", :text
+    t.column "internshipObjectives", :text
+    t.column "currentMinistryDescription", :text
+    t.column "personalStrengthA", :text
+    t.column "personalStrengthB", :text
+    t.column "personalStrengthC", :text
+    t.column "personalDevelopmentA", :text
+    t.column "personalDevelopmentB", :text
+    t.column "personalDevelopmentC", :text
+    t.column "personalDescriptionA", :text
+    t.column "personalDescriptionB", :text
+    t.column "personalDescriptionC", :text
+    t.column "familyRelationshipDescription", :text
+    t.column "electronicSignature", :string, :limit => 90
+    t.column "ssn", :string, :limit => 50
+    t.column "fk_ssmUserID", :integer, :limit => 10
+    t.column "fk_PersonID", :integer
+    t.column "isPaid", :boolean
+    t.column "appFee", :float, :limit => 18
+    t.column "dateAppLastChanged", :datetime
+    t.column "dateAppStarted", :datetime
+    t.column "dateSubmitted", :datetime
+    t.column "isSubmitted", :boolean
+    t.column "appStatus", :string, :limit => 15
+    t.column "assignedToProject", :integer
+    t.column "finalProject", :integer
+    t.column "siYear", :string, :limit => 50
+    t.column "submitDate", :datetime
+    t.column "status", :string, :limit => 22
+    t.column "appType", :string, :limit => 64
+  end
+
+  add_index "hr_si_application_2004", ["fk_PersonID"], :name => "fk_SIPersonID"
+  add_index "hr_si_application_2004", ["fk_ssmUserID"], :name => "fk_ssmUserID"
+
+  create_table "hr_si_application_2005", :id => false, :force => true do |t|
+    t.column "applicationID", :integer, :limit => 10, :null => false
+    t.column "locationA", :integer
+    t.column "locationAExplanation", :string, :limit => 90
+    t.column "locationB", :integer
+    t.column "locationBExplanation", :string, :limit => 90
+    t.column "locationC", :integer
+    t.column "locationCExplanation", :string, :limit => 90
+    t.column "availableMonth", :string, :limit => 2
+    t.column "availableYear", :string, :limit => 4
+    t.column "hasMinistryConflict", :integer, :limit => 10
+    t.column "ministryConflictExplanation", :text
+    t.column "hasSpecificLocation", :integer, :limit => 10
+    t.column "specificLocationRecruiterName", :string, :limit => 50
+    t.column "teamMembers", :text
+    t.column "isDating", :integer, :limit => 10
+    t.column "datingLocation", :text
+    t.column "hasCampusPartnership", :integer, :limit => 10
+    t.column "isDatingStint", :integer, :limit => 10
+    t.column "datingStintName", :text
+    t.column "language1", :string, :limit => 50
+    t.column "language1YearsStudied", :string, :limit => 20
+    t.column "language1Fluency", :integer, :limit => 10
+    t.column "language2", :string, :limit => 50
+    t.column "language2YearsStudied", :string, :limit => 20
+    t.column "language2Fluency", :integer, :limit => 10
+    t.column "previousMinistryExperience", :text
+    t.column "ministryTraining", :text
+    t.column "evangelismAttitude", :text
+    t.column "isEvangelismTrainable", :integer, :limit => 10
+    t.column "participationExplanation", :text
+    t.column "isFamiliarFourSpiritualLaws", :integer, :limit => 10
+    t.column "hasExperienceFourSpiritualLaws", :integer, :limit => 10
+    t.column "confidenceFourSpiritualLaws", :integer, :limit => 10
+    t.column "isFamiliarLifeAtLarge", :integer, :limit => 10
+    t.column "hasExperienceLifeAtLarge", :integer, :limit => 10
+    t.column "confidenceLifeAtLarge", :integer, :limit => 10
+    t.column "isFamiliarPersonalTestimony", :integer, :limit => 10
+    t.column "hasExperiencePersonalTestimony", :integer, :limit => 10
+    t.column "confidencePersonalTestimony", :integer, :limit => 10
+    t.column "isFamiliarExplainingGospel", :integer, :limit => 10
+    t.column "hasExperienceExplainingGospel", :integer, :limit => 10
+    t.column "confidenceExplainingGospel", :integer, :limit => 10
+    t.column "isFamiliarSharingFaith", :integer, :limit => 10
+    t.column "hasExperienceSharingFaith", :integer, :limit => 10
+    t.column "confidenceSharingFaith", :integer, :limit => 10
+    t.column "isFamiliarHolySpiritBooklet", :integer, :limit => 10
+    t.column "hasExperienceHolySpiritBooklet", :integer, :limit => 10
+    t.column "confidenceHolySpiritBooklet", :integer, :limit => 10
+    t.column "isFamiliarFollowUp", :integer, :limit => 10
+    t.column "hasExperienceFollowUp", :integer, :limit => 10
+    t.column "confidenceFollowUp", :integer, :limit => 10
+    t.column "isFamiliarHelpGrowInFaith", :integer, :limit => 10
+    t.column "hasExperienceHelpGrowInFaith", :integer, :limit => 10
+    t.column "confidenceHelpGrowInFaith", :integer, :limit => 10
+    t.column "isFamiliarTrainShareFaith", :integer, :limit => 10
+    t.column "hasExperienceTrainShareFaith", :integer, :limit => 10
+    t.column "confidenceTrainShareFaith", :integer, :limit => 10
+    t.column "isFamiliarOtherReligions", :integer, :limit => 10
+    t.column "hasExperienceOtherReligions", :integer, :limit => 10
+    t.column "confidenceOtherReligions", :integer, :limit => 10
+    t.column "leadershipPositions", :text
+    t.column "hasLedDiscipleshipGroup", :integer, :limit => 10
+    t.column "discipleshipGroupSize", :string, :limit => 50
+    t.column "leadershipEvaluation", :text
+    t.column "conversionMonth", :integer, :limit => 10
+    t.column "conversionYear", :integer, :limit => 10
+    t.column "memberChurchDenomination", :string, :limit => 75
+    t.column "memberChurchDuration", :string, :limit => 50
+    t.column "attendingChurchDenomination", :string, :limit => 50
+    t.column "attendingChurchDuration", :string, :limit => 50
+    t.column "attendingChurchInvolvement", :text
+    t.column "quietTimeQuantity", :text
+    t.column "quietTimeDescription", :text
+    t.column "explanationOfSalvation", :text
+    t.column "explanationOfSpiritFilled", :text
+    t.column "hasInvolvementSpeakingTongues", :integer, :limit => 10
+    t.column "differenceIndwellingFilled", :text
+    t.column "hasCrimeConviction", :integer, :limit => 10
+    t.column "crimeConvictionExplanation", :text
+    t.column "hasDrugUse", :integer, :limit => 10
+    t.column "isTobaccoUser", :integer, :limit => 10
+    t.column "isWillingChangeHabits", :integer, :limit => 10
+    t.column "authorityResponseExplanation", :text
+    t.column "alcoholUseFrequency", :text
+    t.column "alcoholUseDecision", :text
+    t.column "isWillingRefrainAlcohol", :integer, :limit => 10
+    t.column "unwillingRefrainAlcoholExplanation", :text
+    t.column "drugUseExplanation", :text
+    t.column "tobaccoUseExplanation", :text
+    t.column "isWillingAbstainTobacco", :integer, :limit => 10
+    t.column "hasRequestedPhoneCall", :integer, :limit => 10
+    t.column "contactPhoneNumber", :string, :limit => 50
+    t.column "contactBestTime", :string, :limit => 50
+    t.column "contactTimeZone", :string, :limit => 50
+    t.column "sexualInvolvementExplanation", :text
+    t.column "hasSexualGuidelines", :integer, :limit => 10
+    t.column "sexualGuidelineExplanation", :text
+    t.column "isCurrentlyDating", :integer, :limit => 10
+    t.column "currentlyDatingLocation", :text
+    t.column "hasHomosexualInvolvement", :integer, :limit => 10
+    t.column "homosexualInvolvementExplanation", :text
+    t.column "hasRecentPornographicInvolvement", :integer, :limit => 10
+    t.column "pornographicInvolvementMonth", :integer, :limit => 10
+    t.column "pornographicInvolvementYear", :integer, :limit => 10
+    t.column "pornographicInvolvementExplanation", :text
+    t.column "hasRecentSexualImmorality", :integer, :limit => 10
+    t.column "sexualImmoralityMonth", :integer, :limit => 10
+    t.column "sexualImmoralityYear", :integer, :limit => 10
+    t.column "sexualImmoralityExplanation", :text
+    t.column "hasOtherDateSinceImmorality", :integer, :limit => 10
+    t.column "singleImmoralityResultsExplanation", :text
+    t.column "marriedImmoralityResultsExplanation", :text
+    t.column "immoralityLifeChangeExplanation", :text
+    t.column "immoralityCurrentStrugglesExplanation", :text
+    t.column "additionalMoralComments", :text
+    t.column "isAwareMustRaiseSupport", :integer, :limit => 10
+    t.column "isInDebt", :integer, :limit => 10
+    t.column "debtNature1", :string, :limit => 50
+    t.column "debtTotal1", :string, :limit => 50
+    t.column "debtMonthlyPayment1", :string, :limit => 50
+    t.column "debtNature2", :string, :limit => 50
+    t.column "debtTotal2", :string, :limit => 50
+    t.column "debtMonthlyPayment2", :string, :limit => 50
+    t.column "debtNature3", :string, :limit => 50
+    t.column "debtTotal3", :string, :limit => 50
+    t.column "debtMonthlyPayment3", :string, :limit => 50
+    t.column "hasOtherFinancialResponsibility", :integer, :limit => 10
+    t.column "otherFinancialResponsibilityExplanation", :text
+    t.column "debtPaymentPlan", :text
+    t.column "debtPaymentTimeframe", :text
+    t.column "developingPartnersExplanation", :text
+    t.column "isWillingDevelopPartners", :integer, :limit => 10
+    t.column "unwillingDevelopPartnersExplanation", :text
+    t.column "isCommittedDevelopPartners", :integer, :limit => 10
+    t.column "uncommittedDevelopPartnersExplanation", :text
+    t.column "personalTestimonyGrowth", :text
+    t.column "internshipParticipationExplanation", :text
+    t.column "internshipObjectives", :text
+    t.column "currentMinistryDescription", :text
+    t.column "personalStrengthA", :text
+    t.column "personalStrengthB", :text
+    t.column "personalStrengthC", :text
+    t.column "personalDevelopmentA", :text
+    t.column "personalDevelopmentB", :text
+    t.column "personalDevelopmentC", :text
+    t.column "personalDescriptionA", :text
+    t.column "personalDescriptionB", :text
+    t.column "personalDescriptionC", :text
+    t.column "familyRelationshipDescription", :text
+    t.column "electronicSignature", :string, :limit => 90
+    t.column "ssn", :string, :limit => 50
+    t.column "fk_ssmUserID", :integer, :limit => 10
+    t.column "fk_PersonID", :integer, :limit => 10
+    t.column "isPaid", :boolean
+    t.column "appFee", :float, :limit => 18
+    t.column "dateAppLastChanged", :datetime
+    t.column "dateAppStarted", :datetime
+    t.column "dateSubmitted", :datetime
+    t.column "isSubmitted", :boolean
+    t.column "appStatus", :string, :limit => 15
+    t.column "assignedToProject", :integer, :limit => 10
+    t.column "finalProject", :integer
+    t.column "siYear", :string, :limit => 50
+    t.column "submitDate", :datetime
+    t.column "status", :string, :limit => 22
+    t.column "appType", :string, :limit => 64
+  end
+
+  add_index "hr_si_application_2005", ["fk_PersonID"], :name => "fk_SIPersonID"
+  add_index "hr_si_application_2005", ["fk_ssmUserID"], :name => "fk_ssmUserID"
+
+  create_table "hr_si_application_2006", :id => false, :force => true do |t|
+    t.column "applicationID", :integer, :limit => 10, :null => false
+    t.column "locationA", :integer
+    t.column "locationAExplanation", :string, :limit => 90
+    t.column "locationB", :integer
+    t.column "locationBExplanation", :string, :limit => 90
+    t.column "locationC", :integer
+    t.column "locationCExplanation", :string, :limit => 90
+    t.column "availableMonth", :string, :limit => 2
+    t.column "availableYear", :string, :limit => 4
+    t.column "hasMinistryConflict", :integer, :limit => 10
+    t.column "ministryConflictExplanation", :text
+    t.column "hasSpecificLocation", :integer, :limit => 10
+    t.column "specificLocationRecruiterName", :string, :limit => 50
+    t.column "teamMembers", :text
+    t.column "isDating", :integer, :limit => 10
+    t.column "datingLocation", :text
+    t.column "hasCampusPartnership", :integer, :limit => 10
+    t.column "isDatingStint", :integer, :limit => 10
+    t.column "datingStintName", :text
+    t.column "language1", :string, :limit => 50
+    t.column "language1YearsStudied", :string, :limit => 20
+    t.column "language1Fluency", :integer, :limit => 10
+    t.column "language2", :string, :limit => 50
+    t.column "language2YearsStudied", :string, :limit => 20
+    t.column "language2Fluency", :integer, :limit => 10
+    t.column "previousMinistryExperience", :text
+    t.column "ministryTraining", :text
+    t.column "evangelismAttitude", :text
+    t.column "isEvangelismTrainable", :integer, :limit => 10
+    t.column "participationExplanation", :text
+    t.column "isFamiliarFourSpiritualLaws", :integer, :limit => 10
+    t.column "hasExperienceFourSpiritualLaws", :integer, :limit => 10
+    t.column "confidenceFourSpiritualLaws", :integer, :limit => 10
+    t.column "isFamiliarLifeAtLarge", :integer, :limit => 10
+    t.column "hasExperienceLifeAtLarge", :integer, :limit => 10
+    t.column "confidenceLifeAtLarge", :integer, :limit => 10
+    t.column "isFamiliarPersonalTestimony", :integer, :limit => 10
+    t.column "hasExperiencePersonalTestimony", :integer, :limit => 10
+    t.column "confidencePersonalTestimony", :integer, :limit => 10
+    t.column "isFamiliarExplainingGospel", :integer, :limit => 10
+    t.column "hasExperienceExplainingGospel", :integer, :limit => 10
+    t.column "confidenceExplainingGospel", :integer, :limit => 10
+    t.column "isFamiliarSharingFaith", :integer, :limit => 10
+    t.column "hasExperienceSharingFaith", :integer, :limit => 10
+    t.column "confidenceSharingFaith", :integer, :limit => 10
+    t.column "isFamiliarHolySpiritBooklet", :integer, :limit => 10
+    t.column "hasExperienceHolySpiritBooklet", :integer, :limit => 10
+    t.column "confidenceHolySpiritBooklet", :integer, :limit => 10
+    t.column "isFamiliarFollowUp", :integer, :limit => 10
+    t.column "hasExperienceFollowUp", :integer, :limit => 10
+    t.column "confidenceFollowUp", :integer, :limit => 10
+    t.column "isFamiliarHelpGrowInFaith", :integer, :limit => 10
+    t.column "hasExperienceHelpGrowInFaith", :integer, :limit => 10
+    t.column "confidenceHelpGrowInFaith", :integer, :limit => 10
+    t.column "isFamiliarTrainShareFaith", :integer, :limit => 10
+    t.column "hasExperienceTrainShareFaith", :integer, :limit => 10
+    t.column "confidenceTrainShareFaith", :integer, :limit => 10
+    t.column "isFamiliarOtherReligions", :integer, :limit => 10
+    t.column "hasExperienceOtherReligions", :integer, :limit => 10
+    t.column "confidenceOtherReligions", :integer, :limit => 10
+    t.column "leadershipPositions", :text
+    t.column "hasLedDiscipleshipGroup", :integer, :limit => 10
+    t.column "discipleshipGroupSize", :string, :limit => 50
+    t.column "leadershipEvaluation", :text
+    t.column "conversionMonth", :integer, :limit => 10
+    t.column "conversionYear", :integer, :limit => 10
+    t.column "memberChurchDenomination", :string, :limit => 75
+    t.column "memberChurchDuration", :string, :limit => 50
+    t.column "attendingChurchDenomination", :string, :limit => 50
+    t.column "attendingChurchDuration", :string, :limit => 50
+    t.column "attendingChurchInvolvement", :text
+    t.column "quietTimeQuantity", :text
+    t.column "quietTimeDescription", :text
+    t.column "explanationOfSalvation", :text
+    t.column "explanationOfSpiritFilled", :text
+    t.column "hasInvolvementSpeakingTongues", :integer, :limit => 10
+    t.column "differenceIndwellingFilled", :text
+    t.column "hasCrimeConviction", :integer, :limit => 10
+    t.column "crimeConvictionExplanation", :text
+    t.column "hasDrugUse", :integer, :limit => 10
+    t.column "isTobaccoUser", :integer, :limit => 10
+    t.column "isWillingChangeHabits", :integer, :limit => 10
+    t.column "authorityResponseExplanation", :text
+    t.column "alcoholUseFrequency", :text
+    t.column "alcoholUseDecision", :text
+    t.column "isWillingRefrainAlcohol", :integer, :limit => 10
+    t.column "unwillingRefrainAlcoholExplanation", :text
+    t.column "drugUseExplanation", :text
+    t.column "tobaccoUseExplanation", :text
+    t.column "isWillingAbstainTobacco", :integer, :limit => 10
+    t.column "hasRequestedPhoneCall", :integer, :limit => 10
+    t.column "contactPhoneNumber", :string, :limit => 50
+    t.column "contactBestTime", :string, :limit => 50
+    t.column "contactTimeZone", :string, :limit => 50
+    t.column "sexualInvolvementExplanation", :text
+    t.column "hasSexualGuidelines", :integer, :limit => 10
+    t.column "sexualGuidelineExplanation", :text
+    t.column "isCurrentlyDating", :integer, :limit => 10
+    t.column "currentlyDatingLocation", :text
+    t.column "hasHomosexualInvolvement", :integer, :limit => 10
+    t.column "homosexualInvolvementExplanation", :text
+    t.column "hasRecentPornographicInvolvement", :integer, :limit => 10
+    t.column "pornographicInvolvementMonth", :integer, :limit => 10
+    t.column "pornographicInvolvementYear", :integer, :limit => 10
+    t.column "pornographicInvolvementExplanation", :text
+    t.column "hasRecentSexualImmorality", :integer, :limit => 10
+    t.column "sexualImmoralityMonth", :integer, :limit => 10
+    t.column "sexualImmoralityYear", :integer, :limit => 10
+    t.column "sexualImmoralityExplanation", :text
+    t.column "hasOtherDateSinceImmorality", :integer, :limit => 10
+    t.column "singleImmoralityResultsExplanation", :text
+    t.column "marriedImmoralityResultsExplanation", :text
+    t.column "immoralityLifeChangeExplanation", :text
+    t.column "immoralityCurrentStrugglesExplanation", :text
+    t.column "additionalMoralComments", :text
+    t.column "isAwareMustRaiseSupport", :integer, :limit => 10
+    t.column "isInDebt", :integer, :limit => 10
+    t.column "debtNature1", :string, :limit => 50
+    t.column "debtTotal1", :string, :limit => 50
+    t.column "debtMonthlyPayment1", :string, :limit => 50
+    t.column "debtNature2", :string, :limit => 50
+    t.column "debtTotal2", :string, :limit => 50
+    t.column "debtMonthlyPayment2", :string, :limit => 50
+    t.column "debtNature3", :string, :limit => 50
+    t.column "debtTotal3", :string, :limit => 50
+    t.column "debtMonthlyPayment3", :string, :limit => 50
+    t.column "hasOtherFinancialResponsibility", :integer, :limit => 10
+    t.column "otherFinancialResponsibilityExplanation", :text
+    t.column "debtPaymentPlan", :text
+    t.column "debtPaymentTimeframe", :text
+    t.column "developingPartnersExplanation", :text
+    t.column "isWillingDevelopPartners", :integer, :limit => 10
+    t.column "unwillingDevelopPartnersExplanation", :text
+    t.column "isCommittedDevelopPartners", :integer, :limit => 10
+    t.column "uncommittedDevelopPartnersExplanation", :text
+    t.column "personalTestimonyGrowth", :text
+    t.column "internshipParticipationExplanation", :text
+    t.column "internshipObjectives", :text
+    t.column "currentMinistryDescription", :text
+    t.column "personalStrengthA", :text
+    t.column "personalStrengthB", :text
+    t.column "personalStrengthC", :text
+    t.column "personalDevelopmentA", :text
+    t.column "personalDevelopmentB", :text
+    t.column "personalDevelopmentC", :text
+    t.column "personalDescriptionA", :text
+    t.column "personalDescriptionB", :text
+    t.column "personalDescriptionC", :text
+    t.column "familyRelationshipDescription", :text
+    t.column "electronicSignature", :string, :limit => 90
+    t.column "ssn", :string, :limit => 50
+    t.column "fk_ssmUserID", :integer, :limit => 10
+    t.column "fk_personID", :integer, :limit => 10
+    t.column "isPaid", :boolean
+    t.column "appFee", :float, :limit => 18
+    t.column "dateAppLastChanged", :datetime
+    t.column "dateAppStarted", :datetime
+    t.column "dateSubmitted", :datetime
+    t.column "isSubmitted", :boolean
+    t.column "appStatus", :string, :limit => 15
+    t.column "assignedToProject", :integer, :limit => 10
+    t.column "finalProject", :integer, :limit => 10
+    t.column "siYear", :string, :limit => 50
+    t.column "submitDate", :datetime
+    t.column "status", :string, :limit => 22
+    t.column "appType", :string, :limit => 64
+  end
+
+  add_index "hr_si_application_2006", ["fk_ssmUserID"], :name => "IX_hr_si_Application_2006_1"
+
+  create_table "hr_si_applications", :id => false, :force => true do |t|
     t.column "applicationID", :integer, :limit => 10, :null => false
     t.column "oldApplicationID", :integer, :limit => 10
     t.column "locationA", :integer
@@ -941,689 +1451,7 @@ ActiveRecord::Schema.define(:version => 14) do
     t.column "appType", :string, :limit => 64
   end
 
-  add_index "hr_si_application", ["fk_personID"], :name => "fk_PersonID"
-
-  create_table "hr_si_application_2003", :id => false, :force => true do |t|
-    t.column "applicationID", :integer, :limit => 10, :null => false
-    t.column "locationA", :integer
-    t.column "locationAExplanation", :string, :limit => 90
-    t.column "locationB", :integer
-    t.column "locationBExplanation", :string, :limit => 90
-    t.column "locationC", :integer
-    t.column "locationCExplanation", :string, :limit => 90
-    t.column "availableMonth", :string, :limit => 2
-    t.column "availableYear", :string, :limit => 4
-    t.column "hasMinistryConflict", :integer, :limit => 10
-    t.column "ministryConflictExplanation", :text
-    t.column "hasSpecificLocation", :integer, :limit => 10
-    t.column "specificLocationRecruiterName", :string, :limit => 50
-    t.column "teamMembers", :text
-    t.column "isDating", :integer, :limit => 10
-    t.column "datingLocation", :text
-    t.column "hasCampusPartnership", :integer, :limit => 10
-    t.column "isDatingStint", :integer, :limit => 10
-    t.column "datingStintName", :text
-    t.column "language1", :string, :limit => 50
-    t.column "language1YearsStudied", :string, :limit => 20
-    t.column "language1Fluency", :integer, :limit => 10
-    t.column "language2", :string, :limit => 50
-    t.column "language2YearsStudied", :string, :limit => 20
-    t.column "language2Fluency", :integer, :limit => 10
-    t.column "previousMinistryExperience", :text
-    t.column "ministryTraining", :text
-    t.column "evangelismAttitude", :text
-    t.column "isEvangelismTrainable", :integer, :limit => 10
-    t.column "participationExplanation", :text
-    t.column "isFamiliarFourSpiritualLaws", :integer, :limit => 10
-    t.column "hasExperienceFourSpiritualLaws", :integer, :limit => 10
-    t.column "confidenceFourSpiritualLaws", :integer, :limit => 10
-    t.column "isFamiliarLifeAtLarge", :integer, :limit => 10
-    t.column "hasExperienceLifeAtLarge", :integer, :limit => 10
-    t.column "confidenceLifeAtLarge", :integer, :limit => 10
-    t.column "isFamiliarPersonalTestimony", :integer, :limit => 10
-    t.column "hasExperiencePersonalTestimony", :integer, :limit => 10
-    t.column "confidencePersonalTestimony", :integer, :limit => 10
-    t.column "isFamiliarExplainingGospel", :integer, :limit => 10
-    t.column "hasExperienceExplainingGospel", :integer, :limit => 10
-    t.column "confidenceExplainingGospel", :integer, :limit => 10
-    t.column "isFamiliarSharingFaith", :integer, :limit => 10
-    t.column "hasExperienceSharingFaith", :integer, :limit => 10
-    t.column "confidenceSharingFaith", :integer, :limit => 10
-    t.column "isFamiliarHolySpiritBooklet", :integer, :limit => 10
-    t.column "hasExperienceHolySpiritBooklet", :integer, :limit => 10
-    t.column "confidenceHolySpiritBooklet", :integer, :limit => 10
-    t.column "isFamiliarFollowUp", :integer, :limit => 10
-    t.column "hasExperienceFollowUp", :integer, :limit => 10
-    t.column "confidenceFollowUp", :integer, :limit => 10
-    t.column "isFamiliarHelpGrowInFaith", :integer, :limit => 10
-    t.column "hasExperienceHelpGrowInFaith", :integer, :limit => 10
-    t.column "confidenceHelpGrowInFaith", :integer, :limit => 10
-    t.column "isFamiliarTrainShareFaith", :integer, :limit => 10
-    t.column "hasExperienceTrainShareFaith", :integer, :limit => 10
-    t.column "confidenceTrainShareFaith", :integer, :limit => 10
-    t.column "isFamiliarOtherReligions", :integer, :limit => 10
-    t.column "hasExperienceOtherReligions", :integer, :limit => 10
-    t.column "confidenceOtherReligions", :integer, :limit => 10
-    t.column "leadershipPositions", :text
-    t.column "hasLedDiscipleshipGroup", :integer, :limit => 10
-    t.column "discipleshipGroupSize", :string, :limit => 50
-    t.column "leadershipEvaluation", :text
-    t.column "conversionMonth", :integer, :limit => 10
-    t.column "conversionYear", :integer, :limit => 10
-    t.column "memberChurchDenomination", :string, :limit => 75
-    t.column "memberChurchDuration", :string, :limit => 50
-    t.column "attendingChurchDenomination", :string, :limit => 50
-    t.column "attendingChurchDuration", :string, :limit => 50
-    t.column "attendingChurchInvolvement", :text
-    t.column "quietTimeQuantity", :text
-    t.column "quietTimeDescription", :text
-    t.column "explanationOfSalvation", :text
-    t.column "explanationOfSpiritFilled", :text
-    t.column "hasInvolvementSpeakingTongues", :integer, :limit => 10
-    t.column "differenceIndwellingFilled", :text
-    t.column "hasCrimeConviction", :integer, :limit => 10
-    t.column "crimeConvictionExplanation", :text
-    t.column "hasDrugUse", :integer, :limit => 10
-    t.column "isTobaccoUser", :integer, :limit => 10
-    t.column "isWillingChangeHabits", :integer, :limit => 10
-    t.column "authorityResponseExplanation", :text
-    t.column "alcoholUseFrequency", :text
-    t.column "alcoholUseDecision", :text
-    t.column "isWillingRefrainAlcohol", :integer, :limit => 10
-    t.column "unwillingRefrainAlcoholExplanation", :text
-    t.column "drugUseExplanation", :text
-    t.column "tobaccoUseExplanation", :text
-    t.column "isWillingAbstainTobacco", :integer, :limit => 10
-    t.column "hasRequestedPhoneCall", :integer, :limit => 10
-    t.column "contactPhoneNumber", :string, :limit => 50
-    t.column "contactBestTime", :string, :limit => 50
-    t.column "contactTimeZone", :string, :limit => 50
-    t.column "sexualInvolvementExplanation", :text
-    t.column "hasSexualGuidelines", :integer, :limit => 10
-    t.column "sexualGuidelineExplanation", :text
-    t.column "isCurrentlyDating", :integer, :limit => 10
-    t.column "currentlyDatingLocation", :text
-    t.column "hasHomosexualInvolvement", :integer, :limit => 10
-    t.column "homosexualInvolvementExplanation", :text
-    t.column "hasRecentPornographicInvolvement", :integer, :limit => 10
-    t.column "pornographicInvolvementMonth", :integer, :limit => 10
-    t.column "pornographicInvolvementYear", :integer, :limit => 10
-    t.column "pornographicInvolvementExplanation", :text
-    t.column "hasRecentSexualImmorality", :integer, :limit => 10
-    t.column "sexualImmoralityMonth", :integer, :limit => 10
-    t.column "sexualImmoralityYear", :integer, :limit => 10
-    t.column "sexualImmoralityExplanation", :text
-    t.column "hasOtherDateSinceImmorality", :integer, :limit => 10
-    t.column "singleImmoralityResultsExplanation", :text
-    t.column "marriedImmoralityResultsExplanation", :text
-    t.column "immoralityLifeChangeExplanation", :text
-    t.column "immoralityCurrentStrugglesExplanation", :text
-    t.column "additionalMoralComments", :text
-    t.column "isAwareMustRaiseSupport", :integer, :limit => 10
-    t.column "isInDebt", :integer, :limit => 10
-    t.column "debtNature1", :string, :limit => 50
-    t.column "debtTotal1", :string, :limit => 50
-    t.column "debtMonthlyPayment1", :string, :limit => 50
-    t.column "debtNature2", :string, :limit => 50
-    t.column "debtTotal2", :string, :limit => 50
-    t.column "debtMonthlyPayment2", :string, :limit => 50
-    t.column "debtNature3", :string, :limit => 50
-    t.column "debtTotal3", :string, :limit => 50
-    t.column "debtMonthlyPayment3", :string, :limit => 50
-    t.column "hasOtherFinancialResponsibility", :integer, :limit => 10
-    t.column "otherFinancialResponsibilityExplanation", :text
-    t.column "debtPaymentPlan", :text
-    t.column "debtPaymentTimeframe", :text
-    t.column "developingPartnersExplanation", :text
-    t.column "isWillingDevelopPartners", :integer, :limit => 10
-    t.column "unwillingDevelopPartnersExplanation", :text
-    t.column "isCommittedDevelopPartners", :integer, :limit => 10
-    t.column "uncommittedDevelopPartnersExplanation", :text
-    t.column "personalTestimonyGrowth", :text
-    t.column "internshipParticipationExplanation", :text
-    t.column "internshipObjectives", :text
-    t.column "currentMinistryDescription", :text
-    t.column "personalStrengthA", :text
-    t.column "personalStrengthB", :text
-    t.column "personalStrengthC", :text
-    t.column "personalDevelopmentA", :text
-    t.column "personalDevelopmentB", :text
-    t.column "personalDevelopmentC", :text
-    t.column "personalDescriptionA", :text
-    t.column "personalDescriptionB", :text
-    t.column "personalDescriptionC", :text
-    t.column "familyRelationshipDescription", :text
-    t.column "electronicSignature", :string, :limit => 90
-    t.column "ssn", :string, :limit => 50
-    t.column "isPaid", :boolean
-    t.column "appFee", :float, :limit => 18
-    t.column "isSubmitted", :boolean
-    t.column "appStatus", :string, :limit => 15
-    t.column "siYear", :string, :limit => 50
-    t.column "status", :string, :limit => 22
-    t.column "appType", :string, :limit => 64
-    t.column "dateSubmitted", :datetime
-    t.column "dateAppStarted", :datetime
-    t.column "dateAppLastChanged", :datetime
-    t.column "assignedToProject", :integer
-    t.column "finalProject", :integer
-    t.column "fk_ssmUserID", :integer, :limit => 10
-    t.column "fk_personID", :integer, :default => 0, :null => false
-  end
-
-  add_index "hr_si_application_2003", ["fk_ssmUserID"], :name => "fk_ssmUserID"
-
-  create_table "hr_si_application_2004", :id => false, :force => true do |t|
-    t.column "applicationID", :integer, :limit => 10, :null => false
-    t.column "locationA", :integer
-    t.column "locationAExplanation", :string, :limit => 90
-    t.column "locationB", :integer
-    t.column "locationBExplanation", :string, :limit => 90
-    t.column "locationC", :integer
-    t.column "locationCExplanation", :string, :limit => 90
-    t.column "availableMonth", :string, :limit => 2
-    t.column "availableYear", :string, :limit => 4
-    t.column "hasMinistryConflict", :integer, :limit => 10
-    t.column "ministryConflictExplanation", :text
-    t.column "hasSpecificLocation", :integer, :limit => 10
-    t.column "specificLocationRecruiterName", :string, :limit => 50
-    t.column "teamMembers", :text
-    t.column "isDating", :integer, :limit => 10
-    t.column "datingLocation", :text
-    t.column "hasCampusPartnership", :integer, :limit => 10
-    t.column "isDatingStint", :integer, :limit => 10
-    t.column "datingStintName", :text
-    t.column "language1", :string, :limit => 50
-    t.column "language1YearsStudied", :string, :limit => 20
-    t.column "language1Fluency", :integer, :limit => 10
-    t.column "language2", :string, :limit => 50
-    t.column "language2YearsStudied", :string, :limit => 20
-    t.column "language2Fluency", :integer, :limit => 10
-    t.column "previousMinistryExperience", :text
-    t.column "ministryTraining", :text
-    t.column "evangelismAttitude", :text
-    t.column "isEvangelismTrainable", :integer, :limit => 10
-    t.column "participationExplanation", :text
-    t.column "isFamiliarFourSpiritualLaws", :integer, :limit => 10
-    t.column "hasExperienceFourSpiritualLaws", :integer, :limit => 10
-    t.column "confidenceFourSpiritualLaws", :integer, :limit => 10
-    t.column "isFamiliarLifeAtLarge", :integer, :limit => 10
-    t.column "hasExperienceLifeAtLarge", :integer, :limit => 10
-    t.column "confidenceLifeAtLarge", :integer, :limit => 10
-    t.column "isFamiliarPersonalTestimony", :integer, :limit => 10
-    t.column "hasExperiencePersonalTestimony", :integer, :limit => 10
-    t.column "confidencePersonalTestimony", :integer, :limit => 10
-    t.column "isFamiliarExplainingGospel", :integer, :limit => 10
-    t.column "hasExperienceExplainingGospel", :integer, :limit => 10
-    t.column "confidenceExplainingGospel", :integer, :limit => 10
-    t.column "isFamiliarSharingFaith", :integer, :limit => 10
-    t.column "hasExperienceSharingFaith", :integer, :limit => 10
-    t.column "confidenceSharingFaith", :integer, :limit => 10
-    t.column "isFamiliarHolySpiritBooklet", :integer, :limit => 10
-    t.column "hasExperienceHolySpiritBooklet", :integer, :limit => 10
-    t.column "confidenceHolySpiritBooklet", :integer, :limit => 10
-    t.column "isFamiliarFollowUp", :integer, :limit => 10
-    t.column "hasExperienceFollowUp", :integer, :limit => 10
-    t.column "confidenceFollowUp", :integer, :limit => 10
-    t.column "isFamiliarHelpGrowInFaith", :integer, :limit => 10
-    t.column "hasExperienceHelpGrowInFaith", :integer, :limit => 10
-    t.column "confidenceHelpGrowInFaith", :integer, :limit => 10
-    t.column "isFamiliarTrainShareFaith", :integer, :limit => 10
-    t.column "hasExperienceTrainShareFaith", :integer, :limit => 10
-    t.column "confidenceTrainShareFaith", :integer, :limit => 10
-    t.column "isFamiliarOtherReligions", :integer, :limit => 10
-    t.column "hasExperienceOtherReligions", :integer, :limit => 10
-    t.column "confidenceOtherReligions", :integer, :limit => 10
-    t.column "leadershipPositions", :text
-    t.column "hasLedDiscipleshipGroup", :integer, :limit => 10
-    t.column "discipleshipGroupSize", :string, :limit => 50
-    t.column "leadershipEvaluation", :text
-    t.column "conversionMonth", :integer, :limit => 10
-    t.column "conversionYear", :integer, :limit => 10
-    t.column "memberChurchDenomination", :string, :limit => 75
-    t.column "memberChurchDuration", :string, :limit => 50
-    t.column "attendingChurchDenomination", :string, :limit => 50
-    t.column "attendingChurchDuration", :string, :limit => 50
-    t.column "attendingChurchInvolvement", :text
-    t.column "quietTimeQuantity", :text
-    t.column "quietTimeDescription", :text
-    t.column "explanationOfSalvation", :text
-    t.column "explanationOfSpiritFilled", :text
-    t.column "hasInvolvementSpeakingTongues", :integer, :limit => 10
-    t.column "differenceIndwellingFilled", :text
-    t.column "hasCrimeConviction", :integer, :limit => 10
-    t.column "crimeConvictionExplanation", :text
-    t.column "hasDrugUse", :integer, :limit => 10
-    t.column "isTobaccoUser", :integer, :limit => 10
-    t.column "isWillingChangeHabits", :integer, :limit => 10
-    t.column "authorityResponseExplanation", :text
-    t.column "alcoholUseFrequency", :text
-    t.column "alcoholUseDecision", :text
-    t.column "isWillingRefrainAlcohol", :integer, :limit => 10
-    t.column "unwillingRefrainAlcoholExplanation", :text
-    t.column "drugUseExplanation", :text
-    t.column "tobaccoUseExplanation", :text
-    t.column "isWillingAbstainTobacco", :integer, :limit => 10
-    t.column "hasRequestedPhoneCall", :integer, :limit => 10
-    t.column "contactPhoneNumber", :string, :limit => 50
-    t.column "contactBestTime", :string, :limit => 50
-    t.column "contactTimeZone", :string, :limit => 50
-    t.column "sexualInvolvementExplanation", :text
-    t.column "hasSexualGuidelines", :integer, :limit => 10
-    t.column "sexualGuidelineExplanation", :text
-    t.column "isCurrentlyDating", :integer, :limit => 10
-    t.column "currentlyDatingLocation", :text
-    t.column "hasHomosexualInvolvement", :integer, :limit => 10
-    t.column "homosexualInvolvementExplanation", :text
-    t.column "hasRecentPornographicInvolvement", :integer, :limit => 10
-    t.column "pornographicInvolvementMonth", :integer, :limit => 10
-    t.column "pornographicInvolvementYear", :integer, :limit => 10
-    t.column "pornographicInvolvementExplanation", :text
-    t.column "hasRecentSexualImmorality", :integer, :limit => 10
-    t.column "sexualImmoralityMonth", :integer, :limit => 10
-    t.column "sexualImmoralityYear", :integer, :limit => 10
-    t.column "sexualImmoralityExplanation", :text
-    t.column "hasOtherDateSinceImmorality", :integer, :limit => 10
-    t.column "singleImmoralityResultsExplanation", :text
-    t.column "marriedImmoralityResultsExplanation", :text
-    t.column "immoralityLifeChangeExplanation", :text
-    t.column "immoralityCurrentStrugglesExplanation", :text
-    t.column "additionalMoralComments", :text
-    t.column "isAwareMustRaiseSupport", :integer, :limit => 10
-    t.column "isInDebt", :integer, :limit => 10
-    t.column "debtNature1", :string, :limit => 50
-    t.column "debtTotal1", :string, :limit => 50
-    t.column "debtMonthlyPayment1", :string, :limit => 50
-    t.column "debtNature2", :string, :limit => 50
-    t.column "debtTotal2", :string, :limit => 50
-    t.column "debtMonthlyPayment2", :string, :limit => 50
-    t.column "debtNature3", :string, :limit => 50
-    t.column "debtTotal3", :string, :limit => 50
-    t.column "debtMonthlyPayment3", :string, :limit => 50
-    t.column "hasOtherFinancialResponsibility", :integer, :limit => 10
-    t.column "otherFinancialResponsibilityExplanation", :text
-    t.column "debtPaymentPlan", :text
-    t.column "debtPaymentTimeframe", :text
-    t.column "developingPartnersExplanation", :text
-    t.column "isWillingDevelopPartners", :integer, :limit => 10
-    t.column "unwillingDevelopPartnersExplanation", :text
-    t.column "isCommittedDevelopPartners", :integer, :limit => 10
-    t.column "uncommittedDevelopPartnersExplanation", :text
-    t.column "personalTestimonyGrowth", :text
-    t.column "internshipParticipationExplanation", :text
-    t.column "internshipObjectives", :text
-    t.column "currentMinistryDescription", :text
-    t.column "personalStrengthA", :text
-    t.column "personalStrengthB", :text
-    t.column "personalStrengthC", :text
-    t.column "personalDevelopmentA", :text
-    t.column "personalDevelopmentB", :text
-    t.column "personalDevelopmentC", :text
-    t.column "personalDescriptionA", :text
-    t.column "personalDescriptionB", :text
-    t.column "personalDescriptionC", :text
-    t.column "familyRelationshipDescription", :text
-    t.column "electronicSignature", :string, :limit => 90
-    t.column "ssn", :string, :limit => 50
-    t.column "isPaid", :boolean
-    t.column "appFee", :float, :limit => 18
-    t.column "isSubmitted", :boolean
-    t.column "appStatus", :string, :limit => 15
-    t.column "siYear", :string, :limit => 50
-    t.column "status", :string, :limit => 22
-    t.column "appType", :string, :limit => 64
-    t.column "dateSubmitted", :datetime
-    t.column "dateAppStarted", :datetime
-    t.column "dateAppLastChanged", :datetime
-    t.column "assignedToProject", :integer
-    t.column "finalProject", :integer
-    t.column "fk_ssmUserID", :integer, :limit => 10
-    t.column "fk_personID", :integer
-  end
-
-  add_index "hr_si_application_2004", ["fk_personID"], :name => "fk_SIPersonID"
-  add_index "hr_si_application_2004", ["fk_ssmUserID"], :name => "fk_ssmUserID"
-
-  create_table "hr_si_application_2005", :id => false, :force => true do |t|
-    t.column "applicationID", :integer, :limit => 10, :null => false
-    t.column "locationA", :integer
-    t.column "locationAExplanation", :string, :limit => 90
-    t.column "locationB", :integer
-    t.column "locationBExplanation", :string, :limit => 90
-    t.column "locationC", :integer
-    t.column "locationCExplanation", :string, :limit => 90
-    t.column "availableMonth", :string, :limit => 2
-    t.column "availableYear", :string, :limit => 4
-    t.column "hasMinistryConflict", :integer, :limit => 10
-    t.column "ministryConflictExplanation", :text
-    t.column "hasSpecificLocation", :integer, :limit => 10
-    t.column "specificLocationRecruiterName", :string, :limit => 50
-    t.column "teamMembers", :text
-    t.column "isDating", :integer, :limit => 10
-    t.column "datingLocation", :text
-    t.column "hasCampusPartnership", :integer, :limit => 10
-    t.column "isDatingStint", :integer, :limit => 10
-    t.column "datingStintName", :text
-    t.column "language1", :string, :limit => 50
-    t.column "language1YearsStudied", :string, :limit => 20
-    t.column "language1Fluency", :integer, :limit => 10
-    t.column "language2", :string, :limit => 50
-    t.column "language2YearsStudied", :string, :limit => 20
-    t.column "language2Fluency", :integer, :limit => 10
-    t.column "previousMinistryExperience", :text
-    t.column "ministryTraining", :text
-    t.column "evangelismAttitude", :text
-    t.column "isEvangelismTrainable", :integer, :limit => 10
-    t.column "participationExplanation", :text
-    t.column "isFamiliarFourSpiritualLaws", :integer, :limit => 10
-    t.column "hasExperienceFourSpiritualLaws", :integer, :limit => 10
-    t.column "confidenceFourSpiritualLaws", :integer, :limit => 10
-    t.column "isFamiliarLifeAtLarge", :integer, :limit => 10
-    t.column "hasExperienceLifeAtLarge", :integer, :limit => 10
-    t.column "confidenceLifeAtLarge", :integer, :limit => 10
-    t.column "isFamiliarPersonalTestimony", :integer, :limit => 10
-    t.column "hasExperiencePersonalTestimony", :integer, :limit => 10
-    t.column "confidencePersonalTestimony", :integer, :limit => 10
-    t.column "isFamiliarExplainingGospel", :integer, :limit => 10
-    t.column "hasExperienceExplainingGospel", :integer, :limit => 10
-    t.column "confidenceExplainingGospel", :integer, :limit => 10
-    t.column "isFamiliarSharingFaith", :integer, :limit => 10
-    t.column "hasExperienceSharingFaith", :integer, :limit => 10
-    t.column "confidenceSharingFaith", :integer, :limit => 10
-    t.column "isFamiliarHolySpiritBooklet", :integer, :limit => 10
-    t.column "hasExperienceHolySpiritBooklet", :integer, :limit => 10
-    t.column "confidenceHolySpiritBooklet", :integer, :limit => 10
-    t.column "isFamiliarFollowUp", :integer, :limit => 10
-    t.column "hasExperienceFollowUp", :integer, :limit => 10
-    t.column "confidenceFollowUp", :integer, :limit => 10
-    t.column "isFamiliarHelpGrowInFaith", :integer, :limit => 10
-    t.column "hasExperienceHelpGrowInFaith", :integer, :limit => 10
-    t.column "confidenceHelpGrowInFaith", :integer, :limit => 10
-    t.column "isFamiliarTrainShareFaith", :integer, :limit => 10
-    t.column "hasExperienceTrainShareFaith", :integer, :limit => 10
-    t.column "confidenceTrainShareFaith", :integer, :limit => 10
-    t.column "isFamiliarOtherReligions", :integer, :limit => 10
-    t.column "hasExperienceOtherReligions", :integer, :limit => 10
-    t.column "confidenceOtherReligions", :integer, :limit => 10
-    t.column "leadershipPositions", :text
-    t.column "hasLedDiscipleshipGroup", :integer, :limit => 10
-    t.column "discipleshipGroupSize", :string, :limit => 50
-    t.column "leadershipEvaluation", :text
-    t.column "conversionMonth", :integer, :limit => 10
-    t.column "conversionYear", :integer, :limit => 10
-    t.column "memberChurchDenomination", :string, :limit => 75
-    t.column "memberChurchDuration", :string, :limit => 50
-    t.column "attendingChurchDenomination", :string, :limit => 50
-    t.column "attendingChurchDuration", :string, :limit => 50
-    t.column "attendingChurchInvolvement", :text
-    t.column "quietTimeQuantity", :text
-    t.column "quietTimeDescription", :text
-    t.column "explanationOfSalvation", :text
-    t.column "explanationOfSpiritFilled", :text
-    t.column "hasInvolvementSpeakingTongues", :integer, :limit => 10
-    t.column "differenceIndwellingFilled", :text
-    t.column "hasCrimeConviction", :integer, :limit => 10
-    t.column "crimeConvictionExplanation", :text
-    t.column "hasDrugUse", :integer, :limit => 10
-    t.column "isTobaccoUser", :integer, :limit => 10
-    t.column "isWillingChangeHabits", :integer, :limit => 10
-    t.column "authorityResponseExplanation", :text
-    t.column "alcoholUseFrequency", :text
-    t.column "alcoholUseDecision", :text
-    t.column "isWillingRefrainAlcohol", :integer, :limit => 10
-    t.column "unwillingRefrainAlcoholExplanation", :text
-    t.column "drugUseExplanation", :text
-    t.column "tobaccoUseExplanation", :text
-    t.column "isWillingAbstainTobacco", :integer, :limit => 10
-    t.column "hasRequestedPhoneCall", :integer, :limit => 10
-    t.column "contactPhoneNumber", :string, :limit => 50
-    t.column "contactBestTime", :string, :limit => 50
-    t.column "contactTimeZone", :string, :limit => 50
-    t.column "sexualInvolvementExplanation", :text
-    t.column "hasSexualGuidelines", :integer, :limit => 10
-    t.column "sexualGuidelineExplanation", :text
-    t.column "isCurrentlyDating", :integer, :limit => 10
-    t.column "currentlyDatingLocation", :text
-    t.column "hasHomosexualInvolvement", :integer, :limit => 10
-    t.column "homosexualInvolvementExplanation", :text
-    t.column "hasRecentPornographicInvolvement", :integer, :limit => 10
-    t.column "pornographicInvolvementMonth", :integer, :limit => 10
-    t.column "pornographicInvolvementYear", :integer, :limit => 10
-    t.column "pornographicInvolvementExplanation", :text
-    t.column "hasRecentSexualImmorality", :integer, :limit => 10
-    t.column "sexualImmoralityMonth", :integer, :limit => 10
-    t.column "sexualImmoralityYear", :integer, :limit => 10
-    t.column "sexualImmoralityExplanation", :text
-    t.column "hasOtherDateSinceImmorality", :integer, :limit => 10
-    t.column "singleImmoralityResultsExplanation", :text
-    t.column "marriedImmoralityResultsExplanation", :text
-    t.column "immoralityLifeChangeExplanation", :text
-    t.column "immoralityCurrentStrugglesExplanation", :text
-    t.column "additionalMoralComments", :text
-    t.column "isAwareMustRaiseSupport", :integer, :limit => 10
-    t.column "isInDebt", :integer, :limit => 10
-    t.column "debtNature1", :string, :limit => 50
-    t.column "debtTotal1", :string, :limit => 50
-    t.column "debtMonthlyPayment1", :string, :limit => 50
-    t.column "debtNature2", :string, :limit => 50
-    t.column "debtTotal2", :string, :limit => 50
-    t.column "debtMonthlyPayment2", :string, :limit => 50
-    t.column "debtNature3", :string, :limit => 50
-    t.column "debtTotal3", :string, :limit => 50
-    t.column "debtMonthlyPayment3", :string, :limit => 50
-    t.column "hasOtherFinancialResponsibility", :integer, :limit => 10
-    t.column "otherFinancialResponsibilityExplanation", :text
-    t.column "debtPaymentPlan", :text
-    t.column "debtPaymentTimeframe", :text
-    t.column "developingPartnersExplanation", :text
-    t.column "isWillingDevelopPartners", :integer, :limit => 10
-    t.column "unwillingDevelopPartnersExplanation", :text
-    t.column "isCommittedDevelopPartners", :integer, :limit => 10
-    t.column "uncommittedDevelopPartnersExplanation", :text
-    t.column "personalTestimonyGrowth", :text
-    t.column "internshipParticipationExplanation", :text
-    t.column "internshipObjectives", :text
-    t.column "currentMinistryDescription", :text
-    t.column "personalStrengthA", :text
-    t.column "personalStrengthB", :text
-    t.column "personalStrengthC", :text
-    t.column "personalDevelopmentA", :text
-    t.column "personalDevelopmentB", :text
-    t.column "personalDevelopmentC", :text
-    t.column "personalDescriptionA", :text
-    t.column "personalDescriptionB", :text
-    t.column "personalDescriptionC", :text
-    t.column "familyRelationshipDescription", :text
-    t.column "electronicSignature", :string, :limit => 90
-    t.column "ssn", :string, :limit => 50
-    t.column "isPaid", :boolean
-    t.column "appFee", :float, :limit => 18
-    t.column "isSubmitted", :boolean
-    t.column "appStatus", :string, :limit => 15
-    t.column "siYear", :string, :limit => 50
-    t.column "status", :string, :limit => 22
-    t.column "appType", :string, :limit => 64
-    t.column "dateSubmitted", :datetime
-    t.column "dateAppStarted", :datetime
-    t.column "dateAppLastChanged", :datetime
-    t.column "assignedToProject", :integer, :limit => 10
-    t.column "finalProject", :integer
-    t.column "fk_ssmUserID", :integer, :limit => 10
-    t.column "fk_personID", :integer
-  end
-
-  add_index "hr_si_application_2005", ["fk_personID"], :name => "fk_SIPersonID"
-  add_index "hr_si_application_2005", ["fk_ssmUserID"], :name => "fk_ssmUserID"
-
-  create_table "hr_si_application_2006", :id => false, :force => true do |t|
-    t.column "applicationID", :integer, :limit => 10, :null => false
-    t.column "locationA", :integer
-    t.column "locationAExplanation", :string, :limit => 90
-    t.column "locationB", :integer
-    t.column "locationBExplanation", :string, :limit => 90
-    t.column "locationC", :integer
-    t.column "locationCExplanation", :string, :limit => 90
-    t.column "availableMonth", :string, :limit => 2
-    t.column "availableYear", :string, :limit => 4
-    t.column "hasMinistryConflict", :integer, :limit => 10
-    t.column "ministryConflictExplanation", :text
-    t.column "hasSpecificLocation", :integer, :limit => 10
-    t.column "specificLocationRecruiterName", :string, :limit => 50
-    t.column "teamMembers", :text
-    t.column "isDating", :integer, :limit => 10
-    t.column "datingLocation", :text
-    t.column "hasCampusPartnership", :integer, :limit => 10
-    t.column "isDatingStint", :integer, :limit => 10
-    t.column "datingStintName", :text
-    t.column "language1", :string, :limit => 50
-    t.column "language1YearsStudied", :string, :limit => 20
-    t.column "language1Fluency", :integer, :limit => 10
-    t.column "language2", :string, :limit => 50
-    t.column "language2YearsStudied", :string, :limit => 20
-    t.column "language2Fluency", :integer, :limit => 10
-    t.column "previousMinistryExperience", :text
-    t.column "ministryTraining", :text
-    t.column "evangelismAttitude", :text
-    t.column "isEvangelismTrainable", :integer, :limit => 10
-    t.column "participationExplanation", :text
-    t.column "isFamiliarFourSpiritualLaws", :integer, :limit => 10
-    t.column "hasExperienceFourSpiritualLaws", :integer, :limit => 10
-    t.column "confidenceFourSpiritualLaws", :integer, :limit => 10
-    t.column "isFamiliarLifeAtLarge", :integer, :limit => 10
-    t.column "hasExperienceLifeAtLarge", :integer, :limit => 10
-    t.column "confidenceLifeAtLarge", :integer, :limit => 10
-    t.column "isFamiliarPersonalTestimony", :integer, :limit => 10
-    t.column "hasExperiencePersonalTestimony", :integer, :limit => 10
-    t.column "confidencePersonalTestimony", :integer, :limit => 10
-    t.column "isFamiliarExplainingGospel", :integer, :limit => 10
-    t.column "hasExperienceExplainingGospel", :integer, :limit => 10
-    t.column "confidenceExplainingGospel", :integer, :limit => 10
-    t.column "isFamiliarSharingFaith", :integer, :limit => 10
-    t.column "hasExperienceSharingFaith", :integer, :limit => 10
-    t.column "confidenceSharingFaith", :integer, :limit => 10
-    t.column "isFamiliarHolySpiritBooklet", :integer, :limit => 10
-    t.column "hasExperienceHolySpiritBooklet", :integer, :limit => 10
-    t.column "confidenceHolySpiritBooklet", :integer, :limit => 10
-    t.column "isFamiliarFollowUp", :integer, :limit => 10
-    t.column "hasExperienceFollowUp", :integer, :limit => 10
-    t.column "confidenceFollowUp", :integer, :limit => 10
-    t.column "isFamiliarHelpGrowInFaith", :integer, :limit => 10
-    t.column "hasExperienceHelpGrowInFaith", :integer, :limit => 10
-    t.column "confidenceHelpGrowInFaith", :integer, :limit => 10
-    t.column "isFamiliarTrainShareFaith", :integer, :limit => 10
-    t.column "hasExperienceTrainShareFaith", :integer, :limit => 10
-    t.column "confidenceTrainShareFaith", :integer, :limit => 10
-    t.column "isFamiliarOtherReligions", :integer, :limit => 10
-    t.column "hasExperienceOtherReligions", :integer, :limit => 10
-    t.column "confidenceOtherReligions", :integer, :limit => 10
-    t.column "leadershipPositions", :text
-    t.column "hasLedDiscipleshipGroup", :integer, :limit => 10
-    t.column "discipleshipGroupSize", :string, :limit => 50
-    t.column "leadershipEvaluation", :text
-    t.column "conversionMonth", :integer, :limit => 10
-    t.column "conversionYear", :integer, :limit => 10
-    t.column "memberChurchDenomination", :string, :limit => 75
-    t.column "memberChurchDuration", :string, :limit => 50
-    t.column "attendingChurchDenomination", :string, :limit => 50
-    t.column "attendingChurchDuration", :string, :limit => 50
-    t.column "attendingChurchInvolvement", :text
-    t.column "quietTimeQuantity", :text
-    t.column "quietTimeDescription", :text
-    t.column "explanationOfSalvation", :text
-    t.column "explanationOfSpiritFilled", :text
-    t.column "hasInvolvementSpeakingTongues", :integer, :limit => 10
-    t.column "differenceIndwellingFilled", :text
-    t.column "hasCrimeConviction", :integer, :limit => 10
-    t.column "crimeConvictionExplanation", :text
-    t.column "hasDrugUse", :integer, :limit => 10
-    t.column "isTobaccoUser", :integer, :limit => 10
-    t.column "isWillingChangeHabits", :integer, :limit => 10
-    t.column "authorityResponseExplanation", :text
-    t.column "alcoholUseFrequency", :text
-    t.column "alcoholUseDecision", :text
-    t.column "isWillingRefrainAlcohol", :integer, :limit => 10
-    t.column "unwillingRefrainAlcoholExplanation", :text
-    t.column "drugUseExplanation", :text
-    t.column "tobaccoUseExplanation", :text
-    t.column "isWillingAbstainTobacco", :integer, :limit => 10
-    t.column "hasRequestedPhoneCall", :integer, :limit => 10
-    t.column "contactPhoneNumber", :string, :limit => 50
-    t.column "contactBestTime", :string, :limit => 50
-    t.column "contactTimeZone", :string, :limit => 50
-    t.column "sexualInvolvementExplanation", :text
-    t.column "hasSexualGuidelines", :integer, :limit => 10
-    t.column "sexualGuidelineExplanation", :text
-    t.column "isCurrentlyDating", :integer, :limit => 10
-    t.column "currentlyDatingLocation", :text
-    t.column "hasHomosexualInvolvement", :integer, :limit => 10
-    t.column "homosexualInvolvementExplanation", :text
-    t.column "hasRecentPornographicInvolvement", :integer, :limit => 10
-    t.column "pornographicInvolvementMonth", :integer, :limit => 10
-    t.column "pornographicInvolvementYear", :integer, :limit => 10
-    t.column "pornographicInvolvementExplanation", :text
-    t.column "hasRecentSexualImmorality", :integer, :limit => 10
-    t.column "sexualImmoralityMonth", :integer, :limit => 10
-    t.column "sexualImmoralityYear", :integer, :limit => 10
-    t.column "sexualImmoralityExplanation", :text
-    t.column "hasOtherDateSinceImmorality", :integer, :limit => 10
-    t.column "singleImmoralityResultsExplanation", :text
-    t.column "marriedImmoralityResultsExplanation", :text
-    t.column "immoralityLifeChangeExplanation", :text
-    t.column "immoralityCurrentStrugglesExplanation", :text
-    t.column "additionalMoralComments", :text
-    t.column "isAwareMustRaiseSupport", :integer, :limit => 10
-    t.column "isInDebt", :integer, :limit => 10
-    t.column "debtNature1", :string, :limit => 50
-    t.column "debtTotal1", :string, :limit => 50
-    t.column "debtMonthlyPayment1", :string, :limit => 50
-    t.column "debtNature2", :string, :limit => 50
-    t.column "debtTotal2", :string, :limit => 50
-    t.column "debtMonthlyPayment2", :string, :limit => 50
-    t.column "debtNature3", :string, :limit => 50
-    t.column "debtTotal3", :string, :limit => 50
-    t.column "debtMonthlyPayment3", :string, :limit => 50
-    t.column "hasOtherFinancialResponsibility", :integer, :limit => 10
-    t.column "otherFinancialResponsibilityExplanation", :text
-    t.column "debtPaymentPlan", :text
-    t.column "debtPaymentTimeframe", :text
-    t.column "developingPartnersExplanation", :text
-    t.column "isWillingDevelopPartners", :integer, :limit => 10
-    t.column "unwillingDevelopPartnersExplanation", :text
-    t.column "isCommittedDevelopPartners", :integer, :limit => 10
-    t.column "uncommittedDevelopPartnersExplanation", :text
-    t.column "personalTestimonyGrowth", :text
-    t.column "internshipParticipationExplanation", :text
-    t.column "internshipObjectives", :text
-    t.column "currentMinistryDescription", :text
-    t.column "personalStrengthA", :text
-    t.column "personalStrengthB", :text
-    t.column "personalStrengthC", :text
-    t.column "personalDevelopmentA", :text
-    t.column "personalDevelopmentB", :text
-    t.column "personalDevelopmentC", :text
-    t.column "personalDescriptionA", :text
-    t.column "personalDescriptionB", :text
-    t.column "personalDescriptionC", :text
-    t.column "familyRelationshipDescription", :text
-    t.column "electronicSignature", :string, :limit => 90
-    t.column "ssn", :string, :limit => 50
-    t.column "isPaid", :boolean
-    t.column "appFee", :float, :limit => 18
-    t.column "isSubmitted", :boolean
-    t.column "appStatus", :string, :limit => 15
-    t.column "siYear", :string, :limit => 50
-    t.column "status", :string, :limit => 22
-    t.column "appType", :string, :limit => 64
-    t.column "dateSubmitted", :datetime
-    t.column "dateAppStarted", :datetime
-    t.column "dateAppLastChanged", :datetime
-    t.column "assignedToProject", :integer, :limit => 10
-    t.column "finalProject", :integer, :limit => 10
-    t.column "fk_ssmUserID", :integer, :limit => 10
-    t.column "fk_personID", :integer, :limit => 10
-  end
-
-  add_index "hr_si_application_2006", ["fk_ssmUserID"], :name => "IX_hr_si_Application_2006_1"
+  add_index "hr_si_applications", ["fk_personID"], :name => "fk_PersonID"
 
   create_table "hr_si_payment", :id => false, :force => true do |t|
     t.column "paymentID", :integer, :limit => 10, :null => false
@@ -1650,10 +1478,10 @@ ActiveRecord::Schema.define(:version => 14) do
     t.column "SIProjectID", :integer, :limit => 10, :null => false
     t.column "name", :string
     t.column "partnershipRegion", :string, :limit => 50
-    t.column "history", :string, :limit => 8000
+    t.column "history", :text
     t.column "city", :string
     t.column "country", :string
-    t.column "details", :string, :limit => 8000
+    t.column "details", :text
     t.column "status", :string
     t.column "destinationGatewayCity", :string
     t.column "departDateFromGateCity", :datetime
@@ -1868,11 +1696,12 @@ ActiveRecord::Schema.define(:version => 14) do
     t.column "_re3", :text
     t.column "_re4", :integer, :limit => 10
     t.column "_re5", :text
-    t.column "fk_SIApplicationID", :integer
+    t.column "oldSIApplicationID", :integer
+    t.column "fk_SIApplicationID", :integer, :limit => 10
     t.column "siYear", :string, :limit => 4
   end
 
-  add_index "hr_si_reference", ["fk_SIApplicationID"], :name => "IX_hr_si_Reference_2006"
+  add_index "hr_si_reference", ["oldSIApplicationID"], :name => "IX_hr_si_Reference_2006"
 
   create_table "hr_si_reference_2003", :id => false, :force => true do |t|
     t.column "referenceID", :integer, :limit => 10, :null => false
@@ -2435,6 +2264,11 @@ ActiveRecord::Schema.define(:version => 14) do
 
   add_index "hr_si_users", ["fk_ssmUserID"], :name => "IX_hr_si_Users_fk_ssmUserID"
 
+  create_table "import_staffacctbal", :id => false, :force => true do |t|
+    t.column "EMPLID", :string, :limit => 11, :default => "", :null => false
+    t.column "CUR_BAL", :float, :limit => 28
+  end
+
   create_table "linczone_contacts", :id => false, :force => true do |t|
     t.column "ContactID", :integer, :limit => 10, :null => false
     t.column "EntryDate", :timestamp
@@ -2494,36 +2328,6 @@ ActiveRecord::Schema.define(:version => 14) do
     t.column "country", :string, :limit => 64
   end
 
-  create_table "ministry_addresses", :id => false, :force => true do |t|
-    t.column "AddressID", :integer, :limit => 10, :null => false
-    t.column "startdate", :string, :limit => 25
-    t.column "enddate", :string, :limit => 25
-    t.column "address1", :string, :limit => 55
-    t.column "address2", :string, :limit => 55
-    t.column "address3", :string, :limit => 55
-    t.column "address4", :string, :limit => 55
-    t.column "city", :string, :limit => 50
-    t.column "state", :string, :limit => 50
-    t.column "zip", :string, :limit => 10
-    t.column "country", :string, :limit => 64
-    t.column "homePhone", :string, :limit => 25
-    t.column "workPhone", :string, :limit => 25
-    t.column "cellPhone", :string, :limit => 25
-    t.column "fax", :string, :limit => 25
-    t.column "email", :string, :limit => 200
-    t.column "url", :string, :limit => 100
-    t.column "contactName", :string, :limit => 50
-    t.column "contactRelationship", :string, :limit => 50
-    t.column "addressType", :string, :limit => 20
-    t.column "dateCreated", :datetime
-    t.column "dateChanged", :datetime
-    t.column "createdBy", :string, :limit => 50
-    t.column "changedBy", :string, :limit => 50
-    t.column "fk_PersonID", :integer, :limit => 10
-  end
-
-  add_index "ministry_addresses", ["fk_PersonID"], :name => "IX_ministry_NewAddress"
-
   create_table "ministry_assoc_activitycontact", :id => false, :force => true do |t|
     t.column "ActivityID", :integer, :limit => 10, :default => 0, :null => false
     t.column "accountNo", :string, :limit => 11, :default => "", :null => false
@@ -2536,10 +2340,25 @@ ActiveRecord::Schema.define(:version => 14) do
     t.column "dbioDummy", :boolean, :default => true, :null => false
   end
 
+  create_table "ministry_assoc_intlcontact", :id => false, :force => true do |t|
+    t.column "accountNo", :string, :limit => 11, :default => "", :null => false
+    t.column "WsnPartnershipID", :string, :limit => 64, :default => "", :null => false
+  end
+
   create_table "ministry_assoc_otherministries", :id => false, :force => true do |t|
     t.column "NonCccMinID", :string, :limit => 64, :default => "", :null => false
     t.column "TargetAreaID", :string, :limit => 64, :default => "", :null => false
     t.column "dbioDummy", :boolean, :default => true, :null => false
+  end
+
+  create_table "ministry_assoc_partcoord", :id => false, :force => true do |t|
+    t.column "accountNo", :string, :limit => 11, :default => "", :null => false
+    t.column "WsnPartnershipID", :string, :limit => 64, :default => "", :null => false
+  end
+
+  create_table "ministry_assocteamstaff", :id => false, :force => true do |t|
+    t.column "fk_accountNo", :string, :limit => 64, :default => "", :null => false
+    t.column "fk_teamID", :string, :limit => 64, :default => "", :null => false
   end
 
   create_table "ministry_authorization", :id => false, :force => true do |t|
@@ -2613,8 +2432,8 @@ ActiveRecord::Schema.define(:version => 14) do
 
   create_table "ministry_newaddress", :id => false, :force => true do |t|
     t.column "AddressID", :integer, :limit => 10, :null => false
-    t.column "startdate", :string, :limit => 25
-    t.column "enddate", :string, :limit => 25
+    t.column "deprecated_startDate", :string, :limit => 25
+    t.column "deprecated_endDate", :string, :limit => 25
     t.column "address1", :string, :limit => 55
     t.column "address2", :string, :limit => 55
     t.column "address3", :string, :limit => 55
@@ -2637,6 +2456,9 @@ ActiveRecord::Schema.define(:version => 14) do
     t.column "createdBy", :string, :limit => 50
     t.column "changedBy", :string, :limit => 50
     t.column "fk_PersonID", :integer, :limit => 10
+    t.column "start_date", :datetime
+    t.column "end_date", :datetime
+    t.column "email2", :string, :limit => 200
   end
 
   add_index "ministry_newaddress", ["fk_PersonID"], :name => "IX_ministry_NewAddress"
@@ -2666,7 +2488,7 @@ ActiveRecord::Schema.define(:version => 14) do
     t.column "NoteID", :integer, :limit => 10, :null => false
     t.column "dateEntered", :datetime
     t.column "title", :string, :limit => 80
-    t.column "note", :string, :limit => 4000
+    t.column "note", :text
     t.column "Fk_loaNote", :string, :limit => 64
     t.column "Fk_resignationLetter", :string, :limit => 64
     t.column "Fk_authorizationNote", :string, :limit => 64
@@ -2675,16 +2497,13 @@ ActiveRecord::Schema.define(:version => 14) do
   create_table "ministry_person", :id => false, :force => true do |t|
     t.column "personID", :integer, :limit => 10, :null => false
     t.column "accountNo", :string, :limit => 11
-    t.column "deprecated_username", :string, :limit => 200
     t.column "lastName", :string, :limit => 50
     t.column "firstName", :string, :limit => 50
     t.column "middleName", :string, :limit => 50
     t.column "preferredName", :string, :limit => 50
-    t.column "deprecated_phone", :string, :limit => 25
-    t.column "deprecated_email", :string, :limit => 200
     t.column "gender", :string, :limit => 1
-    t.column "birthDate", :string, :limit => 25
-    t.column "dateBecameChristian", :string, :limit => 35
+    t.column "deprecated_birthDate", :string, :limit => 25
+    t.column "deprecated_dateBecameChristian", :string, :limit => 35
     t.column "region", :string, :limit => 5
     t.column "workInUS", :boolean, :default => true, :null => false
     t.column "usCitizen", :boolean, :default => true, :null => false
@@ -2694,16 +2513,13 @@ ActiveRecord::Schema.define(:version => 14) do
     t.column "campus", :string, :limit => 128
     t.column "universityState", :string, :limit => 5
     t.column "yearInSchool", :string, :limit => 20
-    t.column "graduationDate", :string, :limit => 25
+    t.column "deprecated_graduationDate", :string, :limit => 25
     t.column "major", :string, :limit => 70
     t.column "minor", :string, :limit => 70
     t.column "greekAffiliation", :string, :limit => 50
     t.column "maritalStatus", :string, :limit => 20
-    t.column "deprecated_marriageDate", :datetime
-    t.column "deprecated_spouseVerified", :string, :limit => 1
     t.column "numberChildren", :string, :limit => 2
     t.column "isChild", :boolean, :default => false, :null => false
-    t.column "deprecated_isInPeopleSoft", :boolean, :default => false, :null => false
     t.column "bio", :text
     t.column "image", :string, :limit => 100
     t.column "occupation", :string, :limit => 50
@@ -2718,8 +2534,9 @@ ActiveRecord::Schema.define(:version => 14) do
     t.column "fk_StaffSiteProfileID", :integer, :limit => 10
     t.column "fk_spouseID", :integer, :limit => 10
     t.column "fk_childOf", :integer, :limit => 10
-    t.column "deprecated_fk_infobaseID", :integer, :limit => 10
-    t.column "deprecated_CrsSpouseID", :integer, :limit => 10
+    t.column "birth_date", :datetime
+    t.column "date_became_christian", :datetime
+    t.column "graduation_date", :datetime
   end
 
   add_index "ministry_person", ["accountNo"], :name => "accountNo_ministry_Person"
@@ -2770,6 +2587,36 @@ ActiveRecord::Schema.define(:version => 14) do
     t.column "no", :string, :limit => 80
     t.column "abbrv", :string, :limit => 80
     t.column "hrd", :string, :limit => 50
+  end
+
+  create_table "ministry_rolodex", :id => false, :force => true do |t|
+    t.column "rolodexid", :integer, :limit => 10, :default => 0, :null => false
+    t.column "firstname", :string, :limit => 50
+    t.column "middleinitial", :string, :limit => 1
+    t.column "lastname", :string, :limit => 50
+    t.column "address", :string, :limit => 50
+    t.column "address2", :string, :limit => 50
+    t.column "city", :string, :limit => 50
+    t.column "state", :string, :limit => 50
+    t.column "zip", :string, :limit => 50
+    t.column "gender", :string, :limit => 1
+    t.column "phone", :string, :limit => 50
+    t.column "email", :string, :limit => 50
+    t.column "maritalstatus", :string, :limit => 50
+    t.column "birthdate", :datetime
+    t.column "campus", :string, :limit => 100
+    t.column "sourcetable", :string, :limit => 50
+    t.column "sourcekey", :string, :limit => 50
+    t.column "dateinserted", :datetime
+    t.column "crspersonid", :string, :limit => 50
+    t.column "eventpersonid", :string, :limit => 50
+    t.column "sipersonid", :string, :limit => 50
+    t.column "linczonecontactid", :string, :limit => 50
+    t.column "staffaccountno", :string, :limit => 50
+    t.column "usspstudentid", :string, :limit => 50
+    t.column "ussp01studentid", :string, :limit => 50
+    t.column "wsnsppersonid", :string, :limit => 50
+    t.column "note", :string, :limit => 200
   end
 
   create_table "ministry_staff", :id => false, :force => true do |t|
@@ -2867,6 +2714,39 @@ ActiveRecord::Schema.define(:version => 14) do
     t.column "updateStaff", :string, :limit => 64
   end
 
+  create_table "ministry_staffsnapshot", :id => false, :force => true do |t|
+    t.column "snapshotID", :integer, :limit => 10, :default => 0, :null => false
+    t.column "accountNo", :string, :limit => 11
+    t.column "firstName", :string, :limit => 30
+    t.column "middleName", :string, :limit => 30
+    t.column "lastName", :string, :limit => 30
+    t.column "addressType", :string, :limit => 3
+    t.column "address1", :string, :limit => 100
+    t.column "address2", :string, :limit => 100
+    t.column "city", :string, :limit => 40
+    t.column "state", :string, :limit => 50
+    t.column "zip", :string, :limit => 9
+    t.column "country", :string, :limit => 4
+    t.column "intAddress", :string, :limit => 300
+    t.column "workPhone", :string, :limit => 20
+    t.column "mobilePhone", :string, :limit => 20
+    t.column "ministry", :string, :limit => 50
+    t.column "department", :string, :limit => 50
+    t.column "subMinistry", :string, :limit => 50
+    t.column "position", :string, :limit => 80
+    t.column "positionDescr", :string, :limit => 200
+    t.column "strategy", :string, :limit => 20
+    t.column "intStatus", :string, :limit => 50
+    t.column "intRole", :string, :limit => 50
+    t.column "role", :string, :limit => 50
+    t.column "isMarried", :string, :limit => 1
+    t.column "spouseFirstName", :string, :limit => 30
+    t.column "spouseMiddleName", :string, :limit => 30
+    t.column "spouseLastName", :string, :limit => 30
+    t.column "numChildren", :integer, :limit => 10
+    t.column "dateChanged", :datetime
+  end
+
   create_table "ministry_statistic", :id => false, :force => true do |t|
     t.column "StatisticID", :integer, :limit => 10, :null => false
     t.column "periodBegin", :datetime
@@ -2875,12 +2755,7 @@ ActiveRecord::Schema.define(:version => 14) do
     t.column "exposuresViaMedia", :integer, :limit => 10
     t.column "evangelisticOneOnOne", :integer, :limit => 10
     t.column "evangelisticGroup", :integer, :limit => 10
-    t.column "ongoingEvangReln", :integer, :limit => 10
     t.column "decisions", :integer, :limit => 10
-    t.column "decisionsHelpedByMedia", :integer, :limit => 10
-    t.column "decisionsHelpedByOneOnOne", :integer, :limit => 10
-    t.column "decisionsHelpedByGroup", :integer, :limit => 10
-    t.column "decisionsHelpedByOngoingReln", :integer, :limit => 10
     t.column "attendedLastConf", :integer, :limit => 10
     t.column "invldNewBlvrs", :integer, :limit => 10
     t.column "invldStudents", :integer, :limit => 10
@@ -2895,6 +2770,8 @@ ActiveRecord::Schema.define(:version => 14) do
     t.column "nonStaffStint", :integer, :limit => 10
     t.column "staffStint", :integer, :limit => 10
     t.column "fk_Activity", :integer, :limit => 10
+    t.column "multipliers", :integer
+    t.column "laborersSent", :integer
   end
 
   add_index "ministry_statistic", ["fk_Activity"], :name => "index1"
@@ -2962,250 +2839,19 @@ ActiveRecord::Schema.define(:version => 14) do
   add_index "ministry_targetarea", ["isSecure"], :name => "index5"
   add_index "ministry_targetarea", ["region"], :name => "index6"
 
-  create_table "ministry_viewactivitycontacts", :id => false, :force => true do |t|
-    t.column "accountNo", :string, :limit => 11, :default => "", :null => false
-    t.column "firstName", :string, :limit => 30
-    t.column "middleInitial", :string, :limit => 1
-    t.column "lastName", :string, :limit => 30
-    t.column "isMale", :string, :limit => 1
-    t.column "position", :string, :limit => 30
-    t.column "countryStatus", :string, :limit => 10
-    t.column "jobStatus", :string, :limit => 30
-    t.column "ministry", :string, :limit => 35
-    t.column "strategy", :string, :limit => 20
-    t.column "isNewStaff", :string, :limit => 1
-    t.column "primaryEmpLocState", :string, :limit => 6
-    t.column "primaryEmpLocCountry", :string, :limit => 64
-    t.column "primaryEmpLocCity", :string, :limit => 35
-    t.column "spouseFirstName", :string, :limit => 22
-    t.column "spouseMiddleName", :string, :limit => 15
-    t.column "spouseLastName", :string, :limit => 30
-    t.column "spouseAccountNo", :string, :limit => 11
-    t.column "spouseEmail", :string, :limit => 50
-    t.column "fianceeFirstName", :string, :limit => 15
-    t.column "fianceeMiddleName", :string, :limit => 15
-    t.column "fianceeLastName", :string, :limit => 30
-    t.column "isFianceeStaff", :string, :limit => 1
-    t.column "fianceeJoinStaffDate", :datetime
-    t.column "isFianceeJoiningNS", :string, :limit => 1
-    t.column "joiningNS", :string, :limit => 1
-    t.column "homePhone", :string, :limit => 24
-    t.column "workPhone", :string, :limit => 24
-    t.column "mobilePhone", :string, :limit => 24
-    t.column "pager", :string, :limit => 24
-    t.column "email", :string, :limit => 50
-    t.column "isEmailSecure", :string, :limit => 1
-    t.column "url", :string
-    t.column "newStaffTrainingdate", :datetime
-    t.column "fax", :string, :limit => 24
-    t.column "note", :string, :limit => 2048
-    t.column "region", :string, :limit => 10
-    t.column "countryCode", :string, :limit => 3
-    t.column "ssn", :string, :limit => 9
-    t.column "maritalStatus", :string, :limit => 1
-    t.column "deptId", :string, :limit => 10
-    t.column "jobCode", :string, :limit => 6
-    t.column "accountCode", :string, :limit => 25
-    t.column "compFreq", :string, :limit => 1
-    t.column "compRate", :string, :limit => 20
-    t.column "compChngAmt", :string, :limit => 21
-    t.column "jobTitle", :string, :limit => 80
-    t.column "deptName", :string, :limit => 30
-    t.column "coupleTitle", :string, :limit => 12
-    t.column "otherPhone", :string, :limit => 24
-    t.column "preferredName", :string, :limit => 50
-    t.column "namePrefix", :string, :limit => 4
-    t.column "origHiredate", :datetime
-    t.column "birthDate", :datetime
-    t.column "marriageDate", :datetime
-    t.column "hireDate", :datetime
-    t.column "rehireDate", :datetime
-    t.column "loaStartDate", :datetime
-    t.column "loaEndDate", :datetime
-    t.column "loaReason", :string, :limit => 80
-    t.column "severancePayMonthsReq", :integer, :limit => 10
-    t.column "serviceDate", :datetime
-    t.column "lastIncDate", :datetime
-    t.column "jobEntryDate", :datetime
-    t.column "deptEntryDate", :datetime
-    t.column "reportingDate", :datetime
-    t.column "employmentType", :string, :limit => 20
-    t.column "resignationReason", :string, :limit => 80
-    t.column "resignationDate", :datetime
-    t.column "contributionsToOtherAcct", :string, :limit => 1
-    t.column "contributionsToAcntName", :string, :limit => 80
-    t.column "contributionsToAcntNo", :string, :limit => 11
-    t.column "fk_primaryAddress", :integer, :limit => 10
-    t.column "fk_secondaryAddress", :integer, :limit => 10
-    t.column "fk_teamID", :integer, :limit => 10
-    t.column "isSecure", :string, :limit => 1
-    t.column "isSupported", :string, :limit => 1
-    t.column "ActivityID", :integer, :limit => 10, :default => 0, :null => false
-    t.column "fianceeAccountno", :string, :limit => 11
-    t.column "removedFromPeopleSoft", :string, :limit => 1
-    t.column "isNonUSStaff", :string, :limit => 1
-    t.column "primaryEmpLocDesc", :string, :limit => 128
-  end
-
-  create_table "ministry_viewdependentsstaff", :id => false, :force => true do |t|
-    t.column "accountNo", :string, :limit => 11, :default => "", :null => false
-    t.column "firstName", :string, :limit => 30
-    t.column "middleInitial", :string, :limit => 1
-    t.column "lastName", :string, :limit => 30
-    t.column "isMale", :string, :limit => 1
-    t.column "position", :string, :limit => 30
-    t.column "countryStatus", :string, :limit => 10
-    t.column "jobStatus", :string, :limit => 30
-    t.column "ministry", :string, :limit => 35
-    t.column "strategy", :string, :limit => 20
-    t.column "isNewStaff", :string, :limit => 1
-    t.column "primaryEmpLocState", :string, :limit => 6
-    t.column "primaryEmpLocCountry", :string, :limit => 64
-    t.column "primaryEmpLocCity", :string, :limit => 35
-    t.column "spouseFirstName", :string, :limit => 22
-    t.column "spouseMiddleName", :string, :limit => 15
-    t.column "spouseLastName", :string, :limit => 30
-    t.column "spouseAccountNo", :string, :limit => 11
-    t.column "spouseEmail", :string, :limit => 50
-    t.column "fianceeFirstName", :string, :limit => 15
-    t.column "fianceeMiddleName", :string, :limit => 15
-    t.column "fianceeLastName", :string, :limit => 30
-    t.column "isFianceeStaff", :string, :limit => 1
-    t.column "fianceeJoinStaffDate", :datetime
-    t.column "isFianceeJoiningNS", :string, :limit => 1
-    t.column "joiningNS", :string, :limit => 1
-    t.column "homePhone", :string, :limit => 24
-    t.column "workPhone", :string, :limit => 24
-    t.column "mobilePhone", :string, :limit => 24
-    t.column "pager", :string, :limit => 24
-    t.column "email", :string, :limit => 50
-    t.column "isEmailSecure", :string, :limit => 1
-    t.column "url", :string
-    t.column "newStaffTrainingdate", :datetime
-    t.column "fax", :string, :limit => 24
-    t.column "note", :string, :limit => 2048
-    t.column "region", :string, :limit => 10
-    t.column "countryCode", :string, :limit => 3
-    t.column "ssn", :string, :limit => 9
-    t.column "maritalStatus", :string, :limit => 1
-    t.column "deptId", :string, :limit => 10
-    t.column "jobCode", :string, :limit => 6
-    t.column "accountCode", :string, :limit => 25
-    t.column "compFreq", :string, :limit => 1
-    t.column "compRate", :string, :limit => 20
-    t.column "compChngAmt", :string, :limit => 21
-    t.column "jobTitle", :string, :limit => 80
-    t.column "deptName", :string, :limit => 30
-    t.column "coupleTitle", :string, :limit => 12
-    t.column "otherPhone", :string, :limit => 24
-    t.column "preferredName", :string, :limit => 50
-    t.column "namePrefix", :string, :limit => 4
-    t.column "origHiredate", :datetime
-    t.column "birthDate", :datetime
-    t.column "marriageDate", :datetime
-    t.column "hireDate", :datetime
-    t.column "rehireDate", :datetime
-    t.column "loaStartDate", :datetime
-    t.column "loaEndDate", :datetime
-    t.column "loaReason", :string, :limit => 80
-    t.column "severancePayMonthsReq", :integer, :limit => 10
-    t.column "serviceDate", :datetime
-    t.column "lastIncDate", :datetime
-    t.column "jobEntryDate", :datetime
-    t.column "deptEntryDate", :datetime
-    t.column "reportingDate", :datetime
-    t.column "employmentType", :string, :limit => 20
-    t.column "resignationReason", :string, :limit => 80
-    t.column "resignationDate", :datetime
-    t.column "contributionsToOtherAcct", :string, :limit => 1
-    t.column "contributionsToAcntName", :string, :limit => 80
-    t.column "contributionsToAcntNo", :string, :limit => 11
-    t.column "fk_primaryAddress", :integer, :limit => 10
-    t.column "fk_secondaryAddress", :integer, :limit => 10
-    t.column "fk_teamID", :integer, :limit => 10
-    t.column "isSecure", :string, :limit => 1
-    t.column "isSupported", :string, :limit => 1
-    t.column "DependentID", :integer, :limit => 10, :default => 0, :null => false
-    t.column "fianceeAccountno", :string, :limit => 11
-    t.column "removedFromPeopleSoft", :string, :limit => 1
-    t.column "primaryEmpLocDesc", :string, :limit => 128
-  end
-
-  create_table "ministry_viewnoncccmintargetarea", :id => false, :force => true do |t|
-    t.column "NonCccMinID", :string, :limit => 64, :default => "", :null => false
-    t.column "TargetAreaID", :integer, :limit => 10, :default => 0, :null => false
-    t.column "name", :string, :limit => 100
-    t.column "address1", :string, :limit => 35
-    t.column "address2", :string, :limit => 35
-    t.column "city", :string, :limit => 30
-    t.column "state", :string, :limit => 32
-    t.column "zip", :string, :limit => 10
-    t.column "country", :string, :limit => 64
-    t.column "phone", :string, :limit => 24
-    t.column "fax", :string, :limit => 24
-    t.column "email", :string, :limit => 50
-    t.column "url", :string
-    t.column "abbrv", :string, :limit => 32
-    t.column "fice", :string, :limit => 32
-    t.column "note", :string
-    t.column "altName", :string, :limit => 100
-    t.column "isSecure", :string, :limit => 1
-    t.column "region", :string, :limit => 2
-    t.column "mpta", :string, :limit => 30
-    t.column "urlToLogo", :string
-    t.column "enrollment", :string, :limit => 10
-    t.column "monthSchoolStarts", :string, :limit => 10
-    t.column "monthSchoolStops", :string, :limit => 10
-    t.column "isSemester", :string, :limit => 1
-    t.column "isApproved", :string, :limit => 1
-    t.column "aoaPriority", :string, :limit => 10
-    t.column "aoa", :string, :limit => 100
-    t.column "ciaUrl", :string
-    t.column "infoUrl", :string
-  end
-
-  create_table "ministry_viewsortedactivities", :id => false, :force => true do |t|
-    t.column "name", :string, :limit => 100
-    t.column "ActivityID", :integer, :limit => 10, :default => 0, :null => false
+  create_table "ministry_wsnpartnership", :id => false, :force => true do |t|
+    t.column "WsnPartnershipID", :string, :limit => 64, :default => "", :null => false
     t.column "status", :string, :limit => 2
     t.column "periodBegin", :datetime
     t.column "periodEnd", :datetime
     t.column "strategy", :string, :limit => 2
+    t.column "name", :string, :limit => 100
+    t.column "isApproved", :string, :limit => 1
+    t.column "wsnStatus", :string, :limit => 10
+    t.column "accountingUnit", :string, :limit => 10
+    t.column "annualBudget", :string, :limit => 13
+    t.column "notes", :string
     t.column "transUsername", :string, :limit => 50
-    t.column "fk_teamID", :integer, :limit => 10
-    t.column "fk_targetAreaID", :integer, :limit => 10
-  end
-
-  create_table "ministry_viewstaffdependents", :id => false, :force => true do |t|
-    t.column "DependentID", :integer, :limit => 10, :default => 0, :null => false
-    t.column "firstName", :string, :limit => 80
-    t.column "middleName", :string, :limit => 80
-    t.column "lastName", :string, :limit => 80
-    t.column "birthdate", :datetime
-    t.column "gender", :string, :limit => 1
-    t.column "accountNo", :string, :limit => 11, :default => "", :null => false
-  end
-
-  create_table "ministry_viewtargetareanoncccmin", :id => false, :force => true do |t|
-    t.column "NonCccMinID", :integer, :limit => 10, :default => 0, :null => false
-    t.column "ministry", :string, :limit => 50
-    t.column "firstName", :string, :limit => 30
-    t.column "lastName", :string, :limit => 30
-    t.column "address1", :string, :limit => 35
-    t.column "address2", :string, :limit => 35
-    t.column "city", :string, :limit => 30
-    t.column "state", :string, :limit => 6
-    t.column "zip", :string, :limit => 10
-    t.column "country", :string, :limit => 64
-    t.column "homePhone", :string, :limit => 24
-    t.column "workPhone", :string, :limit => 24
-    t.column "mobilePhone", :string, :limit => 24
-    t.column "email", :string, :limit => 24
-    t.column "url", :string, :limit => 50
-    t.column "pager", :string, :limit => 24
-    t.column "fax", :string, :limit => 24
-    t.column "note", :string
-    t.column "TargetAreaID", :string, :limit => 64, :default => "", :null => false
   end
 
   create_table "nag_emails", :force => true do |t|
@@ -3266,7 +2912,7 @@ ActiveRecord::Schema.define(:version => 14) do
     t.column "userID", :integer, :limit => 10, :null => false
     t.column "globallyUniqueID", :string, :limit => 80
     t.column "username", :string, :limit => 80, :default => "", :null => false
-    t.column "email", :string, :limit => 64
+    t.column "email_deprecated", :string, :limit => 64
     t.column "password", :string, :limit => 80
     t.column "passwordQuestion", :string, :limit => 200
     t.column "passwordAnswer", :string, :limit => 200
@@ -3455,7 +3101,7 @@ ActiveRecord::Schema.define(:version => 14) do
     t.column "name", :string, :limit => 50
     t.column "birthday", :datetime
     t.column "passport_no", :string, :limit => 50
-    t.column "person_id", :integer, :limit => 10, :default => 0, :null => false
+    t.column "person_id", :integer, :limit => 10
   end
 
   add_index "sitrack_children", ["person_id"], :name => "fk_personID"
@@ -3473,8 +3119,8 @@ ActiveRecord::Schema.define(:version => 14) do
     t.column "updated_at", :datetime
   end
 
-  create_table "sitrack_columns_views", :id => false, :force => true do |t|
-    t.column "viewID", :integer, :limit => 10, :null => false
+  create_table "sitrack_columns_views", :force => true do |t|
+    t.column "viewID", :integer, :limit => 10, :default => 0, :null => false
     t.column "colID", :integer, :limit => 10, :default => 0, :null => false
     t.column "orderBy", :integer, :limit => 3, :default => 0, :null => false
     t.column "position", :integer, :limit => 10, :default => 0, :null => false
@@ -3484,7 +3130,7 @@ ActiveRecord::Schema.define(:version => 14) do
     t.column "sitrack_column_id", :integer, :limit => 10, :default => 0, :null => false
     t.column "value", :string, :limit => 100, :default => "", :null => false
     t.column "name", :string, :limit => 100, :default => "", :null => false
-    t.column "position", :integer, :limit => 10
+    t.column "position", :integer, :limit => 10, :default => 0, :null => false
   end
 
   create_table "sitrack_feeds", :id => false, :force => true do |t|
@@ -3494,6 +3140,46 @@ ActiveRecord::Schema.define(:version => 14) do
   end
 
   add_index "sitrack_feeds", ["lastRun"], :name => "IX_sitrack_Feeds"
+
+  create_table "sitrack_forms", :force => true do |t|
+    t.column "approver_id", :integer, :limit => 10, :default => 0, :null => false
+    t.column "type", :string, :limit => 50, :default => "", :null => false
+    t.column "current_years_salary", :integer
+    t.column "previous_years_salary", :integer
+    t.column "additional_salary", :integer
+    t.column "adoption", :integer
+    t.column "counseling", :integer
+    t.column "childrens_expenses", :integer
+    t.column "college", :integer
+    t.column "private_school", :integer
+    t.column "graduate_studies", :integer
+    t.column "auto_purchase", :integer
+    t.column "settling_in_expenses", :integer
+    t.column "reimbursable_expenses", :integer
+    t.column "tax_rate", :integer
+    t.column "date_of_change", :datetime
+    t.column "action", :string
+    t.column "reopen_as", :string, :limit => 50
+    t.column "freeze_start", :datetime
+    t.column "freeze_end", :datetime
+    t.column "change_assignment_from_team", :string, :limit => 50
+    t.column "change_assignment_from_location", :string, :limit => 50
+    t.column "change_assignment_to_team", :string, :limit => 50
+    t.column "change_assignment_to_location", :string, :limit => 50
+    t.column "restint_location", :string, :limit => 50
+    t.column "departure_date_certainty", :string, :limit => 20
+    t.column "hours_per_week", :integer
+    t.column "other_explanation", :string
+    t.column "new_staff_training_date", :datetime
+    t.column "payroll_action", :string, :limit => 50
+    t.column "payroll_reason", :string, :limit => 50
+    t.column "hrd", :string, :limit => 100
+    t.column "spouse_name", :string, :limit => 100
+    t.column "spouse_transitioning", :boolean
+    t.column "salary_reason", :string
+    t.column "annual_salary", :integer
+    t.column "hr_si_application_id", :integer, :default => 0, :null => false
+  end
 
   create_table "sitrack_mpd", :force => true do |t|
     t.column "application_id", :integer, :limit => 10
@@ -3509,31 +3195,31 @@ ActiveRecord::Schema.define(:version => 14) do
     t.column "totalGoal", :integer, :limit => 10
     t.column "totalRaised", :integer, :limit => 10
     t.column "percentRaised", :integer, :limit => 10
-    t.column "created_at", :datetime
     t.column "updated_at", :datetime
     t.column "goalYear", :string, :limit => 4
     t.column "salary", :integer, :limit => 10
+    t.column "created_at", :datetime
   end
 
   add_index "sitrack_mpd", ["person_id"], :name => "fk_personID"
   add_index "sitrack_mpd", ["application_id"], :name => "fk_applicationID"
 
   create_table "sitrack_queries", :force => true do |t|
-    t.column "name", :string, :limit => 50, :default => "", :null => false
+    t.column "name", :string, :limit => 50
     t.column "owner", :integer, :limit => 10, :default => 0, :null => false
     t.column "persons", :text, :default => "", :null => false
-    t.column "created_at", :datetime, :null => false
-    t.column "updated_at", :datetime, :null => false
+    t.column "created_at", :datetime
+    t.column "updated_at", :binary, :limit => 8
   end
 
   add_index "sitrack_queries", ["owner"], :name => "owner"
 
   create_table "sitrack_saved_criteria", :force => true do |t|
-    t.column "name", :string, :limit => 50, :default => "", :null => false
+    t.column "name", :string, :limit => 50
     t.column "owner", :integer, :limit => 10, :default => 0, :null => false
     t.column "criteria", :text, :default => "", :null => false
     t.column "saved", :integer, :limit => 3, :default => 0, :null => false
-    t.column "options", :text, :default => "", :null => false
+    t.column "options", :text
     t.column "created_at", :datetime, :null => false
     t.column "updated_at", :datetime
   end
@@ -3546,14 +3232,10 @@ ActiveRecord::Schema.define(:version => 14) do
     t.column "value", :string, :default => "", :null => false
   end
 
-  add_index "sitrack_session_values", ["sitrack_session_id", "attribute"], :name => "sitrack_session_id", :unique => true
-
   create_table "sitrack_sessions", :force => true do |t|
-    t.column "ssm_id", :integer, :limit => 10, :default => 0, :null => false
+    t.column "sitrack_user_id", :integer, :limit => 10, :default => 0, :null => false
     t.column "created_at", :datetime, :null => false
   end
-
-  add_index "sitrack_sessions", ["ssm_id"], :name => "ssm_id", :unique => true
 
   create_table "sitrack_tracking", :force => true do |t|
     t.column "application_id", :integer, :limit => 10
@@ -3592,7 +3274,6 @@ ActiveRecord::Schema.define(:version => 14) do
     t.column "kickoffNotes", :text
     t.column "addFormSent", :datetime
     t.column "updateFormSent", :datetime
-    t.column "picture", :string
     t.column "fieldCoach", :string, :limit => 50
     t.column "medPsychSent", :datetime
     t.column "needsDebtCheck", :integer, :limit => 3
@@ -3621,6 +3302,9 @@ ActiveRecord::Schema.define(:version => 14) do
     t.column "miniPref", :string, :limit => 50
     t.column "birthCity", :string, :limit => 50
     t.column "birthState", :string, :limit => 50
+    t.column "ikw_location", :string, :limit => 100
+    t.column "summer_preference", :string, :limit => 100
+    t.column "summer_assignment", :string, :limit => 100
   end
 
   add_index "sitrack_tracking", ["asgTeam"], :name => "asgTeam"
@@ -3633,15 +3317,14 @@ ActiveRecord::Schema.define(:version => 14) do
   add_index "sitrack_tracking", ["person_id"], :name => "fk_personID"
 
   create_table "sitrack_users", :force => true do |t|
-    t.column "ssm_id", :integer
+    t.column "email", :string, :limit => 100
     t.column "last_login", :datetime
-    t.column "created_at", :datetime, :null => false
-    t.column "created_by", :integer, :limit => 10, :default => 0, :null => false
-    t.column "updated_at", :datetime, :null => false
-    t.column "updated_by", :integer, :limit => 10, :default => 0, :null => false
+    t.column "created_at", :datetime
+    t.column "created_by", :integer, :limit => 10
+    t.column "updated_at", :datetime
+    t.column "updated_by", :integer, :limit => 10
+    t.column "ssm_id", :integer
   end
-
-  add_index "sitrack_users", ["ssm_id"], :name => "ssm_id", :unique => true
 
   create_table "sitrack_view_columns", :force => true do |t|
     t.column "sitrack_view_id", :integer, :limit => 10, :default => 0, :null => false
@@ -3650,11 +3333,15 @@ ActiveRecord::Schema.define(:version => 14) do
   end
 
   create_table "sitrack_views", :force => true do |t|
-    t.column "sitrack_user_id", :integer, :limit => 10, :default => 0, :null => false
-    t.column "name", :string, :default => "", :null => false
+    t.column "sitrack_user_id", :integer, :limit => 10
+    t.column "name", :string
   end
 
   add_index "sitrack_views", ["sitrack_user_id"], :name => "uuid"
+
+  create_table "sp_ministry_focus", :force => true do |t|
+    t.column "name", :string
+  end
 
   create_table "staffsite_staffsitepref", :id => false, :force => true do |t|
     t.column "StaffSitePrefID", :integer, :limit => 10, :null => false
@@ -3774,105 +3461,10 @@ ActiveRecord::Schema.define(:version => 14) do
 
   add_index "wsn_sp_reference", ["fk_WsnApplicationID"], :name => "fk_WsnApplicationID"
 
-  create_table "wsn_sp_viewapplicationlight", :id => false, :force => true do |t|
-    t.column "WsnApplicationID", :integer, :limit => 10, :default => 0, :null => false
-    t.column "surferID", :integer, :limit => 10
-    t.column "legalLastName", :string, :limit => 50
-    t.column "legalFirstName", :string, :limit => 50
-    t.column "wsnYear", :string, :limit => 4
-    t.column "role", :string, :limit => 1
-    t.column "gender", :string, :limit => 1
-    t.column "currentEmail", :string, :limit => 200
-    t.column "fk_isMember", :integer
-    t.column "assignedToProject", :integer
-    t.column "status", :string, :limit => 22
-    t.column "isStaff", :boolean, :default => false, :null => false
-    t.column "isApplyingForStaffInternship", :boolean
-  end
-
-  create_table "wsn_sp_viewapplicationlightest", :id => false, :force => true do |t|
-    t.column "WsnApplicationID", :integer, :limit => 10, :default => 0, :null => false
-    t.column "fk_isMember", :integer
-    t.column "status", :string, :limit => 22
-    t.column "isStaff", :boolean, :default => false, :null => false
-    t.column "isApplyingForStaffInternship", :boolean
-    t.column "role", :string, :limit => 1
-    t.column "gender", :string, :limit => 1
-  end
-
-  create_table "wsn_sp_viewcurrentprojects", :id => false, :force => true do |t|
-    t.column "WsnProjectID", :integer, :limit => 10, :default => 0, :null => false
-    t.column "name", :string
-    t.column "studentStartDate", :datetime
-    t.column "studentEndDate", :datetime
-    t.column "projectType", :string, :limit => 1
-    t.column "onHold", :boolean
-    t.column "wsnYear", :string
-    t.column "partnershipRegion", :string, :limit => 50
-    t.column "partnershipRegionOnly", :boolean
-  end
-
-  create_table "wsn_sp_viewcurrentprojects_maxsfcheck", :id => false, :force => true do |t|
-    t.column "WsnProjectID", :integer, :limit => 10, :default => 0, :null => false
-    t.column "name", :string
-    t.column "studentStartDate", :datetime
-    t.column "onHold", :boolean
-    t.column "wsnYear", :string
-    t.column "projectType", :string, :limit => 1
-    t.column "partnershipRegionOnly", :boolean
-    t.column "partnershipRegion", :string, :limit => 50
-    t.column "studentEndDate", :datetime
-  end
-
-  create_table "wsn_sp_viewcurrentprojects_maxsmcheck", :id => false, :force => true do |t|
-    t.column "WsnProjectID", :integer, :limit => 10, :default => 0, :null => false
-    t.column "name", :string
-    t.column "partnershipRegion", :string, :limit => 50
-    t.column "wsnYear", :string
-    t.column "projectType", :string, :limit => 1
-    t.column "studentStartDate", :datetime
-    t.column "partnershipRegionOnly", :boolean
-    t.column "onHold", :boolean
-    t.column "studentEndDate", :datetime
-  end
-
-  create_table "wsn_sp_viewprojectleaders", :id => false, :force => true do |t|
-    t.column "WsnProjectID", :integer, :limit => 10, :default => 0, :null => false
-    t.column "name", :string
-    t.column "country", :string
-    t.column "wsnYear", :string
-    t.column "partnershipRegion", :string, :limit => 50
-    t.column "PDWsnApplicationID", :integer, :limit => 10
-    t.column "PDLastName", :string, :limit => 50
-    t.column "PDFirstName", :string, :limit => 50
-    t.column "PDCurrentEmail", :string, :limit => 200
-    t.column "APDWsnApplicationID", :integer, :limit => 10
-    t.column "APDFirstName", :string, :limit => 50
-    t.column "APDLastName", :string, :limit => 50
-    t.column "APDCurrentEmail", :string, :limit => 200
-    t.column "CoordWsnApplicationID", :integer, :limit => 10
-    t.column "CoordLastName", :string, :limit => 50
-    t.column "CoordFirstName", :string, :limit => 50
-    t.column "CoordCurrentEmail", :string, :limit => 200
-    t.column "fk_IsPD", :integer, :limit => 10
-    t.column "fk_IsAPD", :integer, :limit => 10
-    t.column "fk_IsCoord", :integer, :limit => 10
-  end
-
-  create_table "wsn_sp_viewquestion", :id => false, :force => true do |t|
-    t.column "required", :string, :limit => 1
-    t.column "displayOrder", :integer, :limit => 10
-    t.column "fk_WsnProjectID", :integer, :limit => 10
-    t.column "body", :string, :limit => 250
-    t.column "answerType", :string, :limit => 50
-    t.column "status", :string, :limit => 50
-    t.column "questionID", :integer, :limit => 10, :default => 0, :null => false
-    t.column "fk_QuestionTextID", :integer, :limit => 10
-    t.column "questionTextID", :integer, :limit => 10, :default => 0, :null => false
-  end
 
   create_table "wsn_sp_wsnapplication", :id => false, :force => true do |t|
     t.column "WsnApplicationID", :integer, :limit => 10, :null => false
+    t.column "surferID", :string, :limit => 64
     t.column "role", :string, :limit => 1
     t.column "earliestAvailableDate", :string, :limit => 22
     t.column "dateMustReturn", :string, :limit => 22
@@ -4017,14 +3609,14 @@ ActiveRecord::Schema.define(:version => 14) do
     t.column "createDate", :datetime
     t.column "lastChangedDate", :datetime
     t.column "lastChangedBy", :integer
-    t.column "assignedDate", :datetime
-    t.column "notAcceptedDate", :datetime
-    t.column "withdrawnDate", :datetime
     t.column "isRecruited", :boolean
     t.column "assignedToProject", :integer
     t.column "electronicSignature", :string, :limit => 50
     t.column "submittedDate", :datetime
+    t.column "assignedDate", :datetime
     t.column "acceptedDate", :datetime
+    t.column "notAcceptedDate", :datetime
+    t.column "withdrawnDate", :datetime
     t.column "preferredContactMethod", :string, :limit => 1
     t.column "howOftenCheckEmail", :string, :limit => 30
     t.column "otherClassDetails", :string, :limit => 30
@@ -4045,10 +3637,12 @@ ActiveRecord::Schema.define(:version => 14) do
     t.column "fk_personID", :integer, :limit => 10
   end
 
+  add_index "wsn_sp_wsnapplication", ["fk_isMember"], :name => "index1"
+  add_index "wsn_sp_wsnapplication", ["applAccountNo"], :name => "index10"
+  add_index "wsn_sp_wsnapplication", ["role"], :name => "index12"
+  add_index "wsn_sp_wsnapplication", ["status"], :name => "index8"
+  add_index "wsn_sp_wsnapplication", ["wsnYear"], :name => "index9"
   add_index "wsn_sp_wsnapplication", ["fk_personID"], :name => "fk_personID"
-  add_index "wsn_sp_wsnapplication", ["fk_isMember"], :name => "fk_isMember"
-  add_index "wsn_sp_wsnapplication", ["applAccountNo"], :name => "applAccountNo"
-  add_index "wsn_sp_wsnapplication", ["status"], :name => "status"
 
   create_table "wsn_sp_wsndonations", :id => false, :force => true do |t|
     t.column "WsnDonationsID", :integer, :limit => 10, :null => false
@@ -4093,12 +3687,12 @@ ActiveRecord::Schema.define(:version => 14) do
     t.column "WsnProjectID", :integer, :limit => 10, :null => false
     t.column "name", :string
     t.column "partnershipRegion", :string, :limit => 50
-    t.column "history", :string, :limit => 8000
+    t.column "history", :text
     t.column "startDate", :string
     t.column "stopDate", :string
     t.column "city", :string
     t.column "country", :string
-    t.column "details", :string, :limit => 8000
+    t.column "details", :text
     t.column "status", :string
     t.column "destinationGatewayCity", :string
     t.column "departDateFromGateCity", :string

@@ -30,7 +30,7 @@ end
 #usage: rake extract_fixtures table=fsk_fields
 #only extracts one table at a time; maybe worth expanding
 task :extract_fixtures => :environment do
-  sql = "SELECT * FROM %s"
+  sql = "SELECT * FROM %s where personID = 50943"
   table = ENV['table']
   ActiveRecord::Base.establish_connection
   (table.split(',')).each do |table_name|
