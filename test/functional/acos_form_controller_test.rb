@@ -5,7 +5,9 @@ require 'acos_form_controller'
 class AcosFormController; def rescue_action(e) raise e end; end
 
 class AcosFormControllerTest < Test::Unit::TestCase
-  fixtures :hr_si_applications, :ministry_person, :sitrack_tracking, :simplesecuritymanager_user
+  fixtures :hr_si_applications, :ministry_person, :sitrack_tracking, 
+           :simplesecuritymanager_user, :sitrack_users, :sitrack_enum_values,
+           :sitrack_columns
   
   def setup
     @controller = AcosFormController.new

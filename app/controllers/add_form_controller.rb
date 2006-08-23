@@ -4,9 +4,9 @@ class AddFormController < ApplicationController
       @form = SitrackAddForm.find(params[:form_id])
     else
       app_id = params[:id]
-      @form = (SitrackAddForm.find(:first, :conditions => ['hr_si_application_id = ?', app_id]) || 
-                SitrackAddForm.create(:hr_si_application_id => app_id))
+      @form = SitrackAddForm.new(:hr_si_application_id => app_id)
       @form.approver = session[:user].person
+      @form.save
     end
     preview if @form.valid?
   end
@@ -43,7 +43,7 @@ class AddFormController < ApplicationController
     @spouse = (@person.spouse || Person.new)
     @stint = @tracking.is_stint?
     @location = @stint ? [@tracking.asgCity, @tracking.asgCountry].join(', ') : @tracking.asgTeam
-    @approver = @form.approver
+    @approver = @form.approver = session[:user].person
   end
 
 end

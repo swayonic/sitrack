@@ -5,14 +5,11 @@ class SalaryFormController < ApplicationController
     else
       app_id = params[:id]
       @application = HrSiApplication.find(app_id)
-#      @form = @application.sitrack_salary_forms.first
-#      if !@form
       if @application.sitrack_tracking && @application.sitrack_tracking.is_stint?
         @form = SitrackStintSalaryForm.new(:hr_si_application_id => app_id)
       else
         @form = SitrackInternSalaryForm.new(:hr_si_application_id => app_id)
       end
-#      end
     end
     @form.approver = session[:user].person
     # display form
@@ -27,8 +24,9 @@ class SalaryFormController < ApplicationController
       @application.update_attributes(params[:application])
       
       @tracking.update_attributes(params[:tracking])
+      @form.update_attributes(params[:form])
       
-      preview if @person.valid? && @application.valid? && @tracking.valid? && @form.update_attributes(params[:form])
+      preview if @person.valid? && @application.valid? && @tracking.valid? && @form.save
     end
   end
     
@@ -60,7 +58,7 @@ class SalaryFormController < ApplicationController
     @tracking.asgState  = @current_address.state if @tracking.asgState.nil? || @tracking.asgState.empty?
     @tracking.asgCountry  = @current_address.country if @tracking.asgCountry.nil? || @tracking.asgCountry.empty?
     @mpd = @application.sitrack_mpd || SitrackMpd.new
-    @approver = @form.approver
+    @approver = @form.approver = session[:user].person
     # If current date is >= 5th and <= 20th, put the 16th. Else put 1st
     day = Time.now.day
     month = Time.now.month

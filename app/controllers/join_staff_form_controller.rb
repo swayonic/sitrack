@@ -5,7 +5,7 @@ class JoinStaffFormController < ApplicationController
     else
       app_id = params[:id]
       @application = HrSiApplication.find(app_id)
-      @form = SitrackJoinStaffForm.new(:hr_si_application_id => app_id, :approver_id => session[:user].person.id)
+      @form = SitrackJoinStaffForm.new(:hr_si_application_id => app_id)
     end
     # display form
     setup
@@ -15,7 +15,8 @@ class JoinStaffFormController < ApplicationController
 
       @person.update_attributes(params[:person])
       @mpd.update_attributes(params[:mpd])
-      preview if @form.update_attributes(params[:form])
+      @form.update_attributes(params[:form])
+      preview if @person.valid? && @mpd.valid? && @tracking.valid? && @form.save 
     end
   end
   
@@ -50,6 +51,6 @@ class JoinStaffFormController < ApplicationController
     @form.spouse_name = @spouse.first_name
     @mpd = @application.sitrack_mpd || (@application.sitrack_mpd = SitrackMpd.new)
     @region = (Region.find_by_region(@person.region) || Region.new)
-    @approver = @form.approver
+    @approver = @form.approver = session[:user].person
   end
 end

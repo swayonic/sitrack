@@ -15,7 +15,7 @@ class SalaryFormControllerTest < Test::Unit::TestCase
     CAS::Filter.fake = true
     @request.session[:user] = User.find(:first)
     #Intern preview options
-    @preview_options = {:id => hr_si_applications(:hero).id, :form => {:annual_salary => "600"}, :tracking => {:internType => 'Internship'}}
+    @preview_options = {:id => hr_si_applications(:hero).id, :form => {:annual_salary => "600", :tax_rate => 20}, :tracking => {:internType => 'Internship'}}
   end
 
   def test_fill_get
@@ -24,7 +24,7 @@ class SalaryFormControllerTest < Test::Unit::TestCase
   end
   
   def test_preview_stint
-    @preview_options = {:id => hr_si_applications(:hero).id, :form => {:annual_salary => "600"}}
+    @preview_options = {:id => hr_si_applications(:hero).id, :form => {:annual_salary => "600", :tax_rate => 20}}
     preview
   end
   

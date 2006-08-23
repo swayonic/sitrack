@@ -6,7 +6,6 @@ class AcosFormController < ApplicationController
       app_id = params[:id]
       @application = HrSiApplication.find(app_id)
       @form = SitrackACOSForm.new(:hr_si_application_id => app_id)
-      @form.approver = session[:user].person
     end
     # display form
     setup
@@ -19,8 +18,8 @@ class AcosFormController < ApplicationController
       @person.update_attributes(params[:person])
       @application.update_attributes(params[:application])
       @tracking.update_attributes(params[:tracking])
-      
-      preview if @form.update_attributes(params[:form])
+      @form.update_attributes(params[:form])
+      preview if @person.valid? && @application.valid? && @tracking.valid? && @form.save
     end
   end
   
@@ -55,7 +54,7 @@ class AcosFormController < ApplicationController
     @current_address = (@person.current_address || Address.new)
     @tracking = (@application.sitrack_tracking || SitrackTracking.new)
     @region = (Region.find_by_region(@person.region) || Region.new)
-    @approver = @form.approver
+    @approver = @form.approver = session[:user].person
   end
   
   def setup_action

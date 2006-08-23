@@ -6,7 +6,6 @@ class AdditionalSalaryFormController < ApplicationController
       app_id = params[:id]
       @application = HrSiApplication.find(app_id)
       @form = SitrackAdditionalSalaryForm.new(:hr_si_application_id => app_id)
-      @form.approver = session[:user].person
     end
     # display form
     setup
@@ -17,8 +16,8 @@ class AdditionalSalaryFormController < ApplicationController
       @person.update_attributes(params[:person])
       @application.update_attributes(params[:application])
       @tracking.update_attributes(params[:tracking])
-      
-      preview if @form.update_attributes(params[:form])
+      @form.update_attributes(params[:form])
+      preview if @person.valid? && @application.valid? && @tracking.valid? && @form.save
     end
   end
   
@@ -49,7 +48,7 @@ class AdditionalSalaryFormController < ApplicationController
     @person = @application.person
     @current_address = (@person.current_address || Address.new)
     @tracking = @application.sitrack_tracking
-    @approver = @form.approver
+    @approver = @form.approver = session[:user].person
   end
   
   def add_tax
