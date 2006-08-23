@@ -5,15 +5,16 @@ class SalaryFormController < ApplicationController
     else
       app_id = params[:id]
       @application = HrSiApplication.find(app_id)
-      @form = @application.sitrack_salary_forms.first
-      if !@form
-        if @application.sitrack_tracking && @application.sitrack_tracking.is_stint?
-          @form = SitrackStintSalaryForm.new(:hr_si_application_id => app_id, :approver_id => session[:user].person.id)
-        else
-          @form = SitrackInternSalaryForm.new(:hr_si_application_id => app_id, :approver_id => session[:user].person.id)
-        end
+#      @form = @application.sitrack_salary_forms.first
+#      if !@form
+      if @application.sitrack_tracking && @application.sitrack_tracking.is_stint?
+        @form = SitrackStintSalaryForm.new(:hr_si_application_id => app_id)
+      else
+        @form = SitrackInternSalaryForm.new(:hr_si_application_id => app_id)
       end
+#      end
     end
+    @form.approver = session[:user].person
     # display form
     setup
     unless request.get?
@@ -27,7 +28,7 @@ class SalaryFormController < ApplicationController
       
       @tracking.update_attributes(params[:tracking])
       
-      preview if @form.update_attributes(params[:form])
+      preview if @person.valid? && @application.valid? && @tracking.valid? && @form.update_attributes(params[:form])
     end
   end
     

@@ -3,7 +3,7 @@
 	Please make sure all the information is accurate before submitting it. <br/>
 	<%= link_to "| Submit the form |", :action => 'submit', :id => @form%> 
 	<% back_url = @controller.controller_name == 'add_form' ? {:controller => 'profile'} : {:action => 'fill'}
-		 back_url[:id] = @application%>
+		 back_url[:form_id] = @form%>
 	<%= link_to "| Go back and make changes |", back_url %>
 </div>
 <%= render(:partial => 'form') %>
