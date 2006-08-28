@@ -46,7 +46,7 @@
 class SitrackForm < ActiveRecord::Base
   belongs_to :hr_si_application
   belongs_to :approver, :class_name => "Person"
-  enforce_schema_rules
+ # enforce_schema_rules
   
   def to
     if hr_si_application.sitrack_tracking.is_stint?
