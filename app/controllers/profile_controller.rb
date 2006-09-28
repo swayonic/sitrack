@@ -67,7 +67,7 @@ class ProfileController < ApplicationController
 	    if @person.save
         # clear page caches
         @person.hr_si_applications do |app|
-  	      expire_action(:action => :index, :id => app.id)
+          expire_action(:controller => 'profile', :action => 'index', :id => app.id)
   	    end
         render(:template => '/shared/close_window', :layout => false)
       else 
