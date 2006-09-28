@@ -1,5 +1,5 @@
 class ProfileController < ApplicationController
-  caches_action :index
+#  caches_action :index
   
   def index
     # if we don't have an id in the request, go back to the directory
