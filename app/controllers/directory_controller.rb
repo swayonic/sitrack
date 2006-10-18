@@ -5,7 +5,7 @@ class DirectoryController < ApplicationController
   end       
   
   def show_directory
-    @views = session[:sitrack_user].sitrack_views
+    @views = sitrack_user.sitrack_views
     @regions = SitrackRegion.all
     # look for a view_id stored in the session
     view_id = session[:session].get_value('view_id') 

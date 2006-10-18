@@ -1,8 +1,10 @@
 require 'numeric'
+require 'sitrack_user'
 # Filters added to this controller will be run for all controllers in the application.
 # Likewise, all the methods added will be available for all controllers.
 class ApplicationController < ActionController::Base
   before_filter AuthenticationFilter, :authorize, :except => ['no_access','logout']
+#  after_filter :connection_bar
   include ExceptionNotifiable	#Automatically generates emails of errors
   # Define the app name. This is used in authentication_filter
   @@application_name = "sitrack"
@@ -40,7 +42,9 @@ class ApplicationController < ActionController::Base
   end
   
   private
-  
+  def sitrack_user
+    session[:sitrack_user] ||= authorize
+  end
   # reset the user object in the session
   def reset_user
     session[:sitrack_user] = SitrackUser.find_by_ssm_id(session[:user].id, :include => :sitrack_views)
@@ -53,7 +57,7 @@ class ApplicationController < ActionController::Base
   end
   
   def authorize
-    if !session[:sitrack_user]
+    if session[:sitrack_user].nil?
       session[:sitrack_user] = SitrackUser.find_by_ssm_id(session[:user].id)
       if session[:sitrack_user].nil?
         redirect_to(:controller => 'directory', :action => 'no_access'); return; 
@@ -62,7 +66,7 @@ class ApplicationController < ActionController::Base
       sitrack_session ||= SitrackSession.create(:sitrack_user_id => session[:sitrack_user].id)
       session[:session] = sitrack_session
     end
-    return true
+    return session[:sitrack_user]
   end
   
   def all_tables
