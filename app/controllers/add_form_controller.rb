@@ -35,9 +35,13 @@ class AddFormController < ApplicationController
     @title = 'STAFF ADD NOTICE - Class A Only'
     @application = @form.hr_si_application
     @person = @application.person
-    @current_address = (@person.current_address || Address.new)
+#    @current_address = (@person.current_address || Address.new)
     @emergency_address = (@person.emergency_address1 || Address.new)
     @permanent_address = (@person.permanent_address || Address.new)
+    # We currently have current address set to permanent address. This is 
+    # because at the point at which the add form is submitted, the permanent
+    # address is more relevant. Contact scott.santee@uscm.org for more details
+    @current_address = @emergency_address
     @region = (Region.find_by_region(@person.region) || Region.new)
     @tracking = @application.sitrack_tracking || SitrackTracking.new
     @spouse = (@person.spouse || Person.new)
