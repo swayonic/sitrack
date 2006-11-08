@@ -21,7 +21,7 @@ memcache_options = {
   :c_threshold => 10_000,
   :compression => true,
   :debug => false,
-  :namespace => "spapp-#{RAILS_ENV}",
+  :namespace => "sitrackapp-#{RAILS_ENV}",
   :readonly => false,
   :urlencode => false
 }
