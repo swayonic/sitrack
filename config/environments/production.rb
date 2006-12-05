@@ -16,7 +16,7 @@ config.action_controller.session_store = :mem_cache_store
 # config.action_controller.asset_host                  = "http://assets.example.com"
 
 # Disable delivery errors if you bad email addresses should just be ignored
-# config.action_mailer.raise_delivery_errors = false
+config.action_mailer.raise_delivery_errors = false
 require 'memcache'
 memcache_options = {
   :c_threshold => 10_000,
