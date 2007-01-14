@@ -9,7 +9,7 @@ or the 16<sup>th</sup>.</p>
 
 <p>Regional Office & Phone# <span class="data"><%=@region.name%>&nbsp;<%=@region.phone%></span></p>
 
-<p><strong>(For STINT Only)</strong> Sending Campus (Specific School): <span class="data"><%if @stint %>UCLA<%end%></span></p>
+<p><strong>(For STINT Only)</strong> Sending Campus (Specific School): <span class="data"><%= @person.campus if @stint %></span></p>
 
 <p>
 Last Name: <span class="data"><%=@person.lastName%> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>
@@ -105,7 +105,7 @@ Team Leader: __________
 </p>
 
 <p>
-Hire Date: __/__/__
+Hire Date: <%= @person.staff && @person.staff.hireDate ? '<span class="data">' + formatted_date(@person.staff.hireDate) + '</span>' : '__/__/__' %>
 Estimated Departure Date: <span class="data"><%= if @stint then ApplicationController::formatted_date(@tracking.departureDate) end%></span>&nbsp;
 <strong>(For STINT Only)</strong>
 </p>
