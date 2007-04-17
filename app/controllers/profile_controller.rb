@@ -23,6 +23,12 @@ class ProfileController < ApplicationController
     # sometimes it's useful to have the person as an object instead of a hash
     @person_obj = Person.find(@person['personID'])
     
+    # determine whether to give option to create second year record
+    @num_valid_apps = 0
+    @person_obj.hr_si_applications.each do |app|
+      @num_valid_apps += 1 unless ["Declined", "Not Accepted", "Withdrawn"].include?(app.sitrack_tracking.status)
+    end
+    
     # get all the columns and create an hash of name=> column pairs
     @columns = Hash.new
     SitrackColumn.find_all.each {|c| @columns[c.name] = c}
