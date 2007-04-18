@@ -56,7 +56,7 @@ end
 # Include your application configuration below
 Engines.start :common
 ActionMailer::Base.server_settings = {
-  :addres   => "smtp1.ccci.org",
+  :address   => "smtp1.ccci.org",
   :domain   => "ccci.org"
 }
 ExceptionNotifier.exception_recipients = %w(josh.starcher@uscm.org matt.drees@uscm.org justin.sabelko@uscm.org)
