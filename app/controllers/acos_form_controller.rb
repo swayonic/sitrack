@@ -15,9 +15,10 @@ class AcosFormController < ApplicationController
       # save and preview
       expire_action(:controller => 'profile', :action => 'index', :id => app_id) # kill the profile cache
 
-      @person.update_attributes(params[:person])
+      @person.update_attributes(params[:person]) if params[:form][:action] == "toStint"
       @application.update_attributes(params[:application])
-      @tracking.update_attributes(params[:tracking])
+      @tracking.update_attributes(params[:trackingStint]) if params[:form][:action] == "toStint"
+      @tracking.update_attributes(params[:tracking]) if params[:form][:action] == "restint"
       @form.update_attributes(params[:form])
       preview if @person.valid? && @application.valid? && @tracking.valid? && @form.save
     end
