@@ -3,7 +3,9 @@ require 'sitrack_user'
 # Filters added to this controller will be run for all controllers in the application.
 # Likewise, all the methods added will be available for all controllers.
 class ApplicationController < ActionController::Base
-  before_filter AuthenticationFilter, :authorize, :except => ['no_access','logout']
+  @@public_pages = ['up_monitor','no_access','logout']
+  skip_before_filter CAS::Filter, :only => @@public_pages
+  before_filter AuthenticationFilter, :authorize, :except => @@public_pages
 #  after_filter :connection_bar
   include ExceptionNotifiable	#Automatically generates emails of errors
   # Define the app name. This is used in authentication_filter
@@ -18,6 +20,11 @@ class ApplicationController < ActionController::Base
   # this action just exists to test our error handling.
   def boom
     raise "boom"
+  end
+  
+  def up_monitor
+    raise "DB looks down" if SitrackTracking.find(:first).nil?
+    render :text => "<html><body>looks good (we're up)</body></html>"
   end
   
   def self.formatted_date(value=nil)
