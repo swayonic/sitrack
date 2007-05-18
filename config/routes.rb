@@ -22,6 +22,9 @@ ActionController::Routing::Routes.draw do |map|
                              :action => 'index',
                              :requirements => {:id => /\d+/}
   map.connect 'logout', :controller => 'application', :action => 'logout'
+
+  map.connect 'up_monitor', :controller => "application", :action => "up_monitor"
+
   # Install the default route as the lowest priority.
   map.connect ':controller/:action/:id'
 end
