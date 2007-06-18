@@ -67,13 +67,13 @@
 		<tr>
 			<td>&nbsp;</td>
 			<td>
-				From <%= text_field(:form, :change_assignment_from_location) %> 
-				to <%= text_field(:form, :change_assignment_to_location) %> 
+				From <%= text_field(:form, :change_assignment_from_location, :maxlength => 50) %> 
+				to <%= text_field(:form, :change_assignment_to_location, :maxlength => 50) %> 
 			</td>
 		</tr>
 		<tr>
 			<td align="right"><%= radio_button 'form', 'action', 'restint'%></td>
-			<td>RESTINT to Location: <%= text_field(:form, :restint_location) %></td>
+			<td>RESTINT to Location: <%= text_field(:form, :restint_location, :maxlength => 50) %></td>
 		</tr>
 		<tr>
 			<td>&nbsp;</td>
