@@ -11,6 +11,7 @@ class SitrackRegion
 		 ['SE','SE'],
 		 ['UM','UM'],
 		 ['NC','NC'],
-		 ['AIA','AIA']]
+		 ['AIA','AIA'],
+     ['HLIC','HLIC']]
   end
 end
