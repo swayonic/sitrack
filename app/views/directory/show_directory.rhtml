@@ -179,8 +179,8 @@
 							 value = get_project(value.to_i)
 						when 'percent'
 							value = value.to_i.round.to_s+'%'
-						when 'dollars'
-					  	value = value.dollars	
+						when 'dollar'
+					  	value = value.to_i.dollars
 				    end -%>
 						 <%=value%>
 				<% end -%>

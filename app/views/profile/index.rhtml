@@ -86,7 +86,8 @@ mpd = ['Coach',
 			 'One Time Raised',
 			 'Total Raised',
 			 'Percent Raised',
-			 'Monthly Salary']
+			 'Monthly Salary',
+			 'Account Balance']
 
 forms = ['Add Form',
 			   'Salary Setup Form',
@@ -227,6 +228,19 @@ person_id = @person['personID']
 							<%end -%>									
 								</a>
 							</span>
+				 <% when "dollar" -%>
+							<script type="text/javascript">
+								var ol_fgcolor = "#eeeeee";
+							</script>
+							<%if !value.empty? -%>
+								<a href="javascript:edit_value('<%=column_name%>',<%=application_id%>,'<%=escape_javascript(value)%>','<%=column_id%>','<%=@columns[column_name].column_type%>')"  onclick="nd();" onmouseover="return overlib('<%=escape_javascript(value)%>',LEFT);" onmouseout="nd();">
+									<%=value.to_i.dollars%>
+							<%else -%>
+								<a href="javascript:edit_value('<%=column_name%>',<%=application_id%>,'<%=value%>','<%=column_id%>','<%=@columns[column_name].column_type%>')">
+									<img src="/images/edit.png" border="0"/> 
+							<%end -%>									
+								</a>
+							</span>
 				 <% else -%>
 							<a href="javascript:edit_value('<%=column_name%>',<%=application_id%>,'<%=escape_javascript(value)%>','<%=column_id%>','<%=@columns[column_name].column_type%>')">
 							<%if !value.empty?%>
@@ -247,8 +261,8 @@ person_id = @person['personID']
 						value = get_project(value.to_i)
 					when 'percent'
 						value = value.to_i.round.to_s+'%'
-				  when 'dollars'
-				  	value = value.dollars
+				  when 'dollar'
+				  	value = value.to_i.dollars
 			    end -%>
 					<span class="static"><%= value %></span>
 				<%end -%>
