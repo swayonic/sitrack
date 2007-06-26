@@ -11,8 +11,17 @@ class DirectoryController < ApplicationController
     view_id = session[:session].get_value('view_id') 
     
     # set up the view
-    @view ||= view_id ? SitrackView.find(view_id, :include => [{:sitrack_view_columns => :sitrack_column}, :sitrack_columns], :order => 'sitrack_view_columns.position') :
-          session[:sitrack_user].sitrack_views.find(:first, :include => [:sitrack_view_columns, :sitrack_columns])
+    begin
+      view_sess_obj = SitrackView.find(view_id, :include => [{:sitrack_view_columns => :sitrack_column}, :sitrack_columns], :order => 'sitrack_view_columns.position') if view_id
+    rescue
+      view_sess_obj = nil
+    end
+    view_data_obj = session[:sitrack_user].sitrack_views.find(:first, :include => [:sitrack_view_columns, :sitrack_columns])
+    unless view_data_obj
+      UserController.create_views(session[:sitrack_user])
+      view_data_obj = session[:sitrack_user].sitrack_views.find(:first, :include => [:sitrack_view_columns, :sitrack_columns])
+    end
+    @view ||= view_sess_obj ? view_sess_obj : view_data_obj 
     
     session[:session].save_value('view_id', @view.id) unless @view.id == view_id.to_i
 
