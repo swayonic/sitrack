@@ -36,6 +36,8 @@ class SitrackMpd < ActiveRecord::Base
       mpd.account_balance = balances[accNo] if accNo
       mpd.save
     end
+    puts Time.now
+    puts "Finished"
     0
   end
 end
