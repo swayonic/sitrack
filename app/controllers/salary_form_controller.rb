@@ -53,10 +53,7 @@ class SalaryFormController < ApplicationController
     @application = @form.hr_si_application
     @person = @application.person
     
-    # We currently have current address set to permanent address. This is 
-    # because at the point at which the add form is submitted, the permanent
-    # address is more relevant. Contact scott.santee@uscm.org for more details
-    @current_address = @person.permanent_address || PermanentAddress.create(:person_id => @person.id)
+    @current_address = @person.current_address || CurrentAddress.create(:person_id => @person.id)
     @tracking = @application.sitrack_tracking || SitrackTracking.new
     @tracking.asgCity  = @current_address.city if @tracking.asgCity.nil? || @tracking.asgCity.empty?
     @tracking.asgState  = @current_address.state if @tracking.asgState.nil? || @tracking.asgState.empty?
