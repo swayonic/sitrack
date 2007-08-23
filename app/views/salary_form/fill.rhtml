@@ -85,7 +85,8 @@
 			<td><%= text_field 'form', 'annual_salary', :size => 30 %></td>
 		</tr>
 		<tr>
-			<td align="right">Current Address: (If this is wrong, go back and change it on the profile)</td>
+			<td align="right">Current Address (during year of internship for tax purposes):<br/>
+			 (If this is wrong, go back and change it on the profile)</td>
 			<td>
 				<%= @current_address.display_html %><br/>
 				Home Phone: <%= @current_address.homePhone %>
