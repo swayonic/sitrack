@@ -1,0 +1,15 @@
+<div id="center">
+	<div class="boxheader">Delete People from the Tracker</div>
+<p>
+Below is the list of people you are about to delete from the Tracker. Please note, THERE IS NO UNDELETE. What you are about to do is 
+final. Please tread cautiously. If you're sure you want to continue, click the 'Delete' button at the bottom of the list. Otherwise, click 
+'Back'.
+</p>
+<%- @applications.each do |app| -%>
+	<%= app.person.full_name %><br />
+<%- end -%><br /><br />
+<%= form_tag '/people/delete' %>
+	<%= hidden_field_tag("id_list", params[:id_list]) %>
+	<%= submit_tag("Delete") %>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+	<%= link_to("Back", '/directory') %>
+<%= end_form_tag %>

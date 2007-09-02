@@ -11,17 +11,17 @@
 class SitrackSession < ActiveRecord::Base
   has_many  :sitrack_session_values, :dependent => true
   
-  def save_value(attribute, value)
-    remove_value(attribute)
-    sitrack_session_values << SitrackSessionValue.new(:attribute => attribute, :value => value)
+  def save_value(attrib, value)
+    remove_value(attrib)
+    sitrack_session_values << SitrackSessionValue.new(:attrib => attrib, :value => value)
   end
   
-  def remove_value(attribute)
-    SitrackSessionValue.delete_all(["sitrack_session_id = ? AND attribute = ?", id, attribute])
+  def remove_value(attrib)
+    SitrackSessionValue.delete_all(["sitrack_session_id = ? AND attrib = ?", id, attrib])
   end
   
-  def get_value(attribute)
-    session_value = sitrack_session_values.find_by_attribute(attribute)
+  def get_value(attrib)
+    session_value = sitrack_session_values.find_by_attrib(attrib)
     session_value ? session_value.value : nil
   end
 end

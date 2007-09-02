@@ -1,0 +1,13 @@
+<div id="center">
+	<div class="boxheader">Add Someone to the Tracker</div>
+<p>
+The fields listed below are required. If you'd also like to enter contact information at this time, you can. Once you enter your
+information, the system will try to match an existing person in the system based on email. If successful, the it might save you some time
+filling out the profile.
+</p>
+<strong>New Person</strong><br/>
+<%= error_messages_for 'person' %>
+<%= error_messages_for 'current_address' %>
+<% form_for(:person, :url => '/people/create') do |f| %>
+	<%= render :partial => 'form', :locals => {:f => f} %>
+<% end %>

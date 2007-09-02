@@ -179,11 +179,14 @@ function perform_action()
 		if (id_list != '0') {
 			var f = document.participants_f;
 			f.id_list.value = id_list;
-			f.action.value = 'delete_prompt';
+			f.action = '/people/delete_prompt';
 			f.submit();
 		} else {
 			alert('You did not select anyone to delete.');
 		}
+		break;
+		case 'add_person':
+			document.location = '/people/new'
 		break;
 	}
 }
