@@ -16,23 +16,23 @@ class DirectoryController < ApplicationController
       # rescue
       #   view_sess_obj = nil
       # end
-      @view = session[:sitrack_user].sitrack_views.find(:first, :include => [:sitrack_view_columns, :sitrack_columns])
+      @view = session[:sitrack_user].sitrack_views.find(:first, :include => {:sitrack_view_columns => :sitrack_columns})
       unless @view
         UserController.create_views(session[:sitrack_user])
-        @view = session[:sitrack_user].sitrack_views.find(:first, :include => [:sitrack_view_columns, :sitrack_columns])
+        @view = session[:sitrack_user].sitrack_views.find(:first, :include => {:sitrack_view_columns => :sitrack_columns})
       end
       @view_id = @view.id
       session[:session].save_value('view_id', @view_id) 
     end
-    # @template_name = "results#{@view_id}"
-    # @template_with_path = "#{RAILS_ROOT}/app/views/directory/_#{@template_name}.rhtml"
-    @view ||= SitrackView.find(@view_id, :include => [{:sitrack_view_columns => :sitrack_column}, :sitrack_columns], :order => 'sitrack_view_columns.position')
-    # unless File.exist?(@template_with_path)
-    #   template = render_to_string(:partial => 'results_template')
-    #   File.open(@template_with_path, 'w') do |f|
-    #     f.puts template
-    #   end
-    # end
+    @template_name = "results#{@view_id}"
+    @template_with_path = "#{RAILS_ROOT}/app/views/directory/_#{@template_name}.rhtml"
+    @view ||= SitrackView.find(@view_id, :include => {:sitrack_view_columns => :sitrack_column}, :order => 'sitrack_view_columns.position')
+    unless File.exist?(@template_with_path)
+      template = render_to_string(:partial => 'results_template')
+      File.open(@template_with_path, 'w') do |f|
+        f.puts template
+      end
+    end
 
     # if we have a query_id in the session, use the saved list
     if (query_id = session[:session].get_value('query_id'))
