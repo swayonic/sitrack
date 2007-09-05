@@ -59,7 +59,7 @@ ActionMailer::Base.server_settings = {
   :address   => "smtp1.ccci.org",
   :domain   => "ccci.org"
 }
-ExceptionNotifier.exception_recipients = %w(matt.drees@uscm.org justin.sabelko@uscm.org)
+ExceptionNotifier.exception_recipients = %w(matt.drees@uscm.org justin.sabelko@uscm.org josh.starcher@gmail.com)
 ExceptionNotifier.sender_address = %("Application Error" <sitrack@uscm.org>)
 ExceptionNotifier.email_prefix = "[SITRACK] "
 
