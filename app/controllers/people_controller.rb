@@ -59,7 +59,11 @@ class PeopleController < ApplicationController
   
   def delete
     ids = params[:id_list].split(',').collect(&:to_i).join(',')
-    HrSiApplication.destroy_all(["ApplicationID IN (?)", params[:id_list].split(',')])
+    @applications = HrSiApplication.find(:all, :conditions => ["ApplicationID IN (?)", params[:id_list].split(',')], :include => :sitrack_tracking)
+    @applications.each do |app|
+      app.sitrack_tracking.destroy
+      app.destroy
+    end
     redirect_to '/directory'
   end
 end
