@@ -38,9 +38,9 @@
 				<% if column.name == "Full Name" || column.name == "First Name" || column.name == "Last Name"%>
 					<td class="<%="<%=style%"+">"%>"><strong> <a href="/profile/<%="<%=@person['applicationID']%"+">"%>"><%="<%=value%"+">"%></a> </strong></td>
 				<% else -%>
-					<td class="<%="<%=style%"+">"%>" align="center" id="c<%=column.name%><%="@person['applicationID'] %"+">"%>c<%= column.id%>">
+					<td class="<%="<%=style%"+">"%>" align="center" id="c<%=column.name%><%="<%= @person['applicationID'] %"+">"%>c<%= column.id%>">
 					<% if column.writeable? %>
-						<div id="<%=column.name%><%="<%=@person['applicationID']%"+">"%>c<%=column.id%>">
+						<div id="<%=column.name%><%="<%= @person['applicationID'] %"+">"%>c<%=column.id%>">
 						<% case column.column_type 
 							 when 'date' %>
 							<%= "<% if is_date(value)\n" +
