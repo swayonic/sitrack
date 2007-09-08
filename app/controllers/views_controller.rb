@@ -26,6 +26,7 @@ class ViewsController < ApplicationController
     @view = session[:sitrack_user].sitrack_views.find(params[:id])
     @view.destroy
     reset_user # defined in application.rb
+    delete_cache(@view.id)
     redirect_to(:action => :index)
   end
   
@@ -35,6 +36,7 @@ class ViewsController < ApplicationController
       view_column.position = params['column_list'].index(view_column.id.to_s) + 1
       view_column.save
     end
+    delete_cache(@view.id)
     render :nothing => true
   end
   
@@ -56,6 +58,7 @@ class ViewsController < ApplicationController
                              :sitrack_column_id => params[:column_id],
                              :position => SitrackViewColumn.maximum('position')+1)
     end
+    delete_cache(@view.id)
   end
   
   def remove_column
@@ -64,6 +67,7 @@ class ViewsController < ApplicationController
     @column = @view_column.sitrack_column
     @view = @view_column.sitrack_view
     @view_column.destroy
+    delete_cache(@view.id)
   end
   
   def search
@@ -106,5 +110,11 @@ class ViewsController < ApplicationController
     end
     session[:sitrack_user].sitrack_views << @new_view
     redirect_to(:action => :index)
+  end
+  
+  protected
+  def delete_cache(view_id)
+    template_with_path = "#{RAILS_ROOT}/app/views/directory/_results#{view_id}.rhtml"
+    File.delete(template_with_path) if File.exist?(template_with_path)
   end
 end
