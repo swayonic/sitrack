@@ -1,15 +1,17 @@
 <%
 # define which fields go in which boxes
 common = ['First Name',
-					'Last Name',
-					'Middle Name',
-					'Preferred Name',
-					'Account No',
-					'SSN',
-					'Intern Type',
-					'Position',
-					'Citizenship',
-					'US Citizen']
+			'Last Name',
+			'Middle Name',
+			'Preferred Name',
+			'Account No',
+			'Vonage',
+			'SSN',
+			'Intern Type',
+			'Position',
+			'Citizenship',
+			'US Citizen',
+			'Website']
 
 personal = ['Alma Mater',
 						'Hire Date',
@@ -181,6 +183,7 @@ person_id = @person['personID']
 			<% box.each_with_index do |column_name, i| 
 					safe_name = u(column_name)
 					value = (@person[safe_name] || '').strip
+					raise column_name.inspect if @columns[column_name].nil?
 					column_id = @columns[column_name].id
 			 -%>
 			 <% if i == 0 || i == (box.size / 2).floor -%>

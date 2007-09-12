@@ -734,6 +734,18 @@ sitrack_columns_007:
   id: "8"
   select_clause: salary
   created_at: 0000-00-00 00:00:00
+sitrack_columns_balance: 
+  where_clause: ''
+  name: Account Balance
+  updated_at: 
+  writeable: "1"
+  show_in_directory: "1"
+  column_type: dollar
+  table_clause: SitrackMpd,HrSiApplication
+  update_clause: ''
+  id: "153"
+  select_clause: account_balance
+  created_at: 0000-00-00 00:00:00
 sitrack_columns_092: 
   where_clause: 
   name: Physical Received
@@ -745,6 +757,30 @@ sitrack_columns_092:
   update_clause: 
   id: "103"
   select_clause: physicalReceived
+  created_at: 0000-00-00 00:00:00
+sitrack_columns_vonage: 
+  where_clause: 
+  name: Vonage
+  updated_at: 
+  writeable: "1"
+  show_in_directory: "1"
+  column_type: string
+  table_clause: SitrackTracking,HrSiApplication
+  update_clause: 
+  id: "155"
+  select_clause: vonage
+  created_at: 0000-00-00 00:00:00
+sitrack_columns_website: 
+  where_clause: 
+  name: Website
+  updated_at: 
+  writeable: "1"
+  show_in_directory: "1"
+  column_type: string
+  table_clause: SitrackTracking,HrSiApplication
+  update_clause: 
+  id: "156"
+  select_clause: website
   created_at: 0000-00-00 00:00:00
 sitrack_columns_063: 
   where_clause: 
