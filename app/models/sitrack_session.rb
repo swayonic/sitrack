@@ -9,7 +9,7 @@
 #
 
 class SitrackSession < ActiveRecord::Base
-  has_many  :sitrack_session_values, :dependent => true
+  has_many  :sitrack_session_values, :dependent => :destroy
   
   def save_value(attrib, value)
     remove_value(attrib)

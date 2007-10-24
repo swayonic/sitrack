@@ -1,6 +1,6 @@
-module Engines
-  CONFIG = {:edge => true}
-end
+#module Engines
+#  CONFIG = {:edge => true}
+#end
 # Be sure to restart your web server when you modify this file.
 
 # Uncomment below to force Rails into production mode when
@@ -8,7 +8,7 @@ end
 # ENV['RAILS_ENV'] ||= 'production'
 
 # Specifies gem version of Rails to use when vendor/rails is not present
-RAILS_GEM_VERSION = '1.1.6'
+# RAILS_GEM_VERSION = '1.1.6'
 
 # Bootstrap the Rails environment, frameworks, and default configuration
 require File.join(File.dirname(__FILE__), 'boot')
@@ -54,8 +54,8 @@ Inflector.inflections do |inflect|
 end
 
 # Include your application configuration below
-Engines.start :common
-ActionMailer::Base.server_settings = {
+#Engines.start :common
+ActionMailer::Base.smtp_settings = {
   :address   => "smtp1.ccci.org",
   :domain   => "ccci.org"
 }

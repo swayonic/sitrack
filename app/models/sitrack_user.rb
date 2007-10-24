@@ -13,7 +13,7 @@
 #
 
 class SitrackUser < ActiveRecord::Base
-  has_many                  :sitrack_views, :dependent => true
-  has_one                   :sitrack_session, :dependent => true
+  has_many                  :sitrack_views, :dependent => :destroy
+  has_one                   :sitrack_session, :dependent => :destroy
   belongs_to                :user, :foreign_key => :ssm_id
 end

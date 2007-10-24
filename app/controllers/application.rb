@@ -65,7 +65,7 @@ class ApplicationController < ActionController::Base
   
   def authorize
     if session[:sitrack_user].nil?
-      session[:sitrack_user] = SitrackUser.find_by_ssm_id(session[:user].id)
+      session[:sitrack_user] = SitrackUser.find_by_ssm_id(session[:user].id, :include => [:sitrack_session, :sitrack_views])
       if session[:sitrack_user].nil?
         redirect_to(:controller => 'directory', :action => 'no_access'); return; 
       end
