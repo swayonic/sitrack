@@ -71,6 +71,10 @@
 			<td><%= select 'form', 'tax_rate', [['Intern who is currently not in NY: 23%', 23],
 												['Intern who is currently in NY: 28%', 28]]%></td>
 		</tr>
+		<tr>
+		  <td align="right">Additional Notes:</td>
+		  <td><%= text_area 'form', 'additional_notes', :rows => 5 %></td>
+		</tr>
 		<% end -%>
 		</table>
 	</div><br /><br />

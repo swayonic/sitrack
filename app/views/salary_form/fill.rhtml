@@ -92,6 +92,10 @@
 				Home Phone: <%= @current_address.homePhone %>
 			</td>
 		</tr>
+		<tr>
+		  <td align="right">Additional Notes:</td>
+		  <td><%= text_area 'form', 'additional_notes', :rows => 5 %></td>
+		</tr>
 		</table>
 	</div><br /><br />
 	<a href="javascript:document.forms[0].submit();" class="button">Preview Form</a>&nbsp;&nbsp;&nbsp;&nbsp;

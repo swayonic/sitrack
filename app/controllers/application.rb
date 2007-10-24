@@ -129,7 +129,7 @@ class ApplicationController < ActionController::Base
       option_hash = {}
       options.each do |column_name, column_array|
         option_hash[column_name] = {}
-        column_array.each { |options| option_hash[column_name][options[0]] = options[1]}
+        column_array.each { |options| option_hash[column_name][options[0]] = options[1] }
       end
       session[:option_hash] = option_hash
     end
