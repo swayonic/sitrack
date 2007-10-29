@@ -62,6 +62,8 @@ ActionMailer::Base.smtp_settings = {
 ExceptionNotifier.exception_recipients = %w(matt.drees@uscm.org justin.sabelko@uscm.org josh.starcher@gmail.com)
 ExceptionNotifier.sender_address = %("Application Error" <sitrack@uscm.org>)
 ExceptionNotifier.email_prefix = "[SITRACK] "
+FILTER_KEYS = %w(ssn)
+ExceptionNotifier.filter_keys = FILTER_KEYS
 
 # Set the default place to find file_column files.
 FILE_COLUMN_PREFIX = 'files'
