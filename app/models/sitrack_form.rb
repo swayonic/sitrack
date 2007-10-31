@@ -45,7 +45,7 @@
 
 class SitrackForm < ActiveRecord::Base
   belongs_to :hr_si_application
-  belongs_to :approver, :class_name => "Person"
+  belongs_to :approver, :class_name => "Person", :foreign_key => "approver_id"
  # enforce_schema_rules
   
   def to
