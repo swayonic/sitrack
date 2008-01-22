@@ -62,7 +62,7 @@ ActionMailer::Base.smtp_settings = {
 
 TABLE_NAME_PREFIX = "si_"
 
-ExceptionNotifier.exception_recipients = %w(matt.drees@uscm.org justin.sabelko@uscm.org josh.starcher@gmail.com)
+ExceptionNotifier.exception_recipients = %w(justin.sabelko@uscm.org josh.starcher@gmail.com)
 ExceptionNotifier.sender_address = %("Application Error" <sitrack@uscm.org>)
 ExceptionNotifier.email_prefix = "[SITRACK] "
 FILTER_KEYS = %w(ssn)
