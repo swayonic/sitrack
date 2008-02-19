@@ -119,7 +119,7 @@ class ApplicationController < ActionController::Base
   def get_options
     if !session[:options]
       options = Hash.new
-      SitrackColumn.find(:all, :include => :sitrack_enum_values).each do |column|
+      SitrackColumn.find(:all, :include => :sitrack_enum_values, :order => 'sitrack_enum_values.position').each do |column|
         options[column.name] = column.sitrack_enum_values.collect {|option| [option.value, option.name]} if column.column_type == 'enum'
       end
       session[:options] = options
