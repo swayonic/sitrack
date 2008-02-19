@@ -1,4 +1,5 @@
 class JsController < ApplicationController
+  caches_page :options
   def options
     @out = 'function appendOptions(field, fieldname, value) {'
     @out += "\n switch(fieldname) {"

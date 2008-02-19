@@ -1,17 +1,17 @@
 class SiApplicationStatus
   def self.all
-    [['Applicant','Applicant'], 
-		 ['Ready','Ready'],
-		 ['Being_Evaluated','Being Evaluated'],
-		 ['Pre_A','Pre A'],
-		 ['Accepted','Accepted'],
-		 ['Follow_Through','Follow Through'],
-		 ['Placed','Placed'],
-		 ['On_Assignment','On Assignment'],
-		 ['Declined','Declined'],
-		 ['Withdrawn','Withdrawn'],
-		 ['Alumni','Alumni'],
-		 ['Re-Applied','Re-Applied'],
-		 ['Terminated','Terminated']]
+    [['started','Applicant'], 
+		 ['completed','Ready'],
+		 ['being_evaluated','Being Evaluated'],
+		 ['pre_a','Pre A'],
+		 ['accepted','Accepted'],
+		 ['follow_through','Follow Through'],
+		 ['placed','Placed'],
+		 ['on_assignment','On Assignment'],
+		 ['declined','Declined'],
+		 ['withdrawn','Withdrawn'],
+		 ['alumni','Alumni'],
+		 ['re_applied','Re-Applied'],
+		 ['terminated','Terminated']]
   end
 end

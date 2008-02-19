@@ -87,7 +87,7 @@ class DirectoryController < ApplicationController
     SiApplicationStatus.all.each do |status|
       if params['status_'+status[0]]
         join = (query_string[:status] == '') ? ' AND (' : ' OR '
-        query_string[:status] += join + SitrackTracking.table_name + ".status = '#{status[1]}'"
+        query_string[:status] += join + Apply.table_name + ".status = '#{status[0]}'"
         @selected_options += "[status_#{status[0]}]"
       end
     end
