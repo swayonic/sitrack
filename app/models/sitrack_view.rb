@@ -39,6 +39,7 @@ class SitrackView < ActiveRecord::Base
     out += " LEFT JOIN #{Staff.table_name} on #{Person.table_name}.accountNo = #{Staff.table_name}.accountNo "
     out += " LEFT JOIN #{SitrackMpd.table_name} on #{HrSiApplication.table_name}.applicationID = #{SitrackMpd.table_name}.application_id "
     out += " LEFT JOIN #{SitrackTracking.table_name} on #{HrSiApplication.table_name}.applicationID = #{SitrackTracking.table_name}.application_id "
+  	out += " LEFT JOIN #{Apply.table_name} on #{HrSiApplication.table_name}.apply_id = #{Apply.table_name}.id "
     return out
   end
   

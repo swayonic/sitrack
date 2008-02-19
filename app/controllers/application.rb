@@ -94,11 +94,13 @@ class ApplicationController < ActionController::Base
     table_regions = 'ministry_RegionalTeam'
     table_children = 'sitrack_Children'
     table_files = 'sitrack_mpdFiles'
+    table_apply = 'si_applies'
     return "#{table_person} p "+
   				 "LEFT JOIN #{table_staff} s on p.accountNo = s.accountNo "+
   				 "JOIN #{table_app} l on p.personID = l.fk_SIPersonID "+
   				 "LEFT JOIN #{table_mpd} m on l.applicationID = m.fk_applicationID "+
-  				 "LEFT JOIN #{table_tracking} t on l.applicationID = t.fk_applicationID "
+  				 "LEFT JOIN #{table_tracking} t on l.applicationID = t.fk_applicationID "+
+  				 "LEFT JOIN #{table_apply} sa on l.apply_id = sa.id "
   end
   
   # since i'm doing a lot of raw SQL, i need to do my own escaping.
