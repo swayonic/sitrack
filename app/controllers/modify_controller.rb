@@ -61,6 +61,9 @@ class ModifyController < ApplicationController
         where = 'application_id'
         set = ''
         
+        value = nil if value && value.empty?
+        value.gsub!(/_/,' ') if value
+        
         # First, perform some extra logic depeding on which table we're updating
         case table
         when Person.table_name
@@ -76,10 +79,11 @@ class ModifyController < ApplicationController
           SitrackTracking.find(:first, :conditions => ['application_id = ?', app_id]) || SitrackTracking.create(:application_id => app_id)
         when HrSiApplication.table_name
           where = HrSiApplication.primary_key
+        when Apply.table_name
+          where = HrSiApplication.primary_key
+          @sql = "UPDATE #{Apply.table_name} s, #{HrSiApplication.table_name} a  SET s.#{column.select_clause} = #{value ? "'#{value}'" : 'NULL'} #{set} WHERE #{where} = #{id} AND s.id = a.apply_id"
         end
-        value = nil if value && value.empty?
-        value.gsub!(/_/,' ') if value
-        @sql = "UPDATE #{table} SET #{column.select_clause} = #{value ? "'#{value}'" : 'NULL'} #{set} WHERE #{where} = #{id}"
+        @sql ||= "UPDATE #{table} SET #{column.select_clause} = #{value ? "'#{value}'" : 'NULL'} #{set} WHERE #{where} = #{id}"
         @result = ActiveRecord::Base.connection.update(@sql)
     	end
       clear_cache(app_id)
