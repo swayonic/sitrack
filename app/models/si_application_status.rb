@@ -1,6 +1,7 @@
 class SiApplicationStatus
   def self.all
     [['started','Applicant'], 
+		 ['submitted','Submitted'],
 		 ['completed','Ready'],
 		 ['being_evaluated','Being Evaluated'],
 		 ['pre_a','Pre A'],
