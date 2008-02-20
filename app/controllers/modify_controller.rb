@@ -62,11 +62,11 @@ class ModifyController < ApplicationController
         set = ''
         
         value = nil if value && value.empty?
-        value.gsub!(/_/,' ') if value
         
         # First, perform some extra logic depeding on which table we're updating
         case table
         when Person.table_name
+          value.gsub!(/_/,' ') if value
           person = HrSiApplication.find(app_id).person
           id = person.id
           where = Person.primary_key
@@ -75,9 +75,11 @@ class ModifyController < ApplicationController
             clear_cache(app.id)
           end
         when SitrackTracking.table_name
+          value.gsub!(/_/,' ') if value
           # make sure they have a tracking row
           SitrackTracking.find(:first, :conditions => ['application_id = ?', app_id]) || SitrackTracking.create(:application_id => app_id)
         when HrSiApplication.table_name
+          value.gsub!(/_/,' ') if value
           where = HrSiApplication.primary_key
         when Apply.table_name
           where = HrSiApplication.primary_key
