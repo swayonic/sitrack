@@ -24,15 +24,15 @@ class DirectoryController < ApplicationController
       @view_id = @view.id
       session[:session].save_value('view_id', @view_id) 
     end
-    @template_name = "results#{@view_id}"
-    @template_with_path = "#{RAILS_ROOT}/app/views/directory/_#{@template_name}.rhtml"
+    # @template_name = "results#{@view_id}"
+    # @template_with_path = "#{RAILS_ROOT}/app/views/directory/_#{@template_name}.rhtml"
     @view ||= SitrackView.find(@view_id, :include => {:sitrack_view_columns => :sitrack_column}, :order => 'sitrack_view_columns.position')
-    unless File.exist?(@template_with_path)
-      template = render_to_string(:partial => 'results_template')
-      File.open(@template_with_path, 'w') do |f|
-        f.puts template
-      end
-    end
+    # unless File.exist?(@template_with_path)
+    #   template = render_to_string(:partial => 'results_template')
+    #   File.open(@template_with_path, 'w') do |f|
+    #     f.puts template
+    #   end
+    # end
 
     # if we have a query_id in the session, use the saved list
     if (query_id = session[:session].get_value('query_id'))

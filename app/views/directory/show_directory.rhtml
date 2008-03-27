@@ -93,11 +93,11 @@
 	</div>
 	</form>
 	<br /><br />
-	<%- if File.exist?(@template_with_path) -%>
-		<%= render :partial => @template_name %>
-	<%- else -%>
+	<%#- if File.exist?(@template_with_path) -%>
+		<%#= render :partial => @template_name %>
+	<%#- else -%>
 		<%= render :partial => 'results' %>
-	<%- end -%>
+	<%#- end -%>
 
 </div> 
 <div id="right">
