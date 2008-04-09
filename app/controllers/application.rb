@@ -35,6 +35,8 @@ class ApplicationController < ActionController::Base
       time = Time.now
     end
     time.strftime('%m/%d/%Y')
+  rescue ArgumentError
+    return ""
   end
   
   def get_project(id)
