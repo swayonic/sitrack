@@ -26,9 +26,9 @@ class ProfileController < ApplicationController
     # determine whether to give option to create second year record
     @num_valid_apps = 0
     @person_obj.hr_si_applications.each do |app|
-      if (!app.sitrack_tracking.nil?)
-        @num_valid_apps += 1 unless ["Declined", "Not Accepted", "Withdrawn"].include?(app.sitrack_tracking.status)
-      else # no tracking record so assume it's valid
+      if (!app.apply.nil?)
+        @num_valid_apps += 1 unless ["Declined", "Not Accepted", "Withdrawn"].include?(app.apply.status)
+      else # no apply record so assume it's valid
         @num_valid_apps += 1
       end
     end
