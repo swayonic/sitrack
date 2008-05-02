@@ -15,7 +15,7 @@ class ApplicationController < ActionController::Base
   
   def logout
     reset_session
-    redirect_to('https://signin.mygcx.org/cas/logout?service='+url_for(:controller => 'directory', :only_path => false ))
+    redirect_to('https://cas.ccci.org/cas/logout?service='+url_for(:controller => 'directory', :only_path => false ))
   end
   
   # this action just exists to test our error handling.
