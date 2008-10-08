@@ -8,8 +8,10 @@ class DirectoryController < ApplicationController
     @views = sitrack_user.sitrack_views
     @regions = SitrackRegion.all
     # look for a view_id stored in the session
-    @view_id = session[:session].get_value('view_id') 
-    unless @view_id
+    @view_id = session[:session].get_value('view_id')
+    # use find_by_id here instead of just find so that it doesn't error out if the view doesn't exist
+    @view = SitrackView.find_by_id(@view_id, :include => {:sitrack_view_columns => :sitrack_column}, :order => 'sitrack_view_columns.position')
+    unless @view
       # # set up the view
       # begin
       #   
@@ -23,10 +25,10 @@ class DirectoryController < ApplicationController
       end
       @view_id = @view.id
       session[:session].save_value('view_id', @view_id) 
+      @view ||= SitrackView.find(@view_id, :include => {:sitrack_view_columns => :sitrack_column}, :order => 'sitrack_view_columns.position')
     end
     # @template_name = "results#{@view_id}"
     # @template_with_path = "#{RAILS_ROOT}/app/views/directory/_#{@template_name}.rhtml"
-    @view ||= SitrackView.find(@view_id, :include => {:sitrack_view_columns => :sitrack_column}, :order => 'sitrack_view_columns.position')
     # unless File.exist?(@template_with_path)
     #   template = render_to_string(:partial => 'results_template')
     #   File.open(@template_with_path, 'w') do |f|
