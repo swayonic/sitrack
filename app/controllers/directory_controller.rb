@@ -389,12 +389,18 @@ class DirectoryController < ApplicationController
   def build_query
     @sel_region_name = session[:session].get_value('region') || session[:user].person.region
     @sel_region_name = '%' if @sel_region_name == 'all'
+    all_where = ""
     all_where = "( #{Person.table_name}.region LIKE '#{@sel_region_name}' OR #{SitrackTracking.table_name}.caringRegion LIKE '#{@sel_region_name}' ) "+
-			     "AND (#{Person.table_name}.firstName <> '' OR #{Person.table_name}.lastName <>'' )"
+			     "AND (#{Person.table_name}.firstName <> '' OR #{Person.table_name}.lastName <>'' )" if @sel_region_name
     select_clause = @view.display_columns
     from_clause = SitrackView.join_tables
     @where_clause = all_where unless @where_clause
     @sql = 'SELECT '+select_clause+' FROM '+from_clause+' WHERE '+@where_clause
+    
+    # Remove first "AND" if there's no where_clause
+    if @where_clause.blank?
+      @qs.sub!("AND", "")
+    end
     
     # If we have a search or saved criteria, add the query string.
     @sql += @qs if @qs
