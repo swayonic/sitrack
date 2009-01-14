@@ -58,6 +58,7 @@ class ViewsController < ApplicationController
                              :sitrack_column_id => params[:column_id],
                              :position => SitrackViewColumn.maximum('position')+1)
     end
+    @view = @view_column.sitrack_view
     delete_cache(@view.id)
   end
   
