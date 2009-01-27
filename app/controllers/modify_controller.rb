@@ -66,7 +66,7 @@ class ModifyController < ApplicationController
         # First, perform some extra logic depeding on which table we're updating
         case table
         when Person.table_name
-          value = Person.fix_acct_no(value) if column.id = 2
+          value = Person.fix_acct_no(value) if column.id == 2
           value.gsub!(/_/,' ') if value
           person = HrSiApplication.find(app_id).person
           id = person.id
