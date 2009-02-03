@@ -3,6 +3,10 @@ class ProfileController < ApplicationController
   
   def index
     # if we don't have an id in the request, go back to the directory
+    if params[:form_id]
+      form = SitrackForm.find(params[:form_id])
+      params[:id] ||= form.hr_si_application_id.to_s
+    end
     unless params[:id]
       redirect_to(:controller => 'directory'); return;
     end
