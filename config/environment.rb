@@ -79,7 +79,3 @@ module FileColumn
     DEFAULT_OPTIONS[:web_root] = "#{FILE_COLUMN_PREFIX}/"
   end
 end
-
-HoptoadNotifier.configure do |config|
-  config.api_key = 'd49d53580cc1f58cec03bcb22eebeef7'
-end
