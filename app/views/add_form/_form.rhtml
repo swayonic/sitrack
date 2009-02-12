@@ -99,7 +99,8 @@ Spouse S.S.#:</p>
 <p>Location of Assignment: <u><span class="data"><%=@location%></span></u></p>
 
 <p>
-Sending Department: <span class="data"><%= @teams[@tracking.send_dept.to_s] %></span>  &nbsp;&nbsp;
+Department: <span class="data"><%= @tracking.asgTeam.to_i > 0 && @tracking.asgTeam.to_i != 4 ? @teams[@tracking.asgTeam.to_s] : @tracking.asgTeam %></span>  &nbsp;&nbsp;
+<br/>Sending Department: <span class="data"><%= @teams[@tracking.send_dept.to_s] %></span>  &nbsp;&nbsp;
 <br/>Caring Department: <span class="data"><%= @tracking.caringRegion %></span>  &nbsp;&nbsp;
 <br/>Strategy: <span class="data"><%= @tracking.sendLane %></span>  &nbsp;&nbsp;
 </p>

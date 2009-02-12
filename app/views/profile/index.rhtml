@@ -223,7 +223,7 @@ person_id = @person['personID']
 							</span>
 				<%  when "team" -%>
 							<a id="link<%=column_name%><%=application_id%>c<%=column_id%>" href="javascript:edit_value('<%=column_name%>','<%=application_id%>','<%=escape_javascript(value)%>',<%=column_id%>,'enum','', true)">
-							<%if value && !value.empty? -%>
+							<%if value && !value.empty? && @teams[value] -%>
 								<%=@teams[value]%>
 							<%else%>
 								<img src="/images/edit.png" border="0"/>
