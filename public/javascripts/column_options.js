@@ -680,7 +680,7 @@ function appendOptions(field, fieldname, value) {
 	field.appendChild(option); 
  break;
 
- case 'Send Lane':
+ case 'Strategy':
 
 	var option = document.createElement('option'); 
 	option.setAttribute('value', 'Catalytic'); 

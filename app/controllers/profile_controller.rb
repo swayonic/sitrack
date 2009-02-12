@@ -42,7 +42,8 @@ class ProfileController < ApplicationController
     SitrackColumn.find_all.each {|c| @columns[c.name] = c}
     # set up options, first looking in the database
     @options = get_options
-    
+    @teams = get_teams
+    @teams_ordered = get_teams_ordered
     @address_types = ['current','permanent','emergency1']
     @address_columns = %w{address1 address2 city state zip country homePhone cellPhone workPhone fax email email2 contactName contactRelationship start_date end_date}
     

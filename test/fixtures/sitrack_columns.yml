@@ -1483,7 +1483,7 @@ sitrack_columns_104:
   created_at: 0000-00-00 00:00:00
 sitrack_columns_077: 
   where_clause: 
-  name: Send Lane
+  name: Strategy
   updated_at: 
   writeable: "1"
   show_in_directory: "1"

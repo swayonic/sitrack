@@ -9,8 +9,6 @@ or the 16<sup>th</sup>.</p>
 
 <p>Regional Office & Phone# <span class="data"><%=@region.name%>&nbsp;<%=@region.phone%></span></p>
 
-<p><strong>(For STINT Only)</strong> Sending Campus (Specific School): <span class="data"><%= @person.campus if @stint %></span></p>
-
 <p>
 Last Name: <span class="data"><%=@person.lastName%> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>
 First Name: <span class="data"><%=@person.firstName%> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>
@@ -100,8 +98,10 @@ Spouse S.S.#:</p>
 
 <p>Location of Assignment: <u><span class="data"><%=@location%></span></u></p>
 
-<p><strong>(For STINT Only)</strong> Caring Region: <span class="data"><%= if @stint then @tracking.caringRegion end%></span>  &nbsp;&nbsp;
-Team Leader: __________
+<p><strong>(For STINT Only)</strong>
+<br/>Sending Department: <span class="data"><%= @teams[@tracking.send_dept.to_s] if @stint %></span>  &nbsp;&nbsp;
+<br/>Caring Department: <span class="data"><%= @tracking.caringRegion if @stint %></span>  &nbsp;&nbsp;
+<br/>Strategy: <span class="data"><%= @tracking.sendLane if @stint %></span>  &nbsp;&nbsp;
 </p>
 
 <p>

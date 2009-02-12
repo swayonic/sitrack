@@ -54,8 +54,10 @@ if HrSiApplication.is_intern(@person['Intern_Type'])
 								'Asg State',
 								'Asg School',
 								'Asg Team',
+								'Strategy',
 								'Region of Origin',
 								'Caring Region',
+								'Sending Department',
 								'Effective Date of Change']
 else
   placement =  ['Asg Year',
@@ -71,8 +73,10 @@ else
 								'Asg Country',
 								'Asg Continent',
 								'Asg Team',
+								'Strategy',
 								'Region of Origin',
 								'Caring Region',
+								'Sending Department',
 								'Effective Date of Change']
 end
 
@@ -213,6 +217,24 @@ person_id = @person['personID']
 							<span id="f<%=column_name%><%=application_id%>c<%=column_id%>" class="modify_field">
 							<select id="v<%=column_name%><%=application_id%>c<%=column_id%>" name="<%=column_name%><%=application_id%>c<%=column_id%>" onblur="update_value('<%=column_name%>','<%=application_id%>','<%=column_id%>','enum')">
 							<%@options[column_name].each do |key, option| -%>
+									<option label="<%=option%>" value="<%=key%>" <%='selected="selected"' if key == value%>><%=option%></option>
+							<%end -%>
+							</select>
+							</span>
+				<%  when "team" -%>
+							<a id="link<%=column_name%><%=application_id%>c<%=column_id%>" href="javascript:edit_value('<%=column_name%>','<%=application_id%>','<%=escape_javascript(value)%>',<%=column_id%>,'enum','', true)">
+							<%if value && !value.empty? -%>
+								<%=@teams[value]%>
+							<%else%>
+								<img src="/images/edit.png" border="0"/>
+							<%end -%>
+							</a>
+							</span>
+							<span id="f<%=column_name%><%=application_id%>c<%=column_id%>" class="modify_field">
+							<select id="v<%=column_name%><%=application_id%>c<%=column_id%>" name="<%=column_name%><%=application_id%>c<%=column_id%>" onblur="update_value('<%=column_name%>','<%=application_id%>','<%=column_id%>','enum')">
+							<%@teams_ordered.each do |team| -%>
+									<%key = team[0]%>
+									<%option = team[1]%>
 									<option label="<%=option%>" value="<%=key%>" <%='selected="selected"' if key == value%>><%=option%></option>
 							<%end -%>
 							</select>

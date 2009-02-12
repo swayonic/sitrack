@@ -44,6 +44,7 @@ class AddFormController < ApplicationController
     @stint = @tracking.is_stint?
     @location = @stint ? [@tracking.asgCity, @tracking.asgCountry].join(', ') : @tracking.asgTeam
     @approver = @form.approver = session[:user].person
+    @teams = get_teams
   end
 
 end
