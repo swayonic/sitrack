@@ -98,10 +98,10 @@ Spouse S.S.#:</p>
 
 <p>Location of Assignment: <u><span class="data"><%=@location%></span></u></p>
 
-<p><strong>(For STINT Only)</strong>
-<br/>Sending Department: <span class="data"><%= @teams[@tracking.send_dept.to_s] if @stint %></span>  &nbsp;&nbsp;
-<br/>Caring Department: <span class="data"><%= @tracking.caringRegion if @stint %></span>  &nbsp;&nbsp;
-<br/>Strategy: <span class="data"><%= @tracking.sendLane if @stint %></span>  &nbsp;&nbsp;
+<p>
+Sending Department: <span class="data"><%= @teams[@tracking.send_dept.to_s] %></span>  &nbsp;&nbsp;
+<br/>Caring Department: <span class="data"><%= @tracking.caringRegion %></span>  &nbsp;&nbsp;
+<br/>Strategy: <span class="data"><%= @tracking.sendLane %></span>  &nbsp;&nbsp;
 </p>
 
 <p>
