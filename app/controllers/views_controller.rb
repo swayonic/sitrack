@@ -75,13 +75,13 @@ class ViewsController < ApplicationController
     @people = ''
     @name = request.raw_post || request.query_string
     if @name and !@name.empty? 
-    	names = @name.strip.split(' ')
+    	names = @name.strip.split('%20')
     	if (names.size > 1)
-	    	first = names[0]
-    		last = names[1].empty? ? first : names[1]
+	    	first = names[0].gsub("=","")
+    		last = names[1].empty? ? first : names[1].gsub("=","")
 	    	@conditions = [ "lastName LIKE ? AND firstName LIKE ? ", last + "%", first + "%" ]
 	   	else 
-	   	  name = names.join
+	   	  name = names.join.gsub("=","")
 	   		@conditions = [ "(lastName LIKE ? OR firstName LIKE ?) ", name+'%',name+'%' ]
 	   	end
 	  	@people = SitrackUser.find(:all, :order => "lastName, firstName", 
