@@ -19,6 +19,20 @@ class JsController < ApplicationController
   		@out += "\n break;\n";
     end	
     @out += " }\n}"
+    @out += "\n"
+    @out += 'function appendTeamOptions(field, fieldname, value) {'
+    get_teams_ordered.each do |value|
+      @out += "\n var option = document.createElement('option'); "
+      @out += "\n option.setAttribute('value', '#{value[0]}'); "
+      @out += "\n if ('#{value[0]}' == value) { "
+      @out += "\n option.setAttribute(\"selected\", \"true\"); "
+      @out += "\n } "
+      @out += "\n var option_value = document.createTextNode('#{value[1].gsub("'","")}'); "
+      @out += "\n option.appendChild(option_value); "
+      @out += "\n field.appendChild(option); "
+    end 
+    @out += " }"
+
     render(:layout => false)
   end
 end

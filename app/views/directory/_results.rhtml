@@ -66,6 +66,9 @@
 						when 'enum'
 							href = "\"javascript:edit_value('#{column.name}',#{@person['applicationID']},'#{escape_javascript(u(value))}','#{column.id}','#{column.column_type}')\"" 
 							value = @options_hash[column.name][u(value)] if 'enum' == column.column_type  
+						when 'team'
+							href = "\"javascript:edit_value('#{column.name}',#{@person['applicationID']},'#{escape_javascript(u(value))}','#{column.id}','#{column.column_type}')\"" 
+							value = @teams[u(value)] if 'team' == column.column_type  
 					  else 
 						  href = "\"javascript:edit_value('#{column.name}',#{@person['applicationID']},'#{escape_javascript(value)}','#{column.id}','#{column.column_type}')\"" 
 						  value = value.to_i.dollars if 'dollar' == column.column_type -%>

@@ -71,6 +71,8 @@ class DirectoryController < ApplicationController
     # get the search options
     @options = get_options
     @options_hash = get_option_hash
+    @teams = get_teams
+    @teams_ordered = get_teams_ordered
     
     # text fields:
     @first_name = @selected_options ? (@selected_options.match(/<first_name>(.*)<\/first_name>/) ? $1 : '') : ''

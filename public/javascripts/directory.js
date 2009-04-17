@@ -213,6 +213,13 @@ function appendField(fieldname, id, value, colID, type, selectClause)
 						this.blur();
 					}
 		break;
+	case 'team':
+		var field = document.createElement("select");
+		appendTeamOptions(field, fieldname, value);
+		field.onchange = function () {
+						this.blur();
+					}
+		break;
 	default:
 		var field = document.createElement("input");
 		field.setAttribute('type', 'text');
@@ -276,6 +283,15 @@ function update_value(fieldname, id, colID, type, selectClause)
 		item.innerHTML = new_text;
 		break;
 	case 'enum':
+		var field = document.getElementById('v'+fieldname+id+'c'+colID);
+		//alert(field);
+		var value = field[field.selectedIndex].value;	// Redefine value
+		var text = field[field.selectedIndex].text;
+		var params = "'"+fieldname+"','"+id+"','"+value+"','"+colID+"','"+type+"','"+selectClause+"','true'";	// Redefine params
+		var href = 'href="javascript:edit_value('+params+')"'; // Redefine href
+		item.innerHTML = '<a id="link'+fieldname+id+'c'+colID+'" '+href+'>'+text+'</a>';
+		break;
+	case 'team':
 		var field = document.getElementById('v'+fieldname+id+'c'+colID);
 		//alert(field);
 		var value = field[field.selectedIndex].value;	// Redefine value
