@@ -9,7 +9,7 @@ class AcosFormController < ApplicationController
     end
     # display form
     setup
-    @form.change_assignment_from_location ||= [@tracking.asgTeam, @tracking.asgCity, @tracking.asgCountry].join(', ')
+    @form.change_assignment_from_location ||= [get_teams[@tracking.asgTeam], @tracking.asgCity, @tracking.asgCountry].join(', ')
     @form.restint_location ||= @form.change_assignment_from_location
     unless request.get?
       # save and preview
