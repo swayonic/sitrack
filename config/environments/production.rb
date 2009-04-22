@@ -33,3 +33,4 @@ CACHE.servers = ['hart-w040.uscm.org:11211','hart-w025.uscm.org:11211']
 
 ActionController::Base.session_options[:expires] = 1.day
 ActionController::Base.session_options[:cache] = CACHE
+ActionController::Base.session_options[:session_secure] = true
