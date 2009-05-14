@@ -1,5 +1,9 @@
 class JsController < ApplicationController
   caches_page :options
+  def expire
+    expire_page :options
+  end
+  
   def options
     @out = 'function appendOptions(field, fieldname, value) {'
     @out += "\n switch(fieldname) {"
