@@ -349,6 +349,7 @@ class DirectoryController < ApplicationController
       build_query
       
       @options_hash = get_option_hash
+      @teams = get_teams
       
 #      headers['Content-Type'] = "application/vnd.ms-excel" 
       headers['Content-Type'] = "text/tab-separated-values" 
@@ -372,6 +373,8 @@ class DirectoryController < ApplicationController
             value = @options_hash[column.name][u(value)]
           when 'project'
             value = get_project(value.to_i)
+          when 'team'
+            value = @teams[value]
           end
           @sheet += "#{value}\t"
         end
