@@ -121,7 +121,7 @@ class ApplicationController < ActionController::Base
   def get_teams
     if !session[:teams]
       teams = MinistryLocalLevel.find(:all, :conditions => "isActive = 'T'", :order => 'name')
-      team_hash = {}
+      team_hash = {"" => ""}
       teams.each do |team|
         team_hash[team.teamID.to_s] = team.name
       end
@@ -133,7 +133,7 @@ class ApplicationController < ActionController::Base
   def get_teams_ordered
     if !session[:teams_ordered]
       teams = MinistryLocalLevel.find(:all, :conditions => "isActive = 'T'", :order => 'name')
-      team_array = []
+      team_array = [["", ""]]
       teams.each do |team|
         team_array << [team.teamID.to_s, team.name]
       end
