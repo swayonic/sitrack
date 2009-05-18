@@ -31,7 +31,7 @@ class ProfileController < ApplicationController
     @num_valid_apps = 0
     @person_obj.hr_si_applications.each do |app|
       if (!app.apply.nil?)
-        @num_valid_apps += 1 unless ["declined", "not_accepted", "withdrawn"].include?(app.apply.status)
+        @num_valid_apps += 1 if ["on_assignment", "placed", "alumni"].include?(app.apply.status)
       else # no apply record so assume it's valid
         @num_valid_apps += 1
       end
