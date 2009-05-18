@@ -1,7 +1,9 @@
 class JsController < ApplicationController
   caches_page :options
+  
   def expire
-    expire_page :options
+    expire_page :action => :options
+    render :nothing => true
   end
   
   def options
