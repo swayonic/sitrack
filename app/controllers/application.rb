@@ -4,7 +4,7 @@ require 'sitrack_user'
 # Likewise, all the methods added will be available for all controllers.
 class ApplicationController < ActionController::Base
   filter_parameter_logging *FILTER_KEYS
-  @@public_pages = ['up_monitor','no_access','logout']
+  @@public_pages = ['up_monitor','no_access','logout','expire']
   skip_before_filter CAS::Filter, :only => @@public_pages
   before_filter AuthenticationFilter, :authorize, :except => @@public_pages
 #  after_filter :connection_bar
