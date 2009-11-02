@@ -34,10 +34,21 @@ class SitrackMpd < ActiveRecord::Base
       person = app.person if app
       accNo = person.accountNo if person
       mpd.account_balance = balances[accNo] if accNo
-      mpd.save
     end
     puts Time.now
     puts "Finished"
     0
   end
+  
+  def account_balance=(balance)
+    class << self
+      def record_timestamps; false; end
+    end
+    self[:account_balance] = balance
+    save!
+    class << self
+      remove_method :record_timestamps
+    end
+  end
+
 end
