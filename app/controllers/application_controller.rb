@@ -141,6 +141,7 @@ class ApplicationController < ActionController::Base
     end
     return session[:teams_ordered]
   end
+  helper_method :get_teams_ordered
 
   def get_options
     if !session[:options]
@@ -164,4 +165,5 @@ class ApplicationController < ActionController::Base
     end
     return session[:option_hash]
   end
+  helper_method :get_option_hash
 end

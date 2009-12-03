@@ -8,7 +8,17 @@ class AddFormController < ApplicationController
       @form.approver = session[:user].person
       @form.save
     end
-    preview if @form.valid?
+    setup
+    unless request.get?
+      # save and preview
+      expire_action(:controller => 'profile', :action => 'index', :id => app_id) # kill the profile cache
+
+      @person.update_attributes(params[:person])
+      @application.update_attributes(params[:application])
+      @tracking.update_attributes(params[:tracking])
+      @form.update_attributes(params[:form])
+      preview if @person.valid? && @application.valid? && @tracking.valid? && @form.valid?
+    end
   end
   
   def submit
