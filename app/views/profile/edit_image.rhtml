@@ -22,11 +22,11 @@
 	<li>It can take a few moments to upload. Please be patient.</li>
 </ul>
 
-<%= form_tag( { :action => 'update_image', :id => @person }, :multipart => true, :id => "up_form" ) %>
+<% form_tag( { :action => 'update_image', :id => @person }, :multipart => true, :id => "up_form" ) do %>
   <p><strong>Image to Upload:</strong><br/>
   <%= file_column_field "person", "image", :size => 65 %></p>
   <%= submit_tag 'Upload', :onclick => "Element.show('spinner');" %>
   <%= image_tag 'spinner.gif', :id => 'spinner', :style => 'display:none' %>
-<%= end_form_tag %>
+<% end %>
 </body>
 </html>

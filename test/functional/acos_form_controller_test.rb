@@ -1,10 +1,7 @@
 require File.dirname(__FILE__) + '/../test_helper'
 require 'acos_form_controller'
 
-# Re-raise errors caught by the controller.
-class AcosFormController; def rescue_action(e) raise e end; end
-
-class AcosFormControllerTest < Test::Unit::TestCase
+class AcosFormControllerTest < ActionController::TestCase
   fixtures :hr_si_applications, :ministry_person, :sitrack_tracking, 
            :simplesecuritymanager_user, :sitrack_users, :sitrack_enum_values,
            :sitrack_columns

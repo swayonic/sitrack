@@ -10,8 +10,6 @@
 #  middleName                     :string(50)    
 #  preferredName                  :string(50)    
 #  gender                         :string(1)     
-#  deprecated_birthDate           :string(25)    
-#  deprecated_dateBecameChristian :string(35)    
 #  region                         :string(5)     
 #  workInUS                       :boolean(1)    default(true), not null
 #  usCitizen                      :boolean(1)    default(true), not null
@@ -21,7 +19,6 @@
 #  campus                         :string(128)   
 #  universityState                :string(5)     
 #  yearInSchool                   :string(20)    
-#  deprecated_graduationDate      :string(25)    
 #  major                          :string(70)    
 #  minor                          :string(70)    
 #  greekAffiliation               :string(50)    
@@ -136,7 +133,6 @@ travis:
   occupation: 
   isChild: "0"
   isStaff: "0"
-  deprecated_birthDate: 09/21/1973
   preferredName: Travis
   lastName: Morris
   graduation_date: 
@@ -163,7 +159,6 @@ travis:
   dateCreated: 2003-08-02 00:00:00
   bio: 
   numberChildren: "0"
-  deprecated_graduationDate: Jul 30 2004 12:00AM
   createdBy: ''
   image: 
   campus: Eastern Kentucky University
@@ -171,4 +166,3 @@ travis:
   personID: "50943"
   fk_spouseID: "51364"
   minor: 
-  deprecated_dateBecameChristian: 

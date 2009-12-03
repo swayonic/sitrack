@@ -9,7 +9,7 @@
 <br>
 <div class="insidebox">
 <%= error_messages_for 'child'%>
-<%= start_form_tag({:action => 'save_child', :id => @child.id}, {:name => 'child_form'})%>
+<% form_tag({:action => 'save_child', :id => @child.id}, {:name => 'child_form'}) do %>
 <%=hidden_field('child','person_id')%>
 <table>
 <tr>
@@ -28,7 +28,7 @@
 	<td colspan="2"><a href="javascript:document.child_form.submit();" class="button">Save</a></td>
 </tr>
 </table><br />
-</form>
+<% end %>
 </div>
 </body>
 </html>

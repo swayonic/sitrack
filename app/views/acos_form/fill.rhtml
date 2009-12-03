@@ -11,7 +11,7 @@
 	This information ensures that the STINT/Intern's payroll, benefits, and	tax status will be correct.
 	</h4>
 	<%= error_messages_for 'form' %>
-	<%= start_form_tag :id => @application.id %>
+	<% form_tag :id => @application.id do %>
 	<div class="box">
 		<div class="subboxheader">Human Resource Status:</div>
 		<table>
@@ -105,6 +105,6 @@
 	</div><br /><br />
 	<a href="javascript:document.forms[0].submit();" class="button">Preview Form</a>&nbsp;&nbsp;&nbsp;&nbsp;
 	<a href="/profile/<%=@application.id%>" class="button">Back to Profile</a>
-	</form>
+	<% end %>
 </div>
 </div>

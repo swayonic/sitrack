@@ -1,10 +1,7 @@
 require File.dirname(__FILE__) + '/../test_helper'
 require 'join_staff_form_controller'
 
-# Re-raise errors caught by the controller.
-class JoinStaffFormController; def rescue_action(e) raise e end; end
-
-class JoinStaffFormControllerTest < Test::Unit::TestCase
+class JoinStaffFormControllerTest < ActionController::TestCase
   fixtures :hr_si_applications, :ministry_person, :sitrack_tracking, :simplesecuritymanager_user
   
   def setup

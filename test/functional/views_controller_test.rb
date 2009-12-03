@@ -1,10 +1,7 @@
 require File.dirname(__FILE__) + '/../test_helper'
 require 'views_controller'
 
-# Re-raise errors caught by the controller.
-class ViewsController; def rescue_action(e) raise e end; end
-
-class ViewsControllerTest < Test::Unit::TestCase
+class ViewsControllerTest < ActionController::TestCase
   fixtures :simplesecuritymanager_user, :sitrack_users, :sitrack_views, 
            :sitrack_view_columns, :sitrack_columns
   def setup

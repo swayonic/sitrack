@@ -1,10 +1,7 @@
 require File.dirname(__FILE__) + '/../test_helper'
 require 'add_form_controller'
 
-# Re-raise errors caught by the controller.
-class AddFormController; def rescue_action(e) raise e end; end
-
-class AddFormControllerTest < Test::Unit::TestCase
+class AddFormControllerTest < ActionController::TestCase
   fixtures :hr_si_applications, :ministry_person, :sitrack_tracking, :ministry_newaddress, :simplesecuritymanager_user
   
   def setup

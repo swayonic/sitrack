@@ -1,10 +1,7 @@
 require File.dirname(__FILE__) + '/../test_helper'
 require 'directory_controller'
 
-# Re-raise errors caught by the controller.
-class DirectoryController; def rescue_action(e) raise e end; end
-
-class DirectoryControllerTest < Test::Unit::TestCase
+class DirectoryControllerTest < ActionController::TestCase
   fixtures :simplesecuritymanager_user, :ministry_person, :sitrack_users,
            :sitrack_views, :sitrack_columns, :sitrack_view_columns, :sitrack_queries,
            :sitrack_saved_criteria, :hr_si_applications
@@ -65,17 +62,17 @@ class DirectoryControllerTest < Test::Unit::TestCase
   end
   
   def test_delete_query_good_id
-    old_size = SitrackQuery.find_all.size
+    old_size = SitrackQuery.count
     get :delete_query, :id => sitrack_queries(:yusef).id
     assert_response :success
-    assert SitrackQuery.find_all.size == old_size - 1
+    assert SitrackQuery.count == old_size - 1
   end
   
   def test_delete_query_bad_id
-    old_size = SitrackQuery.find_all.size
+    old_size = SitrackQuery.count
     get :delete_query, :id => 1
     assert_response :success
-    assert SitrackQuery.find_all.size == old_size
+    assert SitrackQuery.count == old_size
   end
   
   def test_delete_criteria_no_id
@@ -84,17 +81,17 @@ class DirectoryControllerTest < Test::Unit::TestCase
   end
   
   def test_delete_criteria_good_id
-    old_size = SitrackSavedCriteria.find_all.size
+    old_size = SitrackSavedCriteria.count
     get :delete_criteria, :id => sitrack_saved_criteria(:asdf).id
     assert_response :success
-    assert SitrackSavedCriteria.find_all.size == old_size - 1
+    assert SitrackSavedCriteria.count == old_size - 1
   end
   
   def test_delete_criteria_bad_id
-    old_size = SitrackSavedCriteria.find_all.size
+    old_size = SitrackSavedCriteria.count
     get :delete_criteria, :id => 1
     assert_response :success
-    assert SitrackSavedCriteria.find_all.size == old_size
+    assert SitrackSavedCriteria.count == old_size
   end
   
   def test_save_query

@@ -8,8 +8,8 @@ final. Please tread cautiously. If you're sure you want to continue, click the '
 <%- @applications.each do |app| -%>
 	<%= app.person.full_name %><br />
 <%- end -%><br /><br />
-<%= form_tag '/people/delete' %>
+<% form_tag '/people/delete' do %>
 	<%= hidden_field_tag("id_list", params[:id_list]) %>
 	<%= submit_tag("Delete") %>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 	<%= link_to("Back", '/directory') %>
-<%= end_form_tag %>
+<% end %>

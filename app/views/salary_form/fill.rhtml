@@ -5,7 +5,7 @@
 	<%= error_messages_for 'person' %>
 	<%= error_messages_for 'application' %>
 	<%= error_messages_for 'tracking' %>
-	<%= start_form_tag :id => @application.id %>
+	<% form_tag :id => @application.id do %>
 	<div class="box">
 		<div class="subboxheader">Information Fields</div>
 		<table>
@@ -100,5 +100,5 @@
 	</div><br /><br />
 	<a href="javascript:document.forms[0].submit();" class="button">Preview Form</a>&nbsp;&nbsp;&nbsp;&nbsp;
 	<a href="/profile/<%=@application.id%>" class="button">Back to Profile</a>
-	</form>
+	<% end %>
 </div>

@@ -5,7 +5,7 @@
 	Please enter <strong>NET</strong> amounts. Tax will be added based on your tax rate selection.
 	<br/><br/>
 	<%= error_messages_for 'form' %>
-	<%= start_form_tag :id => @application.id %>
+	<% form_tag :id => @application.id do %>
 	<div class="box">
 		<div class="subboxheader">Information Fields</div>
 		<table>
@@ -80,5 +80,5 @@
 	</div><br /><br />
 	<a href="javascript:document.forms[0].submit();" class="button">Preview Form</a>&nbsp;&nbsp;&nbsp;&nbsp;
 	<a href="/profile/<%=@application.id%>" class="button">Back to Profile</a>
-	</form>
+	<% end %>
 </div>

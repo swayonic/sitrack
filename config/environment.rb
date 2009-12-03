@@ -5,7 +5,7 @@
 # ENV['RAILS_ENV'] ||= 'production'
 
 # Specifies gem version of Rails to use when vendor/rails is not present
-RAILS_GEM_VERSION = '1.2.6' unless defined? RAILS_GEM_VERSION
+RAILS_GEM_VERSION = '2.3.5' unless defined? RAILS_GEM_VERSION
 
 # Bootstrap the Rails environment, frameworks, and default configuration
 require File.join(File.dirname(__FILE__), 'boot')
@@ -42,12 +42,12 @@ Rails::Initializer.run do |config|
   # config.active_record.default_timezone = :utc
   
   # See Rails::Configuration for more options
-  
+  config.action_controller.session = { :key => "_sitrack_session", :secret => "3475adcb1bbe8441964f9d9a45d094148664f0ec51e76d7b0ea40446ddd81e38320f757f80cd4e6b49079da52f747125" }
 end
 
 # Add new inflection rules using the following format 
 # (all these examples are active by default):
-Inflector.inflections do |inflect|
+ActiveSupport::Inflector.inflections do |inflect|
 #   inflect.plural /^(ox)$/i, '\1en'
 #   inflect.singular /^(ox)en/i, '\1'
 #   inflect.irregular 'person', 'people'
@@ -55,27 +55,3 @@ Inflector.inflections do |inflect|
 end
 
 # Include your application configuration below
-
-ExceptionNotifier.exception_recipients = %w(justin.sabelko@uscm.org josh.starcher@gmail.com)
-ExceptionNotifier.sender_address = %("Application Error" <sitrack@uscm.org>)
-ExceptionNotifier.email_prefix = "[SITRACK] "
-FILTER_KEYS = %w(ssn)
-ExceptionNotifier.filter_keys = FILTER_KEYS
-
-# retrieve table_name_prefix from database.yml
-# Had to move this here because USCM uses a shared database.yml file for all apps
-TABLE_NAME_PREFIX = "si_"
-
-ActionMailer::Base.smtp_settings = {
-  :address => "smtp1.ccci.org",
-  :domain => "ccci.org"
-}
-
-# Set the default place to find file_column files.
-FILE_COLUMN_PREFIX = 'files'
-module FileColumn
-  module ClassMethods
-    DEFAULT_OPTIONS[:root_path] = File.join(RAILS_ROOT, "public", FILE_COLUMN_PREFIX)
-    DEFAULT_OPTIONS[:web_root] = "#{FILE_COLUMN_PREFIX}/"
-  end
-end

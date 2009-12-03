@@ -2,7 +2,7 @@
 <%#=debug(session) if 42655 == session[:user].id%>
 <div id="center">
 	<div class="boxheader">Directory Listing</div>
-	<%= start_form_tag({:action => 'search'}, {:name => 'search_f', :id => 'search_f'})%>
+	<% form_tag({:action => 'search'}, {:name => 'search_f', :id => 'search_f'}) do %>
 	<div id="selected_options" class="box"></div>
 	<div id="search" onblur="show_me('false');">
 		<span id="options"><strong>Search Options:</strong>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><br />
@@ -91,7 +91,7 @@
 	<%end-%>
 	</select>
 	</div>
-	</form>
+	<% end %>
 	<br /><br />
 	<%#- if File.exist?(@template_with_path) -%>
 		<%#= render :partial => @template_name %>
@@ -101,7 +101,7 @@
 
 </div> 
 <div id="right">
-	<%= start_form_tag({}, {:id => 'query_form', :name => 'query_form'}) %>
+	<% form_tag({}, {:id => 'query_form', :name => 'query_form'}) do %>
 	<input type="hidden" name="query_id" />
 	<div id="queries" class="box">
 		<div id="query_header" class="subboxheader" onclick="Element.toggle('hide_queries');">Stored Lists</div>
@@ -121,9 +121,9 @@
 		<%= collection_select(:current_query, :id, @saved_queries, :id, :name) %>
 		<a href="javascript:append_query();" class="button">Save</a>
 	</div>
-	<%= end_form_tag %>
+	<% end %>
 	<br />
-	<%= start_form_tag({}, {:id => 'criteria_form', :name => 'criteria_form'}) %>
+	<% form_tag({}, {:id => 'criteria_form', :name => 'criteria_form'}) do %>
 	<input type="hidden" name="criteria_id" />
 	<div id="criteria" class="box">
 		<div id="criteria_header" class="subboxheader" onclick="Element.toggle('hide_criteria');">Stored Criteria</div>
@@ -142,7 +142,7 @@
 			<a href="javascript:<%=js%>;" class="button">Save Criteria&nbsp;&nbsp;</a>
 		</div>
 	</div>
-	<%= end_form_tag %>
+	<% end %>
 </div> 
 <script type="text/javascript">
 	align_menu();

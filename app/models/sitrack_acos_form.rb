@@ -1,4 +1,4 @@
-class SitrackACOSForm < SitrackForm
+class SitrackAcosForm < SitrackForm
   def validate
     errors.add_on_empty('Effective Date of Change') if date_of_change.nil? || date_of_change.to_s.empty?
     super

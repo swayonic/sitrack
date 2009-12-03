@@ -39,7 +39,7 @@ class ProfileController < ApplicationController
     
     # get all the columns and create an hash of name=> column pairs
     @columns = Hash.new
-    SitrackColumn.find_all.each {|c| @columns[c.name] = c}
+    SitrackColumn.all.each {|c| @columns[c.name] = c}
     # set up options, first looking in the database
     @options = get_options
     @teams = get_teams

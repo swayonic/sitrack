@@ -1,10 +1,7 @@
 require File.dirname(__FILE__) + '/../test_helper'
 require 'modify_controller'
 
-# Re-raise errors caught by the controller.
-class ModifyController; def rescue_action(e) raise e end; end
-
-class ModifyControllerTest < Test::Unit::TestCase
+class ModifyControllerTest < ActionController::TestCase
   fixtures :simplesecuritymanager_user, :ministry_person, :ministry_newaddress
   def setup
     @controller = ModifyController.new

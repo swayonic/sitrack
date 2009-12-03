@@ -1,10 +1,7 @@
 require File.dirname(__FILE__) + '/../test_helper'
 require 'additional_salary_form_controller'
 
-# Re-raise errors caught by the controller.
-class AdditionalSalaryFormController; def rescue_action(e) raise e end; end
-
-class AdditionalSalaryFormControllerTest < Test::Unit::TestCase
+class AdditionalSalaryFormControllerTest < ActionController::TestCase
   fixtures :hr_si_applications, :ministry_person, :sitrack_tracking, :simplesecuritymanager_user
   
   def setup
