@@ -21,7 +21,7 @@
 		</tr>
 		<tr>
 			<td align="right">Sending Region: </td>
-			<td><%= collection_select(:person, :region, SitrackRegion.all, :first, :first, {:include_blank => true}) %></td>
+			<td><%= collection_select(:tracking, :regionOfOrigin, SitrackRegion.all, :first, :first, {:include_blank => true}) %></td>
 		</tr>
 		<tr>
 			<td align="right">Caring Region: </td>
@@ -40,7 +40,7 @@
 		</tr>
 		<tr>
 			<td align="right">Sending Department: </td>
-			<td><%= collection_select(:tracking, :send_dept, get_teams_ordered, :first, :second, {:include_blank => true}) %></td>
+			<td><%= collection_select(:tracking, :send_dept, get_teams_ordered.collect {|k,v| [k.to_i, v]}, :first, :second, {:include_blank => true}) %></td>
 		</tr>
 		<tr>
 			<td align="right">Strategy: </td>

@@ -9,7 +9,7 @@ class AddFormController < ApplicationController
       @form.save
     end
     setup
-    unless request.get?
+		unless request.get?
       # save and preview
       expire_action(:controller => 'profile', :action => 'index', :id => app_id) # kill the profile cache
 
