@@ -43,7 +43,8 @@ class ViewsController < ApplicationController
   def save_name
     #raise params.inspect
     @view = SitrackView.find(params[:id])
-    @view.name = request.raw_post || request.query_string
+    name = request.raw_post || request.query_string
+    @view.name = name.gsub("%20", " ")
     @view.save!
     render :nothing => true
   end
