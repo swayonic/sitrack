@@ -51,7 +51,7 @@ class SitrackAddForm < SitrackForm
     errors.add_on_empty('Birth Date') if hr_si_application.person.birth_date.nil?
     errors.add_on_empty('SSN') if hr_si_application.ssn.blank?
     errors.add_on_empty('Secure Employee') if !['T','F'].include?(hr_si_application.person.isSecure)
-    errors.add_on_empty('Sending Region') if hr_si_application.person.region.blank?
+    errors.add_on_empty('Sending Region') if hr_si_application.sitrack_tracking.regionOfOrigin.blank?
     errors.add_on_empty('Caring Region') if hr_si_application.sitrack_tracking.caringRegion.blank?
     errors.add_on_empty('Department') if hr_si_application.sitrack_tracking.asgTeam.blank?
     errors.add_on_empty('Strategy') if hr_si_application.sitrack_tracking.sendLane.blank?
