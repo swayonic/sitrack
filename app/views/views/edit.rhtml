@@ -2,8 +2,8 @@
 	<div class="boxheader">Editing a view</div>
 	<br/>
 	<div class="insidebox">
-		<% if @flash[:notice] -%>
-			<div id="notice"><%= @flash[:notice] %></div>
+		<% if flash[:notice] -%>
+			<div id="notice"><%= flash[:notice] %></div>
 		<% end -%>
 		<%= form_tag({:controller => 'view', :action => 'edit', :id => @view.id})%>
 			<%=render(:partial => 'form')%>

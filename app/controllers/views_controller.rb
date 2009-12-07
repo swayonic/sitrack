@@ -4,7 +4,7 @@ class ViewsController < ApplicationController
   end
   
   def edit
-    @view = SitrackView.find(params[:id], :include => {:sitrack_view_columns => :sitrack_column}, :order => :position)
+    @view = SitrackView.find(params[:id], :include => [:sitrack_view_columns => :sitrack_column])
     @all_columns = SitrackColumn.find(:all, :order => :name)
     @unused_columns = @all_columns - @view.sitrack_columns
   end
