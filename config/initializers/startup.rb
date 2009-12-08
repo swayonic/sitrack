@@ -1,5 +1,5 @@
 ExceptionNotifier.exception_recipients = %w(justin.sabelko@uscm.org josh.starcher@gmail.com)
-ExceptionNotifier.sender_address = %("Application Error" <sitrack@uscm.org>)
+ExceptionNotifier.sender_address = %(sitrack@uscm.org)
 ExceptionNotifier.email_prefix = "[SITRACK] "
 FILTER_KEYS = %w(ssn)
 ExceptionNotifier.filter_keys = FILTER_KEYS
