@@ -120,52 +120,52 @@ class ApplicationController < ActionController::Base
   end
   
   def get_teams
-    # @teams = Cache.
-    if !session[:teams]
+    @teams ||= Rails.cache.fetch('teams') do 
       teams = MinistryLocalLevel.find(:all, :conditions => "isActive = 'T'", :order => 'name')
       team_hash = {"" => ""}
       teams.each do |team|
         team_hash[team.teamID.to_s] = team.name
       end
-      session[:teams] = team_hash
+      team_hash
     end
-    return session[:teams]
+    return @teams
   end
   
   def get_teams_ordered
-    if !session[:teams_ordered]
+    @ordered_teams ||= Rails.cache.fetch('ordered_teams') do 
       teams = MinistryLocalLevel.find(:all, :conditions => "isActive = 'T'", :order => 'name')
       team_array = [["", ""]]
       teams.each do |team|
         team_array << [team.teamID.to_s, team.name]
       end
-      session[:teams_ordered] = team_array
+      team_array
     end
-    return session[:teams_ordered]
+    return @ordered_teams
   end
   helper_method :get_teams_ordered
 
   def get_options
-    if !session[:options]
+    @options ||= Rails.cache.fetch('options') do 
       options = Hash.new
       SitrackColumn.find(:all, :include => :sitrack_enum_values, :order => 'sitrack_enum_values.position').each do |column|
         options[column.name] = column.sitrack_enum_values.collect {|option| [option.value, option.name]} if column.column_type == 'enum'
       end
-      session[:options] = options
+      options
     end
-    return session[:options]
+    return @options
   end
+  
   def get_option_hash
-    if !session[:option_hash]
+    @option_hash ||= Rails.cache.fetch('option_hash') do 
       options = get_options
       option_hash = {}
       options.each do |column_name, column_array|
         option_hash[column_name] = {}
         column_array.each { |options| option_hash[column_name][options[0]] = options[1] }
       end
-      session[:option_hash] = option_hash
+      option_hash
     end
-    return session[:option_hash]
+    return @option_hash
   end
   helper_method :get_option_hash
 end

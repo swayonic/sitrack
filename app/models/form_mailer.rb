@@ -3,7 +3,7 @@ class FormMailer < ActionMailer::Base
     @subject = form_type + ' for '+var_hash['person'].full_name
     from_name = var_hash['approver'].full_name
     from_address = var_hash['approver'].current_address.email
-    @from = "#{from_name} <#{from_address}>"
+    @from = "<#{from_address}>"
     @cc = @from
     @recipients = to
     @body = var_hash
