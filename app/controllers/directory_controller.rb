@@ -380,7 +380,7 @@ class DirectoryController < ApplicationController
         end
         @sheet += "\n"
       end
-      render_without_layout
+      render :layout => false
     end
   end
   

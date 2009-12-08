@@ -120,6 +120,7 @@ class ApplicationController < ActionController::Base
   end
   
   def get_teams
+    # @teams = Cache.
     if !session[:teams]
       teams = MinistryLocalLevel.find(:all, :conditions => "isActive = 'T'", :order => 'name')
       team_hash = {"" => ""}
