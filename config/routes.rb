@@ -11,6 +11,8 @@ ActionController::Routing::Routes.draw do |map|
 
   # You can have the root of your site routed by hooking up '' 
   # -- just remember to delete public/index.html.
+  map.resources :views, :collection => {:reorder => :any, :add_column => :any, :remove_column => :any, :search => :any,
+                                        :friend => :any, :import => :any}
   map.directory '', :controller => "directory", :action => "index"
 #  map.connect 'directory', :controller => "directory", :action => "index"
   

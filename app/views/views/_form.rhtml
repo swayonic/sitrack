@@ -1,10 +1,9 @@
 
-<!--			<div id="errors" style="display:<%=(ENV['RAILS_ENV']=='development')?'block':'none'%>"></div>-->
 			View Name:
-			<input type="text" id="view_name" name="view_name" value="<%=@view.name%>" />&nbsp;&nbsp;
-			<%= observe_field('view_name', :url => {:action => :save_name, :id => @view.id}, :update => 'errors')%>
-			<a href="/views" class="button">Done</a> 
-			<a href="/directory/change_view?view_id=<%=@view.id%>" class="button">Go To View</a> 
+			<%= f.text_field :name %>&nbsp;&nbsp;
+			<%= hidden_field_tag :next, '/views' %>
+			<%= link_to_function 'Done', "$('next').value = '/views';$('view_form').submit();", :class => 'button' %>
+			<%= link_to_function 'Go To View', "$('next').value = '/directory/change_view?view_id=#{@view.id}';$('view_form').submit();", :class => 'button' %>
 		<!--  ============= BEGIN Layout column choices ============== -->
 		<p>The following columns are currently a part of this view. To reorder them, 
 		simply click and drag the column where you'd like it to be. To remove a column 

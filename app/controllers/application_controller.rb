@@ -42,8 +42,13 @@ class ApplicationController < ActionController::Base
   
   def get_project(id)
     return '' if  0 == id || id.nil? || '' == id.to_s.strip # an id of 0 is useless. you're useless too
-    @project_names ||= {}
-    @project_names[id] ||= Rails.cache.fetch(['projects',id], :expires_in => 1.day) {ActiveRecord::Base.connection.select_value("SELECT name FROM #{HrSiProject.table_name} where SIProjectID = #{id}").to_s.strip}
+    @project_names ||= Rails.cache.fetch('projects', :expires_in => 1.day){{}}
+    unless @project_names[id] 
+      @project_names = @project_names.dup
+      @project_names[id] = ActiveRecord::Base.connection.select_value("SELECT name FROM #{HrSiProject.table_name} where SIProjectID = #{id}").to_s.strip
+      Rails.cache.write('projects',@project_names, :expires_in => 1.day)
+    end
+    @project_names[id]
   end
   
   def sitrack_user=(sitrack_user)

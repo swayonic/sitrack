@@ -9,6 +9,16 @@ class ViewsController < ApplicationController
     @unused_columns = @all_columns - @view.sitrack_columns
   end
   
+  def update
+    @view = SitrackView.find(params[:id])
+    if @view.update_attributes(params[:sitrack_view])
+      redirect_to params[:next]
+    else
+      edit
+      render :edit
+    end
+  end
+  
   def new
     if request.get?
       @view = SitrackView.new
