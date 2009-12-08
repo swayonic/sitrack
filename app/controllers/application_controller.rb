@@ -9,6 +9,7 @@ class ApplicationController < ActionController::Base
   before_filter AuthenticationFilter, :authorize, :except => @@public_pages
 #  after_filter :connection_bar
   include ExceptionNotifiable	#Automatically generates emails of errors
+  
   # Define the app name. This is used in authentication_filter
   @@application_name = "sitrack"
   cattr_accessor :application_name
