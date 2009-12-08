@@ -624,7 +624,7 @@ span.run100 {
 </span><span class="uncovered0"><a name="line5" /> 5     else
 </span><span class="uncovered1"><a name="line6" /> 6       app_id = params[:id]
 </span><span class="uncovered0"><a name="line7" /> 7       @application = HrSiApplication.find(app_id)
-</span><span class="uncovered1"><a name="line8" /> 8       @form = SitrackAdditionalSalaryForm.new(:hr_si_application_id =&gt; app_id, :approver_id =&gt; session[:user].person.id)
+</span><span class="uncovered1"><a name="line8" /> 8       @form = SitrackAdditionalSalaryForm.new(:hr_si_application_id =&gt; app_id, :approver_id =&gt; current_user.person.id)
 </span><span class="uncovered0"><a name="line9" /> 9     end
 </span><span class="uncovered1"><a name="line10" />10     # display form
 </span><span class="uncovered0"><a name="line11" />11     setup

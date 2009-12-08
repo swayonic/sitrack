@@ -625,19 +625,19 @@ span.run100 {
 </span><span class="uncovered1"><a name="line6" />  6   end       
 </span><span class="inferred0"><a name="line7" />  7   
 </span><span class="marked1"><a name="line8" />  8   def show_directory
-</span><span class="uncovered0"><a name="line9" />  9     @views = session[:sitrack_user].sitrack_views
+</span><span class="uncovered0"><a name="line9" />  9     @views = sitrack_user.sitrack_views
 </span><span class="uncovered1"><a name="line10" /> 10     @regions = SitrackRegion.all
 </span><span class="uncovered0"><a name="line11" /> 11     # look for a view_id stored in the session
-</span><span class="uncovered1"><a name="line12" /> 12     view_id = session[:session].get_value('view_id') 
+</span><span class="uncovered1"><a name="line12" /> 12     view_id = sitrack_session.get_value('view_id') 
 </span><span class="uncovered0"><a name="line13" /> 13     
 </span><span class="uncovered1"><a name="line14" /> 14     # set up the view
 </span><span class="uncovered0"><a name="line15" /> 15     @view ||= view_id ? SitrackView.find(view_id, :include =&gt; [{:sitrack_view_columns =&gt; :sitrack_column}, :sitrack_columns], :order =&gt; 'sitrack_view_columns.position') :
-</span><span class="uncovered1"><a name="line16" /> 16           session[:sitrack_user].sitrack_views.find(:first, :include =&gt; [:sitrack_view_columns, :sitrack_columns])
+</span><span class="uncovered1"><a name="line16" /> 16           sitrack_user.sitrack_views.find(:first, :include =&gt; [:sitrack_view_columns, :sitrack_columns])
 </span><span class="uncovered0"><a name="line17" /> 17     
-</span><span class="uncovered1"><a name="line18" /> 18     session[:session].save_value('view_id', @view.id) unless @view.id == view_id.to_i
+</span><span class="uncovered1"><a name="line18" /> 18     sitrack_session.save_value('view_id', @view.id) unless @view.id == view_id.to_i
 </span><span class="uncovered0"><a name="line19" /> 19 
 </span><span class="uncovered1"><a name="line20" /> 20     # if we have a query_id in the session, use the saved list
-</span><span class="uncovered0"><a name="line21" /> 21     if (query_id = session[:session].get_value('query_id'))
+</span><span class="uncovered0"><a name="line21" /> 21     if (query_id = sitrack_session.get_value('query_id'))
 </span><span class="uncovered1"><a name="line22" /> 22       @current_query = SitrackQuery.find_by_id(query_id)
 </span><span class="uncovered0"><a name="line23" /> 23       if (@current_query)
 </span><span class="uncovered1"><a name="line24" /> 24         @where_clause = ' applicationID IN('+@current_query.persons+') ' 
@@ -646,7 +646,7 @@ span.run100 {
 </span><span class="uncovered0"><a name="line27" /> 27     end
 </span><span class="uncovered1"><a name="line28" /> 28     
 </span><span class="uncovered0"><a name="line29" /> 29     # if we have a criteria_id in the session, use the saved query
-</span><span class="uncovered1"><a name="line30" /> 30     if (criteria_id = session[:session].get_value('criteria_id'))
+</span><span class="uncovered1"><a name="line30" /> 30     if (criteria_id = sitrack_session.get_value('criteria_id'))
 </span><span class="uncovered0"><a name="line31" /> 31       @current_criteria = SitrackSavedCriteria.find_by_id(criteria_id)
 </span><span class="uncovered1"><a name="line32" /> 32       if @current_criteria
 </span><span class="uncovered0"><a name="line33" /> 33         @qs = @current_criteria.criteria
@@ -664,8 +664,8 @@ span.run100 {
 </span><span class="uncovered0"><a name="line45" /> 45     @order_direction = @order_by.split(' ')[1]
 </span><span class="uncovered1"><a name="line46" /> 46     
 </span><span class="uncovered0"><a name="line47" /> 47     
-</span><span class="uncovered1"><a name="line48" /> 48     @saved_queries = SitrackQuery.find_all_by_owner(session[:sitrack_user].id, :order =&gt; :name)
-</span><span class="uncovered0"><a name="line49" /> 49     @saved_criteria = SitrackSavedCriteria.find_all_by_owner(session[:sitrack_user].id, :conditions =&gt; 'saved = 1', :order =&gt; :name)
+</span><span class="uncovered1"><a name="line48" /> 48     @saved_queries = SitrackQuery.find_all_by_owner(sitrack_user.id, :order =&gt; :name)
+</span><span class="uncovered0"><a name="line49" /> 49     @saved_criteria = SitrackSavedCriteria.find_all_by_owner(sitrack_user.id, :conditions =&gt; 'saved = 1', :order =&gt; :name)
 </span><span class="uncovered1"><a name="line50" /> 50     @sel_region_name ||= '%'
 </span><span class="uncovered0"><a name="line51" /> 51     
 </span><span class="uncovered1"><a name="line52" /> 52     # get the search options
@@ -783,11 +783,11 @@ span.run100 {
 </span><span class="uncovered1"><a name="line164" />164     @qs = query_string.values.join
 </span><span class="uncovered0"><a name="line165" />165     
 </span><span class="uncovered1"><a name="line166" />166     # save the query criteria
-</span><span class="uncovered0"><a name="line167" />167     @criteria = SitrackSavedCriteria.create(:owner =&gt; session[:sitrack_user].id, :criteria =&gt; @qs, :options =&gt; @selected_options)
+</span><span class="uncovered0"><a name="line167" />167     @criteria = SitrackSavedCriteria.create(:owner =&gt; sitrack_user.id, :criteria =&gt; @qs, :options =&gt; @selected_options)
 </span><span class="uncovered1"><a name="line168" />168     # put the criteria in the session
-</span><span class="uncovered0"><a name="line169" />169     session[:session].save_value('criteria_id',@criteria.id)
+</span><span class="uncovered0"><a name="line169" />169     sitrack_session.save_value('criteria_id',@criteria.id)
 </span><span class="uncovered1"><a name="line170" />170     # remove any query_id. You can't use a criteria and query at the same time.
-</span><span class="uncovered0"><a name="line171" />171     session[:session].remove_value('query_id')
+</span><span class="uncovered0"><a name="line171" />171     sitrack_session.remove_value('query_id')
 </span><span class="uncovered1"><a name="line172" />172     show_directory
 </span><span class="uncovered0"><a name="line173" />173   end
 </span><span class="inferred1"><a name="line174" />174   
@@ -795,10 +795,10 @@ span.run100 {
 </span><span class="uncovered1"><a name="line176" />176     query_id = params[:id]
 </span><span class="uncovered0"><a name="line177" />177     # if we don't have a query id, just show the directory
 </span><span class="uncovered1"><a name="line178" />178     if query_id
-</span><span class="uncovered0"><a name="line179" />179       session[:session].save_value('query_id', query_id)
+</span><span class="uncovered0"><a name="line179" />179       sitrack_session.save_value('query_id', query_id)
 </span><span class="uncovered1"><a name="line180" />180       # clear any unsaved stored criteria
-</span><span class="uncovered0"><a name="line181" />181       session[:session].remove_value('criteria_id')
-</span><span class="uncovered1"><a name="line182" />182       SitrackSavedCriteria.delete_all(&quot;owner = #{session[:sitrack_user].id} AND saved = 0&quot;)
+</span><span class="uncovered0"><a name="line181" />181       sitrack_session.remove_value('criteria_id')
+</span><span class="uncovered1"><a name="line182" />182       SitrackSavedCriteria.delete_all(&quot;owner = #{sitrack_user.id} AND saved = 0&quot;)
 </span><span class="uncovered0"><a name="line183" />183     end
 </span><span class="uncovered1"><a name="line184" />184     show_directory
 </span><span class="uncovered0"><a name="line185" />185   end
@@ -807,31 +807,31 @@ span.run100 {
 </span><span class="uncovered1"><a name="line188" />188     criteria_id = params[:id]
 </span><span class="uncovered0"><a name="line189" />189     # if we don't have a criteria id, just show the directory
 </span><span class="uncovered1"><a name="line190" />190     if criteria_id
-</span><span class="uncovered0"><a name="line191" />191       session[:session].save_value('criteria_id', criteria_id)
+</span><span class="uncovered0"><a name="line191" />191       sitrack_session.save_value('criteria_id', criteria_id)
 </span><span class="uncovered1"><a name="line192" />192       # remove any query_id. You can't use a criteria and query at the same time.
-</span><span class="uncovered0"><a name="line193" />193       session[:session].remove_value('query_id')
+</span><span class="uncovered0"><a name="line193" />193       sitrack_session.remove_value('query_id')
 </span><span class="uncovered1"><a name="line194" />194     end
 </span><span class="uncovered0"><a name="line195" />195     show_directory
 </span><span class="uncovered1"><a name="line196" />196   end
 </span><span class="inferred0"><a name="line197" />197   
 </span><span class="marked1"><a name="line198" />198   def delete_query
 </span><span class="uncovered0"><a name="line199" />199     # make sure they own the query
-</span><span class="uncovered1"><a name="line200" />200     query = SitrackQuery.find_by_owner_and_id(session[:sitrack_user].id, params[:id])
+</span><span class="uncovered1"><a name="line200" />200     query = SitrackQuery.find_by_owner_and_id(sitrack_user.id, params[:id])
 </span><span class="uncovered0"><a name="line201" />201     query.destroy if query
 </span><span class="uncovered1"><a name="line202" />202     index
 </span><span class="uncovered0"><a name="line203" />203   end
 </span><span class="inferred1"><a name="line204" />204   
 </span><span class="marked0"><a name="line205" />205   def delete_criteria
 </span><span class="uncovered1"><a name="line206" />206     # make sure they own the query
-</span><span class="uncovered0"><a name="line207" />207     criteria = SitrackSavedCriteria.find_by_owner_and_id(session[:sitrack_user].id, params[:id])
+</span><span class="uncovered0"><a name="line207" />207     criteria = SitrackSavedCriteria.find_by_owner_and_id(sitrack_user.id, params[:id])
 </span><span class="uncovered1"><a name="line208" />208     criteria.destroy if criteria
 </span><span class="uncovered0"><a name="line209" />209     index
 </span><span class="uncovered1"><a name="line210" />210   end
 </span><span class="inferred0"><a name="line211" />211   
 </span><span class="marked1"><a name="line212" />212   def save_query
 </span><span class="uncovered0"><a name="line213" />213     if request.post? &amp;&amp; params[:name] &amp;&amp; params[:id_list]
-</span><span class="uncovered1"><a name="line214" />214       query = SitrackQuery.create(:name =&gt; params[:name], :owner =&gt; session[:sitrack_user].id, :persons =&gt; params[:id_list])
-</span><span class="uncovered0"><a name="line215" />215       session[:session].save_value('query_id', query.id)
+</span><span class="uncovered1"><a name="line214" />214       query = SitrackQuery.create(:name =&gt; params[:name], :owner =&gt; sitrack_user.id, :persons =&gt; params[:id_list])
+</span><span class="uncovered0"><a name="line215" />215       sitrack_session.save_value('query_id', query.id)
 </span><span class="uncovered1"><a name="line216" />216     end
 </span><span class="uncovered0"><a name="line217" />217     show_directory
 </span><span class="uncovered1"><a name="line218" />218   end
@@ -839,20 +839,20 @@ span.run100 {
 </span><span class="marked1"><a name="line220" />220   def append_query
 </span><span class="uncovered0"><a name="line221" />221     if request.post? &amp;&amp; params[:id] &amp;&amp; params[:id_list]
 </span><span class="uncovered1"><a name="line222" />222       # make sure they own this query
-</span><span class="uncovered0"><a name="line223" />223       query = SitrackQuery.find_by_owner_and_id(session[:sitrack_user].id, params[:id])
+</span><span class="uncovered0"><a name="line223" />223       query = SitrackQuery.find_by_owner_and_id(sitrack_user.id, params[:id])
 </span><span class="uncovered1"><a name="line224" />224       if query
 </span><span class="uncovered0"><a name="line225" />225         curr_list = query.persons.split(',')
 </span><span class="uncovered1"><a name="line226" />226         add_list = params[:id_list].split(',')
 </span><span class="uncovered0"><a name="line227" />227         query.persons = (curr_list + add_list).uniq.join(',')
 </span><span class="uncovered1"><a name="line228" />228         query.save! 
-</span><span class="uncovered0"><a name="line229" />229         session[:session].save_value('query_id', query.id)
+</span><span class="uncovered0"><a name="line229" />229         sitrack_session.save_value('query_id', query.id)
 </span><span class="uncovered1"><a name="line230" />230       end
 </span><span class="uncovered0"><a name="line231" />231     end
 </span><span class="uncovered1"><a name="line232" />232     show_directory   
 </span><span class="uncovered0"><a name="line233" />233   end
 </span><span class="inferred1"><a name="line234" />234   
 </span><span class="marked0"><a name="line235" />235   def save_criteria
-</span><span class="uncovered1"><a name="line236" />236     if request.post? &amp;&amp; params[:name] &amp;&amp; (id = session[:session].get_value('criteria_id'))
+</span><span class="uncovered1"><a name="line236" />236     if request.post? &amp;&amp; params[:name] &amp;&amp; (id = sitrack_session.get_value('criteria_id'))
 </span><span class="uncovered0"><a name="line237" />237       criteria = SitrackSavedCriteria.find(id)
 </span><span class="uncovered1"><a name="line238" />238       criteria.name = params[:name]
 </span><span class="uncovered0"><a name="line239" />239       criteria.saved = 1
@@ -862,14 +862,14 @@ span.run100 {
 </span><span class="uncovered0"><a name="line243" />243   end
 </span><span class="inferred1"><a name="line244" />244   
 </span><span class="marked0"><a name="line245" />245   def change_region
-</span><span class="uncovered1"><a name="line246" />246     session[:session].save_value('region', params[:region]) if params[:region]
+</span><span class="uncovered1"><a name="line246" />246     sitrack_session.save_value('region', params[:region]) if params[:region]
 </span><span class="uncovered0"><a name="line247" />247     show_directory
 </span><span class="uncovered1"><a name="line248" />248   end
 </span><span class="inferred0"><a name="line249" />249   
 </span><span class="marked1"><a name="line250" />250   def change_view
 </span><span class="uncovered0"><a name="line251" />251     view_id = params[:view_id].to_i
 </span><span class="uncovered1"><a name="line252" />252   	# save view in session object
-</span><span class="uncovered0"><a name="line253" />253   	session[:session].save_value('view_id', view_id) if view_id != 0
+</span><span class="uncovered0"><a name="line253" />253   	sitrack_session.save_value('view_id', view_id) if view_id != 0
 </span><span class="uncovered1"><a name="line254" />254   	show_directory
 </span><span class="uncovered0"><a name="line255" />255   end
 </span><span class="inferred1"><a name="line256" />256   
@@ -925,15 +925,15 @@ span.run100 {
 </span><span class="inferred1"><a name="line306" />306   
 </span><span class="marked0"><a name="line307" />307   def excel_download
 </span><span class="uncovered1"><a name="line308" />308     #get the view
-</span><span class="uncovered0"><a name="line309" />309     @view = SitrackView.find(session[:session].get_value('view_id'), 
+</span><span class="uncovered0"><a name="line309" />309     @view = SitrackView.find(sitrack_session.get_value('view_id'), 
 </span><span class="uncovered1"><a name="line310" />310                             :include =&gt; [:sitrack_view_columns, :sitrack_columns], 
 </span><span class="uncovered0"><a name="line311" />311                             :order =&gt; 'sitrack_view_columns.position')
 </span><span class="uncovered1"><a name="line312" />312     # figure out what to call the downlaod
-</span><span class="uncovered0"><a name="line313" />313     if (id = session[:session].get_value('query_id'))
+</span><span class="uncovered0"><a name="line313" />313     if (id = sitrack_session.get_value('query_id'))
 </span><span class="uncovered1"><a name="line314" />314       query = SitrackQuery.find(id)
 </span><span class="uncovered0"><a name="line315" />315       name = query.name
 </span><span class="uncovered1"><a name="line316" />316       @where_clause = &quot; #{HrSiApplication.table_name}.applicationID in( #{query.persons} ) &quot;
-</span><span class="uncovered0"><a name="line317" />317     elsif (id = session[:session].get_value('criteria_id'))
+</span><span class="uncovered0"><a name="line317" />317     elsif (id = sitrack_session.get_value('criteria_id'))
 </span><span class="uncovered1"><a name="line318" />318       criteria = SitrackSavedCriteria.find(id)
 </span><span class="uncovered0"><a name="line319" />319       name = criteria.name
 </span><span class="uncovered1"><a name="line320" />320       @qs = criteria.criteria
@@ -960,7 +960,7 @@ span.run100 {
 </span><span class="inferred0"><a name="line341" />341   #### Query           ####
 </span><span class="inferred1"><a name="line342" />342   #########################
 </span><span class="marked0"><a name="line343" />343   def build_query
-</span><span class="uncovered1"><a name="line344" />344     @sel_region_name = session[:session].get_value('region') || session[:user].person.region
+</span><span class="uncovered1"><a name="line344" />344     @sel_region_name = sitrack_session.get_value('region') || current_user.person.region
 </span><span class="uncovered0"><a name="line345" />345     @sel_region_name = '%' if @sel_region_name == 'all'
 </span><span class="uncovered1"><a name="line346" />346     all_where = &quot;( #{Person.table_name}.region LIKE '#{@sel_region_name}' OR #{SitrackTracking.table_name}.caringRegion LIKE '#{@sel_region_name}' ) &quot;+
 </span><span class="uncovered0"><a name="line347" />347 			     &quot;AND (#{Person.table_name}.firstName &lt;&gt; '' OR #{Person.table_name}.lastName &lt;&gt;'' )&quot;
@@ -984,10 +984,10 @@ span.run100 {
 </span><span class="uncovered0"><a name="line365" />365     # if there is a query id in the params, set the session value
 </span><span class="uncovered1"><a name="line366" />366     if (params[:order_by])
 </span><span class="uncovered0"><a name="line367" />367       order_by = params[:order_by]
-</span><span class="uncovered1"><a name="line368" />368       session[:session].save_value('order_by', order_by)
+</span><span class="uncovered1"><a name="line368" />368       sitrack_session.save_value('order_by', order_by)
 </span><span class="uncovered0"><a name="line369" />369     end
 </span><span class="uncovered1"><a name="line370" />370     # if we have a order_by in the session, use it
-</span><span class="uncovered0"><a name="line371" />371     order_by = session[:session].get_value('order_by')
+</span><span class="uncovered0"><a name="line371" />371     order_by = sitrack_session.get_value('order_by')
 </span><span class="uncovered1"><a name="line372" />372     # Set up a default orderby
 </span><span class="uncovered0"><a name="line373" />373     # if &quot;Full Name&quot; is a column, sort by that. Otherwise, try lastname
 </span><span class="uncovered1"><a name="line374" />374     columns = view.safe_column_names

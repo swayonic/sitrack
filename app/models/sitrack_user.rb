@@ -13,6 +13,7 @@
 #
 
 class SitrackUser < ActiveRecord::Base
+  unloadable
   has_many                  :sitrack_views, :dependent => :destroy
   has_one                   :sitrack_session, :dependent => :destroy
   belongs_to                :user, :foreign_key => :ssm_id

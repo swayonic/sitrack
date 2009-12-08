@@ -654,14 +654,14 @@ span.run100 {
 </span><span class="inferred0"><a name="line35" /> 35   end
 </span><span class="inferred1"><a name="line36" /> 36   
 </span><span class="marked0"><a name="line37" /> 37   def authorize
-</span><span class="marked1"><a name="line38" /> 38     if !session[:sitrack_user]
-</span><span class="marked0"><a name="line39" /> 39       session[:sitrack_user] = SitrackUser.find_by_ssm_id(session[:user].id)
-</span><span class="marked1"><a name="line40" /> 40       if session[:sitrack_user].nil?
+</span><span class="marked1"><a name="line38" /> 38     if !sitrack_user
+</span><span class="marked0"><a name="line39" /> 39       sitrack_user = SitrackUser.find_by_ssm_id(current_user.id)
+</span><span class="marked1"><a name="line40" /> 40       if sitrack_user.nil?
 </span><span class="marked0"><a name="line41" /> 41         redirect_to(:controller =&gt; 'directory', :action =&gt; 'no_access'); return; 
 </span><span class="inferred1"><a name="line42" /> 42       end
-</span><span class="marked0"><a name="line43" /> 43       sitrack_session = session[:sitrack_user].sitrack_session
-</span><span class="marked1"><a name="line44" /> 44       sitrack_session ||= SitrackSession.create(:sitrack_user_id =&gt; session[:sitrack_user].id)
-</span><span class="marked0"><a name="line45" /> 45       session[:session] = sitrack_session
+</span><span class="marked0"><a name="line43" /> 43       sitrack_session = sitrack_user.sitrack_session
+</span><span class="marked1"><a name="line44" /> 44       sitrack_session ||= SitrackSession.create(:sitrack_user_id =&gt; sitrack_user.id)
+</span><span class="marked0"><a name="line45" /> 45       sitrack_session = sitrack_session
 </span><span class="marked1"><a name="line46" /> 46     end
 </span><span class="marked0"><a name="line47" /> 47   end
 </span><span class="inferred1"><a name="line48" /> 48   

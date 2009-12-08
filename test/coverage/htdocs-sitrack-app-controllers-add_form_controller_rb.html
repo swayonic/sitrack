@@ -625,7 +625,7 @@ span.run100 {
 </span><span class="uncovered0"><a name="line6" /> 6       app_id = params[:id]
 </span><span class="uncovered1"><a name="line7" /> 7       @form = (SitrackAddForm.find(:first, :conditions =&gt; ['hr_si_application_id = ?', app_id]) || 
 </span><span class="uncovered0"><a name="line8" /> 8                 SitrackAddForm.create(:hr_si_application_id =&gt; app_id,
-</span><span class="uncovered1"><a name="line9" /> 9                                       :approver_id =&gt; session[:user].person.id))
+</span><span class="uncovered1"><a name="line9" /> 9                                       :approver_id =&gt; current_user.person.id))
 </span><span class="uncovered0"><a name="line10" />10     end
 </span><span class="uncovered1"><a name="line11" />11     preview if @form.valid?
 </span><span class="uncovered0"><a name="line12" />12   end

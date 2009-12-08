@@ -9,7 +9,7 @@ class ModifyControllerTest < ActionController::TestCase
     @response   = ActionController::TestResponse.new
     # fake cas
     CAS::Filter.fake = true
-    @request.session[:user] = User.find(:first)
+    @request.session[:user_id] = User.find(:first).id
   end
 
    

@@ -1636,3 +1636,15 @@ sitrack_columns_108:
   id: "121"
   select_clause: locationCExplanation
   created_at: 0000-00-00 00:00:00
+sitrack_columns_157: 
+  where_clause: 
+  name: Sending Department
+  updated_at: 
+  writeable: "1"
+  show_in_directory: "1"
+  column_type: team
+  table_clause: SitrackTracking,HrSiApplication
+  update_clause: 
+  id: "157"
+  select_clause: send_dept
+  created_at: 0000-00-00 00:00:00

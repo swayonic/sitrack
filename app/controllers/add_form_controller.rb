@@ -5,7 +5,7 @@ class AddFormController < ApplicationController
     else
       app_id = params[:id]
       @form = SitrackAddForm.new(:hr_si_application_id => app_id)
-      @form.approver = session[:user].person
+      @form.approver = current_user.person
       @form.save
     end
     setup
@@ -53,7 +53,7 @@ class AddFormController < ApplicationController
     @spouse = (@person.spouse || Person.new)
     @stint = @tracking.is_stint?
     @location = @stint ? [@tracking.asgCity, @tracking.asgCountry].join(', ') : @tracking.asgTeam
-    @approver = @form.approver = session[:user].person
+    @approver = @form.approver = current_user.person
     @teams = get_teams
   end
 

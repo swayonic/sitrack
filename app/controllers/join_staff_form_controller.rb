@@ -51,6 +51,6 @@ class JoinStaffFormController < ApplicationController
     @form.spouse_name = @spouse.first_name
     @mpd = @application.sitrack_mpd || (@application.sitrack_mpd = SitrackMpd.new)
     @region = (Region.find_by_region(@person.region) || Region.new)
-    @approver = @form.approver = session[:user].person
+    @approver = @form.approver = current_user.person
   end
 end

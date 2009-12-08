@@ -1,6 +1,6 @@
 class ViewsController < ApplicationController
   def index
-    @views = session[:sitrack_user].sitrack_views
+    @views = sitrack_user.sitrack_views
   end
   
   def edit
@@ -14,7 +14,7 @@ class ViewsController < ApplicationController
       @view = SitrackView.new
     else 
       @view = SitrackView.new(:name => params[:view][:name])
-      @view.sitrack_user = session[:sitrack_user]
+      @view.sitrack_user = sitrack_user
       if @view.save
         reset_user # defined in application.rb
         redirect_to(:action => :edit, :id => @view.id)
@@ -23,7 +23,7 @@ class ViewsController < ApplicationController
   end
   
   def delete
-    @view = session[:sitrack_user].sitrack_views.find(params[:id])
+    @view = sitrack_user.sitrack_views.find(params[:id])
     @view.destroy
     reset_user # defined in application.rb
     delete_cache(@view.id)
@@ -110,7 +110,7 @@ class ViewsController < ApplicationController
     @view.sitrack_view_columns.each do |vc|
       @new_view.sitrack_view_columns << vc.clone
     end
-    session[:sitrack_user].sitrack_views << @new_view
+    sitrack_user.sitrack_views << @new_view
     redirect_to(:action => :index)
   end
   

@@ -24,7 +24,7 @@ class UserController < ApplicationController
     end
     # see if the user already has access
     unless (@sitrack_user = SitrackUser.find_by_ssm_id(ssm_id))
-      @sitrack_user = SitrackUser.create(:ssm_id => ssm_id, :created_by => session[:user].id, :updated_by => session[:user].id)
+      @sitrack_user = SitrackUser.create(:ssm_id => ssm_id, :created_by => current_user.id, :updated_by => current_user.id)
       # set the new user up with some default views
       UserController.create_views(@sitrack_user)
     end

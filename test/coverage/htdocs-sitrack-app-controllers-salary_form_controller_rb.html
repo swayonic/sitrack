@@ -627,9 +627,9 @@ span.run100 {
 </span><span class="uncovered1"><a name="line8" /> 8       @form = @application.sitrack_salary_forms.first
 </span><span class="uncovered0"><a name="line9" /> 9       if !@form
 </span><span class="uncovered1"><a name="line10" />10         if @application.sitrack_tracking &amp;&amp; @application.sitrack_tracking.is_stint?
-</span><span class="uncovered0"><a name="line11" />11           @form = SitrackStintSalaryForm.new(:hr_si_application_id =&gt; app_id, :approver_id =&gt; session[:user].person.id)
+</span><span class="uncovered0"><a name="line11" />11           @form = SitrackStintSalaryForm.new(:hr_si_application_id =&gt; app_id, :approver_id =&gt; current_user.person.id)
 </span><span class="uncovered1"><a name="line12" />12         else
-</span><span class="uncovered0"><a name="line13" />13           @form = SitrackInternSalaryForm.new(:hr_si_application_id =&gt; app_id, :approver_id =&gt; session[:user].person.id)
+</span><span class="uncovered0"><a name="line13" />13           @form = SitrackInternSalaryForm.new(:hr_si_application_id =&gt; app_id, :approver_id =&gt; current_user.person.id)
 </span><span class="uncovered1"><a name="line14" />14         end
 </span><span class="uncovered0"><a name="line15" />15       end
 </span><span class="uncovered1"><a name="line16" />16     end

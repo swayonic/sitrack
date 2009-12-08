@@ -11,8 +11,8 @@ class DirectoryControllerTest < ActionController::TestCase
     @response   = ActionController::TestResponse.new
     # fake cas
     CAS::Filter.fake = true
-    @request.session[:user] = User.find(:first)
-    @request.session[:session] = {:view_id => sitrack_views(:form).id}
+    @request.session[:user_id] = User.find(:first).id
+    # @request.sitrack_session = {:view_id => sitrack_views(:form).id}
   end
 
   # Basic action tests:

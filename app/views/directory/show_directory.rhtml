@@ -1,5 +1,4 @@
-<%#=debug(@sql)%>
-<%#=debug(session) if 42655 == session[:user].id%>
+<%= raise session.inspect %>
 <div id="center">
 	<div class="boxheader">Directory Listing</div>
 	<% form_tag({:action => 'search'}, {:name => 'search_f', :id => 'search_f'}) do %>
@@ -109,7 +108,7 @@
 		<% @saved_queries.each do |query| -%>
 			<div class="menu">
 				<%= link_to(query.name, {:controller => 'directory', :action => 'show_query', :id => query[:id]}, {:class => 'menu'})%>
-				<%= link_to(image_tag('x', :alt => 'Delete Query', :class => 'x', :border => 0), {:action => 'delete_query', :id => query[:id]}, :confirm => 'Are you sure you want to delete the "'+query.name+'" query?', :post => true) %>
+				<%= link_to(image_tag('x.png', :alt => 'Delete Query', :class => 'x', :border => 0), {:action => 'delete_query', :id => query[:id]}, :confirm => 'Are you sure you want to delete the "'+query.name+'" query?', :post => true) %>
 			</div>
 		<% end -%><br />
 			<a href="javascript:save_query('new');" class="button">Save List&nbsp;&nbsp;</a><br />
@@ -131,7 +130,7 @@
 		<% @saved_criteria.each do |criteria| -%>
 			<div class="menu">
 				<%= link_to(criteria.name, {:controller => 'directory', :action => 'show_criteria', :id => criteria[:id]}, {:class => 'menu'})%>
-				<%= link_to(image_tag('x', :alt => 'Delete Query', :class => 'x', :border => 0), {:action => 'delete_criteria', :id => criteria[:id]}, :confirm => 'Are you sure you want to delete the "'+criteria.name+'" criteria?', :post => true) %>
+				<%= link_to(image_tag('x.png', :alt => 'Delete Query', :class => 'x', :border => 0), {:action => 'delete_criteria', :id => criteria[:id]}, :confirm => 'Are you sure you want to delete the "'+criteria.name+'" criteria?', :post => true) %>
 			</div>
 		<% end -%><br />
 		<% if @selected_options 

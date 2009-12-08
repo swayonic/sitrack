@@ -42,43 +42,58 @@ class ApplicationController < ActionController::Base
   
   def get_project(id)
     return '' if  0 == id || id.nil? || '' == id.to_s.strip # an id of 0 is useless. you're useless too
-    session[:projects] ||= {}
-    # early return if we have this project name cached
-    return session[:projects][id] if session[:projects][id]
-    # if it's not cached, look up the name, cache, and return it.
-    project_name = ActiveRecord::Base.connection.select_value("SELECT name FROM #{HrSiProject.table_name} where SIProjectID = #{id}")
-    return '' if project_name.nil? || project_name.strip == ''
-    session[:projects][id] = project_name
-    return project_name
+    @project_names ||= {}
+    @project_names[id] ||= Rails.cache.fetch(['projects',id], :expires_in => 1.day) {ActiveRecord::Base.connection.select_value("SELECT name FROM #{HrSiProject.table_name} where SIProjectID = #{id}").to_s.strip}
+  end
+  
+  def sitrack_user=(sitrack_user)
+    session[:sitrack_user_id] = sitrack_user.id
+    sitrack_user
+  end
+  
+  def current_user
+    if !@current_user && session[:user_id]
+      @current_user = User.find(session[:user_id])
+    end
+    @current_user
+  end
+  
+  def current_user=(user)
+    session[:user_id] = user.id
+    @current_user = user
   end
   
   private
   def sitrack_user
-    session[:sitrack_user] ||= authorize
+    unless @sitrack_user 
+      @sitrack_user ||= authorize
+      session[:sitrack_user_id] = @sitrack_user.id
+    end
+    @sitrack_user
   end
   # reset the user object in the session
   def reset_user
-    session[:sitrack_user] = SitrackUser.find_by_ssm_id(session[:user].id, :include => :sitrack_views)
-  end
-  
-  def dummy_cas
-    session[:cas_receipt] = {}
-    session[:cas_receipt][:user] = 'Scott.Santee@uscm.org'
-    session[:cas_receipt][:ssoGuid] = '06A245FD-88DD-4624-4A00-65152E57122A'
+    sitrack_user = SitrackUser.find_by_ssm_id(current_user.id, :include => :sitrack_views)
   end
   
   def authorize
-    if session[:sitrack_user].nil?
-      session[:sitrack_user] = SitrackUser.find_by_ssm_id(session[:user].id, :include => [:sitrack_session, :sitrack_views])
-      if session[:sitrack_user].nil?
+    if session[:sitrack_user_id].nil?
+      @sitrack_user = SitrackUser.find_by_ssm_id(current_user.id)
+      if @sitrack_user.nil?
         redirect_to(:controller => 'directory', :action => 'no_access'); return; 
       end
-      sitrack_session = session[:sitrack_user].sitrack_session
-      sitrack_session ||= SitrackSession.create(:sitrack_user_id => session[:sitrack_user].id)
-      session[:session] = sitrack_session
+      session[:sitrack_user_id] = @sitrack_user.id
+    else
+      @sitrack_user = SitrackUser.find(session[:sitrack_user_id])
     end
-    return session[:sitrack_user]
+    session[:session_id] = (@sitrack_user.sitrack_session || SitrackSession.create(:sitrack_user_id => session[:sitrack_user_id])).id
+    return @sitrack_user
   end
+  
+  def sitrack_session
+    @sitrack_session ||= SitrackSession.find(session[:session_id])
+  end
+  helper_method :sitrack_session
   
   def all_tables
     table_person = Person.table_name
@@ -120,7 +135,7 @@ class ApplicationController < ActionController::Base
   end
   
   def get_teams
-    @teams ||= Rails.cache.fetch('teams') do 
+    @teams ||= Rails.cache.fetch('teams', :expires_in => 1.day) do 
       teams = MinistryLocalLevel.find(:all, :conditions => "isActive = 'T'", :order => 'name')
       team_hash = {"" => ""}
       teams.each do |team|
@@ -132,7 +147,7 @@ class ApplicationController < ActionController::Base
   end
   
   def get_teams_ordered
-    @ordered_teams ||= Rails.cache.fetch('ordered_teams') do 
+    @ordered_teams ||= Rails.cache.fetch('ordered_teams', :expires_in => 1.day) do 
       teams = MinistryLocalLevel.find(:all, :conditions => "isActive = 'T'", :order => 'name')
       team_array = [["", ""]]
       teams.each do |team|
@@ -145,7 +160,7 @@ class ApplicationController < ActionController::Base
   helper_method :get_teams_ordered
 
   def get_options
-    @options ||= Rails.cache.fetch('options') do 
+    @options ||= Rails.cache.fetch('options', :expires_in => 1.day) do 
       options = Hash.new
       SitrackColumn.find(:all, :include => :sitrack_enum_values, :order => 'sitrack_enum_values.position').each do |column|
         options[column.name] = column.sitrack_enum_values.collect {|option| [option.value, option.name]} if column.column_type == 'enum'
@@ -156,7 +171,7 @@ class ApplicationController < ActionController::Base
   end
   
   def get_option_hash
-    @option_hash ||= Rails.cache.fetch('option_hash') do 
+    @option_hash ||= Rails.cache.fetch('option_hash', :expires_in => 1.day) do 
       options = get_options
       option_hash = {}
       options.each do |column_name, column_array|

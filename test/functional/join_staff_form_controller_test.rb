@@ -10,7 +10,7 @@ class JoinStaffFormControllerTest < ActionController::TestCase
     @response   = ActionController::TestResponse.new
     # fake cas
     CAS::Filter.fake = true
-    @request.session[:user] = User.find(:first)
+    @request.session[:user_id] = User.find(:first).id
     @preview_options = {:id => hr_si_applications(:hero).id, :form => {:date_of_change => '2006-10-25', :hrd => 'me!'}, :mpd => {:coachName => 'you!'}}
   end
 

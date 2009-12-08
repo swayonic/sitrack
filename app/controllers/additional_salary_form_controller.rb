@@ -48,7 +48,7 @@ class AdditionalSalaryFormController < ApplicationController
     @person = @application.person
     @current_address = (@person.current_address || Address.new)
     @tracking = @application.sitrack_tracking
-    @approver = @form.approver = session[:user].person
+    @approver = @form.approver = current_user.person
   end
   
   def add_tax

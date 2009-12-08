@@ -11,7 +11,7 @@ class SalaryFormController < ApplicationController
         @form = SitrackInternSalaryForm.new(:hr_si_application_id => app_id)
       end
     end
-    @form.approver = session[:user].person
+    @form.approver = current_user.person
     # display form
     setup
     unless request.get?
@@ -59,7 +59,7 @@ class SalaryFormController < ApplicationController
     @tracking.asgState  = @current_address.state if @tracking.asgState.nil? || @tracking.asgState.empty?
     @tracking.asgCountry  = @current_address.country if @tracking.asgCountry.nil? || @tracking.asgCountry.empty?
     @mpd = @application.sitrack_mpd || SitrackMpd.new
-    @approver = @form.approver = session[:user].person
+    @approver = @form.approver = current_user.person
     # If current date is >= 5th and <= 20th, put the 16th. Else put 1st
     day = Time.now.day
     month = Time.now.month

@@ -36,7 +36,7 @@ class PeopleController < ApplicationController
           end
           
           # if this person doesn't have a region, default to the current user's region
-          @person.region ||= session[:sitrack_user].user.person.region
+          @person.region ||= sitrack_user.user.person.region
           @person.save
           
           # try to create a user row for the person.

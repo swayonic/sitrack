@@ -643,7 +643,7 @@ span.run100 {
 </span><span class="uncovered1"><a name="line24" />24     end
 </span><span class="uncovered0"><a name="line25" />25     # see if the user already has access
 </span><span class="uncovered1"><a name="line26" />26     unless (@sitrack_user = SitrackUser.find_by_ssm_id(ssm_id))
-</span><span class="uncovered0"><a name="line27" />27       @sitrack_user = SitrackUser.create(:ssm_id =&gt; ssm_id, :created_by =&gt; session[:user].id, :updated_by =&gt; session[:user].id)
+</span><span class="uncovered0"><a name="line27" />27       @sitrack_user = SitrackUser.create(:ssm_id =&gt; ssm_id, :created_by =&gt; current_user.id, :updated_by =&gt; current_user.id)
 </span><span class="uncovered1"><a name="line28" />28       # set the new user up with some default views
 </span><span class="uncovered0"><a name="line29" />29       SitrackView.find_all_by_sitrack_user_id(0).each do |view|
 </span><span class="uncovered1"><a name="line30" />30         new_view = view.clone
