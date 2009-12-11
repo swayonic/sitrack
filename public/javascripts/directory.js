@@ -197,8 +197,12 @@ function perform_action()
 if (document.layers) { // Netscape
     document.captureEvents(Event.MOUSEMOVE);   
 }
-function appendField(fieldname, id, value, colID, type, selectClause)
+function appendField(fieldname, id, value, colID, type, selectClause, maxlength)
 {
+  if ( maxlength === undefined ) {
+     maxlength = '50';
+  }
+
 	var f = document.participants_f;
 	switch (type) {
 	case 'text':
@@ -225,7 +229,7 @@ function appendField(fieldname, id, value, colID, type, selectClause)
 		field.setAttribute('type', 'text');
 		field.setAttribute('value', value);
 		field.setAttribute('size', '10');
-		field.setAttribute('maxlength','50');
+		field.setAttribute('maxlength',maxlength);
 		field.onkeydown = function (event) {
 							check_key(event,value,fieldname, id, colID, type, selectClause);
 						}
@@ -234,7 +238,7 @@ function appendField(fieldname, id, value, colID, type, selectClause)
 	field.setAttribute('name', fieldname+id+'c'+colID);
 	field.setAttribute('id', 'v'+fieldname+id+'c'+colID);
 	field.onblur = function () {
-						update_value(fieldname, id, colID, type, selectClause);
+						update_value(fieldname, id, colID, type, selectClause, maxlength);
 					}
 
 	var c = document.createElement('div');
@@ -246,17 +250,17 @@ function appendField(fieldname, id, value, colID, type, selectClause)
 	outer.appendChild(c);
 			
 }
-function edit_value(fieldname, id, value, colID, type, selectClause, skipAppend)
+function edit_value(fieldname, id, value, colID, type, selectClause, skipAppend, maxlength)
 {
 	var f = document.participants_f;
 	if (!skipAppend) {
-		appendField(fieldname, id, value, colID, type, selectClause);
+		appendField(fieldname, id, value, colID, type, selectClause, maxlength);
 	}
 	document.getElementById(fieldname+id+'c'+colID).style.display = "none";
 	document.getElementById('f'+fieldname+id+'c'+colID).style.display = "inline";
 	document.getElementById('v'+fieldname+id+'c'+colID).focus();
 }
-function update_value(fieldname, id, colID, type, selectClause)
+function update_value(fieldname, id, colID, type, selectClause, maxlength)
 {	
 	var f = document.participants_f;
 	var frame = window.frames["modify_frame"];
@@ -265,7 +269,7 @@ function update_value(fieldname, id, colID, type, selectClause)
 	var value = document.getElementById('v'+fieldname+id+'c'+colID).value
 	var rExp = new RegExp("\'", "g"); 
 	var js_value = value.replace(rExp, "\\\'");
-	var params = "'"+fieldname+"','"+id+"','"+js_value+"','"+colID+"','"+type+"','"+selectClause+"','true'";
+	var params = "'"+fieldname+"','"+id+"','"+js_value+"','"+colID+"','"+type+"','"+selectClause+"','true','"+maxlength+"'";
 	var href = 'href="javascript:edit_value('+params+')"';
 	switch (type) {
 	case 'text':
