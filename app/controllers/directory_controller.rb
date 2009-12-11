@@ -404,7 +404,7 @@ class DirectoryController < ApplicationController
     
     # Remove first "AND" if there's no where_clause
     if @where_clause.blank?
-      @qs.sub!("AND", "")
+      @qs.sub!("AND", "") if @qs
     end
     
     # If we have a search or saved criteria, add the query string.
