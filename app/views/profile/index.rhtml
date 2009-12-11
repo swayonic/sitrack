@@ -266,7 +266,7 @@ person_id = @person['personID']
 								</a>
 							</span>
 				 <% else -%>
-							<a href="javascript:edit_value('<%=column_name%>',<%=application_id%>,'<%=escape_javascript(value)%>','<%=column_id%>','<%=@columns[column_name].column_type%>')">
+							<a href="javascript:edit_value('<%=column_name%>',<%=application_id%>,'<%=escape_javascript(value)%>','<%=column_id%>','<%=@columns[column_name].column_type%>', '', false, '<%=@columns[column_name].maxlength%>')">
 							<%if !value.empty?%>
 								<%= value %>
 							<%else%>
