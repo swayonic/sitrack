@@ -323,14 +323,14 @@ class DirectoryController < ApplicationController
       
       @options_hash = get_option_hash
       @teams = get_teams
-      if request.env['HTTP_USER_AGENT'] =~ /msie/i
-        headers['Pragma'] = 'public'
-        headers['Cache-Control'] = 'no-cache, must-revalidate, post-check=0, pre-check=0'
-        headers['Expires'] = "0" 
-      end
-      headers['Content-Type'] = "application/vnd.ms-excel" 
-      # headers['Content-Type'] = "text/tab-separated-values" 
-      headers['Content-Disposition'] = "attachment; filename=\"#{name}.xls\""
+      # if request.env['HTTP_USER_AGENT'] =~ /msie/i
+      #   headers['Pragma'] = 'public'
+      #   headers['Cache-Control'] = 'no-cache, must-revalidate, post-check=0, pre-check=0'
+      #   headers['Expires'] = "0" 
+      # end
+      # headers['Content-Type'] = "application/vnd.ms-excel" 
+      # # headers['Content-Type'] = "text/tab-separated-values" 
+      # headers['Content-Disposition'] = "attachment; filename=\"#{name}.xls\""
       
       @sheet = ''
       @view.sitrack_view_columns.each do |vc|
@@ -357,7 +357,7 @@ class DirectoryController < ApplicationController
         end
         @sheet += "\n"
       end
-      send_data(render_to_string(:layout => false), :filename => "#{name}.xls")
+      send_data(render_to_string(:layout => false), :filename => "#{name}.xls", :type => "application/vnd.ms-excel")
     end
   end
   
