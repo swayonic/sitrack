@@ -298,33 +298,6 @@ class DirectoryController < ApplicationController
     render(:layout => false)
   end
   
-#  def fix_criteria
-#    @options_hash = get_option_hash
-#    @criteria = SitrackSavedCriteria.find_all
-#    @criteria.each do |c|
-#      ['Status', 'Intern Type', 'Position', 'Tenure', 'App Year'].each do |field|
-#        raise field.inspect unless @options_hash[field]
-#        @options_hash[field].each do |value|
-#          c.options.gsub!('['+value[1]+']', '['+u(field.downcase)+'_'+value[0]+']')
-#        end
-#      end
-#      c.options.gsub!('[o_', '[region_of_origin_')
-#      c.options.gsub!('[c_', '[caring_region_')
-#      c.options.gsub!('[y','[app_year_')
-#      c.options.gsub!('[team_leader]','[misc_team_leader]')
-#      c.options.gsub!('[monthly_birthday]','[misc_monthly_birthday]')
-#      c.options.gsub!('[staff]','[position_1]')
-#      c.options.gsub!('[not_staff]','[position_0]')
-#      
-#      # fix criteria
-#      c.criteria.gsub!('t.', 'sitrack_tracking.')
-#      c.criteria.gsub!('l.', 'hr_si_applications.')
-#      c.criteria.gsub!('p.', 'ministry_person.')
-#      c.save!
-#    end
-#    render_nothing
-#  end
-  
   def excel_download
     if request.post?
       #get the view
@@ -351,10 +324,11 @@ class DirectoryController < ApplicationController
       @options_hash = get_option_hash
       @teams = get_teams
       
-#      headers['Content-Type'] = "application/vnd.ms-excel" 
-      headers['Content-Type'] = "text/tab-separated-values" 
+      headers['Content-Type'] = "application/vnd.ms-excel" 
+      # headers['Content-Type'] = "text/tab-separated-values" 
       headers['Content-Disposition'] = "attachment; filename=\"#{name}.xls\""
       headers['Cache-Control'] = ''
+      
       @sheet = ''
       @view.sitrack_view_columns.each do |vc|
         column = vc.sitrack_column
