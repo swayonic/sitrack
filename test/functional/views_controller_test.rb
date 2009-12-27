@@ -29,6 +29,6 @@ class ViewsControllerTest < ActionController::TestCase
     post :new, :view => {:name => 'new_view'}
     assert_response :redirect
     
-    assert_redirected_to(:action => :edit)
+    assert_redirected_to edit_view_path(assigns(:view))
   end
 end
