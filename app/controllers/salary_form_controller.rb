@@ -68,7 +68,8 @@ class SalaryFormController < ApplicationController
   		date = Time.local(year, month, 16)
   	elsif (day > 20)
   	  month = month+1
-  	  month = 1 if month == 13
+      year += 1 if month == 13
+      month = 1 if month == 13
   		date = Time.local(year, month, 1)
   	else
   		date = Time.local(year, month, 1)
