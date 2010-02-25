@@ -142,7 +142,7 @@ class DirectoryController < ApplicationController
     @options['Region of Origin'].each do |region|
       if params['region_of_origin_'+region[0]]
         join = (query_string[:region_of_origin] == '') ? ' AND (' : ' OR '
-        query_string[:region_of_origin] += join + Person.table_name + ".region = '#{region[1]}'"
+        query_string[:region_of_origin] += join + SitrackTracking.table_name + ".regionOfOrigin = '#{region[1]}'"
         @selected_options += "[region_of_origin_#{region[0]}]"
       end
     end
