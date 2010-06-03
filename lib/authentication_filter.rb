@@ -61,8 +61,9 @@ class AuthenticationFilter
 
         controller.current_user = user
       else
-        #we've got a problem
-        raise "Cas Authentication Failure: "+controller.session[:casfilterreceipt].inspect
+        # Session probably expired, send them back to cas
+        controller.send(:redirect_to, "#{CAS::Filter.login_url}?service=#{controller.send(:directory_url)}")
+        return false
       end
       return true
     end

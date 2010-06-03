@@ -30,6 +30,7 @@ memcache_options = {
 
 CACHE = MemCache.new memcache_options
 CACHE.servers = ['hart-w040.uscm.org:11211','hart-w025.uscm.org:11211']
+config.cache_store = :mem_cache_store, CACHE.servers
 
 ActionController::Base.session_options[:expires] = 1.day
 ActionController::Base.session_options[:cache] = CACHE

@@ -90,10 +90,10 @@ class ViewsController < ApplicationController
     	if (names.size > 1)
 	    	first = names[0].gsub("=","")
     		last = names[1].empty? ? first : names[1].gsub("=","")
-	    	@conditions = [ "lastName LIKE ? AND firstName LIKE ? ", last + "%", first + "%" ]
+	    	@conditions = [ "ministry_person.lastName LIKE ? AND ministry_person.firstName LIKE ? ", last + "%", first + "%" ]
 	   	else 
 	   	  name = names.join.gsub("=","")
-	   		@conditions = [ "(lastName LIKE ? OR firstName LIKE ?) ", name+'%',name+'%' ]
+	   		@conditions = [ "(ministry_person.lastName LIKE ? OR ministry_person.firstName LIKE ?) ", name+'%',name+'%' ]
 	   	end
 	  	@people = SitrackUser.find(:all, :order => "lastName, firstName", 
 	  	                                 :conditions => @conditions, 
@@ -106,7 +106,7 @@ class ViewsController < ApplicationController
     unless params[:id]
       redirect_to(:action => :borrow); return;
     end
-    @user = SitrackUser.find(params[:id], :include => {:user => :person})
+    @user = SitrackUser.find(params[:id])
     @person = @user.user.person
     @views = @user.sitrack_views
   end

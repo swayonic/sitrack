@@ -142,7 +142,7 @@ class DirectoryController < ApplicationController
     @options['Region of Origin'].each do |region|
       if params['region_of_origin_'+region[0]]
         join = (query_string[:region_of_origin] == '') ? ' AND (' : ' OR '
-        query_string[:region_of_origin] += join + Person.table_name + ".region = '#{region[1]}'"
+        query_string[:region_of_origin] += join + SitrackTracking.table_name + ".regionOfOrigin = '#{region[1]}'"
         @selected_options += "[region_of_origin_#{region[0]}]"
       end
     end
@@ -372,7 +372,7 @@ class DirectoryController < ApplicationController
     @sel_region_name = sitrack_session.get_value('region') || current_user.person.region
     @sel_region_name = '%' if @sel_region_name == 'all'
     all_where = ""
-    all_where = "( #{Person.table_name}.region LIKE '#{@sel_region_name}' OR #{SitrackTracking.table_name}.caringRegion LIKE '#{@sel_region_name}' ) "+
+    all_where = "( #{Person.table_name}.region LIKE '#{@sel_region_name}' OR #{SitrackTracking.table_name}.caringRegion LIKE '#{@sel_region_name}' OR #{SitrackTracking.table_name}.regionOfOrigin LIKE '#{@sel_region_name}' ) "+
 			     "AND (#{Person.table_name}.firstName <> '' OR #{Person.table_name}.lastName <>'' )" if @sel_region_name
     select_clause = @view.display_columns
     from_clause = SitrackView.join_tables
