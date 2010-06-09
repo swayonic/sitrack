@@ -39,6 +39,9 @@ class JsController < ApplicationController
     end 
     ret += " }"
     @out = ret
-    render(:layout => false)
+    respond_to do |wants|
+      wants.js { render(:layout => false) }
+    end
+    
   end
 end

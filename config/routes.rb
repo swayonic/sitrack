@@ -14,6 +14,8 @@ ActionController::Routing::Routes.draw do |map|
   map.resources :views, :collection => {:reorder => :any, :add_column => :any, :remove_column => :any, :search => :any,
                                         :friend => :any, :import => :any, :borrow => :any}
   map.directory '', :controller => "directory", :action => "index"
+  
+  map.options 'js/options.js', :controller => 'js', :action => 'options', :format => 'js'
 #  map.connect 'directory', :controller => "directory", :action => "index"
   
   # Allow downloading Web Service WSDL as a file with an extension
