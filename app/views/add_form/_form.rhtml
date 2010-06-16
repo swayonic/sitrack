@@ -16,9 +16,12 @@ Middle Name: <span class="data"><%=@person.middleName%></span>
 </p>
 
 <p>
-Sex: <span class="data"><%=@person.human_gender%></span> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-Spouse First Name: <span class="data"> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>
-Maiden Name:  
+Sex: <span class="data"><%=@person.human_gender%></span>
+</p>
+
+<p>
+Marital Status: <span class="data"><%=get_option_hash["Marital Status"][@person.maritalStatus]%> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>
+Spouse First Name: <span class="data"><%=@form.spouse_name%></span>
 </p>
 
 <p> Spouse's account#: <%=@spouse.accountNo%> &nbsp; Marriage Date __________</p>
@@ -62,37 +65,12 @@ Spouse Birthdate:
 
 <p>
 S.S#: <span class="data"><%=@application.ssn%></span> &nbsp;&nbsp;
-Spouse S.S.#:</p>
-<table cellpadding="2">
-	<tr>
-		<td colspan="2">HUMAN RESOURCES STATUS:</td>
-		<td colspan="4">MINISTRY PLACEMENT:</td>
-	</tr>
-	<tr>
-		<td><span class="data"><%if @stint%>X<%end%></span></td>
-		<td>CAMPUS STINT</td>
-		<td><span class="data">X</span></td>
-		<td>CAMPUS</td>
-		<td>&nbsp;</td>
-		<td>SILK ROAD</td>
-	</tr>
-	<tr>
-		<td>&nbsp;</td>
-		<td>COMMUNITY STINT</td>
-		<td>&nbsp;</td>
-		<td>CO-MISSION</td>
-		<td>&nbsp;</td>
-		<td>AIA</td>
-	</tr>
-	<tr>
-		<td><span class="data"><%unless @stint%>X<%end%></span></td>
-		<td>U.S. MINISTRY INTERN</td>
-		<td>&nbsp;</td>
-		<td>STUDENT VENTURE</td>
-		<td>&nbsp;</td>
-		<td>OTHER</td>
-	</tr>
-</table>
+Spouse S.S.#:
+</p>
+
+<p>
+HUMAN RESOURCES STATUS: &nbsp;&nbsp;<span class="data"><%=@tracking.internType.upcase%></span>
+</p>
 
 <p>If "other", please specify_______________</p>
 

@@ -20,6 +20,10 @@
 			<td><%= text_field 'application', 'ssn' %></td>
 		</tr>
 		<tr>
+			<td align="right">Intern Type: </td>
+			<td><%= select(:tracking, :internType, get_option_hash['Intern Type'], {:include_blank => true}) %></td>
+		</tr>
+		<tr>
 			<td align="right">Sending Region: </td>
 			<td><%= collection_select(:tracking, :regionOfOrigin, SitrackRegion.all, :first, :first, {:include_blank => true}) %></td>
 		</tr>
@@ -45,6 +49,14 @@
 		<tr>
 			<td align="right">Strategy: </td>
 			<td><%= select(:tracking, :sendLane, get_option_hash['Strategy'].keys.sort, {:include_blank => true}) %></td>
+		</tr>
+		<tr>
+			<td align="right">Marital Status: </td>
+			<td><%= select(:person, :maritalStatus, get_option_hash['Marital Status'].invert, {:include_blank => true}) %></td>
+		</tr>
+		<tr>
+			<td align="right">Spouse Name: </td>		
+			<td><%= text_field(:form, :spouse_name) %></td>
 		</tr>
 
 	</table><br /><br />
