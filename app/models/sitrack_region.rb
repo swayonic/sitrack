@@ -12,6 +12,10 @@ class SitrackRegion
 		 ['UM','UM'],
 		 ['NC','NC'],
 		 ['AIA','AIA'],
-     ['HLIC','HLIC']]
+     ['DEST','DEST'],
+     ['EPIC','EPIC'],
+     ['JF','JF'],
+     ['HLIC','HLIC'],
+     ['MM','MM']]
   end
 end
