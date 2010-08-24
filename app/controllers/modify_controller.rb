@@ -32,7 +32,7 @@ class ModifyController < ApplicationController
       	if (table == SitrackMpd.table_name)
       	  # make sure they have an mpd row
       	  mpd = SitrackMpd.find(:first, :conditions => ['application_id = ?', app_id]) || SitrackMpd.create(:application_id => app_id)
-      	  mpd.save! #stamp the updated_at date
+      	  mpd.touch #stamp the updated_at date
       	  # strip commas and dollar signs
     		  value = value.scan(/\d/).join unless safe_columns.include?(column.select_clause)
           value = nil if value == ''
