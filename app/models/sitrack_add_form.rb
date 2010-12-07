@@ -49,7 +49,9 @@ class SitrackAddForm < SitrackForm
     errors.add_on_empty('First Name') if hr_si_application.person.firstName.empty?
     errors.add_on_empty('Last Name') if hr_si_application.person.lastName.empty?
     errors.add_on_empty('Birth Date') if hr_si_application.person.birth_date.nil?
+    errors.add_on_empty('Marital Status') if hr_si_application.person.maritalStatus.blank?
     errors.add_on_empty('SSN') if hr_si_application.ssn.blank?
+    errors.add_on_empty('Intern Type') if hr_si_application.sitrack_tracking.internType.blank?
     errors.add_on_empty('Secure Employee') if !['T','F'].include?(hr_si_application.person.isSecure)
     errors.add_on_empty('Sending Region') if hr_si_application.sitrack_tracking.regionOfOrigin.blank?
     errors.add_on_empty('Caring Region') if hr_si_application.sitrack_tracking.caringRegion.blank?
@@ -63,7 +65,7 @@ class SitrackAddForm < SitrackForm
   end 
   
   def to
-      'Personel Records <personnel.records@ccci.org>'
+      'personnel.records@ccci.org'
   end
   
   def email(var_hash, form_html)
