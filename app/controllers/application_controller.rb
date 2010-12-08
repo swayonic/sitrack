@@ -31,7 +31,7 @@ class ApplicationController < ActionController::Base
   
   def self.formatted_date(value=nil)
     if value
-      time = value.class == Date ? value : Time.parse(value) 
+      time = value.class == String ? Time.parse(value) : value
     else 
       time = Time.now
     end
