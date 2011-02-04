@@ -18,3 +18,18 @@ You can search by any combination of first or last name, including partial names
 <p><div id="results">
 <%= image_tag "spinner.gif", :id => 'spinner', :style => 'display:none' %></div></p>
 </div>
+
+<div>
+  <ul id="current_users">
+    <% @sitrack_users.each do |su| %>
+      <% if su.user && su.user.person %>
+        <li id="user_<%= su.id %>">
+          <%=link_to_remote image_tag('x.png', :border => 0), 
+								:url => {:action => :delete, :id => su.id},
+								:loading => visual_effect(:drop_out, "user_#{su.id}")%>
+          <%= su.user.person.lastName %>, <%= su.user.person.firstName %> - <%= su.user.username %>
+        </li>
+      <% end %>
+    <% end %>
+  </ul>
+</div>

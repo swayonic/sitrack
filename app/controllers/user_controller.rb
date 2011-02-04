@@ -1,4 +1,8 @@
 class UserController < ApplicationController
+  def index
+  	@sitrack_users = SitrackUser.find(:all, :order => "ministry_person.lastName, ministry_person.firstName", :include => {:user => :person})
+  end
+  
   def search
     @people = ''
     @name = request.raw_post || request.query_string
@@ -7,13 +11,13 @@ class UserController < ApplicationController
     	if (names.size > 1)
 	    	first = names[0].gsub("=", "")
     		last = names[1].empty? ? first : names[1].gsub("=", "")
-	    	@conditions = [ "lastName LIKE ? AND firstName LIKE ? ", last + "%", first + "%" ]
+	    	@conditions = [ "lastName LIKE ? AND (firstName LIKE ? OR preferredName LIKE ?) ", last + "%", first + "%", first + "%" ]
 	   	else 
 	   	  name = names.join.gsub("=", "")
-	   		@conditions = [ "(lastName LIKE ? OR firstName LIKE ?) ", name+'%',name+'%' ]
+	   		@conditions = [ "(lastName LIKE ? OR firstName LIKE ? OR preferredName LIKE ?) ", name+'%',name+'%',name+'%' ]
 	   	end
 	   	@conditions[0] += " AND fk_ssmUserId <> 0 AND fk_ssmUserId is NOT NULL "
-	  	@people = Person.find(:all, :order => "lastName, firstName", :conditions => @conditions)
+	  	@people = Person.find(:all, :order => "lastName, firstName", :conditions => @conditions, :limit => 41)
 	  end
 	  render(:layout => false)
   end
@@ -30,6 +34,12 @@ class UserController < ApplicationController
     end
     @person = Person.find(:first, :conditions => ['fk_ssmUserID  = ?', ssm_id])
 	  render(:layout => false)
+  end
+  
+  def delete
+    @sitrack_user = SitrackUser.find(params[:id])
+    @sitrack_user.destroy
+    render :nothing => true
   end
   
   protected
