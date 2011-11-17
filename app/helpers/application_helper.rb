@@ -7,7 +7,7 @@ module ApplicationHelper
       id = name+'_'+key
       checked = @selected_options ? (@selected_options.match(/\[#{id}\]/) ? 'checked="checked"' : '') : ''
       ret_val += "<div class=\"select_item\" onclick=\"check($('#{id}'));\"><input id=\"#{id}\" type=\"Checkbox\" name=\"#{id}\" value=\"#{key}\" title=\"#{value}\" onclick=\"check($('#{id}'));\" #{checked} /> #{value}<br /></div>\n";
-    end
+    end unless options.blank?
     return ret_val
   end
   

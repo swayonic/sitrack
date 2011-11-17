@@ -367,3 +367,6 @@ div.column_title {
 #action_menu {
     margin-left: 120px;
 }
+#current_users {
+	list-style:nonem ;
+}
