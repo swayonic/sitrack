@@ -16,6 +16,8 @@ class SitrackRegion
      ['EPIC','EPIC'],
      ['JF','JF'],
      ['HLIC','HLIC'],
+     ['BRG','BRG'],
+     ['KEY','KEY'],
      ['MM','MM']]
   end
 end
