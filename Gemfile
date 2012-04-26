@@ -7,6 +7,8 @@ gem 'rails', '3.2.3.rc2'
 
 gem 'mysql2'
 
+gem 'rubycas-client'
+gem 'airbrake'
 
 # Gems used only for assets and not required
 # in production environments by default.

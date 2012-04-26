@@ -56,10 +56,4 @@ module Sitrack
     # Version of your assets, change this if you want to expire all your assets
     config.assets.version = '1.0'
   end
-  ActiveSupport::Inflector.inflections do |inflect|
-  #   inflect.plural /^(ox)$/i, '\1en'
-  #   inflect.singular /^(ox)en/i, '\1'
-  #   inflect.irregular 'person', 'people'
-     inflect.uncountable %w( sitrack_saved_criteria sitrack_tracking sitrack_mpd )
-  end
 end

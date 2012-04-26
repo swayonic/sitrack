@@ -1,24 +1,38 @@
-Sitrack::Application.routes.draw do |map|
-  map.resources :views, :collection => {:reorder => :any, :add_column => :any, :remove_column => :any, :search => :any,
-                                        :friend => :any, :import => :any, :borrow => :any}
-  map.directory '', :controller => "directory", :action => "index"
+Sitrack::Application.routes.draw do
+  resources :views do
+    collection do
+      get :reorder
+      get :add_column
+      get :remove_column
+      get :search
+      get :friend
+      get :import
+      get :borrow
+      
+      post :reorder
+      post :add_column
+      post :remove_column
+      post :search
+      post :friend
+      post :import
+      post :borrow
+    end
+  end
   
-  map.options 'js/options.js', :controller => 'js', :action => 'options', :format => 'js'
-#  map.connect 'directory', :controller => "directory", :action => "index"
+  #map.directory '', :controller => "directory", :action => "index"
+  match '' => 'directory#index'
   
-  # Allow downloading Web Service WSDL as a file with an extension
-  # instead of a file named 'wsdl'
-  map.connect ':controller/service.wsdl', :action => 'wsdl'
+  match 'js/options.js' => 'js#options', :format => 'js'
+  # map.connect 'directory', :controller => "directory", :action => "index"
 
-  map.connect 'profile/:id', :controller => 'profile',
-                             :action => 'index',
-                             :requirements => {:id => /\d+/}
-  map.connect 'logout', :controller => 'application', :action => 'logout'
+  match ':controller/service.wsdl', :action => 'wsdl'
 
-  map.connect 'up_monitor', :controller => "application", :action => "up_monitor"
-
-  # Install the default route as the lowest priority.
-  map.connect ':controller/:action/:id'
+  match 'profile/:id' => 'profile#index', :requirements => {:id => /\d+/}
+                             
+  match 'logout' => 'application#logout'
+  match 'up_monitor' => 'application#up_monitor'
+  
+  match ':controller/:action/:id'
   
   
   # The priority is based upon order of creation:
@@ -38,12 +52,12 @@ Sitrack::Application.routes.draw do |map|
   # Sample resource route with options:
   #   resources :products do
   #     member do
-  #       get 'short'
-  #       post 'toggle'
+  #       get :short'
+  #       post :toggle'
   #     end
   #
   #     collection do
-  #       get 'sold'
+  #       get :sold'
   #     end
   #   end
 
@@ -57,7 +71,7 @@ Sitrack::Application.routes.draw do |map|
   #   resources :products do
   #     resources :comments
   #     resources :sales do
-  #       get 'recent', :on => :collection
+  #       get :recent', :on => :collection
   #     end
   #   end
 
