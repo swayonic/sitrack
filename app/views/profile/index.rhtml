@@ -375,9 +375,7 @@ person_id = @person['personID']
 <div id="right">
 	<div id="profile_nav" class="box">
 		<div id="profile_nav_header" class="subboxheader">Quick Links</div>
-		<%if @num_valid_apps < 2%>
-			<a href="create_second_year?id=<%=application_id%>">&nbsp;&nbsp;[ Create Second <br />&nbsp;&nbsp;&nbsp;&nbsp;Year Record ]</a><br />
-		<%end -%>
+		<a href="create_second_year?id=<%=application_id%>">&nbsp;&nbsp;[ Create Next <br />&nbsp;&nbsp;&nbsp;&nbsp;Year Record ]</a><br />
 		<a href="javascript:pictureWindow(<%=person_id%>);">&nbsp;&nbsp;[ Upload Picture ]&nbsp;&nbsp;</a>
 		<div class="subboxheader2">Generate Forms</div>
 		<a href="/add_form/fill?id=<%=application_id%>">&nbsp;&nbsp;Add Form</a><br />
