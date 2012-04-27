@@ -6,10 +6,12 @@ gem 'rails', '3.2.3.rc2'
 # gem 'rails', :git => 'git://github.com/rails/rails.git'
 
 gem 'mysql2'
-gem 'acts_as_state_machine'
+gem 'aasm'
+gem 'memcache-client'
+# gem 'acts_as_state_machine'
 # gem 'rubycas-client-rails'
 # gem 'rubycas-client', '2.2.1'
-#gem 'rubycas-client', '2.3.8'
+# gem 'rubycas-client', '2.3.8'
 gem 'airbrake'
 
 # Gems used only for assets and not required

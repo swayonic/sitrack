@@ -1,7 +1,7 @@
 class ApplicationController < ActionController::Base
   @@public_pages = ['up_monitor','no_access','logout','expire']
   include AuthenticatedSystem
-  before_filter CASClient::Frameworks::Rails3::Filter, AuthenticationFilter, :check_user, :current_user, :except => @@public_pages
+  before_filter CASClient::Frameworks::Rails3::Filter, AuthenticationFilter, :current_user, :except => @@public_pages
   # before_filter CASClient::Frameworks::Rails3::Filter, AuthenticationFilter
   # skip_before_filter CAS::Filter, :only => @@public_pages
   # before_filter AuthenticationFilter, :authorize, :except => @@public_pages
@@ -139,7 +139,7 @@ class ApplicationController < ActionController::Base
   
   def get_teams
     @teams ||= Rails.cache.fetch('teams', :expires_in => 1.day) do 
-      teams = MinistryLocalLevel.find(:all, :conditions => "isActive = 'T'", :order => 'name')
+      teams = Team.active.order('name')
       team_hash = {"" => ""}
       teams.each do |team|
         team_hash[team.teamID.to_s] = team.name
@@ -151,7 +151,7 @@ class ApplicationController < ActionController::Base
   
   def get_teams_ordered
     @ordered_teams ||= Rails.cache.fetch('ordered_teams', :expires_in => 1.day) do 
-      teams = MinistryLocalLevel.find(:all, :conditions => "isActive = 'T'", :order => 'name')
+      teams = Team.active.order('name')
       team_array = [["", ""]]
       teams.each do |team|
         team_array << [team.teamID.to_s, team.name]

@@ -1,6 +1,8 @@
 GEM
   remote: https://rubygems.org/
   specs:
+    aasm (3.0.5)
+      activerecord
     actionmailer (3.2.3.rc2)
       actionpack (= 3.2.3.rc2)
       mail (~> 2.4.4)
@@ -28,8 +30,6 @@ GEM
     activesupport (3.2.3.rc2)
       i18n (~> 0.6)
       multi_json (~> 1.0)
-    acts_as_state_machine (2.2.0)
-      activerecord (>= 2.1)
     airbrake (3.0.9)
       activesupport
       builder
@@ -56,6 +56,7 @@ GEM
       i18n (>= 0.4.0)
       mime-types (~> 1.16)
       treetop (~> 1.4.8)
+    memcache-client (1.8.5)
     mime-types (1.18)
     multi_json (1.3.2)
     mysql2 (0.3.11)
@@ -108,10 +109,11 @@ PLATFORMS
   ruby
 
 DEPENDENCIES
-  acts_as_state_machine
+  aasm
   airbrake
   coffee-rails (~> 3.2.1)
   jquery-rails
+  memcache-client
   mysql2
   rails (= 3.2.3.rc2)
   sass-rails (~> 3.2.3)

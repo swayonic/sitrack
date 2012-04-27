@@ -34,4 +34,24 @@ Sitrack::Application.configure do
 
   # Expands the lines which load the assets
   config.assets.debug = true
+  
+  
+  # config.action_controller.session_store = :mem_cache_store
+  # 
+  #  require 'memcache'
+  #  memcache_options = {
+  #    :c_threshold => 10_000,
+  #    :compression => true,
+  #    :debug => false,
+  #    :namespace => "sitrackapp-#{Rails.env}",
+  #    :readonly => false,
+  #    :urlencode => false
+  #  }
+  # 
+  #  CACHE = MemCache.new memcache_options
+  #  CACHE.servers = 'localhost:11211'
+  # 
+  #  ActionController::Base.session_options[:expires] = 1.day
+  #  ActionController::Base.session_options[:cache] = CACHE
+  #  ActionController::Base.session_options[:session_secure] = true
 end

@@ -78,7 +78,7 @@ class DirectoryController < ApplicationController
     @first_name = @selected_options ? (@selected_options.match(/<first_name>(.*)<\/first_name>/) ? $1 : '') : ''
     @last_name = @selected_options ? (@selected_options.match(/<last_name>(.*)<\/last_name>/) ? $1 : '') : ''
     @pref_name = @selected_options ? (@selected_options.match(/<pref_name>(.*)<\/pref_name>/) ? $1 : '') : ''
-    render(:action => :show_directory)
+    render :controller => :directory, :action => :show_directory
   end
   
   def search
