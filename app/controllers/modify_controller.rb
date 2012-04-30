@@ -54,7 +54,10 @@ class ModifyController < ApplicationController
       		end
           column.update_clause.gsub!(/\?/, id.to_s) # the rest are the id
       	  queries = column.update_clause.split(';')
-      	  queries.each {|@sql| @result = ActiveRecord::Base.connection.update(@sql)}
+      	  queries.each do |sql|
+      	    @sql = sql
+      	    @result = ActiveRecord::Base.connection.update(sql)
+      	  end
       	else
           # Use the select string to figure out which column to update
           # set some default values

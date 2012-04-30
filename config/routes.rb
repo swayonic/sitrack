@@ -21,8 +21,8 @@ Sitrack::Application.routes.draw do
   
   #map.directory '', :controller => "directory", :action => "index"
   match '' => 'directory#index'
-  
-  match 'js/options.js' => 'js#options', :format => 'js'
+  match 'modify/update' => 'modify#update'
+  match 'js/options' => 'js#options', :format => 'js'
   # map.connect 'directory', :controller => "directory", :action => "index"
 
   match ':controller/service.wsdl', :action => 'wsdl'

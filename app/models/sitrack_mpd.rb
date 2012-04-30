@@ -1,6 +1,8 @@
 class SitrackMpd < ActiveRecord::Base
   belongs_to :hr_si_application, :foreign_key => 'application_id'
   
+  attr_accessible :application_id
+  
   def self.update_account_balances
     balances = PsEmployee.get_balances
     mpd_records = find(:all)

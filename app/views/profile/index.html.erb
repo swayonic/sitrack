@@ -259,7 +259,7 @@ person_id = @person['personID']
 							</script>
 							<%if !value.empty? -%>
 								<a href="javascript:edit_value('<%=column_name%>',<%=application_id%>,'<%=escape_javascript(value)%>','<%=column_id%>','<%=@columns[column_name].column_type%>')"  onclick="nd();" onmouseover="return overlib('<%=escape_javascript(value)%>',LEFT);" onmouseout="nd();">
-									<%=value.to_i.dollars%>
+									<%= number_to_currency(value.to_i) %>
 							<%else -%>
 								<a href="javascript:edit_value('<%=column_name%>',<%=application_id%>,'<%=value%>','<%=column_id%>','<%=@columns[column_name].column_type%>')">
 									<img src="/images/edit.png" border="0"/> 
