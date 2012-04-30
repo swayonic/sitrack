@@ -11,4 +11,5 @@
 
 class SitrackSessionValue < ActiveRecord::Base
   belongs_to  :sitrack_session
+  attr_accessible :attrib, :value
 end

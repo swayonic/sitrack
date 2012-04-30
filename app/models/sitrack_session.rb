@@ -12,6 +12,7 @@ class SitrackSession < ActiveRecord::Base
   unloadable
   has_many  :sitrack_session_values, :dependent => :destroy
   
+  
   def save_value(attrib, value)
     remove_value(attrib)
     sitrack_session_values << SitrackSessionValue.new(:attrib => attrib, :value => value)

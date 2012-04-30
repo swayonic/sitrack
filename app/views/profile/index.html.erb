@@ -388,7 +388,7 @@ person_id = @person['personID']
 
 		<%if @person_obj.image && !@person_obj.image.empty?-%>
 			<div class="subboxheader2">Picture</div>
-			<img src="<%=@person_obj.thumb_pic%>" border="0" />
+			<%= image_tag @person_obj.image, :border=>0 %>
 		<%end-%>
 	</div>
 </div> 
