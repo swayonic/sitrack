@@ -187,7 +187,7 @@ person_id = @person['personID']
 		<tr>
 			<% box.each_with_index do |column_name, i| 
 					safe_name = u(column_name)
-					value = (@person[safe_name] || '').strip
+					value = (@person[safe_name] || '').to_s.strip
 					raise column_name.inspect if @columns[column_name].nil?
 					column_id = @columns[column_name].id
 			 -%>
@@ -287,7 +287,7 @@ person_id = @person['personID']
 					when 'percent'
 						value = value.to_i.round.to_s+'%'
 				  when 'dollar'
-				  	value = value.to_i.dollars
+				  	value = number_to_currency(value.to_i, :unit=>"$")
 			    end -%>
 					<span class="static"><%= value %></span>
 				<%end -%>

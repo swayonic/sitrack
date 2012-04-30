@@ -1,0 +1,325 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 TRANSITIONAL//EN">
+
+<html lang="en">
+<head>
+<title>Calendar</title>
+<%= stylesheet_link_tag 'calendar', :media => 'all' %>
+
+  <meta http-equiv="content-type" content="text/html; charset=ISO-8859-1" />
+  <meta name="robots" content="noindex" />
+  <meta name="keywords" content="" />
+  <meta name="description" content="" />
+
+
+<script type="text/javascript" language="JavaScript1.2">
+
+var sDateFormat = 'mm/dd/yyyy';
+
+
+function y2k(iYear)
+{
+  if (iYear < 1000)
+  {
+    iYear += 1900;
+  }
+  
+  return iYear;
+}
+
+
+function calendar(iMonth, iYear)
+{
+  /* open the form, create table, row, cell, and open select */
+  var sOutput = "";
+  sOutput += "<form name=\"frmCal\" method=\"post\"> \
+    <table width=\"250\" cellspacing=\"2\" cellpadding=\"3\" border=\"0\"> \
+    <tr> \
+        <td align=\"right\" width=\"100%\" colspan=\"3\"> \
+        <select name=\"selMonth\" onChange=\"changeMonth();\">";
+  
+  /* generate an option tag for each month */
+  for (g_iMonth = 0; g_iMonth < 12; g_iMonth++)
+  {
+    if (g_iMonth == iMonth)
+    {
+      sOutput += "<option value=\"" + g_iMonth + "\" selected=\"true\">" + g_saMonths[g_iMonth] + "</option>";
+    }
+    else
+    {
+      sOutput += "<option value=\"" + g_iMonth + "\">" + g_saMonths[g_iMonth] + "</option>";
+    }
+  }
+  
+  /* close month select and open year select */
+  sOutput += "</select> \
+    <select name=\"selYear\" onChange=\"changeYear();\">";
+  
+  /* generate an option tag for years 1970 - current+1 */
+  for (var iYearCnt = 1950; iYearCnt < <%=Time.now.year + 2%>; iYearCnt++)
+  {
+    if (iYear == iYearCnt)
+    {
+      sOutput += "<option value=\"" + iYearCnt + "\" selected=\"true\">" + iYearCnt + "</option>";
+    }
+    else
+    {
+      sOutput += "<option value=\"" + iYearCnt + "\">" + iYearCnt + "</option>";
+    }
+  }
+  
+  /* close year select and create the calendar table header */
+  sOutput += "</select> \
+      </td> \
+    </tr> \
+    <tr> \
+      <td class=\"month\" nowrap align=\"center\"> \
+        <table border=\"0\" cellspacing=\"0\" cellpadding=\"0\" width=\"100%\"> \
+          <tr> \
+            <td align=\"left\"><a href=\"javascript:previousMonth()\"><img border=\"0\" src=\"/images/calleftarrow.gif\"></a>&nbsp;</td> \
+            <td align=\"center\" class=\"month\">" + g_saMonths[iMonth] + " " + iYear + "</td> \
+            <td align=\"right\">&nbsp;<a href=\"javascript:nextMonth()\"><img border=\"0\" src=\"/images/calrightarrow.gif\"></a></td> \
+          </tr> \
+        </table> \
+      </td> \
+    </tr> \
+    </table>";
+  
+  /* determine start day-of-week for calendar */
+  var dtFirstDay  = new Date(iYear, iMonth, 1);
+  var iStartDay   = dtFirstDay.getDay();
+  
+  /* Test for leap-year, set February days to 29 if leap year */
+  if (((iYear % 4 == 0) && (iYear % 100 != 0)) || (iYear % 400 == 0))
+  {
+    g_iaDays[1] = 29;
+  }
+  else
+  {
+    g_iaDays[1] = 28;
+  }
+  
+  /* open the calendar table */
+  sOutput += "<table cellspacing=\"2\" cellpadding=\"3\" border=\"0\" width=\"250\"> \
+    <tr>";
+  
+  /* generate the seven day-of-week column headers */
+  for (iCnt = 0; iCnt < 7; iCnt++)
+  {
+    sOutput += "<th width = \"35\" align=\"center\" class = \"week\">" + g_saDaysOfWeek[iCnt] + "</th>";
+  }
+  sOutput += "</tr><tr>";
+  
+  /* determine last month */
+  var iColumn = 0;
+  var iLastMonth = iMonth - 1;
+  if (iLastMonth == -1)
+  {
+    iLastMonth = 11;
+  }
+  
+  var dtTodaysDate = new Date("<%=Time.now.strftime('%m/%d/%Y')%>");
+  
+  /* generate days-of-week prior to calendar start day */
+  for (iCnt = 0; iCnt < iStartDay; iCnt++, iColumn++)
+  {
+    sOutput += "<td width = \"35\" class=\"notnow\">&nbsp</td>";
+  }
+  
+  /* generate days-of-week for current calendar */
+  for (iCnt = 1; iCnt <= g_iaDays[iMonth]; iCnt++, iColumn++)
+  {
+    /* highlight today's date */
+    if (iCnt == dtTodaysDate.getDate() && (<%=@iMonth%>) == dtTodaysDate.getMonth() && <%=@iYear%> == y2k(dtTodaysDate.getYear()))
+    {
+      // GSC: using bgcolor to support an apparant NN4 incompatibility
+      sOutput += "<td class=\"today\" bgcolor=\"#000099\" class=\"calendar\" align=\"center\" valign=\"top\"><a class=\"today\" href=\"javascript:changeDay(" + iCnt + ")\">" + iCnt + "</a>" + "</td>";
+    }
+    else
+    /* output all other dates in normal (unhighlighted) style */
+    {
+      sOutput += "<td width = \"35\" class=\"calendar\" align=\"center\" valign=\"top\"><a href=\"javascript:changeDay(" + iCnt + ")\">" + iCnt + "</a>" + "</td>";
+    }
+    
+    /* create new row after each 7th day */
+    if (iColumn == 6)
+    {
+      sOutput += "</tr><tr>";
+      iColumn = -1;
+    }
+  }
+  
+  /* generate days-of-week after calendar end day */
+  if (iColumn > 0)
+  {
+    for (iCnt = 1; iColumn < 7; iCnt++, iColumn++)
+    {
+      sOutput += "<td width = \"35\" class=\"notnow\">&nbsp;</td>";
+    }
+  }
+  
+  /* close the table and form */
+  sOutput += "</tr></table></form>";
+  
+  return sOutput;
+}
+
+
+function changeDay(iDay)
+{
+  opener.g_sDay = iDay.toString();
+  
+  if (sDateFormat == 'dd/mm/yyyy')
+  {
+    opener.changeDate('' + padout(opener.g_sDay) + '/' +  padout(opener.g_iMonth - 0 + 1) + '/'  + opener.g_iYear);
+  }
+  else
+  {
+    opener.changeDate('' +  padout(opener.g_iMonth - 0 + 1) + '/' + padout(opener.g_sDay) + '/' + opener.g_iYear);
+  }
+  
+  window.close();
+}
+
+
+function changeMonth()
+{
+  opener.g_iMonth = document.frmCal.selMonth.options[document.frmCal.selMonth.selectedIndex].value + '';
+  document.forms.frmCal.submit();
+}
+
+
+function previousMonth()
+{
+  var iMonthIndex = document.frmCal.selMonth.selectedIndex;
+  var iYearIndex = document.frmCal.selYear.selectedIndex;
+
+  /* if January */
+  if (iMonthIndex == 0)
+  {
+    /* if not the first year in the SELECT list */
+    if (iYearIndex != 0)
+    {
+      /* set to December of previous year */
+      document.frmCal.selMonth.selectedIndex = 11;
+      opener.g_iMonth = 11;
+      document.frmCal.selYear.selectedIndex = iYearIndex - 1;
+      opener.g_iYear = document.frmCal.selYear.options[iYearIndex - 1].value + '';
+    }
+  }
+  else
+  {
+    document.frmCal.selMonth.selectedIndex = iMonthIndex - 1;
+    opener.g_iMonth = document.frmCal.selMonth.options[iMonthIndex - 1].value;
+  }
+  document.forms.frmCal.submit();
+}
+
+
+function nextMonth()
+{
+  var iMonthIndex = document.frmCal.selMonth.selectedIndex;
+  var iYearIndex = document.frmCal.selYear.selectedIndex;
+
+  /* if December */
+  if (iMonthIndex == document.frmCal.selMonth.length-1)
+  {
+    /* if not the last year listed in the SELECT */
+    if (iYearIndex != document.frmCal.selYear.length-1)
+    {
+      /* set to January of next year */
+      document.frmCal.selMonth.selectedIndex = 0;
+      opener.g_iMonth = 0;
+      document.frmCal.selYear.selectedIndex = iYearIndex + 1;
+      opener.g_iYear = document.frmCal.selYear.options[iYearIndex + 1].value + '';
+    }
+  }
+  else
+  {
+    document.frmCal.selMonth.selectedIndex = iMonthIndex + 1;
+    opener.g_iMonth = document.frmCal.selMonth.options[iMonthIndex + 1].value;
+  }
+  
+  document.forms.frmCal.submit();
+}
+
+
+function changeYear()
+{
+  opener.g_iYear = document.frmCal.selYear.options[document.frmCal.selYear.selectedIndex].value + '';
+  document.forms.frmCal.submit();
+}
+
+
+function makeArrayEx()
+{
+  for (iCnt = 0; iCnt < makeArrayEx.arguments.length; iCnt++)
+  {
+    this[iCnt] = makeArrayEx.arguments[iCnt];
+  }
+}
+
+
+function padout(iNumber)
+{
+  var sNumber;
+  iNumber < 10 ? sNumber = '0' + iNumber : sNumber = iNumber.toString();
+  
+  return sNumber;
+}
+
+/* create global arrays of months, days in months, and days-of-week */
+var g_saMonths      = new makeArrayEx('January','February','March','April','May','June','July','August','September','October','November','December');
+var g_iaDays        = new makeArrayEx(31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31);
+var g_saDaysOfWeek  = new makeArrayEx('Sun','Mon','Tue','Wed','Thu','Fri','Sat');
+</script>
+</head>
+
+<body bgcolor="#FFFFFF" topmargin="0" leftmargin="0" marginwidth="0" marginheight="0" link="#0000ff" alink="#339900" vlink="#339900" onLoad="window.focus();">
+
+<!-- Wrapper table -->
+<center>
+<table border="0" cellspacing="0" cellpadding="0" width="320">
+  <tr>
+
+    <td align="center" valign="top" height="220">
+      <script type="text/javascript" language="JavaScript">
+         document.write(calendar(<%=@iMonth%>, <%=@iYear%>));</script>
+    </td>
+  </tr>
+  <tr>
+	  <td align="center">
+		<a href ="javascript:opener.clearDate('<%=Time.now.strftime('%m/%d/%Y')%>');window.close();">Clear Date</a>&nbsp;&nbsp;&nbsp;&nbsp;
+		<a href ="javascript:window.close()">Close Calendar</a>
+	  </td>
+  </tr>
+</table>
+</center>
+<script language="JavaScript1.2">
+
+        var iWindowScreenWidth = window.screen.width;
+        var iWindowScreenHeight = window.screen.height;
+        
+        var sPageTitle = escape(document.title);
+        
+        var dtNow = new Date();
+        var sR1 = dtNow.getMilliseconds();
+        var sR2 = Math.floor(Math.random() * 12345678);
+        var sRetVal = '';
+        var sVerNCache =  '';
+
+        var sImgLocation = "https://metric.wamu.com/2.gif?" + sRetVal + "" + sVerNCache;
+</script>
+
+        <div id="lyrPageDot" name="lyrPageDot" style="position:absolute;top:-1px;left:-1px;visibility:hidden;z-index:0;">
+        <script language="JavaScript1.2">
+
+        document.writeln('  <img name="imgPageDot" border="0" src="' + sImgLocation + '" alt="" />');
+        </script>
+
+        <noscript>
+          <img name="imgPageDot" border="0" src="https://metric.wamu.com/2.gif?ng_host=onlinebanking.personal.wamu.com&ng_uf=106974773438180&ng_pagetitle=-&ng_referrer=https://onlinebanking.personal.wamu.com/PayBills/PaymentAddMultipleEntry.asp&ng_sr=-&ng_cookieOK=Y&ngm_st=-&ng_pdver=102&ngm_transdatefr=-&ngm_transdateto=-&ngm_prodcd=-&ngm_subprodcd=-&ngm_software=-&ng_r1=2005-05-04T15:11:13-08:00&ng_r2=0.2015345" alt="" />
+        </noscript>
+        </div>
+        
+</body>
+</html>
