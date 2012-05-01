@@ -44,6 +44,8 @@
 #
 
 class SitrackAddForm < SitrackForm
+  
+  attr_accessible :hr_si_application_id, :spouse_name
 
   def validate
     errors.add_on_empty('First Name') if hr_si_application.person.firstName.empty?
@@ -69,7 +71,7 @@ class SitrackAddForm < SitrackForm
   end
   
   def email(var_hash, form_html)
-    email = FormMailer.create_form_email(to, var_hash, form_html, 'Add Form')
+    email = FormMailer.form_email(to, var_hash, form_html, 'Add Form')
     FormMailer.deliver(email)
     
     # Stamp "form submitted" column

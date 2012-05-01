@@ -32,8 +32,9 @@ Sitrack::Application.routes.draw do
   match 'logout' => 'application#logout'
   match 'up_monitor' => 'application#up_monitor'
   
-  match ':controller/:action/:id'
+  match ':controller(/:action(/:id))(.:format)'
   
+  resources :directory
   
   # The priority is based upon order of creation:
   # first created -> highest priority.

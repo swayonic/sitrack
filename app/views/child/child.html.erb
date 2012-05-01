@@ -8,7 +8,11 @@
 <div class="boxheader">Child Info</div>
 <br>
 <div class="insidebox">
-<%= error_messages_for 'child'%>
+
+<% @child.errors.full_messages.each do |msg| %>
+  <li><%= msg %></li>
+<% end %>
+
 <% form_tag({:action => 'save_child', :id => @child.id}, {:name => 'child_form'}) do %>
 <%=hidden_field('child','person_id')%>
 <table>

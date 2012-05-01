@@ -185,118 +185,123 @@ person_id = @person['personID']
 		<div class="subboxheader-a"><%=box_name%> Info</div>
 		<table cellspacing="0" width="100%">
 		<tr>
-			<% box.each_with_index do |column_name, i| 
-					safe_name = u(column_name)
-					value = (@person[safe_name] || '').to_s.strip
-					raise column_name.inspect if @columns[column_name].nil?
-					column_id = @columns[column_name].id
-			 -%>
-			 <% if i == 0 || i == (box.size / 2).floor -%>
-						<td width="50%">
-			 <% end -%>
+      <% box.each_with_index do |column_name, i| 
+			  safe_name = u(column_name)
+				value = (@person[safe_name] || '').to_s.strip
+				raise column_name.inspect if @columns[column_name].nil?
+				column_id = @columns[column_name].id
+			  -%>
+			  <% if i == 0 || i == (box.size / 2).floor -%>
+          <td width="50%">
+			  <% end -%>
 				<%=column_name%>: <span id="c<%=column_name%><%=application_id%>c<%=column_id%>">
 				<% if @columns[column_name].writeable? -%>
 					<span id="<%=column_name%><%=application_id%>c<%=column_id%>">
-				<%	case @columns[column_name].column_type 
-						when "date" -%>
-							<%if is_date(value)
-								value = formatted_date(value) -%>
-								<a href=<%=date_edit_js(column_name, column_id, application_id, value)%>><%=value%></a>
-							<%else -%>
-								<a href=<%=date_edit_js(column_name, column_id, application_id, formatted_date) %>><img src="/images/edit.png" border="0"/></a>
-							<%end -%>
-							</span>
-				<%  when "enum" -%>
-							<a id="link<%=column_name%><%=application_id%>c<%=column_id%>" href="javascript:edit_value('<%=column_name%>','<%=application_id%>','<%=escape_javascript(value)%>',<%=column_id%>,'enum','', true)">
-							<%if value && !value.empty? -%>
-								<%=@options_hash[column_name][u(value)]%>
-							<%else%>
-								<img src="/images/edit.png" border="0"/>
-							<%end -%>
-							</a>
-							</span>
-							<span id="f<%=column_name%><%=application_id%>c<%=column_id%>" class="modify_field">
-							<select id="v<%=column_name%><%=application_id%>c<%=column_id%>" name="<%=column_name%><%=application_id%>c<%=column_id%>" onblur="update_value('<%=column_name%>','<%=application_id%>','<%=column_id%>','enum')">
-							<%@options[column_name].each do |key, option| -%>
-									<option label="<%=option%>" value="<%=key%>" <%='selected="selected"' if key == value%>><%=option%></option>
-							<%end -%>
-							</select>
-							</span>
-				<%  when "team" -%>
-							<a id="link<%=column_name%><%=application_id%>c<%=column_id%>" href="javascript:edit_value('<%=column_name%>','<%=application_id%>','<%=escape_javascript(value)%>',<%=column_id%>,'enum','', true)">
-							<%if value && !value.empty? && @teams[value] -%>
-								<%=@teams[value]%>
-							<%else%>
-								<img src="/images/edit.png" border="0"/>
-							<%end -%>
-							</a>
+    				<% link_id = "link#{column_name}#{application_id}c#{column_id}" %>
+    				<% case @columns[column_name].column_type %>
+    				<% when "date" %>
+    				  <% if is_date(value) %>
+    				    <% href = "javascript:popCalendar('#{column_name}',#{column_id},#{application_id},'#{value}')" %>
+    					<% else %>
+    				    <% href = "javascript:popCalendar('#{column_name}',#{column_id},#{application_id},'#{formatted_date}')" %>
+    				    <% value = image_tag("edit.png", border: 0) %>
+    					<% end -%>
+  						<a id="<%= link_id %>" href="<%= href %>"><%= value %></a>
+    					</span>
+    				<% when "enum" -%>
+  				    <% href = "javascript:edit_value('#{column_name}','#{application_id}','#{escape_javascript(value)}',#{column_id},'enum','',true)" %>
+    				  <% if value.present? %>
+    				    <% value = @options_hash[column_name][u(value)] %>
+							<% else%>
+								<% value = image_tag("edit.png", border: 0) %>
+							<% end -%>
+  						<a id="<%= link_id %>" href="<%= href %>"><%= value %></a>
 							</span>
 							<span id="f<%=column_name%><%=application_id%>c<%=column_id%>" class="modify_field">
-							<select id="v<%=column_name%><%=application_id%>c<%=column_id%>" name="<%=column_name%><%=application_id%>c<%=column_id%>" onblur="update_value('<%=column_name%>','<%=application_id%>','<%=column_id%>','enum')">
-							<%@teams_ordered.each do |team| -%>
-									<%key = team[0]%>
-									<%option = team[1]%>
-									<option label="<%=option%>" value="<%=key%>" <%='selected="selected"' if key == value%>><%=option%></option>
-							<%end -%>
-							</select>
+							  <select id="v<%=column_name%><%=application_id%>c<%=column_id%>" name="<%=column_name%><%=application_id%>c<%=column_id%>" onblur="update_value('<%=column_name%>','<%=application_id%>','<%=column_id%>','enum')">
+							    <% @options[column_name].each do |key, option| -%>
+							      <% if key == value %>
+									    <option label="<%=option%>" value="<%=key%>" selected='selected'><%=option%></option>
+									  <% else %>
+									    <option label="<%=option%>" value="<%=key%>"><%=option%></option>
+									  <% end %>
+							    <% end -%>
+							  </select>
 							</span>
-				 <% when "text" -%>
+				    <% when "team" -%>
+				      <% href="javascript:edit_value('#{column_name}','#{application_id}','#{escape_javascript(value)}',#{column_id},'enum','',true)" %>
+							<% if value.present? && @teams[value] -%>
+								<%= value = @teams[value] %>
+							<%else%>
+								<% value = image_tag("edit.png", border: 0) %>
+							<%end -%>
+  						<a id="<%= link_id %>" href="<%= href %>"><%= value %></a>
+							</span>
+							<span id="f<%=column_name%><%=application_id%>c<%=column_id%>" class="modify_field">
+							  <select id="v<%=column_name%><%=application_id%>c<%=column_id%>" name="<%=column_name%><%=application_id%>c<%=column_id%>" onblur="update_value('<%=column_name%>','<%=application_id%>','<%=column_id%>','enum')">
+							    <% @teams_ordered.each do |team| -%>
+									  <%key = team[0]%>
+									  <%option = team[1]%>
+									  <option label="<%=option%>" value="<%=key%>" <%='selected="selected"' if key == value%>><%=option%></option>
+							    <% end -%>
+							  </select>
+							</span>
+				    <% when "text" -%>
 							<script type="text/javascript">
 								var ol_fgcolor = "#eeeeee";
 							</script>
-							<%if !value.empty? -%>
-								<a href="javascript:edit_value('<%=column_name%>',<%=application_id%>,'<%=escape_javascript(value)%>','<%=column_id%>','<%=@columns[column_name].column_type%>')"  onclick="nd();" onmouseover="return overlib('<%=escape_javascript(value)%>',LEFT);" onmouseout="nd();">
-									<%=value[0..27]+'...'%>
-							<%else -%>
-								<a href="javascript:edit_value('<%=column_name%>',<%=application_id%>,'<%=value%>','<%=column_id%>','<%=@columns[column_name].column_type%>')">
-									<img src="/images/edit.png" border="0"/> 
-							<%end -%>									
-								</a>
+							<% if value.present? -%>
+							  <% href = "javascript:edit_value('#{column_name}','#{application_id},'#{escape_javascript(value)}','#{column_id}','#{@columns[column_name].column_type}')" %>
+							  <% value = value[0..27]+'...' %>
+								<a id="<%= link_id %>" href="<%= href %>" onclick="nd();" onmouseover="return overlib('<%=escape_javascript(value)%>',LEFT);" onmouseout="nd();"><%= value %></a>
+							<% else -%>
+							  <% href = "javascript:edit_value('#{column_name}','#{application_id}','#{value}','#{column_id}','#{@columns[column_name].column_type}')" %>
+								<% value = image_tag("edit.png", border: 0) %>
+								<a id="<%= link_id %>" href="<%= href %>"><%= value %></a>
+							<% end -%>									
 							</span>
-				 <% when "dollar" -%>
+				    <% when "dollar" -%>
 							<script type="text/javascript">
 								var ol_fgcolor = "#eeeeee";
 							</script>
-							<%if !value.empty? -%>
-								<a href="javascript:edit_value('<%=column_name%>',<%=application_id%>,'<%=escape_javascript(value)%>','<%=column_id%>','<%=@columns[column_name].column_type%>')"  onclick="nd();" onmouseover="return overlib('<%=escape_javascript(value)%>',LEFT);" onmouseout="nd();">
-									<%= number_to_currency(value.to_i) %>
-							<%else -%>
-								<a href="javascript:edit_value('<%=column_name%>',<%=application_id%>,'<%=value%>','<%=column_id%>','<%=@columns[column_name].column_type%>')">
-									<img src="/images/edit.png" border="0"/> 
-							<%end -%>									
-								</a>
+							<%if value.present? -%>
+							  <% href = "javascript:edit_value('#{column_name}','#{application_id}','#{escape_javascript(value)}','#{column_id}','#{@columns[column_name].column_type}')" %>
+							  <% value = number_to_currency(value.to_i) %>
+								<a id="<%= link_id %>" href="<%= href %>"  onclick="nd();" onmouseover="return overlib('<%=escape_javascript(value)%>',LEFT);" onmouseout="nd();"><%= value %></a>
+							<% else -%>
+							  <% href = "javascript:edit_value('#{column_name}','#{application_id}','#{value}','#{column_id}','#{@columns[column_name].column_type}')" %>
+								<% value = image_tag("edit.png", border: 0) %>
+								<a id="<%= link_id %>" href="<%= href %>"><%= value %></a>
+							<% end -%>		
 							</span>
-				 <% else -%>
-							<a href="javascript:edit_value('<%=column_name%>',<%=application_id%>,'<%=escape_javascript(value)%>','<%=column_id%>','<%=@columns[column_name].column_type%>', '', false, '<%=@columns[column_name].maxlength%>')">
-							<%if !value.empty?%>
-								<%= value %>
-							<%else%>
-								<img src="/images/edit.png" border="0"/> 
-							<%end -%>
-							</a>
+				    <% else -%>
+				      <% href = "javascript:edit_value('#{column_name}','#{application_id}','#{escape_javascript(value)}','#{column_id}','#{@columns[column_name].column_type}','', false, '#{@columns[column_name].maxlength}')" %>
+							<% unless value.present? %>
+								<% value = image_tag("edit.png", border: 0) %>
+							<% end %>
+							<a id="<%= link_id %>" href="<%= href %>"><%= value %></a>
 							</span>
-						
-				 <% end -%>
-				 		</span>
-				<%else 
-					case @columns[column_name].column_type
-					when 'date' 
-				   	value = is_date(value) ? formatted_date(value) : ''
-				  when 'project' 
-						value = get_project(value.to_i)
-					when 'percent'
-						value = value.to_i.round.to_s+'%'
-				  when 'dollar'
-				  	value = number_to_currency(value.to_i, :unit=>"$")
-			    end -%>
+				    <% end -%>
+				<% else %>
+					<% case @columns[column_name].column_type %>
+					<% when 'date' %>
+				   	<% value = is_date(value) ? formatted_date(value) : '' %>
+				  <% when 'project' %>
+						<% value = get_project(value.to_i) %>
+					<% when 'percent' %>
+						<% value = value.to_i.round.to_s+'%' %>
+				  <% when 'dollar' %>
+				  	<% value = number_to_currency(value.to_i) %>
+			    <% end -%>
 					<span class="static"><%= value %></span>
-				<%end -%>
-				<% if i == (box.size / 2).floor-1 || i == box.size-1%>
-						</td>
+				<% end -%>
+			  </span>
+				<% if i == (box.size / 2).floor-1 || i == box.size-1 %>
+					</td>
 				<%else%>
-						<br/>
-				<%end -%>
-			<%end -%>
+					<br/>
+				<% end -%>
+			<% end -%>
 		</tr>
 		</table>
 		</div>

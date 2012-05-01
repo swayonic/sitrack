@@ -13,6 +13,8 @@
 class SitrackChild < ActiveRecord::Base
   belongs_to    :person
   
+  attr_accessible :person_id
+  
   validates_presence_of :name
   validates_presence_of :birthday
 end

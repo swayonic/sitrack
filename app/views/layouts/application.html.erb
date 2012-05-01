@@ -6,9 +6,8 @@
   <title>STINT/Intern Tracker</title>
   <%= stylesheet_link_tag 'styles', :media => 'all' %>
   <%= stylesheet_link_tag 'scaffold', :media => 'all' %>
-  <%= javascript_include_tag 'directory', 'search', 'general', 
-      'directory_views', 'overlib', 'calendar' %>
-  <%= javascript_include_tag '/js/options' %>
+  <%= javascript_include_tag "application" %>
+  <%= javascript_include_tag "/js/options" %>
 </head>
 <body>
 <%= render :partial=>'shared/top_nav'%>

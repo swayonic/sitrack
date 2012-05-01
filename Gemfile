@@ -13,6 +13,8 @@ gem 'memcache-client'
 # gem 'rubycas-client', '2.2.1'
 # gem 'rubycas-client', '2.3.8'
 gem 'airbrake'
+gem 'jquery-rails'
+
 
 # Gems used only for assets and not required
 # in production environments by default.
