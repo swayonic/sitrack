@@ -2,8 +2,12 @@
 	Below is a preview of the form as it will look when staff services receives it.
 	Please make sure all the information is accurate before submitting it. <br/>
 	<%= link_to "| Submit the form |", :action => 'submit', :id => @form%> 
-	<% back_url = params[:controller] == 'add_form' || params[:controller] == 'salary_form' ? {:action => 'fill'} : {:controller => 'profile'}
-		 back_url[:form_id] = @form %>
+	<% if params[:controller] == 'add_form' || params[:controller] == 'salary_form' || params[:controller] == 'additional_salary_form' %>
+	  <% back_url = {:action => 'fill'} %>
+	<% else %>
+	  <% back_url = {:controller => 'profile'} %>
+	<% end %>
+	<% back_url[:form_id] = @form %>
 	<%= link_to "| Go back and make changes |", back_url %>
 </div>
 <%= render(:partial => 'form') %>

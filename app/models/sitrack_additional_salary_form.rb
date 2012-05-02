@@ -44,6 +44,11 @@
 #
 
 class SitrackAdditionalSalaryForm < SitrackForm
+  
+  attr_accessible :hr_si_application_id, :current_years_salary, :previous_years_salary, :additional_salary,
+    :adoption, :counseling, :childrens_expenses, :college, :private_school, :graduate_studies, 
+    :auto_purchase, :settling_in_expenses, :reimbursable_expenses, :tax_rate
+  
   def to
     if hr_si_application.sitrack_tracking.is_stint?
       'Celeste Allison <celeste.allison@ccci.org>'
