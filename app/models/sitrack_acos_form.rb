@@ -1,4 +1,9 @@
 class SitrackAcosForm < SitrackForm
+  
+  attr_accessible :hr_si_application_id, :date_of_change, :freeze_start, :freeze_end,
+    :change_assignment_from_location, :change_assignment_to_location, :restint_location,
+    :hours_per_week, :other_explanation, :additional_notes
+  
   def validate
     errors.add_on_empty('Effective Date of Change') if date_of_change.nil? || date_of_change.to_s.empty?
     super
