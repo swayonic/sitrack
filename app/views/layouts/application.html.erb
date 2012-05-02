@@ -11,6 +11,10 @@
 </head>
 <body>
 <%= render :partial=>'shared/top_nav'%>
+<% if flash[:notice].present? %>
+  <div class='flash_notice'><%= flash[:notice] %></div>
+<% end %>
+  
 <%= yield %>
 <script type="text/javascript">
 var gaJsHost = (("https:" == document.location.protocol) ? "https://ssl." : "http://www.");

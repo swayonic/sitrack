@@ -16,17 +16,22 @@ class SalaryFormController < ApplicationController
     setup
     unless request.get?
       # save and preview
-      expire_action(:controller => 'profile', :action => 'index', :id => app_id) # kill the profile cache
+      if params[:form][:annual_salary].present?
+        expire_action(:controller => 'profile', :action => 'index', :id => app_id) # kill the profile cache
 
-      # Make birthDate a string
-      params[:form][:annual_salary].gsub!(/[$,]/, '')
-      @person.update_attributes(params[:person])
-      @application.update_attributes(params[:application])
+        # Make birthDate a string
+        params[:form][:annual_salary].gsub!(/[$,]/, '')
       
-      @tracking.update_attributes(params[:tracking])
-      @form.update_attributes(params[:form])
+        @person.update_attributes(params[:person])
+        @application.update_attributes(params[:application])
+        @tracking.update_attributes(params[:tracking])
+        @form.update_attributes(params[:form])
       
-      preview if @person.valid? && @application.valid? && @tracking.valid? && @form.save
+        preview if @person.valid? && @application.valid? && @tracking.valid? && @form.save
+      else
+        flash[:notice] = "New Annual Base Salary is required!"
+        redirect_to :action => 'fill', :id => app_id
+      end
     end
   end
     
@@ -37,7 +42,7 @@ class SalaryFormController < ApplicationController
                 'approver' => @approver,
                 'tracking' => @tracking}
     form_html = render_to_string(:template => 'shared/form', :layout => 'salary_form_layout')
-    @form.email(var_hash, form_html)
+    #@form.email(var_hash, form_html)
     @form_type = 'Salary'
     render(:template => 'shared/form_submitted')
   end

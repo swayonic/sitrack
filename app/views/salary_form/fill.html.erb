@@ -1,14 +1,22 @@
 <div class="center"> 
 	<div class="boxheader">Salary Form Information for <%= @person.full_name %></div>
 	<br/>
-	<%= error_messages_for 'form' %>
-	<%= error_messages_for 'person' %>
-	<%= error_messages_for 'application' %>
-	<%= error_messages_for 'tracking' %>
-	<% form_tag :id => @application.id do %>
+  <% @form.errors.full_messages.each do |msg| %>
+    <li><%= msg %></li>
+  <% end %>
+  <% @person.errors.full_messages.each do |msg| %>
+    <li><%= msg %></li>
+  <% end %>
+  <% @application.errors.full_messages.each do |msg| %>
+    <li><%= msg %></li>
+  <% end %>
+  <% @tracking.errors.full_messages.each do |msg| %>
+    <li><%= msg %></li>
+  <% end %>
+	<%= form_tag :id => @application.id do %>
 	<div class="box">
 		<div class="subboxheader">Information Fields</div>
-		<table>
+		<table class="form_style">
 		<tr>
 			<td align="right">Type of Form: </td>
 			<td>
@@ -85,15 +93,17 @@
 			<td><%= text_field 'form', 'annual_salary', :size => 30 %></td>
 		</tr>
 		<tr>
-			<td align="right">Current Address during year of internship (for tax purposes):<br/>
+			<td align="right" class="atop">Current Address during year of internship (for tax purposes):<br/>
 			 (If this is wrong, go back and change it on the profile)</td>
 			<td>
-				<%= @current_address.display_html %><br/>
-				Home Phone: <%= @current_address.homePhone %>
+				<%=raw @current_address %><br/>
+				<% if @current_address.homePhone.present? %>
+				  Home Phone: <%= @current_address.homePhone %>
+				<% end %>
 			</td>
 		</tr>
 		<tr>
-		  <td align="right">Additional Notes:</td>
+		  <td align="right" class="atop">Additional Notes:</td>
 		  <td><%= text_area 'form', 'additional_notes', :rows => 5 %></td>
 		</tr>
 		</table>

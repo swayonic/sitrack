@@ -1,4 +1,4 @@
-	<div align="center">
+<div align="center">
 	<% if @tracking.is_stint? -%>
 	<h2 align="center"><%= Time.now.year %> STINT SALARY SETUP FORM</h2>
 
@@ -108,6 +108,6 @@
 
 	</table>
 	Address Change (Complete only if applicable):<br/>
-	<%= @current_address.display_html %><br/>
+	<%=raw @current_address.display_html %><br/>
 	Home Phone: <%= @current_address.homePhone %>
 	</div>

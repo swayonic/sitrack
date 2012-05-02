@@ -375,3 +375,17 @@ div.display-inline {
 	border: 1px solid red;
 	display: inline;
 }
+
+table.form_style td.atop {
+	vertical-align: top;
+}
+
+div.flash_notice {
+	border: 1px solid #990000;
+	margin: 10px;
+	padding: 5px;
+	background: #ffe2e9;
+	font-weight: bold;
+	color: #990000;
+	text-align: center;
+}
