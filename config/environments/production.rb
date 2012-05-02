@@ -64,23 +64,6 @@ Sitrack::Application.configure do
   # Log the query plan for queries taking more than this (works
   # with SQLite, MySQL, and PostgreSQL)
   # config.active_record.auto_explain_threshold_in_seconds = 0.5
-  config.action_controller.session_store = :mem_cache_store
-
-  require 'memcache'
-  memcache_options = {
-    :c_threshold => 10_000,
-    :compression => true,
-    :debug => false,
-    :namespace => "sitrackapp-#{RAILS_ENV}",
-    :readonly => false,
-    :urlencode => false
-  }
-
-  CACHE = MemCache.new memcache_options
-  CACHE.servers = ['hart-w040.uscm.org:11211','hart-w025.uscm.org:11211']
-  config.cache_store = :mem_cache_store, CACHE.servers
-
-  ActionController::Base.session_options[:expires] = 1.day
-  ActionController::Base.session_options[:cache] = CACHE
-  ActionController::Base.session_options[:session_secure] = true
+  
+  config.action_mailer.default_url_options = { :host => '' }
 end

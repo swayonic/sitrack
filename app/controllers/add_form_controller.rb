@@ -33,7 +33,7 @@ class AddFormController < ApplicationController
                 'approver' => @approver,
                 'tracking' => @tracking}
     form_html = render_to_string(:template => 'shared/form', :layout => 'add_form_layout')
-    # @form.email(var_hash, form_html)
+    @form.email(var_hash, form_html)
     @form_type = 'Add'
     render(:template => 'shared/form_submitted')
   end
