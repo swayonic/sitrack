@@ -1,8 +1,10 @@
 <div id="center">
 <div class="boxheader">Join Staff Form Information</div>
 	<h3>&nbsp;The following information is necessary to generate an update form:</h3>
-	<%= error_messages_for 'form' %>
-	<% form_tag :id => @application.id do %>
+  <% @form.errors.full_messages.each do |msg| %>
+    <li><%= msg %></li>
+  <% end %>
+	<%= form_tag :id => @application.id do %>
 	<div class="box">
 		<div class="subboxheader">Personal Information</div>
 		<table>

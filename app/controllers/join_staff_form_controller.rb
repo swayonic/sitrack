@@ -10,13 +10,21 @@ class JoinStaffFormController < ApplicationController
     # display form
     setup
     unless request.get?
-      # save and preview
-      expire_action(:controller => 'profile', :action => 'index', :id => app_id) # kill the profile cache
+      if !params[:form][:hrd].present?
+        flash[:notice] = "Name of approving HRD is required!"
+        redirect_to :action => 'fill', :id => app_id
+      elsif !params[:mpd][:coachName].present?
+        flash[:notice] = "MPD Coach is required!"
+        redirect_to :action => 'fill', :id => app_id
+      else
+        # save and preview
+        expire_action(:controller => 'profile', :action => 'index', :id => app_id) # kill the profile cache
 
-      @person.update_attributes(params[:person])
-      @mpd.update_attributes(params[:mpd])
-      @form.update_attributes(params[:form])
-      preview if @person.valid? && @mpd.valid? && @tracking.valid? && @form.save 
+        @person.update_attributes(params[:person])
+        @mpd.update_attributes(params[:mpd])
+        @form.update_attributes(params[:form])
+        preview if @person.valid? && @mpd.valid? && @tracking.valid? && @form.save 
+      end
     end
   end
   
@@ -28,7 +36,7 @@ class JoinStaffFormController < ApplicationController
                 'approver' => @approver,
                 'tracking' => @tracking}
     form_html = render_to_string(:template => 'shared/form', :layout => 'add_form_layout')
-    @form.email(var_hash, form_html)
+    #@form.email(var_hash, form_html)
     @form_type = 'Join Staff'
     render(:template => 'shared/form_submitted', :layout => 'application')
   end

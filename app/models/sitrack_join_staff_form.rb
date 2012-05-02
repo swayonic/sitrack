@@ -44,6 +44,10 @@
 #
 
 class SitrackJoinStaffForm < SitrackForm
+  
+  attr_accessible :hr_si_application_id, :date_of_change, :new_staff_training_date, :payroll_action,
+    :payroll_reason, :hrd, :spouse_name, :additional_notes
+  
   def validate
     errors.add_on_empty('Effective Date of Change') if date_of_change.nil? || date_of_change.to_s.empty?
     errors.add_on_empty('Account Number') if hr_si_application.person.accountNo.nil? || hr_si_application.person.accountNo.empty?

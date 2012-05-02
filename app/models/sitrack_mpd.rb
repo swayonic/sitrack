@@ -1,7 +1,7 @@
 class SitrackMpd < ActiveRecord::Base
   belongs_to :hr_si_application, :foreign_key => 'application_id'
   
-  attr_accessible :application_id
+  attr_accessible :application_id, :coachName
   
   def self.update_account_balances
     balances = PsEmployee.get_balances
