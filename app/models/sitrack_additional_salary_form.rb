@@ -57,8 +57,8 @@ class SitrackAdditionalSalaryForm < SitrackForm
     end
   end
   def email(var_hash, form_html)
-    email = FormMailer.create_form_email(to, var_hash, form_html, 'Additional Salary Form')
-    FormMailer.deliver(email)
+    email = FormMailer.form_email(to, var_hash, form_html, 'Additional Salary Form')
+    Rails.logger.info "#{email}"
     
     # Stamp "form submitted" column
     var_hash['tracking'].additionalSalaryForm = Time.now

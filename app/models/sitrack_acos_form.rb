@@ -18,8 +18,8 @@ class SitrackAcosForm < SitrackForm
   end  
   
   def email(var_hash, form_html)
-    email = FormMailer.create_form_email(to, var_hash, form_html, 'ACOS Form')
-    FormMailer.deliver(email)
+    email = FormMailer.form_email(to, var_hash, form_html, 'ACOS Form')
+    Rails.logger.info "#{email}"
     
     # Stamp "form submitted" column
     var_hash['tracking'].acosForm = Time.now
