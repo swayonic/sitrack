@@ -13,9 +13,6 @@ class JoinStaffFormController < ApplicationController
       if !params[:form][:hrd].present?
         flash[:notice] = "Name of approving HRD is required!"
         redirect_to :action => 'fill', :id => app_id
-      elsif !params[:mpd][:coachName].present?
-        flash[:notice] = "MPD Coach is required!"
-        redirect_to :action => 'fill', :id => app_id
       else
         # save and preview
         expire_action(:controller => 'profile', :action => 'index', :id => app_id) # kill the profile cache

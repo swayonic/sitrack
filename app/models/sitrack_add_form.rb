@@ -62,7 +62,7 @@ class SitrackAddForm < SitrackForm
     errors.add_on_empty('Sending Department') if hr_si_application.sitrack_tracking.send_dept.blank?
     errors.add_on_empty('Current Address', 'must be completely filled out') if hr_si_application.person.current_address.nil? || hr_si_application.person.current_address.address1.blank?
     errors.add_on_empty('Permanent Address', 'must be completely filled out') if hr_si_application.person.permanent_address.nil? || hr_si_application.person.permanent_address.address1.blank?
-    errors.add_on_empty('Emergency Address', 'must be completely filled out') if hr_si_application.person.emergency_address1.nil? || hr_si_application.person.emergency_address1.address1.blank?
+    # errors.add_on_empty('Emergency Address', 'must be completely filled out') if hr_si_application.person.emergency_address1.nil? || hr_si_application.person.emergency_address1.address1.blank?
     super
   end 
   

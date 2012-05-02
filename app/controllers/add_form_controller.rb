@@ -10,17 +10,20 @@ class AddFormController < ApplicationController
     end
     setup
 		unless request.get?
-      # save and preview
-      expire_action(:controller => 'profile', :action => 'index', :id => app_id) # kill the profile cache
+      if !params[:tracking][:caringRegion].present?
+        flash[:notice] = "Caring Region is required!"
+        redirect_to :action => 'fill', :id => app_id
+      else
+        # save and preview
+        expire_action(:controller => 'profile', :action => 'index', :id => app_id) # kill the profile cache
 
-      @person.update_attributes(params[:person])
-      @application.update_attributes(params[:application])
-      @tracking.update_attributes(params[:tracking])
-      @form.update_attributes(params[:form])
-      preview if @person.valid? && @application.valid? && @tracking.valid? && @form.valid?
+        @person.update_attributes(params[:person])
+        @application.update_attributes(params[:application])
+        @tracking.update_attributes(params[:tracking])
+        @form.update_attributes(params[:form])
+        preview if @person.valid? && @application.valid? && @tracking.valid? && @form.valid?
+      end
     end
-    Rails.logger.info ">>>>>> #{@form.to_json}"
-    Rails.logger.info ">>>>>> #{@application.to_json}"
   end
   
   def submit
