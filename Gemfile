@@ -10,6 +10,7 @@ gem 'aasm'
 gem 'airbrake'
 gem 'jquery-rails'
 gem 'dalli'
+gem 'jquery-ui-rails'
 
 
 # Gems used only for assets and not required
