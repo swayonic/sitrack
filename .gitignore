@@ -68,3 +68,8 @@
 .rvmrc
 
 /vendor/ruby
+
+
+# .DS_Store
+/app/views/.DS_Store
+/app/views/layouts/.DS_Store
