@@ -1,17 +1,21 @@
 <div id="center">
 	<div class="boxheader">Directory Listing</div>
-	<% form_tag({:action => 'search'}, {:name => 'search_f', :id => 'search_f'}) do %>
+	<%= form_tag({:action => 'search'}, {:name => 'search_f', :id => 'search_f'}) do %>
 	<div id="selected_options" class="box"></div>
 	<div id="search" onblur="show_me('false');">
-		<span id="options"><strong>Search Options:</strong>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><br />
-		<div id="status" class="search_item" onclick="show_me('statuses');" onmouseout="hide_menu(event);">Status</div>
-		<div id="type" class="search_item" onclick="show_me('types');" onmouseout="hide_menu(event);">Type</div>
-		<span id="position" class="search_item" onclick="show_me('positions');" onmouseout="hide_menu(event);">Position</span>
-		<span id="tenure" class="search_item" onclick="show_me('tenures');" onmouseout="hide_menu(event);">Tenure</span>
-		<span id="misc" class="search_item" onclick="show_me('miscs');" onmouseout="hide_menu(event);">Misc</span>
-		<span id="rog" class="search_item" onclick="show_me('rogs');" onmouseout="hide_menu(event);">Region of Origin</span>
-		<span id="cr" class="search_item" onclick="show_me('crs');" onmouseout="hide_menu(event);">Caring Region</span>
-		<span id="year" class="search_item" onclick="show_me('years');" onmouseout="hide_menu(event);">App Year</span>
+		<span id="options">
+		  <strong>Search Options:</strong>
+		  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+		</span>
+		<br />
+		<span id="status" class="search_item" data='statuses'>Status</span>
+		<span id="type" class="search_item" data='types'>Type</span>
+		<span id="position" class="search_item" data='positions' >Position</span>
+		<span id="tenure" class="search_item" data='tenures'>Tenure</span>
+		<span id="misc" class="search_item" data='miscs'>Misc</span>
+		<span id="rog" class="search_item" data='rogs'>Region of Origin</span>
+		<span id="cr" class="search_item" data='crs'>Caring Region</span>
+		<span id="year" class="search_item" data='years'>App Year</span>
 		<span id="name">
 			Last: <input type="Text" name="last_name" title="Last Name" value="<%=@last_name%>" size="10" onKeyUp="enterCheck(this.form);selected(this.form);" />&nbsp;&nbsp;&nbsp;
 			First: <input type="Text" name="first_name" title="First Name" value="<%=@first_name%>" size="10" onKeyUp="enterCheck(this.form);selected(this.form);" />&nbsp;&nbsp;&nbsp;
@@ -22,29 +26,29 @@
 			<a href="javascript:clear_search();" class="button">Clear</a>
 		</div>
 	</div>
-	<div id="statuses" class="select_box" title="Status" onmouseout="hide_menu(event);">
-		<%= display_option_box(@options['Status'], 'status')%>
+	<div id="statuses" class="select_box" title="Status">
+		<%=raw display_option_box(@options['Status'], 'status')%>
 	</div>
-	<div id="types" class="select_box" title="Type" onmouseout="hide_menu(event);">
-		<%= display_option_box(@options['Intern Type'], 'intern_type')%>
+	<div id="types" class="select_box" title="Type">
+		<%=raw display_option_box(@options['Intern Type'], 'intern_type')%>
 	</div>
-	<div id="positions" class="select_box" title="Position" onmouseout="hide_menu(event);">
-		<%= display_option_box(@options['Position'], 'position')%>
+	<div id="positions" class="select_box" title="Position">
+		<%=raw display_option_box(@options['Position'], 'position')%>
 	</div>
-	<div id="tenures" class="select_box" title="Tenure" onmouseout="hide_menu(event);">
-		<%= display_option_box(@options['Tenure'], 'tenure')%>
+	<div id="tenures" class="select_box" title="Tenure">
+		<%=raw display_option_box(@options['Tenure'], 'tenure')%>
 	</div>
-	<div id="miscs" class="select_box" title="Misc" onmouseout="hide_menu(event);">
-		<%= display_option_box(SiMiscOption.all, 'misc')%>
+	<div id="miscs" class="select_box" title="Misc">
+		<%=raw display_option_box(SiMiscOption.all, 'misc')%>
 	</div>
-	<div id="rogs" class="select_box" title="Region of Origin" onmouseout="hide_menu(event);">
-		<%= display_option_box(@options['Region of Origin'], 'region_of_origin')%>
+	<div id="rogs" class="select_box" title="Region of Origin">
+		<%=raw display_option_box(@options['Region of Origin'], 'region_of_origin')%>
 	</div>
-	<div id="crs" class="select_box" title="Caring Region" onmouseout="hide_menu(event);">
-		<%= display_option_box(@options['Caring Region'], 'caring_region')%>
+	<div id="crs" class="select_box" title="Caring Region">
+		<%=raw display_option_box(@options['Caring Region'], 'caring_region')%>
 	</div>
-	<div id="years" class="select_box" title="Year" onmouseout="hide_menu(event);">
-		<%= display_option_box(@options['App Year'], 'app_year')%>
+	<div id="years" class="select_box" title="Year">
+		<%=raw display_option_box(@options['App Year'], 'app_year')%>
 	</div>
 	<br />
 	<div id="action_menu">
@@ -99,8 +103,8 @@
 
 </div> 
 <div id="right">
-	<% form_tag({}, {:id => 'query_form', :name => 'query_form'}) do %>
-	<input type="hidden" name="query_id" />
+	<%= form_tag({}, {:id => 'query_form', :name => 'query_form'}) do %>
+	<input type="text" name="query_id" />
 	<div id="queries" class="box">
 		<div id="query_header" class="subboxheader" onclick="Element.toggle('hide_queries');">Stored Lists</div>
 		<div id="hide_queries">
@@ -121,7 +125,7 @@
 	</div>
 	<% end %>
 	<br />
-	<% form_tag({}, {:id => 'criteria_form', :name => 'criteria_form'}) do %>
+	<%= form_tag({}, {:id => 'criteria_form', :name => 'criteria_form'}) do %>
 	<input type="hidden" name="criteria_id" />
 	<div id="criteria" class="box">
 		<div id="criteria_header" class="subboxheader" onclick="Element.toggle('hide_criteria');">Stored Criteria</div>

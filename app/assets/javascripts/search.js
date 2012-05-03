@@ -3,8 +3,7 @@ var menu_arr = new Array('status','type','position','tenure','misc','rog','cr','
 var current;
 
 //this function will align the menu-bar in the proper position on the page
-function align_menu() 
-{
+function align_menu() {
 	var v_adj = 36;
 	var h_adj = 127;
 
@@ -20,7 +19,7 @@ function align_menu()
 //	document.getElementById("selected_options").style.display = 'none';
 	if (selected(document.forms[0])) {
 		// If options are selected, hide the box
-//		show("selected_options");
+		//		show("selected_options");
 	}
 
 	// set up each section
@@ -58,32 +57,32 @@ function align_menu()
 }
 function show_me(item) {
     if (item && $(item)) {
-    	var ptr = document.getElementById(item);
-    	var action_ptr = document.getElementById('action_menu');
+    	var ptr = $("#"+item);
+    	var action_ptr = $('#action_menu');
+
     	// hide the previous item (if any), then show the one clicked
     	// if this was the last item clicked, switch it's display
     	if (item == current) {
-    		ptr.style.display = "none"
+    		ptr.hide();
     		current = '';
     		// display the action menu
-    		action_ptr.style.visibility = "visible";
+    		// action_ptr.show();
     		return;
     	}
     	// hide old item
     	if ($(current)) {
-    		$(current).style.display = "none";
+    		$(current).hide();
     	}
     	// display current item
     	if (ptr) {
-    		ptr.style.display = "block";
+    		ptr.show();
     	}
     	current = item;
     	// hide the action menu
-    	action_ptr.style.visibility = "hidden";
+    	// action_ptr.hide();
     }
 }
-function hide_menu(event)
-{
+function hide_menu(event){
 	captureMousePosition(event)
 	// check to see if the mouse is currently over the current menu
 	if ($(current)) {
@@ -211,4 +210,6 @@ function enterCheck(form)
 		form.submit();
 	}
 }
+
+$()
 

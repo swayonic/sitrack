@@ -4,6 +4,7 @@
 //= require jquery_ujs
 //= require directory
 //= require search
+//= require search_jq
 //= require general
 //= require directory_views
 //= require overlib
