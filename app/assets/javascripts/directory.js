@@ -40,11 +40,11 @@ function save_query(action)
 			break;
 		case 'append':
 			// Display the query selector box
-			$('append_query').style.display = "block";
+			$('#list_append_dialog').dialog('open');
 		}
 
 	} else {
-		alert("You must select at least one person.");
+		alert("You must check at least one person.");
 	}
 }
 function save_criteria()
@@ -67,8 +67,7 @@ function save_criteria()
 	f.submit();
 }
 
-function append_query()
-{
+function append_query(){
 	var f = document.participants_f;
 	// make sure they didn't uncheck all the boxes
 	var id_list = get_id_list();
@@ -76,7 +75,7 @@ function append_query()
 		// set the form action to append_query
 		f.action = '/directory/append_query';
 		// get the id of the currently selected query
-		f.id.value = $('current_query_id').options[$('current_query_id').selectedIndex].value;
+		f.id.value = $('#current_query_id').val();
 		f.id_list.value = id_list;
 		f.submit();
 	} else {

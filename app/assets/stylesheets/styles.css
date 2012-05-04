@@ -62,10 +62,11 @@ div.boxheader {
 	top: 40px;
 	float:left;
 	border: 1px solid #336699;
-	background: #4183c4;
+	background: #fcfcfc;
 	width: 210px;
 	padding: 5px;
 	color: #ffffff;
+	display: none;
 }
 
 table#results {
@@ -138,7 +139,7 @@ a.button {
 }
 
 div#search_button {
-	margin-top: 10px;
+	margin-top: 5px;
 	text-align: center;
 }
 
@@ -150,11 +151,56 @@ input.search_field {
 
 div.search_label {
 	width: 70px;
-	padding-left: 10px;
 	display: inline-block;
-	color: #fff;
+	color: #333;
+}
+
+.ui-accordion .ui-accordion-content {
+	padding: 10px;
 }
 
 .ui-tabs .ui-tabs-panel {
 	padding: 0;
+}
+
+div.centered {
+	text-align: center;
+}
+
+.ui-accordion-header {
+	cursor: pointer;
+}
+
+div.entry {
+	padding: 5px 8px;
+}
+
+div.entry:hover {
+	background: #f9f9f9;
+}
+
+div.entry a {
+	font-size: 13px;
+	text-decoration: none;
+}
+
+div.entry div.entry_delete {
+	float: right;
+	padding-top: 3px;
+}
+
+a.wide_link {
+	width: 100%;
+}
+
+.fleft {
+	float: left;
+}
+
+.font14 {
+	font-size: 14px;
+}
+
+.hidden {
+	display: none;
 }
