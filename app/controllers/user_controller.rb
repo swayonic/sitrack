@@ -4,9 +4,9 @@ class UserController < ApplicationController
   end
   
   def search
-    @people = ''
-    @name = request.raw_post || request.query_string
-    if @name and !@name.empty? 
+    @people = []
+    @name = params[:search][:name]
+    if @name.present?
     	names = @name.strip.split('%20')
     	if (names.size > 1)
 	    	first = names[0].gsub("=", "")
@@ -17,29 +17,32 @@ class UserController < ApplicationController
 	   		@conditions = [ "(lastName LIKE ? OR firstName LIKE ? OR preferredName LIKE ?) ", name+'%',name+'%',name+'%' ]
 	   	end
 	   	@conditions[0] += " AND fk_ssmUserId <> 0 AND fk_ssmUserId is NOT NULL "
-	  	@people = Person.find(:all, :order => "lastName, firstName", :conditions => @conditions, :limit => 41)
+	  	@people = Person.find(:all, :order => "lastName, firstName", :conditions => @conditions, :limit => 10)
 	  end
-	  render(:layout => false)
+    renderJS
   end
   
   def add
-    unless (ssm_id = params[:ssm_id])
-      raise "No user specified to add"
+    ssm_id = params[:ssm_id]
+    if ssm_id.present?
+      # see if the user already has access
+      if !SitrackUser.exists?(:ssm_id => ssm_id)
+        @sitrack_user = SitrackUser.create(:ssm_id => ssm_id, :created_by => current_user.id, :updated_by => current_user.id)
+        # set the new user up with some default views
+        # UserController.create_views(@sitrack_user)
+        # Should be discussed
+      end
     end
-    # see if the user already has access
-    unless (@sitrack_user = SitrackUser.find_by_ssm_id(ssm_id))
-      @sitrack_user = SitrackUser.create(:ssm_id => ssm_id, :created_by => current_user.id, :updated_by => current_user.id)
-      # set the new user up with some default views
-      UserController.create_views(@sitrack_user)
-    end
-    @person = Person.find(:first, :conditions => ['fk_ssmUserID  = ?', ssm_id])
-	  render(:layout => false)
+    @sitrack_users = SitrackUser.find(:all, :order => "ministry_person.lastName, ministry_person.firstName", :include => {:user => :person})
+    renderJS
   end
   
   def delete
-    @sitrack_user = SitrackUser.find(params[:id])
+    @id = params[:id]
+    @sitrack_user = SitrackUser.find(@id)
     @sitrack_user.destroy
-    render :nothing => true
+    @sitrack_users_count = SitrackUser.count(:all, :include => {:user => :person})
+    renderJS
   end
   
   protected

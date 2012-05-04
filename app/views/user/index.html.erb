@@ -1,35 +1,23 @@
 <div id="center">
-	<div class="boxheader">Add SI Tracker User</div>
-<p>
-You can search by any combination of first or last name, including partial names:
-</p>
-
-	<p>
-	<label for="name">Name:</label>
-  <%= text_field_tag :name %>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-  <%= observe_field(:name,
-  									:update => "results",
-  									:frequency => 1,
-										:url 		=> {:action => :search},
-										:loading => "Element.show('spinner')",
-										:complete => "Element.hide('spinner')")%>
-</p>
-
-<p><div id="results">
-<%= image_tag "spinner.gif", :id => 'spinner', :style => 'display:none' %></div></p>
-</div>
-
-<div>
-  <ul id="current_users">
-    <% @sitrack_users.each do |su| %>
-      <% if su.user && su.user.person %>
-        <li id="user_<%= su.id %>">
-          <%=link_to_remote image_tag('x.png', :border => 0), 
-								:url => {:action => :delete, :id => su.id},
-								:loading => visual_effect(:drop_out, "user_#{su.id}")%>
-          <%= su.user.person.lastName %>, <%= su.user.person.firstName %> - <%= su.user.username %>
-        </li>
+  <div id="other_panel">
+  	<div class="head">Add SI Tracker User</div>
+  	<div class="guide">You can search by First Name, Last Name, or Partial Name:</div>
+  	<div class="acenter">
+  	  <%= form_for(:search, :url=>{:action=>:search}, :html=>{:autocomplete=>"off", :remote=>true}) do |f| %>
+        <%= f.text_field :name, :value => @keyword, :onkeyup => "$('#spinner_user_search').show();$(this).submit();" %>
       <% end %>
-    <% end %>
-  </ul>
+    </div>
+    <div id="user_search_results">
+      <div class="acenter spinner_container">
+        <%= image_tag("spinner.gif", :id=>"spinner_user_search") %>
+      </div>
+      <div id="results">
+      </div>
+    </div>
+  </div> 
+  <div id="main_panel">
+	  <div id="users_list">
+      <%= render :partial => 'users_list' %>
+    </div>
+  </div>
 </div>

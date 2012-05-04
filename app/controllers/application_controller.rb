@@ -21,6 +21,13 @@ class ApplicationController < ActionController::Base
     raise "boom"
   end
   
+  def renderJS
+  	respond_to do |format|
+    	format.js if request.xhr?
+			format.html
+    end
+  end
+  
   def up_monitor
     raise "DB looks down" if SitrackTracking.find(:first).nil?
     render :text => "<html><body>looks good (we're up)</body></html>"
