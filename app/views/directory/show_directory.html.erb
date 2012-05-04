@@ -1,157 +1,66 @@
 <div id="center">
-  <div id="other_panel">
-    <div class="side_title">Search Options:</div>
-    <div id="search_options_accordion">
-      <h3><a href="#">Status</a></h3>
-      <div>
-        <%=raw display_option_box(@options['Status'], 'status')%>
+  <%= form_tag({:action => 'search'}, {:name => 'search_f', :id => 'search_f'}) do %>
+    <div id="other_panel">
+      <div class="side_title">Search Options</div>    
+  	  <div id="selected_options" class="box"></div>
+  	  <div id="search" onblur="show_me('false');">
+        <div id="search_options_accordion">
+          <h3><a href="#">Status</a></h3>
+          <div>
+            <%=raw display_option_box(@options['Status'], 'status')%>
+          </div>
+          <h3><a href="#">Type</a></h3>
+          <div>
+            <%=raw display_option_box(@options['Intern Type'], 'intern_type')%>
+          </div>
+          <h3><a href="#">Position</a></h3>
+          <div>
+            <%=raw display_option_box(@options['Position'], 'position')%>
+          </div>
+          <h3><a href="#">Tenure</a></h3>
+          <div>
+            <%=raw display_option_box(@options['Tenure'], 'tenure')%>
+          </div>
+          <h3><a href="#">Misc</a></h3>
+          <div>
+            <%=raw display_option_box(SiMiscOption.all, 'misc')%>
+          </div>
+          <h3><a href="#">Region of Origin</a></h3>
+          <div>
+            <%=raw display_option_box(@options['Region of Origin'], 'region_of_origin')%>
+          </div>
+          <h3><a href="#">Caring Region</a></h3>
+          <div>
+            <%=raw display_option_box(@options['Caring Region'], 'caring_region')%>
+          </div>
+          <h3><a href="#">Application Year</a></h3>
+          <div>
+            <%=raw display_option_box(@options['App Year'], 'app_year')%>
+          </div>
+        </div>
+    		<span id="name">
+    		  <div class="search_label">First Name:</div>
+    			<%= text_field_tag :first_name, @first_name, :class=>"search_field",
+    			    :size=>"10", :onKeyUp=>"enterCheck(this.form);selected(this.form);" %>
+    			<br/>
+    		  <div class="search_label">Last Name:</div>
+    			<%= text_field_tag :last_name, @last_name, :class=>"search_field",
+    			    :size=>"10", :onKeyUp=>"enterCheck(this.form);selected(this.form);" %>
+    			<br/>
+    		  <div class="search_label">Preferred:</div>
+    			<%= text_field_tag :pref_name, @pref_name, :class=>"search_field",
+    			    :size=>"10", :onKeyUp=>"enterCheck(this.form);selected(this.form);" %>
+    			<br/>
+    		</span>
+      	<div id="search_button">
+    			<a href="javascript:document.search_f.submit();" class="button">Search!</a>
+    			<a href="javascript:clear_search();" class="button">Clear</a>
+    		</div>
       </div>
-      <h3><a href="#">Type</a></h3>
-      <div>
-        <%=raw display_option_box(@options['Intern Type'], 'intern_type')%>
-      </div>
-      <h3><a href="#">Position</a></h3>
-      <div>
-        <%=raw display_option_box(@options['Position'], 'position')%>
-      </div>
-      <h3><a href="#">Tenure</a></h3>
-      <div>
-        <%=raw display_option_box(@options['Tenure'], 'tenure')%>
-      </div>
-      <h3><a href="#">Misc</a></h3>
-      <div>
-        <%=raw display_option_box(SiMiscOption.all, 'misc')%>
-      </div>
-      <h3><a href="#">Region of Origin</a></h3>
-      <div>
-        <%=raw display_option_box(@options['Region of Origin'], 'region_of_origin')%>
-      </div>
-      <h3><a href="#">Caring Region</a></h3>
-      <div>
-        <%=raw display_option_box(@options['Caring Region'], 'caring_region')%>
-      </div>
-      <h3><a href="#">Application Year</a></h3>
-      <div>
-        <%=raw display_option_box(@options['App Year'], 'app_year')%>
-      </div>
+    </div> 
+    <div id="main_panel">
+  	  <div class="boxheader">Directory Listing - <%=@people.size%> displayed records</div>
+      <%= render :partial => 'results' %>
     </div>
-  	<div id="search_button">
-			<a href="javascript:document.search_f.submit();" class="button">Search!</a><br /><br />
-			<a href="javascript:clear_search();" class="button">Clear</a>
-		</div>
-  </div>
-  <div id="main_panel">
-	  <div class="boxheader">Directory Listing - <%=@people.size%> displayed records</div>
-    <%= render :partial => 'results' %>
-  </div>
-</div> 
-	<%= form_tag({:action => 'search'}, {:name => 'search_f', :id => 'search_f'}) do %>
-	  <div id="selected_options" class="box"></div>
-	  <div id="search" onblur="show_me('false');">
-  		<span id="name">
-  			Last: 
-  			<input type="Text" name="last_name" title="Last Name" value="<%=@last_name%>" size="10" onKeyUp="enterCheck(this.form);selected(this.form);" />
-  			&nbsp;&nbsp;&nbsp;
-  			First:
-  			<input type="Text" name="first_name" title="First Name" value="<%=@first_name%>" size="10" onKeyUp="enterCheck(this.form);selected(this.form);" />
-  			&nbsp;&nbsp;&nbsp;
-  			Preferred: <input type="Text" name="pref_name" title="Pref Name" value="<%=@pref_name%>" size="10" onKeyUp="enterCheck(this.form);selected(this.form);" />
-  		</span>
-  		<br />
-	  </div>
-	  <br />
-	<div id="action_menu">
-	
-	<a><span id="toggle_options" onclick="javascript:toggle_options()"></span></a>
-	
-	&nbsp;Views: 
-	<select name="view" onchange="change_view();">
-	<%@views.sort_by(&:name).each do |view| -%>
-		<%if view.id == @view.id-%>
-			<option value="<%=view.id%>" selected="selected"><%=view.name%></option>
-		<%else-%>
-			<option value="<%=view.id%>"><%=view.name%></option>
-		<%end-%>
-	<%end-%>
-		<option value="|ev|">[Edit Views...]</option>
-	</select>
-	&nbsp;&nbsp;
-	Actions:
-	<select name="do_something" onchange="perform_action();">
-		<option value="">Choose Action...</option>
-		<option value="email">Send Email</option>
-		<option value="excel">Create Spreadsheet</option>
-		<option value="add_person">Add Person</option>
-		<!-- 		<option value="delete">Delete People</option> -->
-	<!--	<option value="print">Print</option> -->
-	</select>
-	&nbsp;&nbsp; 
-	Restrict Search To:
-	<select name="region" id="region" onchange="change_region();">
-	<%@regions.sort.each do |region|-%>
-		<%if region[0] == @sel_region_name-%>
-			<option value="<%=region[0]%>" selected="selected"><%=region[0]%></option>
-		<%else-%>
-			<option value="<%=region[0]%>"><%=region[0]%></option>
-		<%end-%>
-	<%end%>
-	<%if '%' == @sel_region_name-%>
-		<option value="all" selected="selected">All</option>
-	<%else-%>
-		<option value="all">All</option>
-	<%end-%>
-	</select>
-	</div>
 	<% end %>
-	<br /><br />
-<div id="right">
-	<%= form_tag({}, {:id => 'query_form', :name => 'query_form'}) do %>
-	<input type="text" name="query_id" />
-	<div id="queries" class="box">
-		<div id="query_header" class="subboxheader" onclick="Element.toggle('hide_queries');">Stored Lists</div>
-		<div id="hide_queries">
-		<% @saved_queries.each do |query| -%>
-			<div class="menu">
-				<%= link_to(query.name, {:controller => 'directory', :action => 'show_query', :id => query[:id]}, {:class => 'menu'})%>
-				<%= link_to(image_tag('x.png', :alt => 'Delete Query', :class => 'x', :border => 0), {:action => 'delete_query', :id => query[:id]}, :confirm => 'Are you sure you want to delete the "'+query.name+'" query?', :post => true) %>
-			</div>
-		<% end -%><br />
-			<a href="javascript:save_query('new');" class="button">Save List&nbsp;&nbsp;</a><br />
-			<a href="javascript:save_query('append');" class="button">Append to List</a>
-		</div>
-	</div>
-	<div id="append_query" class="box">
-		Choose a list to append to.<br />
-		<%= collection_select(:current_query, :id, @saved_queries, :id, :name) %>
-		<a href="javascript:append_query();" class="button">Save</a>
-	</div>
-	<% end %>
-	<br />
-	<%= form_tag({}, {:id => 'criteria_form', :name => 'criteria_form'}) do %>
-	<input type="hidden" name="criteria_id" />
-	<div id="criteria" class="box">
-		<div id="criteria_header" class="subboxheader" onclick="Element.toggle('hide_criteria');">Stored Criteria</div>
-		<div id="hide_criteria">
-		<% @saved_criteria.each do |criteria| -%>
-			<div class="menu">
-				<%= link_to(criteria.name, {:controller => 'directory', :action => 'show_criteria', :id => criteria[:id]}, {:class => 'menu'})%>
-				<%= link_to(image_tag('x.png', :alt => 'Delete Query', :class => 'x', :border => 0), {:action => 'delete_criteria', :id => criteria[:id]}, :confirm => 'Are you sure you want to delete the "'+criteria.name+'" criteria?', :post => true) %>
-			</div>
-		<% end -%><br />
-		<% if @selected_options 
-				js = 'save_criteria()'
-			 else
-			  js = 'alert(\'You must perform click the \\\'Search!\\\' button before you can save the criteria.\')'
-			 end-%>
-			<a href="javascript:<%=js%>;" class="button">Save Criteria&nbsp;&nbsp;</a>
-		</div>
-	</div>
-	<% end %>
-</div> 
-<script type="text/javascript">
-	align_menu();
-	var ol_fgcolor = "#eeeeee";
-</script>
-<div <% if ENV['RAILS_ENV'] == 'development' %> id="modify_value" <% else %>style="display:none"<% end %>>
-	<iframe src="" width="1000px" height="500px" frameborder="0" scrolling="yes" name="modify_frame"></iframe>
 </div>

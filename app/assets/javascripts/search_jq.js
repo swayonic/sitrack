@@ -4,4 +4,6 @@ jQuery(document).ready(function() {
 		active: false,
 		autoHeight: false
 	});
+	
+	$(".button").button()
 });

@@ -120,29 +120,31 @@ div.modify_field input {
 	width: 90px;
 }
 
-h3.ui-accordion-header {
-	margin: 0px 5px;
-	padding: 1px 5px 2px;
-}
-
-h3.ui-state-active {
-	background: #336699;
-}
-
-h3.ui-accordion-header a {
-	color: #fff;
-	font-size: 12px;
-	text-decoration: none;
-	font-weight: normal;
-}
-
-div.ui-accordion-content {
-	margin-top: 2px;
-	margin-left: 15px;
-}
-
 div.side_title {
 	font-size: 14px;
 	color: #fff;
 	margin-bottom: 5px;
+}
+
+a.button {
+	border: 1px solid #336699;
+	min-width: 80px;
+}
+
+div#search_button {
+	margin-top: 10px;
+	text-align: center;
+}
+
+input.search_field {
+	padding: 2px;
+	width: 105px;
+}
+
+
+div.search_label {
+	width: 70px;
+	padding-left: 10px;
+	display: inline-block;
+	
 }
