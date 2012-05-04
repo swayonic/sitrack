@@ -1,61 +1,69 @@
 <div id="center">
   <%= form_tag({:action => 'search'}, {:name => 'search_f', :id => 'search_f'}) do %>
     <div id="other_panel">
-      <div class="side_title">Search Options</div>    
-  	  <div id="selected_options" class="box"></div>
-  	  <div id="search" onblur="show_me('false');">
-        <div id="search_options_accordion">
-          <h3><a href="#">Status</a></h3>
-          <div>
-            <%=raw display_option_box(@options['Status'], 'status')%>
+    	<ul>
+    		<li><a href="#tabs-1">Search</a></li>
+    		<li><a href="#tabs-2">Views</a></li>
+    	</ul>
+    	<div id="tabs-1">
+    	  <div id="selected_options" class="box"></div>
+    	  <div id="search" onblur="show_me('false');">
+          <div id="search_options_accordion">
+            <h3><a href="#">Status</a></h3>
+            <div>
+              <%=raw display_option_box(@options['Status'], 'status')%>
+            </div>
+            <h3><a href="#">Type</a></h3>
+            <div>
+              <%=raw display_option_box(@options['Intern Type'], 'intern_type')%>
+            </div>
+            <h3><a href="#">Position</a></h3>
+            <div>
+              <%=raw display_option_box(@options['Position'], 'position')%>
+            </div>
+            <h3><a href="#">Tenure</a></h3>
+            <div>
+              <%=raw display_option_box(@options['Tenure'], 'tenure')%>
+            </div>
+            <h3><a href="#">Misc</a></h3>
+            <div>
+              <%=raw display_option_box(SiMiscOption.all, 'misc')%>
+            </div>
+            <h3><a href="#">Region of Origin</a></h3>
+            <div>
+              <%=raw display_option_box(@options['Region of Origin'], 'region_of_origin')%>
+            </div>
+            <h3><a href="#">Caring Region</a></h3>
+            <div>
+              <%=raw display_option_box(@options['Caring Region'], 'caring_region')%>
+            </div>
+            <h3><a href="#">Application Year</a></h3>
+            <div>
+              <%=raw display_option_box(@options['App Year'], 'app_year')%>
+            </div>
           </div>
-          <h3><a href="#">Type</a></h3>
-          <div>
-            <%=raw display_option_box(@options['Intern Type'], 'intern_type')%>
-          </div>
-          <h3><a href="#">Position</a></h3>
-          <div>
-            <%=raw display_option_box(@options['Position'], 'position')%>
-          </div>
-          <h3><a href="#">Tenure</a></h3>
-          <div>
-            <%=raw display_option_box(@options['Tenure'], 'tenure')%>
-          </div>
-          <h3><a href="#">Misc</a></h3>
-          <div>
-            <%=raw display_option_box(SiMiscOption.all, 'misc')%>
-          </div>
-          <h3><a href="#">Region of Origin</a></h3>
-          <div>
-            <%=raw display_option_box(@options['Region of Origin'], 'region_of_origin')%>
-          </div>
-          <h3><a href="#">Caring Region</a></h3>
-          <div>
-            <%=raw display_option_box(@options['Caring Region'], 'caring_region')%>
-          </div>
-          <h3><a href="#">Application Year</a></h3>
-          <div>
-            <%=raw display_option_box(@options['App Year'], 'app_year')%>
-          </div>
+      		<span id="name">
+      		  <div class="search_label">First Name:</div>
+      			<%= text_field_tag :first_name, @first_name, :class=>"search_field",
+      			    :size=>"10", :onKeyUp=>"enterCheck(this.form);selected(this.form);" %>
+      			<br/>
+      		  <div class="search_label">Last Name:</div>
+      			<%= text_field_tag :last_name, @last_name, :class=>"search_field",
+      			    :size=>"10", :onKeyUp=>"enterCheck(this.form);selected(this.form);" %>
+      			<br/>
+      		  <div class="search_label">Preferred:</div>
+      			<%= text_field_tag :pref_name, @pref_name, :class=>"search_field",
+      			    :size=>"10", :onKeyUp=>"enterCheck(this.form);selected(this.form);" %>
+      			<br/>
+      		</span>
+        	<div id="search_button">
+      			<a href="javascript:document.search_f.submit();" class="button">Search!</a>
+      			<a href="javascript:clear_search();" class="button">Clear</a>
+      		</div>
         </div>
-    		<span id="name">
-    		  <div class="search_label">First Name:</div>
-    			<%= text_field_tag :first_name, @first_name, :class=>"search_field",
-    			    :size=>"10", :onKeyUp=>"enterCheck(this.form);selected(this.form);" %>
-    			<br/>
-    		  <div class="search_label">Last Name:</div>
-    			<%= text_field_tag :last_name, @last_name, :class=>"search_field",
-    			    :size=>"10", :onKeyUp=>"enterCheck(this.form);selected(this.form);" %>
-    			<br/>
-    		  <div class="search_label">Preferred:</div>
-    			<%= text_field_tag :pref_name, @pref_name, :class=>"search_field",
-    			    :size=>"10", :onKeyUp=>"enterCheck(this.form);selected(this.form);" %>
-    			<br/>
-    		</span>
-      	<div id="search_button">
-    			<a href="javascript:document.search_f.submit();" class="button">Search!</a>
-    			<a href="javascript:clear_search();" class="button">Clear</a>
-    		</div>
+      </div>
+      <div id="tabs-2">
+        test
       </div>
     </div> 
     <div id="main_panel">

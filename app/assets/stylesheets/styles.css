@@ -10,20 +10,23 @@ body {
 #topnav {
 	background: #4183c4;
 	text-align: right;
-	padding: 5px 10px;
+	padding: 5px 25px;
 	border-bottom: 1px solid #265aa6;
+	position: fixed;
+	top: 0;
+	width: 100%;
 }
 
 #topnav a {
 	color: #fff;
 	text-decoration: none;
-	margin-left: 10px;
+	margin-right: 40px;
+	margin-left: -30px;
 }
 
 #topnav a:hover {
 	color: #dedede;
 	text-decoration: none;
-	margin-left: 10px;
 }
 
 div.flash_notice {
@@ -37,7 +40,7 @@ div.flash_notice {
 }
 
 #center {
-	margin: 10px;
+	margin: 40px 10px;
 	padding: 0;
 }
 
@@ -54,6 +57,9 @@ div.boxheader {
 }
 
 #other_panel {
+	position: fixed;
+	left: 10px;
+	top: 40px;
 	float:left;
 	border: 1px solid #336699;
 	background: #4183c4;
@@ -146,5 +152,9 @@ div.search_label {
 	width: 70px;
 	padding-left: 10px;
 	display: inline-block;
-	
+	color: #fff;
+}
+
+.ui-tabs .ui-tabs-panel {
+	padding: 0;
 }

@@ -5,5 +5,7 @@ jQuery(document).ready(function() {
 		autoHeight: false
 	});
 	
-	$(".button").button()
+	$(".button").button();
+	
+	$("div#other_panel").tabs();
 });
