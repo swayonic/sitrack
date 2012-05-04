@@ -176,7 +176,9 @@
     </div> 
     <div id="main_panel">
   	  <div class="boxheader">Directory Listing - <%=@people.size%> displayed records</div>
-      <%= render :partial => 'results' %>
+  	  <div id="directory_results">
+        <%= render :partial => 'results' %>
+      </div>
     </div>
 	<% end %>
 </div>

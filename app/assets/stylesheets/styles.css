@@ -47,13 +47,20 @@ div.flash_notice {
 div.boxheader {
 	color: #336699;
 	background: #D0DDEA;
-	border: 1px solid #336699;
+	border-bottom: 1px solid #336699;
 	font-size: 16px;
 	padding: 5px;
 }
 
 #main_panel {
 	margin-left: 230px;
+	overflow: hidden;
+	border: 1px solid #336699;
+}
+
+#main_panel div#directory_results,  #main_panel div#users_list {
+	overflow: hidden;
+	overflow-x: scroll;
 }
 
 #other_panel {
@@ -65,13 +72,12 @@ div.boxheader {
 	background: #fcfcfc;
 	width: 210px;
 	padding: 5px;
-	color: #333;
 	display: none;
+	color: #fff;
 }
 
 table#results {
-	border: 1px solid #336699;
-	border-top: none;
+	border: none;
 	background: #fefefe;
 }
 
@@ -200,12 +206,16 @@ div.entry div.entry_add {
 	color: #fff;
 }
 
-#other_panel a {
+#other_panel div.entry {
+	color: #333;
+}
+#other_panel div.entry a {
 	color: #333;
 }
 
 #other_panel .guide {
 	padding: 5px;
+	color: #333;
 }
 
 input#search_name {
@@ -254,4 +264,3 @@ a.wide_link {
 .hidden {
 	display: none;
 }
-
