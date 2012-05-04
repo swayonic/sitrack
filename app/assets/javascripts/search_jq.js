@@ -22,4 +22,6 @@ jQuery(document).ready(function() {
 	$("div#other_panel").tabs();
 	
 	$("div#other_panel").fadeIn();
+	
+	$(".date_select").datepicker();
 });

@@ -209,6 +209,13 @@ function appendField(fieldname, id, value, colID, type, selectClause, maxlength)
 		//field.defaultValue = value;
 		field.innerHTML = value;
 		break;
+	case 'date':
+		var field = document.createElement("input");
+		field.setAttribute('type', 'text');
+		field.setAttribute('value', value);
+		field.setAttribute('class', 'date_select');
+		field.setAttribute('maxlength',maxlength);
+		break;
 	case 'enum':
 		var field = document.createElement("select");
 		appendOptions(field, fieldname, value);
@@ -247,7 +254,7 @@ function appendField(fieldname, id, value, colID, type, selectClause, maxlength)
 	
 	var outer = document.getElementById('c'+fieldname+id+'c'+colID);
 	outer.appendChild(c);
-			
+	$(".date_select").datepicker();
 }
 function edit_value(fieldname, id, value, colID, type, selectClause, skipAppend, maxlength)
 {
@@ -259,6 +266,18 @@ function edit_value(fieldname, id, value, colID, type, selectClause, skipAppend,
 	document.getElementById('f'+fieldname+id+'c'+colID).style.display = "inline";
 	document.getElementById('v'+fieldname+id+'c'+colID).focus();
 }
+
+function edit_date(fieldname, id, value, colID, type, selectClause, skipAppend, maxlength)
+{
+	var f = document.participants_f;
+	if (!skipAppend) {
+		appendField(fieldname, id, value, colID, type, selectClause, maxlength);
+	}
+	document.getElementById(fieldname+id+'c'+colID).style.display = "none";
+	document.getElementById('f'+fieldname+id+'c'+colID).style.display = "inline";
+	document.getElementById('v'+fieldname+id+'c'+colID).focus();
+}
+
 function update_value(fieldname, id, colID, type, selectClause, maxlength)
 {	
 	var f = document.participants_f;
