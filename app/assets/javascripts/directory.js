@@ -243,9 +243,9 @@ function appendField(fieldname, id, value, colID, type, selectClause, maxlength)
 	}
 	field.setAttribute('name', fieldname+id+'c'+colID);
 	field.setAttribute('id', 'v'+fieldname+id+'c'+colID);
-	field.onblur = function () {
-						update_value(fieldname, id, colID, type, selectClause, maxlength);
-					}
+	field.onchange = function () {
+		update_value(fieldname, id, colID, type, selectClause, maxlength);
+	}
 
 	var c = document.createElement('div');
 	c.setAttribute('id', 'f'+fieldname+id+'c'+colID);
@@ -278,8 +278,8 @@ function edit_date(fieldname, id, value, colID, type, selectClause, skipAppend, 
 	document.getElementById('v'+fieldname+id+'c'+colID).focus();
 }
 
-function update_value(fieldname, id, colID, type, selectClause, maxlength)
-{	
+function update_value(fieldname, id, colID, type, selectClause, maxlength){	
+	$("#ui-datepicker-div").fadeOut();
 	var f = document.participants_f;
 	var frame = window.frames["modify_frame"];
 	// Put the right value in the blank

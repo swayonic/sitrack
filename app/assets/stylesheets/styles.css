@@ -82,12 +82,12 @@ div.boxheader {
 }
 
 #main_panel div.profile_box a {
-	color: #336699;
+	color: #4183c4;
 	text-decoration: none;
 }
 
 #main_panel div.profile_box a:hover {
-	color: #4183c4;
+	color: #62a5e6;
 	text-decoration: none;
 }
 
@@ -250,7 +250,7 @@ div.entry {
 }
 
 div.entry:hover {
-	background: #f9f9f9;
+	background: #e9e9e9;
 }
 
 div.entry a {
@@ -284,6 +284,12 @@ div.entry div.entry_add {
 #other_panel .guide {
 	padding: 5px;
 	color: #333;
+	cursor: default;
+}
+
+#other_panel div.picture {
+	text-align: center;
+	margin: 10px;
 }
 
 input#search_name {
