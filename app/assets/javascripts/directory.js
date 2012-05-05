@@ -208,6 +208,9 @@ function appendField(fieldname, id, value, colID, type, selectClause, maxlength)
 		var field = document.createElement("textarea");
 		//field.defaultValue = value;
 		field.innerHTML = value;
+		field.onblur = function () {
+			update_value(fieldname, id, colID, type, selectClause, maxlength);
+		}
 		break;
 	case 'date':
 		var field = document.createElement("input");
@@ -215,20 +218,23 @@ function appendField(fieldname, id, value, colID, type, selectClause, maxlength)
 		field.setAttribute('value', value);
 		field.setAttribute('class', 'date_select');
 		field.setAttribute('maxlength',maxlength);
+		field.onchange = function () {
+			update_value(fieldname, id, colID, type, selectClause, maxlength);
+		}
 		break;
 	case 'enum':
 		var field = document.createElement("select");
 		appendOptions(field, fieldname, value);
-		field.onchange = function () {
-						this.blur();
-					}
+		field.onblur = function () {
+			update_value(fieldname, id, colID, type, selectClause, maxlength);
+		}
 		break;
 	case 'team':
 		var field = document.createElement("select");
 		appendTeamOptions(field, fieldname, value);
-		field.onchange = function () {
-						this.blur();
-					}
+		field.onblur = function () {
+			update_value(fieldname, id, colID, type, selectClause, maxlength);
+		}
 		break;
 	default:
 		var field = document.createElement("input");
@@ -239,13 +245,13 @@ function appendField(fieldname, id, value, colID, type, selectClause, maxlength)
 		field.onkeydown = function (event) {
 							check_key(event,value,fieldname, id, colID, type, selectClause);
 						}
+		field.onblur = function () {
+			update_value(fieldname, id, colID, type, selectClause, maxlength);
+		}
 		break;
 	}
 	field.setAttribute('name', fieldname+id+'c'+colID);
 	field.setAttribute('id', 'v'+fieldname+id+'c'+colID);
-	field.onchange = function () {
-		update_value(fieldname, id, colID, type, selectClause, maxlength);
-		}
 
 	var c = document.createElement('div');
 	c.setAttribute('id', 'f'+fieldname+id+'c'+colID);
