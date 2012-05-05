@@ -58,9 +58,77 @@ div.boxheader {
 	border: 1px solid #336699;
 }
 
-#main_panel div#directory_results,  #main_panel div#users_list {
+#main_panel div#directory_results, #main_panel div#users_list, #main_panel div#profile_info {
 	overflow: hidden;
-	overflow-x: scroll;
+	overflow-x: auto;
+}
+
+#main_panel div.frame {
+	min-width: 850px;
+}
+
+#main_panel div.profile_box div.subboxheader-a {
+	border-bottom: 1px solid #336699;
+	color: #336699;
+	background: #D0DDEA;
+	padding: 5px;
+	
+}
+
+#main_panel div.profile_box div.subboxheader2 {
+	font-size: 14px;
+	padding: 3px 5px;
+	background: #e0edf9;
+}
+
+#main_panel div.profile_box a {
+	color: #336699;
+	text-decoration: none;
+}
+
+#main_panel div.profile_box a:hover {
+	color: #4183c4;
+	text-decoration: none;
+}
+
+#main_panel span.label  {
+	font-weight: bold;
+}
+
+#main_panel div.col1 {
+	width: 50%;
+	margin: 0;
+	padding: 5px 0;
+	float: left;
+}
+
+
+#main_panel div.col2 {
+	width: 50%;
+	margin: 0;
+	padding: 5px 0;
+	float: right;
+}
+
+#main_panel div.profile_box {
+	border: 1px solid #336699;
+	margin: 5px;
+}
+
+#main_panel div.col1 div.profile_box {
+	margin-left: 10px;
+}
+
+#main_panel div.col2 div.profile_box {
+	margin-right: 10px;
+}
+
+#main_panel table.info {
+	margin: 5px;
+}
+#main_panel table.info td {
+	vertical-align: top;
+	line-height: 25px;
 }
 
 #other_panel {
@@ -262,5 +330,9 @@ a.wide_link {
 }
 
 .hidden {
+	display: none;
+}
+
+.modify_field {
 	display: none;
 }

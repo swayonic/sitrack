@@ -1,121 +1,143 @@
 <%
-# define which fields go in which boxes
-common = ['First Name',
-			'Last Name',
-			'Middle Name',
-			'Preferred Name',
-			'Account No',
-			'Vonage',
-			'SSN',
-			'Intern Type',
-			'Position',
-			'Citizenship',
-			'US Citizen',
-			'Website']
+  # define which fields go in which boxes
+  common = [
+    'First Name',
+    'Last Name',
+    'Middle Name',
+		'Preferred Name',
+		'Account No',
+		'Vonage',
+		'SSN',
+		'Intern Type',
+		'Position',
+		'Citizenship',
+		'US Citizen',
+		'Website'
+	]
 
-personal = ['Alma Mater',
-						'Hire Date',
-						'Departure Date',
-						'Return Date',
-						'Termination Date',
-						'Future Plans',
-						'Tenure',
-						'Passport No',
-						'Birth Date',
-						'Birth City',
-						'Birth State',
-						'Gender',
-						'Marital Status',
-						'Spouse Name']
+  personal = [
+    'Alma Mater',
+		'Hire Date',
+		'Departure Date',
+		'Return Date',
+		'Termination Date',
+		'Future Plans',
+		'Tenure',
+		'Passport No',
+		'Birth Date',
+		'Birth City',
+		'Birth State',
+		'Gender',
+		'Marital Status',
+		'Spouse Name'
+	]
 
-application =  ['App Year',
-								'Status',
-								'App Started',
-								'App Submitted',
-								'App Ready Date',
-								'Evaluator',
-								'Eval Started',
-								'Eval Docs Received',
-								'Eval Doc Type',
-								'Eval Summary Sent',
-								'Pre A',
-								'Med Psych Sent',
-								'Final A',
-								'Acceptance Sent']
+  application =  [
+    'App Year',
+		'Status',
+		'App Started',
+		'App Submitted',
+		'App Ready Date',
+		'Evaluator',
+		'Eval Started',
+		'Eval Docs Received',
+		'Eval Doc Type',
+		'Eval Summary Sent',
+		'Pre A',
+		'Med Psych Sent',
+		'Final A',
+		'Acceptance Sent'
+	]
 
-if HrSiApplication.is_intern(@person['Intern_Type'])
-	placement =  ['Asg Year',
-								'Preference A',
-								'Preference B',
-								'Preference C',
-								'Placement Comments',
-								'Team Leader',
-								'Asg City',
-								'Asg State',
-								'Asg School',
-								'Asg Team',
-								'Strategy',
-								'Region of Origin',
-								'Caring Region',
-								'Sending Department',
-								'Effective Date of Change']
-else
-  placement =  ['Asg Year',
-								'Preference A',
-								'Preference A Explained',
-								'Preference B',
-								'Preference A Explained',
-								'Preference C',
-								'Preference C Explained',
-								'Placement Comments',
-								'Team Leader',
-								'Asg City',
-								'Asg Country',
-								'Asg Continent',
-								'Asg Team',
-								'Strategy',
-								'Region of Origin',
-								'Caring Region',
-								'Sending Department',
-								'Effective Date of Change']
-end
+  if HrSiApplication.is_intern(@person['Intern_Type'])
+	  placement = [
+	    'Asg Year',
+			'Preference A',
+			'Preference B',
+			'Preference C',
+			'Placement Comments',
+			'Team Leader',
+			'Asg City',
+			'Asg State',
+			'Asg School',
+			'Asg Team',
+			'Strategy',
+			'Region of Origin',
+			'Caring Region',
+			'Sending Department',
+			'Effective Date of Change'
+		]
+  else
+    placement = [
+      'Asg Year',
+			'Preference A',
+			'Preference A Explained',
+			'Preference B',
+			'Preference A Explained',
+			'Preference C',
+			'Preference C Explained',
+			'Placement Comments',
+			'Team Leader',
+			'Asg City',
+			'Asg Country',
+			'Asg Continent',
+			'Asg Team',
+			'Strategy',
+			'Region of Origin',
+			'Caring Region',
+			'Sending Department',
+			'Effective Date of Change'
+		]
+  end
 
-mpd = ['Coach',
-			 'Coach Phone',
-			 'Coach Cell',
-			 'Coach Email',
-			 'Monthly Goal',
-			 'One Time Goal',
-			 'Total Goal',
-			 'Monthly Raised',
-			 'One Time Raised',
-			 'Total Raised',
-			 'Percent Raised',
-			 'Monthly Salary',
-			 'Account Balance']
+  mpd = [
+    'Coach',
+    'Coach Phone',
+    'Coach Cell',
+    'Coach Email',
+    'Monthly Goal',
+    'One Time Goal',
+    'Total Goal',
+    'Monthly Raised',
+    'One Time Raised',
+    'Total Raised',
+    'Percent Raised',
+    'Monthly Salary',
+    'Account Balance'
+  ]
 
-forms = ['Add Form',
-			   'Salary Setup Form',
-			   'Background Check',
-			   'ACOS Form',
-			   'Join Staff Form',
-			   'Additional Salary Form']
+  forms = [
+    'Add Form',
+    'Salary Setup Form',
+    'Background Check',
+    'ACOS Form',
+    'Join Staff Form',
+    'Additional Salary Form'
+  ]
 
-# define which boxes go in which column
-col1 = [['Common Form', common],
-				['ACOS Form', application],
-				['Placement', placement],
-				['MPD', mpd]]
+  # define which boxes go in which column
+  col1 = [
+    ['Common Form', common],
+		['ACOS Form', application],
+		['Placement', placement],
+		['MPD', mpd]
+	]
 				
-col2 = [['Hiring', personal],
-				['Forms Submitted', forms]]
+  col2 = [
+    ['Hiring', personal],
+		['Forms Submitted', forms]
+	]
 
-boxes = {'col1' => col1,
-				 'col2' => col2}
+  boxes = {
+    'col1' => col1,
+		'col2' => col2
+	}
 
-application_id = @person['applicationID']
-person_id = @person['personID']
+  application_id = @person['applicationID']
+  person_id = @person['personID']
+  
 -%>
+
 <script type="text/javascript">
 	function adjustHeight()
 	{
@@ -171,212 +193,226 @@ person_id = @person['personID']
 		}
 	}
 </script>
+
 <div id="center">
-	<div class="boxheader">Profile</div>
-	<form name="participants_f" method="post" action="/profile/<%=application_id%>">
-	<br />
-	<% boxes.each do |side_name, side| -%>
-	<div class="<%=side_name%>" id="<%=side_name%>">
-		<% side.each do |arr| 
-				box_name = arr.first
-				box = arr.last
-		-%>
-		<div class="profile_box">
-		<div class="subboxheader-a"><%=box_name%> Info</div>
-		<table cellspacing="0" width="100%">
-		<tr>
-      <% box.each_with_index do |column_name, i| 
-			  safe_name = u(column_name)
-				value = (@person[safe_name] || '').to_s.strip
-				raise column_name.inspect if @columns[column_name].nil?
-				column_id = @columns[column_name].id
-			  -%>
-			  <% if i == 0 || i == (box.size / 2).floor -%>
-          <td width="50%">
-			  <% end -%>
-				<%=column_name%>: <span id="c<%=column_name%><%=application_id%>c<%=column_id%>">
-				<% if @columns[column_name].writeable? -%>
-					<span id="<%=column_name%><%=application_id%>c<%=column_id%>">
-    				<% link_id = "link#{column_name}#{application_id}c#{column_id}" %>
-    				<% case @columns[column_name].column_type %>
-    				<% when "date" %>
-    				  <% if is_date(value) %>
-    				    <% href = "javascript:popCalendar('#{column_name}',#{column_id},#{application_id},'#{value}')" %>
-    					<% else %>
-    				    <% href = "javascript:popCalendar('#{column_name}',#{column_id},#{application_id},'#{formatted_date}')" %>
-    				    <% value = image_tag("edit.png", border: 0) %>
-    					<% end -%>
-  						<a id="<%= link_id %>" href="<%= href %>"><%= value %></a>
-    					</span>
-    				<% when "enum" -%>
-  				    <% href = "javascript:edit_value('#{column_name}','#{application_id}','#{escape_javascript(value)}',#{column_id},'enum','',true)" %>
-    				  <% if value.present? %>
-    				    <% value = @options_hash[column_name][u(value)] %>
-							<% else%>
-								<% value = image_tag("edit.png", border: 0) %>
-							<% end -%>
-  						<a id="<%= link_id %>" href="<%= href %>"><%= value %></a>
-							</span>
-							<span id="f<%=column_name%><%=application_id%>c<%=column_id%>" class="modify_field">
-							  <select id="v<%=column_name%><%=application_id%>c<%=column_id%>" name="<%=column_name%><%=application_id%>c<%=column_id%>" onblur="update_value('<%=column_name%>','<%=application_id%>','<%=column_id%>','enum')">
-							    <% @options[column_name].each do |key, option| -%>
-							      <% if key == value %>
-									    <option label="<%=option%>" value="<%=key%>" selected='selected'><%=option%></option>
-									  <% else %>
-									    <option label="<%=option%>" value="<%=key%>"><%=option%></option>
-									  <% end %>
-							    <% end -%>
-							  </select>
-							</span>
-				    <% when "team" -%>
-				      <% href="javascript:edit_value('#{column_name}','#{application_id}','#{escape_javascript(value)}',#{column_id},'enum','',true)" %>
-							<% if value.present? && @teams[value] -%>
-								<%= value = @teams[value] %>
-							<%else%>
-								<% value = image_tag("edit.png", border: 0) %>
-							<%end -%>
-  						<a id="<%= link_id %>" href="<%= href %>"><%= value %></a>
-							</span>
-							<span id="f<%=column_name%><%=application_id%>c<%=column_id%>" class="modify_field">
-							  <select id="v<%=column_name%><%=application_id%>c<%=column_id%>" name="<%=column_name%><%=application_id%>c<%=column_id%>" onblur="update_value('<%=column_name%>','<%=application_id%>','<%=column_id%>','enum')">
-							    <% @teams_ordered.each do |team| -%>
-									  <%key = team[0]%>
-									  <%option = team[1]%>
-									  <option label="<%=option%>" value="<%=key%>" <%='selected="selected"' if key == value%>><%=option%></option>
-							    <% end -%>
-							  </select>
-							</span>
-				    <% when "text" -%>
-							<script type="text/javascript">
-								var ol_fgcolor = "#eeeeee";
-							</script>
-							<% if value.present? -%>
-							  <% href = "javascript:edit_value('#{column_name}','#{application_id},'#{escape_javascript(value)}','#{column_id}','#{@columns[column_name].column_type}')" %>
-							  <% value = value[0..27]+'...' %>
-								<a id="<%= link_id %>" href="<%= href %>" onclick="nd();" onmouseover="return overlib('<%=escape_javascript(value)%>',LEFT);" onmouseout="nd();"><%= value %></a>
-							<% else -%>
-							  <% href = "javascript:edit_value('#{column_name}','#{application_id}','#{value}','#{column_id}','#{@columns[column_name].column_type}')" %>
-								<% value = image_tag("edit.png", border: 0) %>
-								<a id="<%= link_id %>" href="<%= href %>"><%= value %></a>
-							<% end -%>									
-							</span>
-				    <% when "dollar" -%>
-							<script type="text/javascript">
-								var ol_fgcolor = "#eeeeee";
-							</script>
-							<%if value.present? -%>
-							  <% href = "javascript:edit_value('#{column_name}','#{application_id}','#{escape_javascript(value)}','#{column_id}','#{@columns[column_name].column_type}')" %>
-							  <% value = number_to_currency(value.to_i) %>
-								<a id="<%= link_id %>" href="<%= href %>"  onclick="nd();" onmouseover="return overlib('<%=escape_javascript(value)%>',LEFT);" onmouseout="nd();"><%= value %></a>
-							<% else -%>
-							  <% href = "javascript:edit_value('#{column_name}','#{application_id}','#{value}','#{column_id}','#{@columns[column_name].column_type}')" %>
-								<% value = image_tag("edit.png", border: 0) %>
-								<a id="<%= link_id %>" href="<%= href %>"><%= value %></a>
-							<% end -%>		
-							</span>
-				    <% else -%>
-				      <% href = "javascript:edit_value('#{column_name}','#{application_id}','#{escape_javascript(value)}','#{column_id}','#{@columns[column_name].column_type}','', false, '#{@columns[column_name].maxlength}')" %>
-							<% unless value.present? %>
-								<% value = image_tag("edit.png", border: 0) %>
-							<% end %>
-							<a id="<%= link_id %>" href="<%= href %>"><%= value %></a>
-							</span>
-				    <% end -%>
-				<% else %>
-					<% case @columns[column_name].column_type %>
-					<% when 'date' %>
-				   	<% value = is_date(value) ? formatted_date(value) : '' %>
-				  <% when 'project' %>
-						<% value = get_project(value.to_i) %>
-					<% when 'percent' %>
-						<% value = value.to_i.round.to_s+'%' %>
-				  <% when 'dollar' %>
-				  	<% value = number_to_currency(value.to_i) %>
-			    <% end -%>
-					<span class="static"><%= value %></span>
-				<% end -%>
-			  </span>
-				<% if i == (box.size / 2).floor-1 || i == box.size-1 %>
-					</td>
-				<%else%>
-					<br/>
-				<% end -%>
-			<% end -%>
-		</tr>
-		</table>
-		</div>
-		<br/>
-		<%end -%>
-		<%# For each side, add any additional boxes to the bottom %>
-		<%# Add boxes to side 1 *%>
-		<%if side_name == "col1"%>
-			<div class="profile_box">
-			<div class="subboxheader-a">Children</div>
-			<table cellspacing="0" border="0" width="100%">
-			<tr>
-				<td class="white nosort">Name</td>
-				<td class="white nosort">Birthday</td>
-				<td class="white nosort">Passport#</td>
-				<td class="white nosort" align="center"><a href="javascript:childWindow(<%=person_id%>,'add');">Add Child</a></td>
-			</tr>
-			<%@children.each do |child|%>
-			<tr id="child#{child.id}">
-				<td><%=child.name %></td>
-				<td><%=child.birthday.strftime('%m/%d/%Y') unless child.birthday.nil?%></td>
-				<td><%=child.passport_no %></td>
-				<td align="center">
-					<a href="javascript:childWindow(<%=child.id%>,'edit');">edit</a>&nbsp;&nbsp;&nbsp;
-					<%= link_to_remote 'remove', 
-														:url => {:controller => 'child', :action => 'delete_child', :id => child.id},
-														:complete => "document.location = '/profile/#{application_id}'",
-														:condition => "confirm('Are you sure you want to remove this child?')"%>
-				</td>
-			</tr>
-			<%end -%>
-			</table>
-			</div>
-		<%end -%>
-		
-		<%# Add address boxes *%>
-		<%if side_name == "col2"%>
-			<div class="profile_box">
-			<div class="subboxheader">Contact Info</div>
-			<%@address_types.each do |address_type|%>
-				<div class="subboxheader2"><%=address_type.camelize%>:</div>
-				<table cellspacing="0">
-				<tr>
-				<%this_address = @addresses[address_type]
-					@address_columns.each_with_index do |column_name, i| 
-						value = (this_address.send(column_name) || '').to_s -%>
-						<%if i == 0 || i == (@address_columns.size / 2).floor -%>
-							<td>
-						<%else -%>
-							<br />
-						<%end -%>
-						<%=column_name.titleize %>: 
-						<span id="c<%=column_name%><%=person_id%>c<%=this_address.addressID%>">
-						<span id="<%=column_name%><%=person_id%>c<%=this_address.addressID%>">
-						<a href="javascript:edit_value('<%=column_name%>',<%=person_id%>,'<%=escape_javascript(value.to_s)%>',<%=this_address.addressID%>,'address')">
-						<%if !value.empty? -%>
-							<%=value%>
-						<%else -%>
-							<img src="/images/edit.png" border="0"/> 
-						<%end -%>
-						</a>
-						</span>
-						</span>
-						<%if i == (@address_columns.size / 2).floor-1 || i == @address_columns.size-1%>
-							</td>
-						<%end -%>
-				<%end -%>
-				</tr>
-				</table>
-			<%end -%>		
-		<%end -%>
-	</div>
-	<%end -%>
-	</form>
+  <div id="other_panel">
+  	<div class="head">Add SI Tracker User</div>
+  	
+  </div> 
+  <div id="main_panel">
+	  <div id="profile_info">
+	    <div class="boxheader">Profile</div>
+	    <div class="frame">
+    	  <form name="participants_f" method="post" action="/profile/<%=application_id%>">
+        	<% boxes.each do |side_name, side| -%>
+        	  <div class="<%=side_name%>" id="<%=side_name%>">
+        		  <% side.each do |arr| -%>
+        			  <% box_name = arr.first-%>
+        				<% box = arr.last-%>
+        		    <div class="profile_box">
+        		      <div class="subboxheader-a"><%=box_name%> Info</div>
+        		      <table class="info" cellspacing="0" width="100%">
+        	          <tr>
+                      <% box.each_with_index do |column_name, i|  -%>
+        		            <% safe_name = u(column_name) -%>
+        			          <% value = (@person[safe_name] || '').to_s.strip -%>
+        			          <% raise column_name.inspect if @columns[column_name].nil? -%>
+        			          <% column_id = @columns[column_name].id -%>
+        		            <% if i == 0 || i == (box.size / 2).floor -%>
+                          <td width="50%">
+        		            <% end -%>
+        			          <span class="label"><%=column_name%>:</span>
+        			          <span id="c<%=column_name%><%=application_id%>c<%=column_id%>">
+        			            <% if @columns[column_name].writeable? -%>
+        				            <span id="<%=column_name%><%=application_id%>c<%=column_id%>">
+          				            <% link_id = "link#{column_name}#{application_id}c#{column_id}" %>
+          				            <% case @columns[column_name].column_type %>
+          				            <% when "date" %>
+        					              <% if is_date(value) %>
+                  						 	  <% begin %>
+                  						 		  <% value = formatted_date(value) %>
+                  						 		<% rescue %>
+                  						 		<% end %>
+                  						 		<% href = "javascript:edit_value('#{column_name}',#{application_id},'#{escape_javascript(value)}','#{column_id}','date')" %>
+                  						 	<% else  %>
+                  						 	  <% value = image_tag("edit.png", border: 0) %>
+                  						 		<% href = "javascript:edit_value('#{column_name}',#{application_id},'#{escape_javascript(formatted_date)}','#{column_id}','date')" %>
+                  							<% end %>
+        						            <a id="<%= link_id %>" href="<%= href %>"><%= value %></a>
+          					            </span>
+          				            <% when "enum" -%>
+        				                <% href = "javascript:edit_value('#{column_name}','#{application_id}','#{escape_javascript(value)}',#{column_id},'enum','',true)" %>
+          				              <% if value.present? %>
+          				                <% value = @options_hash[column_name][u(value)] %>
+        						            <% else %>
+        							            <% value = image_tag("edit.png", border: 0) %>
+        						            <% end -%>
+        						            <a id="<%= link_id %>" href="<%= href %>"><%= value %></a>
+        						            </span>
+        						            <span id="f<%=column_name%><%=application_id%>c<%=column_id%>" class="modify_field">
+        						              <select id="v<%=column_name%><%=application_id%>c<%=column_id%>" name="<%=column_name%><%=application_id%>c<%=column_id%>" onblur="update_value('<%=column_name%>','<%=application_id%>','<%=column_id%>','enum')">
+        						                <% @options[column_name].each do |key, option| -%>
+        						                  <% if key == value %>
+        								                <option label="<%=option%>" value="<%=key%>" selected='selected'><%=option%></option>
+        								              <% else %>
+        								                <option label="<%=option%>" value="<%=key%>"><%=option%></option>
+        								              <% end %>
+        						                <% end -%>
+        						              </select>
+        						            </span>
+        			                <% when "team" -%>
+                  				      <% href="javascript:edit_value('#{column_name}','#{application_id}','#{escape_javascript(value)}',#{column_id},'enum','',true)" %>
+                  							<% if value.present? && @teams[value] -%>
+                  								<%= value = @teams[value] %>
+                  							<%else%>
+                  								<% value = image_tag("edit.png", border: 0) %>
+                  							<%end -%>
+                    						<a id="<%= link_id %>" href="<%= href %>"><%= value %></a>
+                  							</span>
+                  							<span id="f<%=column_name%><%=application_id%>c<%=column_id%>" class="modify_field">
+                  							  <select id="v<%=column_name%><%=application_id%>c<%=column_id%>" name="<%=column_name%><%=application_id%>c<%=column_id%>" onblur="update_value('<%=column_name%>','<%=application_id%>','<%=column_id%>','enum')">
+                  							    <% @teams_ordered.each do |team| -%>
+                  									  <%key = team[0]%>
+                  									  <%option = team[1]%>
+                  									  <option label="<%=option%>" value="<%=key%>" <%='selected="selected"' if key == value%>><%=option%></option>
+                  							    <% end -%>
+                  							  </select>
+                  							</span>
+                  				    <% when "text" -%>
+        						            <script type="text/javascript">
+                  								var ol_fgcolor = "#eeeeee";
+                  							</script>
+                  							<% if value.present? -%>
+                  							  <% href = "javascript:edit_value('#{column_name}','#{application_id},'#{escape_javascript(value)}','#{column_id}','#{@columns[column_name].column_type}')" %>
+                  							  <% value = value[0..27]+'...' %>
+                  								<a id="<%= link_id %>" href="<%= href %>" onclick="nd();" onmouseover="return overlib('<%=escape_javascript(value)%>',LEFT);" onmouseout="nd();"><%= value %></a>
+                  							<% else -%>
+                  							  <% href = "javascript:edit_value('#{column_name}','#{application_id}','#{value}','#{column_id}','#{@columns[column_name].column_type}')" %>
+                  								<% value = image_tag("edit.png", border: 0) %>
+                  								<a id="<%= link_id %>" href="<%= href %>"><%= value %></a>
+                  							<% end -%>									
+                  							</span>
+        			                <% when "dollar" -%>
+                  							<script type="text/javascript">
+                  								var ol_fgcolor = "#eeeeee";
+                  							</script>
+                  							<%if value.present? -%>
+                  							  <% href = "javascript:edit_value('#{column_name}','#{application_id}','#{escape_javascript(value)}','#{column_id}','#{@columns[column_name].column_type}')" %>
+                  							  <% value = number_to_currency(value.to_i) %>
+                  								<a id="<%= link_id %>" href="<%= href %>"  onclick="nd();" onmouseover="return overlib('<%=escape_javascript(value)%>',LEFT);" onmouseout="nd();"><%= value %></a>
+                  							<% else -%>
+                  							  <% href = "javascript:edit_value('#{column_name}','#{application_id}','#{value}','#{column_id}','#{@columns[column_name].column_type}')" %>
+                  								<% value = image_tag("edit.png", border: 0) %>
+                  								<a id="<%= link_id %>" href="<%= href %>"><%= value %></a>
+                  							<% end -%>		
+                  							</span>
+                  				    <% else -%>
+                  				      <% href = "javascript:edit_value('#{column_name}','#{application_id}','#{escape_javascript(value)}','#{column_id}','#{@columns[column_name].column_type}','', false, '#{@columns[column_name].maxlength}')" %>
+                  							<% unless value.present? %>
+                  								<% value = image_tag("edit.png", border: 0) %>
+                  							<% end %>
+                  							<a id="<%= link_id %>" href="<%= href %>"><%= value %></a>
+                  							</span>
+                  				    <% end -%>
+        			              <% else %>
+                    					<% case @columns[column_name].column_type %>
+                    					<% when 'date' %>
+                    				   	<% value = is_date(value) ? formatted_date(value) : '' %>
+                    				  <% when 'project' %>
+                    						<% value = get_project(value.to_i) %>
+                    					<% when 'percent' %>
+                    						<% value = value.to_i.round.to_s+'%' %>
+                    				  <% when 'dollar' %>
+                    				  	<% value = number_to_currency(value.to_i) %>
+                    			    <% end -%>
+                    					<span class="static"><%= value %></span>
+                    				<% end -%>
+        		            </span>
+        		            <% if i == (box.size / 2).floor-1 || i == box.size-1 %>
+        			            </td>
+        		            <%else%>
+        			            <br/>
+        		            <% end -%>
+        	            <% end -%>
+                    </tr>
+                  </table>
+                </div>
+        	    <% end -%>
+    	    
+        	    <%# For each side, add any additional boxes to the bottom %>
+        	    <%# Add boxes to side 1 *%>
+        		  <% if side_name == "col1"%>
+        		    <div class="profile_box">
+        		      <div class="subboxheader-a">Children</div>
+        	        <table cellspacing="0" border="0" width="100%" class="info">
+        	          <tr>
+              				<td class="white nosort">Name</td>
+              				<td class="white nosort">Birthday</td>
+              				<td class="white nosort">Passport#</td>
+              				<td class="white nosort" align="center"><a href="javascript:childWindow(<%=person_id%>,'add');">Add Child</a></td>
+        	          </tr>
+        	          <% @children.each do |child|%>
+        	            <tr id="child#{child.id}">
+        		            <td><%=child.name %></td>
+        		            <td><%=child.birthday.strftime('%m/%d/%Y') unless child.birthday.nil?%></td>
+                				<td><%=child.passport_no %></td>
+                				<td align="center">
+                				  <a href="javascript:childWindow(<%=child.id%>,'edit');">edit</a>
+                				  <br/>
+        			            <%= link_to_remote 'remove', 
+        									  :url => {:controller => 'child', :action => 'delete_child', :id => child.id},
+        										:complete => "document.location = '/profile/#{application_id}'",
+        										:condition => "confirm('Are you sure you want to remove this child?')"%>
+        		            </td>
+        	            </tr>
+        	          <% end -%>
+        	        </table>
+        	      </div>
+              <% end -%>
+	
+        		  <%# Add address boxes *%>
+          		<% if side_name == "col2" %>
+          			<div class="profile_box">
+          			  <div class="subboxheader-a">Contact Info</div>
+          			  <% @address_types.each do |address_type|%>
+          				  <div class="subboxheader2"><%=address_type.camelize%>:</div>
+          				  <table class="info" cellspacing="0" width="100%" border="0">
+          				    <tr>
+        				        <% this_address = @addresses[address_type] -%>
+        					      <% @address_columns.each_with_index do |column_name, i|  -%>
+        						      <% value = (this_address.send(column_name) || '').to_s -%>
+        						      <% if i == 0 || i == (@address_columns.size / 2).floor -%>
+        							      <td width="50%">
+        						      <% else -%>
+        							      <br />
+        						      <% end -%>
+        						      <span class="label"><%= column_name.titleize %>:</span> 
+        						      <span id="c<%=column_name%><%=person_id%>c<%=this_address.addressID%>">
+        						        <span id="<%=column_name%><%=person_id%>c<%=this_address.addressID%>">
+        						          <% href = "javascript:edit_value('#{column_name}','#{person_id}','#{escape_javascript(value)}','#{this_address.addressID}','address')" %>
+          							      <% value = image_tag("edit.png", :border=>"0") if !value.present? %>
+        						          <a href="<%= href %>"><%= value %></a>
+        						        </span>
+        						      </span>
+        						      <% if i == (@address_columns.size / 2).floor-1 || i == @address_columns.size-1 %>
+          							    </td>
+          						    <% end -%>
+          				      <% end -%>
+        				      </tr>
+        				    </table>
+        			    <% end -%>	
+        	      </div>	
+        		  <% end -%>
+    		  
+        		</div>
+        	<% end -%>
+        </form>
+      </div>
+    </div>
+  </div>
 </div>
+
+
 <div id="right">
 	<div id="profile_nav" class="box">
 		<div id="profile_nav_header" class="subboxheader">Quick Links</div>
