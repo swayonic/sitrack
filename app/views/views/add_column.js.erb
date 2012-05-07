@@ -1,2 +1,3 @@
-$("#list_unused").html("<%= escape_javascript(render :partial => 'list_unused') %>");
+$("#unused_<%=@column_id%>").fadeOut();
 $("#list_used").html("<%= escape_javascript(render :partial => 'list_used') %>");
+initialize_sortable_manage_view_used();

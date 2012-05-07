@@ -12,7 +12,7 @@ module ApplicationHelper
   
   # add underscores
   def u(str)
-    str.strip.gsub(/ /, '_')
+    str.to_s.strip.gsub(/ /, '_')
   end
   
   # check for valid date

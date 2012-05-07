@@ -73,7 +73,7 @@ class ViewsController < ApplicationController
   def add_column
     #raise params.inspect
     # make sure the column isn't already on this view (catch a double-click)
-    @column = params[:column_id]
+    @column_id = params[:column_id]
     @view_column = SitrackViewColumn.find(:first, 
                                           :conditions => ['sitrack_view_id = ? and sitrack_column_id = ?', params[:id], params[:column_id]])
     unless @view_column    
@@ -92,6 +92,9 @@ class ViewsController < ApplicationController
   end
   
   def remove_column
+    
+    @column_id = params[:view_column_id]
+    
     @view_column = SitrackViewColumn.find(params[:view_column_id], 
                               :include => [:sitrack_view, :sitrack_column])
     @column = @view_column.sitrack_column
