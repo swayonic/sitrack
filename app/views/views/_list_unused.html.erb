@@ -1,27 +1,29 @@
-<table width="90%" id="results" cellspacing="0" class="list" align="center">
-  <tr>
-    <td class="white sortactive" align="center" nowrap="nowrap" colspan="2">
-      Unused Columns
-    </td>
-  </tr>
-  <% if @unused_columns.size > 0 %>
-    <% @unused_columns.each do |column| -%>
-      <tr id="unused_<%=column.id%>" class="<%= cycle('odd', 'even') %>">
-        <td>
-          <%= column.name %>
+<table width="90%" id="results" cellspacing="0" class="list unused" align="center">
+  <tbody class="list">
+    <tr>
+      <td class="white sortactive lined-t" align="center" nowrap="nowrap" colspan="2">
+        Unused Columns
+      </td>
+    </tr>
+    <% if @unused_columns.size > 0 %>
+      <% @unused_columns.each do |column| -%>
+        <tr id="unused_<%=column.id%>">
+          <td class="lined-l">
+            <%= column.name %>
+          </td>
+          <td class="checkbox lined-r">
+      		  <%= link_to image_tag('add.gif'), 
+      				{:action => :add_column, :id => @view.id, :column_id => column.id},
+      				{:remote => true, :title=>"Add Column to View"} %>
+      		</td>
+      	</tr>
+      <% end %>
+    <% else %>
+      <tr>
+        <td colspan="2" align="center" class="lined">
+          All Columns Are Added
         </td>
-        <td class="checkbox">
-    		  <%= link_to image_tag('add.gif'), 
-    				{:action => :add_column, :id => @view.id, :column_id => column.id},
-    				{:remote => true, :title=>"Add Column to View"} %>
-    		</td>
     	</tr>
     <% end %>
-  <% else %>
-    <tr class="<%= cycle('odd', 'even') %>">
-      <td colspan="2" align="center">
-        All Columns Are Added
-      </td>
-  	</tr>
-  <% end %>
+  </tbody>
 </table>

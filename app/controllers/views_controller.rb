@@ -51,6 +51,16 @@ class ViewsController < ApplicationController
     render :nothing => true
   end
   
+  def reorder_used
+    @view = SitrackView.find(params[:id], :include => :sitrack_view_columns)
+    @view.sitrack_view_columns.each do |view_column|
+      view_column.position = params['used'].index(view_column.id.to_s) + 1
+      view_column.save
+    end
+    delete_cache(@view.id)
+    render :nothing => true
+  end
+  
   def save_name
     #raise params.inspect
     @view = SitrackView.find(params[:id])

@@ -165,6 +165,27 @@ table#results tr.even {
 	background: #f7f7f7;
 }
 
+table#results td.lined {
+	border: 1px solid #cdcdcd;
+	border-top: none;
+}
+
+table#results td.lined-t {
+	border: 1px solid #cdcdcd;
+}
+
+table#results td.lined-l {
+	border: 1px solid #cdcdcd;
+	border-top: none;
+	border-right: none;
+}
+
+table#results td.lined-r {
+	border: 1px solid #cdcdcd;
+	border-top: none;
+	border-left: none;
+}
+
 table#results td {
 	height: 25px;
 	min-width: 100px;
@@ -212,7 +233,7 @@ table#results td.checkbox {
 }
 
 table.list {
-	border: 1px solid #999;
+	
 }
 
 div.modify_field input {

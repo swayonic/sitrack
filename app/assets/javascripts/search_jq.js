@@ -23,6 +23,24 @@ jQuery(document).ready(function() {
     ]
 	});
 	
+	$("table.used").sortable({
+		items: "tr:not(.not-sortable)",
+		update: function(){
+			$.ajax({
+				type: 'post',
+				data: $(this).sortable('serialize'),
+				dataType: 'script',
+				complete: function(request){
+					$(this).effect('highlight');
+				},
+				url: '/views/reorder_used?id=' + $(this).attr('data-view-id')
+			});
+		}
+	});
+	
+  $("table.used tbody.list").disableSelection();
+  $("table.used tbody.list tr").css("cursor","pointer");
+	
 	$(".button").button();
 	
 	$("div#other_panel").tabs();
