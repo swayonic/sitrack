@@ -1,37 +1,40 @@
-<table class="form" border="1">
+<table border="0">
   <tr>
     <td>
-      View Name:
+      &nbsp;View Name:
     </td>
     <td>
-      <%= f.text_field :name, :class=>'field' %>
-      <%= hidden_field_tag :next, '/views' %>
-      <%= link_to_function 'Done', "$('next').value = '/views';$('view_form').submit();", :class => 'button' %>
-      <%= link_to_function 'Go To View', "$('next').value = '/directory/change_view?view_id=#{@view.id}';$('view_form').submit();", :class => 'button' %>
-<!--  ============= BEGIN Layout column choices ============== -->
-<p>The following columns are currently a part of this view. To reorder them, 
-simply click and drag the column where you'd like it to be. To remove a column 
-from the view, simply click on the red 'x' on that row. <strong>Changes are 
-saved automatically!</strong></p>
-<ul id="column_list">
-	<% @view.sitrack_view_columns.each do |column| -%>
-		<li id="column_<%=column.id%>">
-				<%=link_to_remote image_tag('x.png', :border => 0), 
-						:url => {:action => :remove_column, :view_column_id => column.id}%>
-				&nbsp;&nbsp;<%=column.sitrack_column.name%>
-		</li>
-	<% end -%>
-</ul>
-<p>The columns listed below are not currently part of your view. To add one 
-of the columns below to your view simply click on it. When you click on it 
-it will jump to the bottom of the list above. Once it's there you can click 
-and drag it where you'd like the column to go.
-<ul id="unused_column_list">
-<% @unused_columns.each do |column| -%>
-	<li id="unused_<%=column.id%>">
-			<%= link_to column.name, 
-					{:action => :add_column, :id => @view.id, :column_id => column.id},
-					{:remote => true}%>
-	</li>
-<% end -%>
-</ul>
+      <%= f.text_field :name %>
+    </td>
+    <td align="center">
+      <%= f.submit "Save Name", :class=>'button' %>
+    </td>
+  </tr>
+</table>
+<div class="col1">
+  <div class="boxed">
+    <div class="segment">
+      <center>
+        The following columns are currently a part of this view. To reorder them, simply click and drag the column where you'd like it to be. To remove a column from the view, simply click on the red 'x' on that row.
+        <br/>
+        <strong>Changes are saved automatically!</strong>
+      </center>
+    </div>
+    <div class="segment" id="list_used">
+      <%= render :partial => 'list_used' %>
+    </div>
+  </div>
+</div>
+<div class="col2">
+  <div class="boxed">
+    <div class="segment">
+      <center>
+        The columns listed below are not currently part of your view. To add one of the columns below to your view simply click on it. When you click on it it will jump to the bottom of the list above. Once it's there you can click and drag it where you'd like the column to go.
+        <strong>Changes are saved automatically!</strong>
+      </center>
+    </div>
+    <div class="segment" id="list_unused">
+      <%= render :partial => 'list_unused' %>
+    </div>
+  </div>
+</div>

@@ -17,6 +17,7 @@ class SitrackView < ActiveRecord::Base
   belongs_to :sitrack_user
     
   validates_presence_of :name
+  validates_uniqueness_of :name
   
   def display_columns
     out = Person.table_name+'.personID as id, '+HrSiApplication.table_name+'.applicationID, '

@@ -196,15 +196,13 @@
 
 <div id="center">
   <div id="other_panel">
-  	<div class="head">Brief Information</div>
     <% if @person_obj.image.present?-%>
-			<div class="picture">
-			  <%= image_tag @person_obj.image %>
+  	  <div class="head">Picture</div>
+			  <div class="picture">
+			    <%= image_tag @person_obj.image %>
+			  </div>
 			</div>
 		<% end-%>
-  	<div class="guide"><b>Name:</b> <%="#{@person_obj.lastName}, #{@person_obj.firstName} #{@person_obj.middleName}"%></div>
-  	<div class="guide"><b>Campus:</b> <%="#{@person_obj.campus}"%></div>
-  	<div class="guide"><b>Ministry:</b> <%="#{@person_obj.ministry}"%></div>
   	<div class="head">Quick Links</div>
     <div class="entry">
 	    <%= link_to "Create Another Year Record", "create_second_year?id=#{application_id}" %>

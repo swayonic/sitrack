@@ -11,7 +11,9 @@
 <body>
 <%= render :partial=>'shared/top_nav'%>
 <% if flash[:notice].present? %>
-  <div class='flash_notice'><%= flash[:notice] %></div>
+  <div id="notice_space">
+    <div class='flash_notice'><%= flash[:notice] %></div>
+  </div>
 <% end %>
   
 <%= yield %>

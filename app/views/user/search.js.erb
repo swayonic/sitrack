@@ -1,0 +1,4 @@
+$('#results').hide();
+$("#results").html("<%= escape_javascript(render :partial => 'user/search_results') %>");
+$('#results').fadeIn();
+$('#spinner_user_search').hide();

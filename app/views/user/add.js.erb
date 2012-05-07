@@ -1,0 +1,4 @@
+$("#users_list").html("<%= escape_javascript(render :partial => 'users_list') %>");
+$('#search_name').val('');
+$('#results').slideUp();
+$('#spinner_user_search').hide();

@@ -12,10 +12,11 @@ class ViewsController < ApplicationController
   def update
     @view = SitrackView.find(params[:id])
     if @view.update_attributes(params[:sitrack_view])
-      redirect_to params[:next]
+      flash[:notice] = "Directory View successfully renamed"
+      redirect_to :action=>:edit, :id=>@view
     else
-      edit
-      render :edit
+      flash[:notice] = "Failed to rename Directory View"
+      redirect_to :action=>:edit, :id=>@view
     end
   end
   
@@ -62,6 +63,7 @@ class ViewsController < ApplicationController
   def add_column
     #raise params.inspect
     # make sure the column isn't already on this view (catch a double-click)
+    @column = params[:column_id]
     @view_column = SitrackViewColumn.find(:first, 
                                           :conditions => ['sitrack_view_id = ? and sitrack_column_id = ?', params[:id], params[:column_id]])
     unless @view_column    
@@ -71,6 +73,12 @@ class ViewsController < ApplicationController
     end
     @view = @view_column.sitrack_view
     delete_cache(@view.id)
+    
+    @view = SitrackView.find(params[:id], :include => [:sitrack_view_columns => :sitrack_column])
+    @all_columns = SitrackColumn.find(:all, :order => :name)
+    @unused_columns = @all_columns - @view.sitrack_columns
+    
+    renderJS
   end
   
   def remove_column
@@ -80,6 +88,14 @@ class ViewsController < ApplicationController
     @view = @view_column.sitrack_view
     @view_column.destroy
     delete_cache(@view.id)
+    
+    
+    @view = SitrackView.find(@view.id, :include => [:sitrack_view_columns => :sitrack_column])
+    @all_columns = SitrackColumn.find(:all, :order => :name)
+    @unused_columns = @all_columns - @view.sitrack_columns
+    
+    renderJS
+    
   end
   
   def search
@@ -126,7 +142,7 @@ class ViewsController < ApplicationController
   
   protected
   def delete_cache(view_id)
-    template_with_path = "#{RAILS_ROOT}/app/views/directory/_results#{view_id}.rhtml"
+    template_with_path = "#{Rails.root}/app/views/directory/_results#{view_id}.rhtml"
     File.delete(template_with_path) if File.exist?(template_with_path)
   end
 end

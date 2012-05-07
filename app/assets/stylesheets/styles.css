@@ -15,6 +15,7 @@ body {
 	position: fixed;
 	top: 0;
 	width: 100%;
+	z-index: 99;
 }
 
 #topnav a {
@@ -29,6 +30,11 @@ body {
 	text-decoration: none;
 }
 
+div#notice_space {
+	margin-top: 40px;
+	margin-bottom: -40px;
+}
+
 div.flash_notice {
 	border: 1px solid #990000;
 	margin: 10px;
@@ -40,8 +46,7 @@ div.flash_notice {
 }
 
 #center {
-	margin: 40px 10px;
-	padding: 0;
+	padding: 40px 10px;
 }
 
 div.boxheader {
@@ -53,7 +58,6 @@ div.boxheader {
 }
 
 #main_panel {
-	margin-left: 230px;
 	overflow: hidden;
 	border: 1px solid #336699;
 }
@@ -102,12 +106,19 @@ div.boxheader {
 	float: left;
 }
 
-
 #main_panel div.col2 {
 	width: 50%;
 	margin: 0;
 	padding: 5px 0;
 	float: right;
+}
+
+#main_panel div.boxed {
+	
+}
+
+#main_panel div.segment {
+	margin: 10px;
 }
 
 #main_panel div.profile_box {
@@ -132,11 +143,9 @@ div.boxheader {
 }
 
 #other_panel {
-	position: fixed;
-	left: 10px;
-	top: 40px;
 	float:left;
 	border: 1px solid #336699;
+	border-right: none;
 	background: #fcfcfc;
 	width: 210px;
 	padding: 5px;
@@ -145,7 +154,6 @@ div.boxheader {
 }
 
 table#results {
-	border: none;
 	background: #fefefe;
 }
 
@@ -201,6 +209,10 @@ table#results td.checkbox {
 	width: 25px;
 	min-width: 25px;
 	text-align: center;
+}
+
+table.list {
+	border: 1px solid #999;
 }
 
 div.modify_field input {
@@ -301,7 +313,7 @@ div.entry div.entry_add {
 
 input[type='text'] {
 	width: 180px;
-	padding: 2px 3px;
+	padding: 2px;
 }
 
 #user_search_results {

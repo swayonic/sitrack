@@ -14,6 +14,7 @@
 	    <% @view.errors.full_messages.each do |msg| %>
         <div class='flash_notice'><%= msg %></div>
       <% end %>
+  		<br/>
       <%= form_for :view, {:action => 'new'} do |f| %>
         <center>
           <table border="0">
@@ -32,7 +33,6 @@
     			  </tr>
     			</table>
     		</center>
-    		<br/>
     		<br/>
   		<% end %>
     </div>
