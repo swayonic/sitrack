@@ -10,4 +10,5 @@
 //= require directory_views
 //= require overlib
 //= require calendar
+//= require column_options
 //= require custom_jquery

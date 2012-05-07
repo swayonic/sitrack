@@ -309,7 +309,7 @@ function update_value(fieldname, id, colID, type, selectClause, maxlength)
 			//alert('-'+short_value+'-');
 			new_text = '<a '+href+' onclick="nd();" onmouseover="return overlib(\''+value+'\',LEFT);" onmouseout="nd();">'+short_value+'</a>';
 		} else {
-			new_text = '<a '+href+'><img src="/images/edit.png" border="0"/> </a>';
+			new_text = '<a '+href+'><img src="/assets/edit.png" border="0"/> </a>';
 		}
 		item.innerHTML = new_text;
 		break;
@@ -340,7 +340,7 @@ function update_value(fieldname, id, colID, type, selectClause, maxlength)
 			new_text += value+'</a>';
 			item.innerHTML = new_text;
 		} else {
-			item.innerHTML = '<a '+href+'><img src="/images/edit.png" border="0"/></a>';
+			item.innerHTML = '<a '+href+'><img src="/assets/edit.png" border="0"/></a>';
 		}
 		break;
 	}
