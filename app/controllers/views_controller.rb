@@ -113,8 +113,8 @@ class ViewsController < ApplicationController
   
   def search
     @people = ''
-    @name = request.raw_post || request.query_string
-    if @name and !@name.empty? 
+    @name = params[:search][:name]
+    if @name.present?
     	names = @name.strip.split('%20')
     	if (names.size > 1)
 	    	first = names[0].gsub("=","")
@@ -128,29 +128,30 @@ class ViewsController < ApplicationController
 	  	                                 :conditions => @conditions, 
 	  	                                 :include => {:user => :person})
 	  end
-	  render(:layout => false)
+	  renderJS
   end
   
   def friend
-    unless params[:id]
-      redirect_to(:action => :borrow); return;
-    end
     @user = SitrackUser.find(params[:id])
     @person = @user.user.person
     @views = @user.sitrack_views
+    renderJS
   end
   
   def import
-    unless params[:id]
-      redirect_to(:action => :borrow); return;
-    end
     @view = SitrackView.find(params[:id])
-    @new_view = @view.clone
-    @view.sitrack_view_columns.each do |vc|
-      @new_view.sitrack_view_columns << vc.clone
-    end
-    sitrack_user.sitrack_views << @new_view
-    redirect_to(:action => :index)
+    @new_view = sitrack_user.sitrack_views.create!(
+      :name => @view.name
+    )
+    
+    @view.sitrack_view_columns.each do |c|
+      @new_view.sitrack_view_columns.create!(
+        :position => c.position,
+        :sitrack_column_id => c.sitrack_column_id
+      )
+    end 
+    
+    renderJS
   end
   
   protected
