@@ -299,9 +299,9 @@ div.entry div.entry_add {
 	margin: 10px;
 }
 
-input#search_name {
+input[type='text'] {
 	width: 180px;
-	padding: 3px 5px;
+	padding: 2px 3px;
 }
 
 #user_search_results {

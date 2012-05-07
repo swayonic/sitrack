@@ -9,6 +9,9 @@
 #
 
 class SitrackView < ActiveRecord::Base
+  
+  attr_accessible :name
+  
   has_many   :sitrack_view_columns, :order => :position, :include => :sitrack_column, :dependent => :destroy
   has_many   :sitrack_columns, :through => :sitrack_view_columns
   belongs_to :sitrack_user
