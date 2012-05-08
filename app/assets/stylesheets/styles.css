@@ -267,6 +267,7 @@ div.side_title {
 a.button {
 	border: 1px solid #336699;
 	min-width: 80px;
+	cursor: pointer;
 }
 
 div#search_button {

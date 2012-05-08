@@ -377,7 +377,7 @@ class DirectoryController < ApplicationController
     select_clause = @view.display_columns
     from_clause = SitrackView.join_tables
     @where_clause = all_where unless @where_clause
-    @sql = 'SELECT '+select_clause+' FROM '+from_clause+' WHERE '+@where_clause
+    @sql = 'SELECT fb_uid, '+select_clause+' FROM '+from_clause+' WHERE '+@where_clause
     
     # Remove first "AND" if there's no where_clause
     if @where_clause.blank?

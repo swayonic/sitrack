@@ -383,8 +383,7 @@ function check_key(event, old_value, fieldname, id, colID, type, selectClause)
 }
 //Open picture window
 function picture_window(personID) {
-	alert("Under Construction!");
-	// var path = "picture.php?personID="+personID+"&action=edit";
-	// pwin = window.open(path, "pwin", "toolbar=0,scrollbars=0,resizable=1,width=400,height=200");
-	// pwin.focus();
+	var path = "/profile/edit_image/"+personID;
+	pwin = window.open(path, "pwin", "toolbar=0,scrollbars=0,resizable=1,width=400,height=200");
+	pwin.focus();
 }
