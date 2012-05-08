@@ -1,0 +1,31 @@
+<% if @views.size > 0 %>
+  <div class="segment">
+    Click&nbsp;
+    <%= image_tag('copy.png')%>
+    &nbsp;to save the Directory Views in your list:
+  </div>
+  <table width="90%" id="results" cellspacing="0" class="list bordered" align="center">
+    <tr>
+      <td class="white sortactive" align="center" nowrap="nowrap" colspan="2">
+        Directory Views
+      </td>
+    </tr>
+    <% @views.each do |v| -%>
+      <tr class="<%= cycle('odd', 'even') %>">
+        <td>
+          <%= v.name %><br/>
+        </td>
+        <td class="checkbox">
+          <%=link_to image_tag('copy.png'),
+            {:action => 'import', :id => v.id},
+            :remote=>true, :onclick=>"$('#spinner_user_search').show();" %>
+    		</td>
+    	</tr>
+    <% end %>
+  </table>
+<% else %> 
+  <div class="segment">
+    <br/>
+  </div>
+	<div class="flash_notice">No views have been created.</div>
+<% end -%>
