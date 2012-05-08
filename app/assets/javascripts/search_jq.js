@@ -32,9 +32,18 @@ jQuery(document).ready(function() {
 	
 	$("div#other_panel").fadeIn();
 	
+	$(document).click(function(){
+		if(!$("div#ui-datepicker-div").is(':visible')){
+			$("input.hasDatepicker").change();
+		}
+	});
+	
 	$(".date_select").datepicker({
 		changeMonth: true,
-		changeYear: true
+		changeYear: true,
+		onClose: function(){
+			$("input.hasDatepicker").change();
+		}
 	});
 });
 

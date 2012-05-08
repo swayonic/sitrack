@@ -262,7 +262,10 @@ function appendField(fieldname, id, value, colID, type, selectClause, maxlength)
 	outer.appendChild(c);
 	$(".date_select").datepicker({
 		changeMonth: true,
-		changeYear: true
+		changeYear: true,
+		onClose: function(){
+			$("input.hasDatepicker").change();
+		}
 	});
 }
 function edit_value(fieldname, id, value, colID, type, selectClause, skipAppend, maxlength)
@@ -380,7 +383,8 @@ function check_key(event, old_value, fieldname, id, colID, type, selectClause)
 }
 //Open picture window
 function picture_window(personID) {
-	var path = "picture.php?personID="+personID+"&action=edit";
-	pwin = window.open(path, "pwin", "toolbar=0,scrollbars=0,resizable=1,width=400,height=200");
-	pwin.focus();
+	alert("Under Construction!");
+	// var path = "picture.php?personID="+personID+"&action=edit";
+	// pwin = window.open(path, "pwin", "toolbar=0,scrollbars=0,resizable=1,width=400,height=200");
+	// pwin.focus();
 }

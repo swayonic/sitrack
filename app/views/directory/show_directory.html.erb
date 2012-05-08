@@ -184,6 +184,9 @@
     </div>
 	<% end %>
 </div>
+<div class="<%= 'modify_field' if ENV['RAILS_ENV'] == 'production' %>">
+  <iframe src="" width="100%" height="20px" frameborder="0" scrolling="yes" name="modify_frame"></iframe>
+</div>
 <div id="list_append_dialog" title="Append to List" class="centered hidden">
 	<div class="fleft font14">Choose a list to append to:</div>
 	<br/>
