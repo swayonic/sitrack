@@ -22,7 +22,7 @@
 /sqlnet.log
 
 # /app/views/directory/
-/app/views/directory/_results*
+# /app/views/directory/_results*
 
 # /config/
 /config/database.yml
