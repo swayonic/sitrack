@@ -32,7 +32,10 @@ jQuery(document).ready(function() {
 	
 	$("div#other_panel").fadeIn();
 	
-	$(".date_select").datepicker();
+	$(".date_select").datepicker({
+		changeMonth: true,
+		changeYear: true
+	});
 });
 
 function initialize_sortable_manage_view_used(){

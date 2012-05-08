@@ -4,7 +4,9 @@ class ModifyController < ApplicationController
     begin
       value = escape_string(params[:value].to_s.strip)
       type = params[:type]
-      value = (value != '' ? Time.parse(value).strftime('%Y-%m-%d') : '') if type == 'date'
+      if type == 'date'
+        value = value.present? ? Date.strptime(value, '%m/%d/%Y').strftime('%Y-%m-%d') : ''
+      end
       # if this is an address field from the profile table, handle it differently
       if type == 'address'
         field = params[:fieldname]
