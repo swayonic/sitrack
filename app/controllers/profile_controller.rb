@@ -24,6 +24,7 @@ class ProfileController < ApplicationController
     end
     
     # sometimes it's useful to have the person as an object instead of a hash
+    Rails.logger.info ">>>>>>>>> #{@person['personID']}"
     @person_obj = Person.find(@person['personID'])
     
     # determine whether to give option to create second year record

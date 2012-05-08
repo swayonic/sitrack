@@ -196,12 +196,10 @@
 
 <div id="center">
   <div id="other_panel">
-    <% if @person_obj.image.present?-%>
-  	  <div class="head">Picture</div>
-			  <div class="picture">
-			    <%= image_tag @person_obj.image %>
-			  </div>
-			</div>
+    <% if @person_obj.fb_uid.present?-%>
+		  <div class="picture">
+		    <%= url_for_fb_picture(@person_obj.fb_uid) %>
+		  </div>
 		<% end-%>
   	<div class="head">Quick Links</div>
     <div class="entry">

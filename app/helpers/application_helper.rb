@@ -33,6 +33,10 @@ module ApplicationHelper
     "/files/person/image/#{id}/#{size}/#{img}"
   end
   
+  def url_for_fb_picture(uid, size='large')
+    path = "http://graph.facebook.com/#{uid}/picture?type=#{size}"
+    image_tag(path)
+  end
     
   # get the name of a project
   def get_project(id)
