@@ -19,9 +19,6 @@ class SalaryFormController < ApplicationController
       if !params[:tracking][:asgContinent].present?
         flash[:notice] = "AOA is required!"
         redirect_to :action => 'fill', :id => app_id
-      elsif !params[:form][:hrd].present?
-        flash[:notice] = "Name of approving HRD is required!"
-        redirect_to :action => 'fill', :id => app_id
       elsif !params[:form][:annual_salary].present?
         flash[:notice] = "New Annual Base Salary is required and should be a number!"
         redirect_to :action => 'fill', :id => app_id

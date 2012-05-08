@@ -1,69 +1,98 @@
 <div id="center">
-  <% @form.errors.full_messages.each do |msg| %>
-    <li><%= msg %></li>
-  <% end %>
-  <%= form_tag :id => @application  do %>
-    <div class="boxheader">Add Form Information</div>
-      <table>
-    		<tr>
-    			<td align="right">First Name: </td>
-    			<td><%= text_field 'person', 'firstName' %></td>
-    		</tr>
-    		<tr>
-    			<td align="right">Last Name: </td>
-    			<td><%= text_field 'person', 'lastName' %></td>
-    		</tr>
-    		<tr>
-    			<td align="right">Birth Date: </td>
-    			<td><%= date_select 'person', 'birth_date', :order => [:month, :day, :year], :include_blank => true, :start_year => 1970, :end_year => Time.now.year %></td>
-    		</tr>
-    		<tr>
-    			<td align="right">SSN: </td>
-    			<td><%= text_field 'application', 'ssn' %></td>
-    		</tr>
-    		<tr>
-    			<td align="right">Intern Type: </td>
-    			<td><%= select(:tracking, :internType, get_option_hash['Intern Type'], {:include_blank => true}) %></td>
-    		</tr>
-    		<tr>
-    			<td align="right">Sending Region: </td>
-    			<td><%= collection_select(:tracking, :regionOfOrigin, SitrackRegion.all, :first, :first, {:include_blank => true}) %></td>
-    		</tr>
-    		<tr>
-    			<td align="right">Caring Region: </td>
-    			<td><%= collection_select(:tracking, :caringRegion, SitrackRegion.all, :first, :second, {:include_blank => true}) %></td>
-    		</tr>
-    		<tr>
-    			<td align="right">Secure Employee: </td>
-    			<td>
-    			  <%= radio_button :person, :isSecure, 'T' %> Yes
-    			  <%= radio_button :person, :isSecure, 'F' %> No
-    			</td>
-    		</tr>
-    		<tr>
-    			<td align="right">Department: </td>
-    			<td><%= collection_select(:tracking, :asgTeam, get_teams_ordered, :first, :second, {:include_blank => true}) %></td>
-    		</tr>
-    		<tr>
-    			<td align="right">Sending Department: </td>
-    			<td><%= collection_select(:tracking, :send_dept, get_teams_ordered.collect {|k,v| [k.to_i, v]}, :first, :second, {:include_blank => true}) %></td>
-    		</tr>
-    		<tr>
-    			<td align="right">Strategy: </td>
-    			<td><%= select(:tracking, :sendLane, get_option_hash['Strategy'].keys.sort, {:include_blank => true}) %></td>
-    		</tr>
-    		<tr>
-    			<td align="right">Marital Status: </td>
-    			<td><%= select(:person, :maritalStatus, get_option_hash['Marital Status'].invert, {:include_blank => true}) %></td>
-    		</tr>
-    		<tr>
-    			<td align="right">Spouse Name: </td>		
-    			<td><%= text_field(:form, :spouse_name) %></td>
-    		</tr>
-
-    	</table><br /><br />
-    	<a href="javascript:document.forms[0].submit();" class="button">Preview Form</a>&nbsp;&nbsp;&nbsp;&nbsp;
-    	<a href="/profile/<%=@application.id%>" class="button">Back to Profile</a>
+  <div id="other_panel">
+  	<div class="head">Quick Links</div>
+    <div class="entry">
+	    <%= link_to "Back to Profile", {:controller=>'profile', :id=>params[:id]} %>
+	  </div>
+  	<div class="head">Generate Forms</div>
+    <div class="entry">
+	    <%= link_to "Add Form", "/add_form/fill?id=#{params[:id]}" %>
+	  </div>
+    <div class="entry">
+	    <%= link_to "Salary Form", "/salary_form/fill?id=#{params[:id]}" %>
+	  </div>
+    <div class="entry">
+	    <%= link_to "Additional Salary Form", "/additional_salary_form/fill?id=#{params[:id]}" %>
+	  </div>
+    <div class="entry">
+	    <%= link_to "ACOS Form", "/acos_form/fill?id=#{params[:id]}" %>
+	  </div>
+    <div class="entry">
+	    <%= link_to "Join Staff Form", "/join_staff_form/fill?id=#{params[:id]}" %>
+	  </div>
+  </div> 
+  <div id="main_panel">
+	  <div id="profile_info">
+	    <div class="boxheader">Add Form for <%= @person.full_name %></div>
+	    
+      <% @form.errors.full_messages.each do |msg| %>
+        <div class='flash_notice'><%= msg %></div>
+      <% end %>
+      <div class='segment'>
+        <%= form_tag :id => @application  do %>
+          <table>
+        		<tr>
+        			<td align="right">First Name: </td>
+        			<td><%= text_field 'person', 'firstName' %></td>
+        		</tr>
+        		<tr>
+        			<td align="right">Last Name: </td>
+        			<td><%= text_field 'person', 'lastName' %></td>
+        		</tr>
+        		<tr>
+        			<td align="right">Birth Date: </td>
+        			<td><%= date_select 'person', 'birth_date', :order => [:month, :day, :year], :include_blank => true, :start_year => 1970, :end_year => Time.now.year %></td>
+        		</tr>
+        		<tr>
+        			<td align="right">SSN: </td>
+        			<td><%= text_field 'application', 'ssn' %></td>
+        		</tr>
+        		<tr>
+        			<td align="right">Intern Type: </td>
+        			<td><%= select(:tracking, :internType, get_option_hash['Intern Type'], {:include_blank => true}) %></td>
+        		</tr>
+        		<tr>
+        			<td align="right">Sending Region: </td>
+        			<td><%= collection_select(:tracking, :regionOfOrigin, SitrackRegion.all, :first, :first, {:include_blank => true}) %></td>
+        		</tr>
+        		<tr>
+        			<td align="right">Caring Region: </td>
+        			<td><%= collection_select(:tracking, :caringRegion, SitrackRegion.all, :first, :second, {:include_blank => true}) %></td>
+        		</tr>
+        		<tr>
+        			<td align="right">Secure Employee: </td>
+        			<td>
+        			  <%= radio_button :person, :isSecure, 'T' %> Yes
+        			  <%= radio_button :person, :isSecure, 'F' %> No
+        			</td>
+        		</tr>
+        		<tr>
+        			<td align="right">Department: </td>
+        			<td><%= collection_select(:tracking, :asgTeam, get_teams_ordered, :first, :second, {:include_blank => true}) %></td>
+        		</tr>
+        		<tr>
+        			<td align="right">Sending Department: </td>
+        			<td><%= collection_select(:tracking, :send_dept, get_teams_ordered.collect {|k,v| [k.to_i, v]}, :first, :second, {:include_blank => true}) %></td>
+        		</tr>
+        		<tr>
+        			<td align="right">Strategy: </td>
+        			<td><%= select(:tracking, :sendLane, get_option_hash['Strategy'].keys.sort, {:include_blank => true}) %></td>
+        		</tr>
+        		<tr>
+        			<td align="right">Marital Status: </td>
+        			<td><%= select(:person, :maritalStatus, get_option_hash['Marital Status'].invert, {:include_blank => true}) %></td>
+        		</tr>
+        		<tr>
+        			<td align="right">Spouse Name: </td>		
+        			<td><%= text_field(:form, :spouse_name) %></td>
+        		</tr>
+        		<tr>
+        			<td align="right">&nbsp;</td>		
+        			<td><br/><a href="javascript:document.forms[0].submit();" class="button">Preview Form</a></td>
+        		</tr>
+        	</table>
+        <% end %>
+      </div>
     </div>
-  <% end %>
+  </div>
 </div>

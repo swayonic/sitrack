@@ -1,112 +1,143 @@
 <div id="center">
-<div class="boxheader">Update Form Information</div>
-	<h4>
-	Use this update to make HR
-	and Payroll changes for withdrawals, terminations, or transfers of Non-Staff
-	STINTers and Ministry Interns. <u>Assignment changes should be submitted two weeks prior to the effective date of the
-	change.</u> For terminations, withdrawals, or transfers the effective date will be the 1<sup>st</sup> or the
-	16<sup>th</sup> of the month in which the change occurs. <u>If this information
-	comes in to Staff Services less than two weeks prior to the change, it will go
-	into effect the 1<sup>st</sup> or the 16<sup>th</sup> of the following month.</u>
-	This information ensures that the STINT/Intern's payroll, benefits, and	tax status will be correct.
-	</h4>
-  <% @form.errors.full_messages.each do |msg| %>
-    <li><%= msg %></li>
-  <% end %>
-	<%= form_tag :id => @application.id do %>
-	<div class="box">
-		<div class="subboxheader">Human Resource Status:</div>
-		<table>
-		<tr>
-			<td align="right">Effective date of change: </td>		
-			<td><%=date_select('form','date_of_change', :order => [:month, :day, :year], :start_year => Time.now.year-1)%></td>
-		</tr>
-		<tr>
-			<td align="right"><%= radio_button 'form', 'action', 'termination'%> </td>
-			<td>TERMINATION</td>
-		</tr>
-		<tr>
-			<td>&nbsp;</td>
-			<td>
-				Reopen account as
-				<%= radio_button 'form', 'reopen_as', 'staff'%> Staff Applicant 
-				<%= radio_button 'form', 'reopen_as', 'stint'%> STINT Applicant 
-				<%= radio_button 'form', 'reopen_as', 'intern'%> Intern Applicant 
-			</td>
-		</tr>
-		<tr>
-			<td align="right">&nbsp;</td>
-			<td>
-				<%= radio_button 'form', 'reopen_as', 'freeze'%>
-				FREEZE ACCOUNT 
-				From <%=date_select('form','freeze_start', :order => [:month, :day, :year], :start_year => Time.now.year-1)%> 
-				to <%=date_select('form','freeze_end', :order => [:month, :day, :year], :start_year => Time.now.year-1)%> ( up to 1 year)	
-			</td>
-		</tr>
-		<tr>
-			<td align="right"><%= radio_button 'form', 'action', 'toIntern'%></td>
-			<td>TRANSITION FROM STINT to US Intern</td>
-		</tr>
-		<tr>
-			<td align="right"><%= radio_button 'form', 'action', 'toStint'%></td>
-			<td>TRANSITION FROM US Intern to STINT</td>
-		</tr>
-		<tr>
-			<td>&nbsp;</td>
-			<td>
-				<%= select(:trackingStint, :caringRegion, SitrackRegion.all)%> Caring HR Team  
-				<%= select(:person, :region, SitrackRegion.all)%> Sending HR Team
-			</td>
-		</tr>
-		<tr>
-			<td align="right"><%= radio_button 'form', 'action', 'withdrawal'%></td>
-			<td>WITHDRAWAL</td>
-		</tr>
-		<tr>
-			<td align="right"><%= radio_button 'form', 'action', 'changeLocation'%></td>
-			<td>CHANGE IN ASSIGNMENT (Please indicate: TEAM and LOCATION)</td>
-		</tr>
-		<tr>
-			<td>&nbsp;</td>
-			<td>
-				From <%= text_field(:form, :change_assignment_from_location, :maxlength => 50) %> 
-				to <%= text_field(:form, :change_assignment_to_location, :maxlength => 50) %> 
-			</td>
-		</tr>
-		<tr>
-			<td align="right"><%= radio_button 'form', 'action', 'restint'%></td>
-			<td>RESTINT to Location: <%= text_field(:form, :restint_location, :maxlength => 50) %></td>
-		</tr>
-		<tr>
-			<td>&nbsp;</td>
-			<td> 
-				DEPARTURE DATE: <%= date_select('tracking','departureDate', :order => [:month, :day, :year], :start_year => Time.now.year)%>
-				<%= radio_button 'form', 'departure_date_certainty', 'est'%> Est. 
-				<%= radio_button 'form', 'departure_date_certainty', 'conf'%> Conf.
-			</td>
-		</tr>
-		<tr>
-			<td align="right"><%= radio_button 'form', 'action', 'reintern'%></td>		
-			<td>Intern approved for second-year Internship</td>
-		</tr>
-		<tr>
-			<td align="right"><%= radio_button 'form', 'action', 'changeHours'%></td>
-			<td>
-				Change in hours worked. New number of hours per week: <%= text_field(:form, :hours_per_week, :size => 5) %> 
-			</td>
-		</tr>
-		<tr>
-			<td align="right"><%= radio_button 'form', 'action', 'other'%></td>		
-			<td>Other: <%= text_field(:form, :other_explanation) %></td>
-		</tr>
-		<tr>
-		  <td align="right">Additional Notes:</td>
-		  <td><%= text_area 'form', 'additional_notes', :rows => 5 %></td>
-		</tr>
-		</table>
-	</div><br /><br />
-	<a href="javascript:document.forms[0].submit();" class="button">Preview Form</a>&nbsp;&nbsp;&nbsp;&nbsp;
-	<a href="/profile/<%=@application.id%>" class="button">Back to Profile</a>
-	<% end %>
-</div>
+  <div id="other_panel">
+  	<div class="head">Quick Links</div>
+    <div class="entry">
+	    <%= link_to "Back to Profile", {:controller=>'profile', :id=>params[:id]} %>
+	  </div>
+  	<div class="head">Generate Forms</div>
+    <div class="entry">
+	    <%= link_to "Add Form", "/add_form/fill?id=#{params[:id]}" %>
+	  </div>
+    <div class="entry">
+	    <%= link_to "Salary Form", "/salary_form/fill?id=#{params[:id]}" %>
+	  </div>
+    <div class="entry">
+	    <%= link_to "Additional Salary Form", "/additional_salary_form/fill?id=#{params[:id]}" %>
+	  </div>
+    <div class="entry">
+	    <%= link_to "ACOS Form", "/acos_form/fill?id=#{params[:id]}" %>
+	  </div>
+    <div class="entry">
+	    <%= link_to "Join Staff Form", "/join_staff_form/fill?id=#{params[:id]}" %>
+	  </div>
+  </div> 
+  <div id="main_panel">
+	  <div id="profile_info">
+	    <div class="boxheader">Update Form Information for <%= @person.full_name %></div>
+	    
+      <% @form.errors.full_messages.each do |msg| %>
+        <div class='flash_notice'><%= msg %></div>
+      <% end %>
+      <div class='segment'>
+        Use this update to make HR and Payroll changes for withdrawals, terminations, or transfers of Non-Staff
+	STINTers and Ministry Interns.
+	      <br/>
+	      <u>Assignment changes should be submitted two weeks prior to the effective date of the change.</u> 
+	      <br/>
+	      For terminations, withdrawals, or transfers the effective date will be the 1<sup>st</sup> or the 16<sup>th</sup> of the month in which the change occurs.
+	      <br/>
+	      <u>If this information comes in to Staff Services less than two weeks prior to the change, it will go into effect the 1<sup>st</sup> or the 16<sup>th</sup> of the following month.</u>
+	      <br/>
+	      This information ensures that the STINT/Intern's payroll, benefits, and	tax status will be correct.
+	    </div>
+      <div class='segment'>
+        <%= form_tag :id => @application.id do %>
+          <div class="profile_box">
+        	  <div class="subboxheader-a">Human Resource Status</div>
+        	  <table>
+          		<tr>
+          			<td align="right">Effective date of change: </td>		
+          			<td><%=date_select('form','date_of_change', :order => [:month, :day, :year], :start_year => Time.now.year-1)%></td>
+          		</tr>
+          		<tr>
+          			<td align="right"><%= radio_button 'form', 'action', 'termination'%> </td>
+          			<td>TERMINATION</td>
+          		</tr>
+          		<tr>
+          			<td>&nbsp;</td>
+          			<td>
+          				Reopen account as
+          				<%= radio_button 'form', 'reopen_as', 'staff'%> Staff Applicant 
+          				<%= radio_button 'form', 'reopen_as', 'stint'%> STINT Applicant 
+          				<%= radio_button 'form', 'reopen_as', 'intern'%> Intern Applicant 
+          			</td>
+          		</tr>
+          		<tr>
+          			<td align="right">&nbsp;</td>
+          			<td>
+          				<%= radio_button 'form', 'reopen_as', 'freeze'%>
+          				FREEZE ACCOUNT 
+          				From <%=date_select('form','freeze_start', :order => [:month, :day, :year], :start_year => Time.now.year-1)%> 
+          				to <%=date_select('form','freeze_end', :order => [:month, :day, :year], :start_year => Time.now.year-1)%> ( up to 1 year)	
+          			</td>
+          		</tr>
+          		<tr>
+          			<td align="right"><%= radio_button 'form', 'action', 'toIntern'%></td>
+          			<td>TRANSITION FROM STINT to US Intern</td>
+          		</tr>
+          		<tr>
+          			<td align="right"><%= radio_button 'form', 'action', 'toStint'%></td>
+          			<td>TRANSITION FROM US Intern to STINT</td>
+          		</tr>
+          		<tr>
+          			<td>&nbsp;</td>
+          			<td>
+          				<%= select(:trackingStint, :caringRegion, SitrackRegion.all)%> Caring HR Team  
+          				<%= select(:person, :region, SitrackRegion.all)%> Sending HR Team
+          			</td>
+          		</tr>
+          		<tr>
+          			<td align="right"><%= radio_button 'form', 'action', 'withdrawal'%></td>
+          			<td>WITHDRAWAL</td>
+          		</tr>
+          		<tr>
+          			<td align="right"><%= radio_button 'form', 'action', 'changeLocation'%></td>
+          			<td>CHANGE IN ASSIGNMENT (Please indicate: TEAM and LOCATION)</td>
+          		</tr>
+          		<tr>
+          			<td>&nbsp;</td>
+          			<td>
+          				From <%= text_field(:form, :change_assignment_from_location, :maxlength => 50) %> 
+          				to <%= text_field(:form, :change_assignment_to_location, :maxlength => 50) %> 
+          			</td>
+          		</tr>
+          		<tr>
+          			<td align="right"><%= radio_button 'form', 'action', 'restint'%></td>
+          			<td>RESTINT to Location: <%= text_field(:form, :restint_location, :maxlength => 50) %></td>
+          		</tr>
+          		<tr>
+          			<td>&nbsp;</td>
+          			<td> 
+          				DEPARTURE DATE: <%= date_select('tracking','departureDate', :order => [:month, :day, :year], :start_year => Time.now.year)%>
+          				<%= radio_button 'form', 'departure_date_certainty', 'est'%> Est. 
+          				<%= radio_button 'form', 'departure_date_certainty', 'conf'%> Conf.
+          			</td>
+          		</tr>
+          		<tr>
+          			<td align="right"><%= radio_button 'form', 'action', 'reintern'%></td>		
+          			<td>Intern approved for second-year Internship</td>
+          		</tr>
+          		<tr>
+          			<td align="right"><%= radio_button 'form', 'action', 'changeHours'%></td>
+          			<td>
+          				Change in hours worked. New number of hours per week: <%= text_field(:form, :hours_per_week, :size => 5) %> 
+          			</td>
+          		</tr>
+          		<tr>
+          			<td align="right"><%= radio_button 'form', 'action', 'other'%></td>		
+          			<td>Other: <%= text_field(:form, :other_explanation) %></td>
+          		</tr>
+          		<tr>
+          		  <td align="right">Additional Notes:</td>
+          		  <td><%= text_area 'form', 'additional_notes', :rows => 5 %></td>
+          		</tr>
+          	</table>
+          </div>
+        	<div id="search_button">
+        	  <a href="javascript:document.forms[0].submit();" class="button">Preview Form</a>
+      		</div>
+        <% end %>
+      </div>
+    </div>
+  </div>
 </div>

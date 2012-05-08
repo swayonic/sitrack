@@ -3,9 +3,9 @@ class AcosFormController < ApplicationController
     if params[:form_id]
       @form = SitrackForm.find(params[:form_id])
     else
-      app_id = params[:id]
-      @application = HrSiApplication.find(app_id)
-      @form = SitrackAcosForm.new(:hr_si_application_id => app_id)
+      @app_id = params[:id]
+      @application = HrSiApplication.find(@app_id)
+      @form = SitrackAcosForm.new(:hr_si_application_id => @app_id)
     end
     # display form
     setup
@@ -13,7 +13,7 @@ class AcosFormController < ApplicationController
     @form.restint_location ||= @form.change_assignment_from_location
     unless request.get?
       # save and preview
-      expire_action(:controller => 'profile', :action => 'index', :id => app_id) # kill the profile cache
+      expire_action(:controller => 'profile', :action => 'index', :id => @app_id) # kill the profile cache
 
       @person.update_attributes(params[:person]) if params[:form][:action] == "toStint"
       @application.update_attributes(params[:application])
