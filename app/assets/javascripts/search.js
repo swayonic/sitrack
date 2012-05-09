@@ -127,16 +127,18 @@ function print_selected(show_apply){
 	var selected_options = '';
 	var title = '';
 	var fields = $('.option_box');
+	var active = 0;
 	for(var i=0; i < fields.length; i++){
 		var field = fields.eq(i);
 		print_entry = false;
-		print_label = false
+		print_label = false;
 		if(field.attr('type').toLowerCase() == 'checkbox'){
 			if(field.is(':checked')){
 				if(title != field.attr('group')){
 					print_label = true;
 				}
 				print_entry = true;
+				active += 1;
 			}
 		}
 		if(field.attr('type').toLowerCase() == 'text'){
@@ -145,6 +147,7 @@ function print_selected(show_apply){
 					print_label = true;
 				}
 				print_entry = true;
+				active += 1;
 			}
 		}
 		if(print_label){
@@ -161,14 +164,17 @@ function print_selected(show_apply){
 		}
 	}
 	if(show_apply){
-		selected_options_buttons = "<a href='javascript:document.search_f.submit();' id='apply_selected' class='button'>Apply Changes</a>";
-		$('#selected_options_buttons').html(selected_options_buttons);
-		$('#apply_selected').button();
+		selected_options += "<center><br/><a href='javascript:document.search_f.submit();' id='apply_selected' class='button'>Apply Changes</a></center>";
 	}
-	if(selected_options == ''){
-		$('#selected_options').html("No Selected Options");
+	if(active == 0){
+		$('#selected_options').html("");
 	}else{
-		$('#selected_options').html(selected_options);
+		div_selected_options = "<div class='head'>Active Search Options</div>";
+		div_selected_options += "<div class='segment'>";
+			div_selected_options += selected_options
+		div_selected_options += "</div>";
+		$('#selected_options').html(div_selected_options);
+		$('#apply_selected').button();
 	}
 }
 
