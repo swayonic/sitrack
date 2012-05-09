@@ -129,7 +129,7 @@ div.boxheader {
 	
 }
 
-#main_panel div.segment {
+div.segment {
 	margin: 10px;
 }
 
@@ -163,6 +163,12 @@ div.boxheader {
 	padding: 5px;
 	display: none;
 	color: #fff;
+}
+
+#other_panel div.label {
+	font-size: 14px;
+	color: #336699;
+	float: left;
 }
 
 table#results {
@@ -351,7 +357,7 @@ div.entry div.entry_add {
 }
 
 input[type='text'] {
-	width: 180px;
+	width: 155px;
 	padding: 2px;
 }
 
@@ -399,4 +405,9 @@ a.wide_link {
 
 .modify_field {
 	display: none;
+}
+
+.side_select {
+	width:180px;
+	margin-bottom: 5px;
 }

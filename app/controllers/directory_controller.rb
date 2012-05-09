@@ -186,8 +186,10 @@ class DirectoryController < ApplicationController
     
     # save the query criteria
     @criteria = SitrackSavedCriteria.create(:owner => sitrack_user.id, :criteria => @qs, :options => @selected_options)
+    
     # put the criteria in the session
     sitrack_session.save_value('criteria_id',@criteria.id)
+    
     # remove any query_id. You can't use a criteria and query at the same time.
     sitrack_session.remove_value('query_id')
     show_directory

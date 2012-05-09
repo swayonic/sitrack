@@ -1,5 +1,5 @@
 jQuery(document).ready(function() {
-	$("#search_options_accordion, #options_accordion").accordion({
+	$("#search_options_accordion, #options_accordion, #directory_sidebar").accordion({
 		collapsible: true,
 		active: false,
 		autoHeight: false
@@ -28,7 +28,7 @@ jQuery(document).ready(function() {
 	
 	$(".button").button();
 	
-	$("div#other_panel").tabs();
+	$("div#directory_tabs").tabs();
 	
 	$("div#other_panel").fadeIn();
 	
