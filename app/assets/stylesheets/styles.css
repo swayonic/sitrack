@@ -157,7 +157,7 @@ div.segment {
 #other_panel {
 	float:left;
 	border: 1px solid #336699;
-	border-right: none;
+	margin-right: -1px;
 	background: #fcfcfc;
 	width: 210px;
 	padding: 5px;
