@@ -129,26 +129,29 @@ function print_selected(show_apply){
 	var fields = $('.option_box');
 	for(var i=0; i < fields.length; i++){
 		var field = fields.eq(i);
-		print = false;
+		print_entry = false;
+		print_label = false
 		if(field.attr('type').toLowerCase() == 'checkbox'){
 			if(field.is(':checked')){
 				if(title != field.attr('group')){
-					selected_options += "<div class='entry-label'>" + field.attr('group') + "</div>";
-					title = field.attr('group');
+					print_label = true;
 				}
-				print = true;
+				print_entry = true;
 			}
 		}
 		if(field.attr('type').toLowerCase() == 'text'){
 			if(field.val()){
 				if(title != field.attr('group')){
-					selected_options += "<div class='entry-label'>" + field.attr('group') + "</div>";
-					title = field.attr('group');
+					print_label = true;
 				}
-				print = true;
+				print_entry = true;
 			}
 		}
-		if(print){
+		if(print_label){
+			selected_options += "<div class='label'>" + field.attr('group') + ":</div><br/>";
+			title = field.attr('group');
+		}
+		if(print_entry){
 			selected_options += "<div class='entry-value'>";
 				selected_options += "<div class='entry-button'>";
 					selected_options += "<img src='/assets/x.png' onclick=\"remove_selected($('#"+field.attr('id')+"'))\">";

@@ -1,5 +1,11 @@
 jQuery(document).ready(function() {
-	$("#search_options_accordion, #options_accordion, #directory_sidebar").accordion({
+	$("#search_options_accordion, #options_accordion").accordion({
+		collapsible: true,
+		active: false,
+		autoHeight: false
+	});
+	
+	$("#directory_sidebar").accordion({
 		collapsible: true,
 		active: false,
 		autoHeight: false
