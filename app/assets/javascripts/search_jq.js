@@ -5,6 +5,12 @@ jQuery(document).ready(function() {
 		autoHeight: false
 	});
 	
+	$("#directory_sidebar").accordion({
+		collapsible: true,
+		active: false,
+		autoHeight: false
+	});
+	
 	$("#storage_accordion").accordion({
 		collapsible: true,
 		active: false,
@@ -28,7 +34,7 @@ jQuery(document).ready(function() {
 	
 	$(".button").button();
 	
-	$("div#other_panel").tabs();
+	$("div#directory_tabs").tabs();
 	
 	$("div#other_panel").fadeIn();
 	

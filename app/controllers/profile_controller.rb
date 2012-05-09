@@ -24,6 +24,7 @@ class ProfileController < ApplicationController
     end
     
     # sometimes it's useful to have the person as an object instead of a hash
+    Rails.logger.info ">>>>>>>>> #{@person['personID']}"
     @person_obj = Person.find(@person['personID'])
     
     # determine whether to give option to create second year record
@@ -70,27 +71,17 @@ class ProfileController < ApplicationController
 
   def edit_image
     @person = Person.find(params[:id])
-    render(:action => :edit_image, :layout => false)
-  end
-  
-  def update_image
-  	#make sure we have a person in the params
-  	@person = Person.find(params[:id])
-  	if params[:person] && @person
-	    @person.image = params[:person][:image]
-	    if @person.save
+    if params[:person].present?
+      @person.fb_uid = params[:person][:fb_uid]
+      if @person.save!
         # clear page caches
         @person.hr_si_applications do |app|
           expire_action(:controller => 'profile', :action => 'index', :id => app.id)
   	    end
-        render(:template => '/shared/close_window', :layout => false)
-      else 
-    	  edit_image
-	    end
-	  else
-	   edit_image
+      end
     end
-  end  
+    render :layout => false
+  end
   
   def create_second_year
     @first_year = HrSiApplication.find(params[:id])

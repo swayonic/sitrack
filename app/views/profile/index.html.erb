@@ -196,19 +196,17 @@
 
 <div id="center">
   <div id="other_panel">
-    <% if @person_obj.image.present?-%>
-  	  <div class="head">Picture</div>
-			  <div class="picture">
-			    <%= image_tag @person_obj.image %>
-			  </div>
-			</div>
+    <% if @person_obj.fb_uid.present?-%>
+		  <div class="picture">
+		    <%= image_tag(url_for_fb_picture(@person_obj.fb_uid)) %>
+		  </div>
 		<% end-%>
   	<div class="head">Quick Links</div>
     <div class="entry">
 	    <%= link_to "Create Another Year Record", "create_second_year?id=#{application_id}" %>
 	  </div>
     <div class="entry">
-	    <%= link_to "Upload Picture", "javascript:picture_window(#{person_id})" %>
+	    <%= link_to "Set Picture from FB", "javascript:picture_window(#{person_id})" %>
 	  </div>
   	<div class="head">Generate Forms</div>
     <div class="entry">

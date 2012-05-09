@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20120430035555) do
+ActiveRecord::Schema.define(:version => 20120509113054) do
 
   create_table "academic_departments", :force => true do |t|
     t.string "name"
@@ -2190,7 +2190,7 @@ ActiveRecord::Schema.define(:version => 20120430035555) do
     t.string   "lastAttended",                  :limit => 20
     t.string   "ministry"
     t.string   "strategy",                      :limit => 20
-    t.integer  "fb_uid",                        :limit => 8
+    t.string   "fb_uid"
     t.datetime "date_attributes_updated"
   end
 

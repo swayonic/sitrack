@@ -46,6 +46,16 @@
   					    <a href="/profile/<%=person['applicationID']%>"><%=value%></a> 
   					  </strong>
   					</td>
+  				<% elsif column.name == "Picture" %>  
+  				  <td align="center" id="c<%=column.name%><%=person['applicationID']%>c<%=column.id%>">				
+  				    <div id="<%=column.name%><%=person['applicationID']%>c<%=column.id%>">
+      				  <% href = "javascript:picture_window(#{person['id']})" %>
+    			      <% value = image_tag(url_for_fb_picture(person['fb_uid'],'square')) if person['fb_uid'].present? %>
+      			    <a href="<%=href%>">
+      			      <%=raw person['fb_uid'].present? ? value : image_tag('edit.png', border: 0) %>
+      			    </a>
+  				    </div>
+  				  </td>
   				<% else -%>
   					<td align="center" id="c<%=column.name%><%=person['applicationID']%>c<%=column.id%>">
   					  <% if column.writeable? %>
@@ -70,7 +80,7 @@
         				    <% end  %>
         		      <% when 'image' %>
         			      <% href = "javascript:picture_window(#{person['id']})" %>
-        			      <% value = "N/A" if value.present? %>
+        			      <% value = image_tag(value) %>
         			    <% when 'enum' %>
         				    <% href = "javascript:edit_value('#{column.name}',#{person['applicationID']},'#{escape_javascript(u(value))}','#{column.id}','#{column.column_type}')" %>
         				    <% value = @options_hash[column.name][u(value)] if 'enum' == column.column_type %>

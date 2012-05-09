@@ -88,7 +88,11 @@
         		</tr>
         		<tr>
         			<td align="right">&nbsp;</td>		
-        			<td><br/><a href="javascript:document.forms[0].submit();" class="button">Preview Form</a></td>
+        			<td>
+        			  <br/>
+        			  <a href="javascript:document.forms[0].submit();" class="button">Preview Form</a>
+        	      <%= link_to "Back to Profile", {:controller=>:profile, :id=>params[:id]}, :class=>'button'%>
+        	    </td>
         		</tr>
         	</table>
         <% end %>
