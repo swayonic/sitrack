@@ -161,14 +161,17 @@ function print_selected(show_apply){
 		}
 	}
 	if(show_apply){
-		selected_options_buttons = "<a href='javascript:document.search_f.submit();' id='apply_selected' class='button'>Apply Changes</a>";
-		$('#selected_options_buttons').html(selected_options_buttons);
-		$('#apply_selected').button();
+		selected_options += "<center><br/><a href='javascript:document.search_f.submit();' id='apply_selected' class='button'>Apply Changes</a></center>";
 	}
-	if(selected_options == ''){
-		$('#selected_options').html("No Selected Options");
+	if(selected_options == '' && show_apply == false){
+		$('#selected_options').html("");
 	}else{
-		$('#selected_options').html(selected_options);
+		div_selected_options = "<div class='head'>Active Search Options</div>";
+		div_selected_options += "<div class='segment'>";
+			div_selected_options += selected_options
+		div_selected_options += "</div>";
+		$('#selected_options').html(div_selected_options);
+		$('#apply_selected').button();
 	}
 }
 
