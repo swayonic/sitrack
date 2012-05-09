@@ -1,5 +1,12 @@
 jQuery(document).ready(function() {
-	$("#search_options_accordion, #options_accordion").accordion({
+	$("#search_options_accordion").accordion({
+		collapsible: true,
+		active: false,
+		autoHeight: false,
+		active: 0
+	});
+	
+	$("#options_accordion").accordion({
 		collapsible: true,
 		active: false,
 		autoHeight: false

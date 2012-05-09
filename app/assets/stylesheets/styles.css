@@ -327,15 +327,6 @@ div.entry-button {
 	margin-right: 4px;
 }
 
-div.entry-name {
-	padding-top:2px;
-}
-
-div.entry-value {
-	vertical-align: middle;
-	padding: 4px 8px;
-}
-
 div.entry-value a {
 	font-size: 12px;
 	text-decoration: none;
@@ -378,6 +369,10 @@ div.entry div.entry_add {
 }
 #other_panel div.entry a {
 	color: #333;
+}
+
+#other_panel div.filter_tab {
+	margin-bottom: 3px;
 }
 
 #other_panel .guide {

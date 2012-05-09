@@ -152,13 +152,11 @@ function print_selected(show_apply){
 			title = field.attr('group');
 		}
 		if(print_entry){
-			selected_options += "<div class='entry-value'>";
-				selected_options += "<div class='entry-button'>";
+			selected_options += "<div class='entry'>";
+				selected_options += field.attr('title');
+				selected_options += "<div class='entry_delete'>";
 					selected_options += "<img src='/assets/x.png' onclick=\"remove_selected($('#"+field.attr('id')+"'))\">";
 				selected_options += "</div>";
-				selected_options += "<div class='entry-name'>";
-					selected_options += field.attr('title');
-				selected_options += "</div>";	
 			selected_options += "</div>";
 		}
 	}
