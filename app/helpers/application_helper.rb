@@ -1,11 +1,11 @@
 module ApplicationHelper
 
-  def display_option_box(options, name='')
+  def display_option_box(options, name='', clean_name='')
     ret_val = ''
     options.each do |key, value|
       id = name+'_'+key
-      checked = @selected_options ? (@selected_options.match(/\[#{id}\]/) ? 'checked="checked"' : '') : ''
-      ret_val += "<div class=\"select_item\" onclick=\"check($('#{id}'));\"><input id=\"#{id}\" type=\"Checkbox\" name=\"#{id}\" value=\"#{key}\" title=\"#{value}\" onclick=\"check($('#{id}'));\" #{checked} /> #{value}<br /></div>\n";
+      checked = @selected_options ? (@selected_options.match(/\[#{id}\]/) ? "checked='checked'" : '') : ''
+      ret_val += "<div class='select_item'><input id='#{id}' type='Checkbox' name='#{id}' value='#{key}' title='#{value}' onchange=\"toggle($('##{id}'));\" group='#{clean_name}' class='option_box option_box_#{name}' #{checked} /> #{value}<br /></div>";
     end unless options.blank?
     return ret_val
   end

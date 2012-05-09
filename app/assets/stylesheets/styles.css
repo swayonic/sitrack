@@ -309,12 +309,48 @@ div.centered {
 	cursor: pointer;
 }
 
+div.entry-label {
+	padding: 2px 4px;
+	background: #D0DDEA;
+}
+
+div.entry-label a {
+	font-size: 14px;
+	color: #336699;
+	font-weight: bold;
+	text-decoration: none;
+}
+
+div.entry-button {
+	float: left;
+	cursor: pointer;
+	margin-right: 4px;
+}
+
+div.entry-name {
+	padding-top:2px;
+}
+
+div.entry-value {
+	vertical-align: middle;
+	padding: 4px 8px;
+}
+
+div.entry-value a {
+	font-size: 12px;
+	text-decoration: none;
+}
+
+div.entry-value:hover {
+	background: #f9f9f9;
+}
+
 div.entry {
 	padding: 5px 8px;
 }
 
 div.entry:hover {
-	background: #e9e9e9;
+	background: #f9f9f9;
 }
 
 div.entry a {
@@ -324,7 +360,6 @@ div.entry a {
 
 div.entry div.entry_delete {
 	float: right;
-	padding-top: 3px;
 }
 div.entry div.entry_add {
 	float: left;

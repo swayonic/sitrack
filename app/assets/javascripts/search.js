@@ -116,92 +116,144 @@ function check(item) {
 	} else {
 		item.checked = true;
 	}
-	selected(item.form);
+	selected(item);
+}
+
+function toggle(item) {
+	print_selected(true);
+}
+
+function print_selected(show_apply){
+	var selected_options = '';
+	var title = '';
+	var fields = $('.option_box');
+	for(var i=0; i < fields.length; i++){
+		var field = fields.eq(i);
+		print = false;
+		if(field.attr('type').toLowerCase() == 'checkbox'){
+			if(field.is(':checked')){
+				if(title != field.attr('group')){
+					selected_options += "<div class='entry-label'>" + field.attr('group') + "</div>";
+					title = field.attr('group');
+				}
+				print = true;
+			}
+		}
+		if(field.attr('type').toLowerCase() == 'text'){
+			if(field.val()){
+				if(title != field.attr('group')){
+					selected_options += "<div class='entry-label'>" + field.attr('group') + "</div>";
+					title = field.attr('group');
+				}
+				print = true;
+			}
+		}
+		if(print){
+			selected_options += "<div class='entry-value'>";
+				selected_options += "<div class='entry-button'>";
+					selected_options += "<img src='/assets/x.png' onclick=\"remove_selected($('#"+field.attr('id')+"'))\">";
+				selected_options += "</div>";
+				selected_options += "<div class='entry-name'>";
+					selected_options += field.attr('title');
+				selected_options += "</div>";	
+			selected_options += "</div>";
+		}
+	}
+	if(show_apply){
+		selected_options_buttons = "<a href='javascript:document.search_f.submit();' id='apply_selected' class='button'>Apply Changes</a>";
+		$('#selected_options_buttons').html(selected_options_buttons);
+		$('#apply_selected').button();
+	}
+	if(selected_options == ''){
+		$('#selected_options').html("No Selected Options");
+	}else{
+		$('#selected_options').html(selected_options);
+	}
+}
+
+function remove_selected(field){
+	if(field.attr('type').toLowerCase() == 'text'){
+		field.val("");
+	}
+	if(field.attr('type').toLowerCase() == 'checkbox'){
+		field.attr('checked', false)
+	}
+	print_selected(true);
 }
 
 function selected(form) {
 	var selected_options = '';
 	var titles = '';
-
 	// loop over entire form checking for all values
-	for (var i=0; i<form.length; i++) {
+	
+	for (var i=0; i < form.length; i++) {
 		var item = form[i];
-		// Check text fields
-		if (item.type == 'text') {
-			if (item.value) {
-				selected_options += '<div class="subboxheader">' + item.title + '</div>';
-				selected_options += '<div class="menu">' + item.value + '</div>';
+		if (item.attr('type') == 'text') {
+			if (item.val()) {
+				selected_options += '<div class="subboxheader">' + item.attr('title') + '</div>';
+				selected_options += '<div class="menu">' + item.val() + '</div>';
 			}
-		// Check all the checkboxes
-		} else if (item.type == 'checkbox') {
-			if (item.checked == true) {
-				title = item.parentNode.parentNode.title;
+		} else if (item.attr('type') == 'checkbox') {
+			if (item.is(':checked')) {
+				title = item.parent('form').attr('title');
 				if (titles.lastIndexOf(title) == -1) {
 					selected_options += '<div class="subboxheader">' + title + '</div>';
 					titles = titles+','+title;
 				}
-				selected_options += '<div class="menu"><img class="x2" onclick="uncheck(document.search_f[\''+item.name+'\']);selected(document.forms[0]);" src="/images/x.png" alt="Remove" title="Remove"> ' + item.title + '</div>';
+				obj = "uncheck($(\'#"+item.name+"\'))";
+				selected_options += "<div class='menu'><img class='x2' onclick="+obj+" src='/assets/x.png' alt='Remove' title='Remove'>" + item.title + "</div>";
 			}
 		}
 	}
 	// Get pointer for selected options
-	var sel_ptr = document.getElementById('selected_options');
-	var op_ptr = document.getElementById('options');
-	
-    sel_ptr.style.display = 'block';
-	if (selected_options != '') {
-		sel_ptr.innerHTML = selected_options;
-		sel_ptr.style.visibility = 'hidden';
-		$('toggle_options').innerHTML = '(show search options)';
-		return true;
-	} else {
-		sel_ptr.innerHTML = '';
-		sel_ptr.style.visibility='hidden';
-		$('toggle_options').innerHTML = '';
-		return false;
-	}
+	// var sel_ptr = $('#selected_options');
+	// var op_ptr = document.getElementById('options');
+	$('#selected_options').html(selected_options);
+	// sel_ptr.style.display = 'block';
+	// if (selected_options != '') {
+	// 	sel_ptr.innerHTML = selected_options;
+	// 	sel_ptr.style.visibility = 'hidden';
+	// 	$('toggle_options').innerHTML = '(show search options)';
+	// 	return true;
+	// } else {
+	// 	sel_ptr.innerHTML = '';
+	// 	sel_ptr.style.visibility='hidden';
+	// 	$('toggle_options').innerHTML = '';
+	// 	return false;
+	// }
 }
 
-function toggle_options()
-{   
-    if ($('selected_options').style.visibility=='hidden') {
-        $('selected_options').style.visibility='visible';
-        $('toggle_options').innerHTML = '(hide search options)';
-    } else {
-        $('selected_options').style.visibility='hidden';
-        $('toggle_options').innerHTML = '(show search options)';
-    }
-    return false;
-}
 function clear_form(form)
 {
 	// loop over entire form clearing all values
-	for (var i=0; i<form.length; i++) {
+	fields = form.find('input');
+	for (var i=0; i<fields.length; i++) {
 		var item = form[i];
 		// Clear text fields
-		if (item.type == 'text') {
-			item.value = '';
+		if (item.attr('type') == 'text') {
+			item.val('');
 		}
 		// Clear all the checkboxes
-		else if (item.type == 'checkbox') {
-			item.checked = false;
+		else if (item.attr('type') == 'checkbox') {
+			alert("checkbox");
+			item.attr('checked', false);
 		}
 	}
-	$('selected_options').style.visibility = 'hidden';
-	$('action_menu').style.display = 'block';
+	selected_options_buttons = "<a href='javascript:document.search_f.submit();' id='apply_selected' class='button'>Apply Changes</a>";
+	$('#selected_options_buttons').html(selected_options_buttons);
+	$('#apply_selected').button();
+	$('#selected_options').html("No Option Selected");
 }
 
 function clear_search()
 {
-	// Clear and hide selected items box
-	document.getElementById('selected_options').innerHTML = '';
-//	document.getElementById('selected_options').style.display = 'none';
-	clear_form(document.search_f);
+	clear_form($('#search_f'));
 }
 
 function uncheck(item)
 {
-	item.checked = false;
+	item.attr('checked', false);
+	selected(item);
 }
 
 function enterCheck(form)
