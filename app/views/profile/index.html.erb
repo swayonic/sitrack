@@ -227,7 +227,7 @@
   </div> 
   <div id="main_panel">
 	  <div id="profile_info">
-	    <div class="boxheader">Profile</div>
+	    <div class="boxheader"><%= @person_obj.full_name %>'s Profile</div>
 	    <div class="frame">
     	  <form name="participants_f" method="post" action="/profile/<%=application_id%>">
         	<% boxes.each do |side_name, side| -%>
