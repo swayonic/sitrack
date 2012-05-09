@@ -1,7 +1,10 @@
 module ApplicationHelper
 
   def display_option_box(options, name='', clean_name='')
-    ret_val = ''
+    ret_val = '';
+    if name == 'app_year'
+      options = options.reverse;
+    end
     options.each do |key, value|
       id = name+'_'+key
       checked = @selected_options ? (@selected_options.match(/\[#{id}\]/) ? "checked='checked'" : '') : ''
