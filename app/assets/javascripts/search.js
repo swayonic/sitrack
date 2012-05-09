@@ -163,7 +163,7 @@ function print_selected(show_apply){
 	if(show_apply){
 		selected_options += "<center><br/><a href='javascript:document.search_f.submit();' id='apply_selected' class='button'>Apply Changes</a></center>";
 	}
-	if(selected_options == '' && show_apply == false){
+	if(selected_options == ''){
 		$('#selected_options').html("");
 	}else{
 		div_selected_options = "<div class='head'>Active Search Options</div>";
