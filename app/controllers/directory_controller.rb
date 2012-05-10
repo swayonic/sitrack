@@ -228,9 +228,10 @@ class DirectoryController < ApplicationController
   
   def delete_criteria
     # make sure they own the query
-    criteria = SitrackSavedCriteria.find_by_owner_and_id(sitrack_user.id, params[:id])
+    @criteria_id = params[:id]
+    criteria = SitrackSavedCriteria.find_by_owner_and_id(sitrack_user.id, @criteria_id)
     criteria.destroy if criteria
-    index
+    renderJS
   end
   
   def save_query
