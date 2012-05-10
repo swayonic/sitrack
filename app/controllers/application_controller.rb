@@ -107,21 +107,21 @@ class ApplicationController < ActionController::Base
   
   def all_tables
     table_person = Person.table_name
-    table_mpd = 'sitrack_Mpd'
-    table_address = 'ministry_NewAddress'
+    table_mpd = 'sitrack_mpd'
+    table_address = 'ministry_newaddress'
     table_tracking = SitrackTracking.table_name
-    table_users = 'sitrack_Users'
-    table_staff = 'ministry_Staff'
+    table_users = 'sitrack_users'
+    table_staff = 'ministry_staff'
     table_app = HrSiApplication.table_name
-    table_views = 'sitrack_Views'
-    table_columns = 'sitrack_Columns'
-    table_vc = 'sitrack_View_Columns'
-    table_queries = 'sitrack_Queries'
-    table_criteria = 'sitrack_SavedCriteria'
-    table_session = 'sitrack_Session'
-    table_regions = 'ministry_RegionalTeam'
-    table_children = 'sitrack_Children'
-    table_files = 'sitrack_mpdFiles'
+    table_views = 'sitrack_views'
+    table_columns = 'sitrack_columns'
+    table_vc = 'sitrack_view_columns'
+    table_queries = 'sitrack_queries'
+    table_criteria = 'sitrack_savedcriteria'
+    table_session = 'sitrack_session'
+    table_regions = 'ministry_regionalteam'
+    table_children = 'sitrack_children'
+    table_files = 'sitrack_mpdfiles'
     table_apply = 'si_applies'
     return "#{table_person} p "+
   				 "LEFT JOIN #{table_staff} s on p.accountNo = s.accountNo "+
