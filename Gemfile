@@ -11,6 +11,7 @@ gem 'airbrake'
 gem 'jquery-rails'
 gem 'dalli'
 gem 'jquery-ui-rails'
+gem 'rest-client'
 
 
 # Gems used only for assets and not required

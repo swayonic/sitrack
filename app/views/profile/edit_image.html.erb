@@ -7,15 +7,19 @@
   <body bgcolor="" style="">
     <div class="boxheader">Profile Picture</div>
   
-    <div style="float:left; width:200px; height:160px; text-align:center; margin-top:5px;">  	
+    <div style="float:left; width:200px; height:160px; padding: 5px; text-align:center; margin-top:5px;">  	
       <% @person.errors.full_messages.each do |msg| %>
         <div class='flash_notice'><%= msg %></div>
       <% end %>
-
-      <br/>
+      <% if flash[:notice].present? %>
+        <div class='flash_notice'><%= flash[:notice] %></div>
+        <% flash[:notice] = nil %>
+      <% end %>
+      <%=@fb_id%>
       <%= form_for :person, {:action => 'edit_image', :id => @person.id}  do |f| %>
-        Enter Facebook UID
-        <%= f.text_field "fb_uid", :style=>"text-align:center; width:150px; padding: 3px 5px; font-size:14px;" %>
+        <div class="label">Facebook Profile URL:</div>
+        <%= f.text_field "url", :value=>"#{@fb_url if @fb_url.present?}",
+          :style=>"text-align:center; width:180px; padding: 3px 5px; font-size:11px;" %>
         <br/>
         <br/>
       	<div id="search_button">
