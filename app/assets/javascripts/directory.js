@@ -263,6 +263,7 @@ function appendField(fieldname, id, value, colID, type, selectClause, maxlength)
 	$(".date_select").datepicker({
 		changeMonth: true,
 		changeYear: true,
+		yearRange: '-65:-0',
 		onClose: function(){
 			$("input.hasDatepicker").change();
 		}

@@ -1,38 +1,40 @@
 <html>
-<head>
-	<title>Child Info</title>
-	<%= stylesheet_link_tag 'styles', :media => 'all'%>
-  <%= stylesheet_link_tag 'scaffold', :media => 'all' %>
-</head>
-<body bgcolor="#E5E5CC">
-<div class="boxheader">Child Info</div>
-<br>
-<div class="insidebox">
+  <head>
+    <%= stylesheet_link_tag 'application', :media => 'all' %>
+    <%= javascript_include_tag "application" %>
+	  <title>Child Information</title>
+  </head>
+  <body bgcolor="" style="">
+    <div class="boxheader">Child Information</div>
+    <div class="segment">
 
-<% @child.errors.full_messages.each do |msg| %>
-  <li><%= msg %></li>
-<% end %>
-
-<% form_tag({:action => 'save_child', :id => @child.id}, {:name => 'child_form'}) do %>
-<%=hidden_field('child','person_id')%>
-<table>
-<tr>
-	<td><strong>Name</strong>: &nbsp;&nbsp;</td>
-	<td><%=text_field('child','name')%></td>
-</tr>
-<tr>
-	<td><strong>Birthdate:</strong> &nbsp;&nbsp;</td>
-	<td><%=date_select('child','birthday', :order => [:month, :day, :year], :include_blank => true, :start_year => 1980)%></td>
-</tr>
-<tr>
-	<td><strong>Passport#:</strong> &nbsp;&nbsp;</td>
-	<td><%=text_field('child','passport_no')%></td>
-</tr>
-<tr>
-	<td colspan="2"><a href="javascript:document.child_form.submit();" class="button">Save</a></td>
-</tr>
-</table><br />
-<% end %>
-</div>
-</body>
+      <% @child.errors.full_messages.each do |msg| %>
+        <div class="flash_notice"><%= msg %></div>
+      <% end %>
+      <%= form_for :child, {:action => 'save_child', :id => @child.id} do |f| %>
+      <%= f.hidden_field 'person_id'%>
+      <%= f.hidden_field 'id'%>
+        <table>
+          <tr>
+          	<td><strong>Name</strong>:</td>
+          	<td><%= f.text_field 'name' %></td>
+          </tr>
+          <tr>
+          	<td><strong>Birthdate</strong>:</td>
+          	<td><%= f.text_field 'birthday', :class=>"date_select" %></td>
+          </tr>
+          <tr>
+          	<td><strong>Passport#</strong>:</td>
+          	<td><%=text_field('child','passport_no')%></td>
+          </tr>
+          <tr>
+            <td>&nbsp;</td>
+          	<td>
+          	  <%= f.submit "Save", :class=>'button'%>
+          	</td>
+          </tr>
+        </table>
+      <% end %>
+    </div>
+  </body>
 </html>

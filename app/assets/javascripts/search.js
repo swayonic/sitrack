@@ -151,7 +151,7 @@ function print_selected(show_apply){
 			}
 		}
 		if(print_label){
-			selected_options += "<div class='label'>" + field.attr('group') + ":</div><br/>";
+			selected_options += "<div class='label'>" + field.attr('group') + ":</div>";
 			title = field.attr('group');
 		}
 		if(print_entry){
@@ -166,7 +166,7 @@ function print_selected(show_apply){
 	if(show_apply){
 		selected_options += "<center><br/><a href='javascript:document.search_f.submit();' id='apply_selected' class='button'>Apply Changes</a></center>";
 	}
-	if(active == 0){
+	if(active == 0 && show_apply == false){
 		$('#selected_options').html("");
 	}else{
 		div_selected_options = "<div class='head'>Active Search Options</div>";
@@ -230,31 +230,33 @@ function selected(form) {
 	// }
 }
 
-function clear_form(form)
+function clear_form()
 {
 	// loop over entire form clearing all values
-	fields = form.find('input');
+	var fields = $('.option_box');
 	for (var i=0; i<fields.length; i++) {
-		var item = form[i];
+		var field = fields.eq(i);
 		// Clear text fields
-		if (item.attr('type') == 'text') {
-			item.val('');
+		if (field.attr('type').toLowerCase() == 'text') {
+			field.val('');
 		}
 		// Clear all the checkboxes
-		else if (item.attr('type') == 'checkbox') {
-			alert("checkbox");
-			item.attr('checked', false);
+		else if (field.attr('type').toLowerCase() == 'checkbox') {
+			field.attr('checked', false);
 		}
 	}
-	selected_options_buttons = "<a href='javascript:document.search_f.submit();' id='apply_selected' class='button'>Apply Changes</a>";
-	$('#selected_options_buttons').html(selected_options_buttons);
+	
+	div_selected_options = "<div class='head'>Active Search Options</div>";
+	div_selected_options += "<div class='segment'>";
+		div_selected_options += "<center><br/><a href='javascript:document.search_f.submit();' id='apply_selected' class='button'>Apply Changes</a></center>";
+	div_selected_options += "</div>";
+	$('#selected_options').html(div_selected_options);
 	$('#apply_selected').button();
-	$('#selected_options').html("No Option Selected");
 }
 
 function clear_search()
 {
-	clear_form($('#search_f'));
+	clear_form();
 }
 
 function uncheck(item)

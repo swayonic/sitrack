@@ -1,11 +1,13 @@
 <div id="center">
   <div id="other_panel">
   	<div class="head">Add SI Tracker User</div>
-  	<div class="guide">You can search by First Name, Last Name, or Partial Name:</div>
-  	<div class="acenter">
-  	  <%= form_for(:search, :url=>{:action=>:search}, :html=>{:autocomplete=>"off", :remote=>true}) do |f| %>
-        <%= f.text_field :name, :value => @keyword, :onkeyup => "$('#spinner_user_search').show();$(this).submit();" %>
-      <% end %>
+  	<div class="segment acenter">
+  	  <div class="guide">You can search by First Name, Last Name, or Partial Name:</div>
+    	<div class="acenter">
+    	  <%= form_for(:search, :url=>{:action=>:search}, :html=>{:autocomplete=>"off", :remote=>true}) do |f| %>
+          <%= f.text_field :name, :value => @keyword, :onkeyup => "$('#spinner_user_search').show();$(this).submit();" %>
+        <% end %>
+      </div>
     </div>
     <div id="user_search_results">
       <div class="acenter spinner_container">
@@ -16,8 +18,10 @@
     </div>
   </div> 
   <div id="main_panel">
-	  <div id="users_list">
-      <%= render :partial => 'users_list' %>
+    <div id="holder">
+	    <div id="users_list">
+        <%= render :partial => 'users_list' %>
+      </div>
     </div>
   </div>
 </div>

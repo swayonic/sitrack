@@ -22,124 +22,126 @@
 	  </div>
   </div> 
   <div id="main_panel">
-	  <div id="profile_info">
-	    <div class="boxheader">Salary Form Information for <%= @person.full_name %></div>
+    <div id="holder">
+  	  <div id="profile_info">
+  	    <div class="boxheader">Salary Form Information for <%= @person.full_name %></div>
 	    
-      <% @form.errors.full_messages.each do |msg| %>
-        <div class='flash_notice'><%= msg %></div>
-      <% end %>
-      <% @person.errors.full_messages.each do |msg| %>
-        <div class='flash_notice'><%= msg %></div>
-      <% end %>
-      <% @application.errors.full_messages.each do |msg| %>
-        <div class='flash_notice'><%= msg %></div>
-      <% end %>
-      <% @tracking.errors.full_messages.each do |msg| %>
-        <div class='flash_notice'><%= msg %></div>
-      <% end %>
-      <div class='segment'>
+        <% @form.errors.full_messages.each do |msg| %>
+          <div class='flash_notice'><%= msg %></div>
+        <% end %>
+        <% @person.errors.full_messages.each do |msg| %>
+          <div class='flash_notice'><%= msg %></div>
+        <% end %>
+        <% @application.errors.full_messages.each do |msg| %>
+          <div class='flash_notice'><%= msg %></div>
+        <% end %>
+        <% @tracking.errors.full_messages.each do |msg| %>
+          <div class='flash_notice'><%= msg %></div>
+        <% end %>
+        <div class='segment'>
         
         
-      	<%= form_tag :id => @application.id do %>
-          <div class="profile_box">
-        	  <div class="subboxheader-a">Information Fields</div>
-      		  <table class="form_style">
-        		  <tr>
-          			<td align="right">Type of Form: </td>
-          			<td>
-          				<%= radio_button 'form', 'payroll_action', 'New Hire'%> New Hire &nbsp;
-          				<%= radio_button 'form', 'payroll_action', 'Payroll Change'%> Payroll Change
-          			</td>
-          		</tr>
-          		<tr>
-          			<td align="right">Account #: </td>
-          			<td><%= text_field 'person', 'accountNo' %></td>
-          		</tr>
-          		<tr><td align="right">First Name:</td>
-          			<td><%= text_field 'person', 'firstName' %></td>
-          		</tr>
-          		<tr><td align="right">Last Name:</td>
-          			<td><%= text_field 'person', 'lastName' %></td>
-          		</tr>
-          		<tr>
-          			<td align="right">SSN: </td>
-          			<td><%= text_field 'application', 'ssn' %></td>
-          		</tr>
-          		<tr>
-          			<td align="right">Birth Date: </td>
-          			<td><%=date_select('person','birth_date', :order => [:month, :day, :year], :start_year => 1960)%></td>
-          		</tr>
-          		<tr>
-          			<td align="right">Hire Date (or Effective Date of Change): </td>
-          			<td><%=date_select('form','date_of_change', :order => [:month, :day, :year], :start_year => Time.now.year)%></td>
-          		</tr>
-          		<tr>
-          			<td align="right">City: </td>
-          			<td><%= text_field 'tracking', 'asgCity' %></td>
-          		</tr>
-          		<% if @tracking.is_stint? -%>
-          		<tr>
-          			<td align="right">Country: </td>
-          			<td><%= text_field 'tracking', 'asgCountry' %></td>
-          		</tr>
-          		<tr>
-          			<td align="right">AOA: </td>
-          			<td><%= text_field 'tracking', 'asgContinent' %></td>
-          		</tr>
-          		<tr>
-          			<td align="right">Expected Date of Departure (If New Hire): </td>
-          			<td><%= date_select('tracking','departureDate', :order => [:month, :day, :year], :start_year => Time.now.year)%></td>
-          		</tr>
-          		<% else -%>
-          		<tr>
-          			<td align="right">State: </td>
-          			<td><%= text_field 'tracking', 'asgState' %></td>
-          		</tr>
-          		<tr>
-          			<td align="right">Intern Type: </td>
-          			<td>
-          				<%= radio_button 'tracking', 'internType', 'Internship'%> Full Time &nbsp;
-          				<%= radio_button 'tracking', 'internType', 'Class B Intern'%> Part Time
-          			</td>
-          		</tr>
-          		<tr>
-          			<td align="right">Hours/Week: </td>
-          			<td><%= text_field 'form', 'hours_per_week' %></td>
-          		</tr>
-          		<tr>
-          			<td align="right">Is this person in New York: </td>
-          			<td><%= select 'form', 'tax_rate', [['No', 23],['Yes', 28]]%></td>
-          		</tr>
-          		<% end -%>
-          		<tr>
-          			<td align="right">Reason for Change: </td>		
-          			<td><%= text_field 'form', 'salary_reason' %></td>
-          		</tr>
-          		<tr>
-          			<td align="right">New Annual Base Salary (Net): </td>
-          			<td><%= text_field 'form', 'annual_salary', :size => 30 %></td>
-          		</tr>
-          		<tr>
-          			<td align="right" class="atop">Current Address during year of internship (for tax purposes):<br/>
-          			 (If this is wrong, go back and change it on the profile)</td>
-          			<td>
-          				<%=raw @current_address %><br/>
-          				<% if @current_address.homePhone.present? %>
-          				  Home Phone: <%= @current_address.homePhone %>
-          				<% end %>
-          			</td>
-          		</tr>
-          		<tr>
-          		  <td align="right" class="atop">Additional Notes:</td>
-          		  <td><%= text_area 'form', 'additional_notes', :rows => 5 %></td>
-          		</tr>
-        		</table>
-        	</div>
-        	<div id="search_button">
-        	  <a href="javascript:document.forms[0].submit();" class="button">Preview Form</a>
-        	  <%= link_to "Back to Profile", {:controller=>:profile, :id=>params[:id]}, :class=>'button'%>
-      		</div>
-      	<% end %>
+        	<%= form_tag :id => @application.id do %>
+            <div class="profile_box">
+          	  <div class="subboxheader-a">Information Fields</div>
+        		  <table class="form_style">
+          		  <tr>
+            			<td align="right">Type of Form: </td>
+            			<td>
+            				<%= radio_button 'form', 'payroll_action', 'New Hire'%> New Hire &nbsp;
+            				<%= radio_button 'form', 'payroll_action', 'Payroll Change'%> Payroll Change
+            			</td>
+            		</tr>
+            		<tr>
+            			<td align="right">Account #: </td>
+            			<td><%= text_field 'person', 'accountNo' %></td>
+            		</tr>
+            		<tr><td align="right">First Name:</td>
+            			<td><%= text_field 'person', 'firstName' %></td>
+            		</tr>
+            		<tr><td align="right">Last Name:</td>
+            			<td><%= text_field 'person', 'lastName' %></td>
+            		</tr>
+            		<tr>
+            			<td align="right">SSN: </td>
+            			<td><%= text_field 'application', 'ssn' %></td>
+            		</tr>
+            		<tr>
+            			<td align="right">Birth Date: </td>
+            			<td><%=date_select('person','birth_date', :order => [:month, :day, :year], :start_year => 1960)%></td>
+            		</tr>
+            		<tr>
+            			<td align="right">Hire Date (or Effective Date of Change): </td>
+            			<td><%=date_select('form','date_of_change', :order => [:month, :day, :year], :start_year => Time.now.year)%></td>
+            		</tr>
+            		<tr>
+            			<td align="right">City: </td>
+            			<td><%= text_field 'tracking', 'asgCity' %></td>
+            		</tr>
+            		<% if @tracking.is_stint? -%>
+            		<tr>
+            			<td align="right">Country: </td>
+            			<td><%= text_field 'tracking', 'asgCountry' %></td>
+            		</tr>
+            		<tr>
+            			<td align="right">AOA: </td>
+            			<td><%= text_field 'tracking', 'asgContinent' %></td>
+            		</tr>
+            		<tr>
+            			<td align="right">Expected Date of Departure (If New Hire): </td>
+            			<td><%= date_select('tracking','departureDate', :order => [:month, :day, :year], :start_year => Time.now.year)%></td>
+            		</tr>
+            		<% else -%>
+            		<tr>
+            			<td align="right">State: </td>
+            			<td><%= text_field 'tracking', 'asgState' %></td>
+            		</tr>
+            		<tr>
+            			<td align="right">Intern Type: </td>
+            			<td>
+            				<%= radio_button 'tracking', 'internType', 'Internship'%> Full Time &nbsp;
+            				<%= radio_button 'tracking', 'internType', 'Class B Intern'%> Part Time
+            			</td>
+            		</tr>
+            		<tr>
+            			<td align="right">Hours/Week: </td>
+            			<td><%= text_field 'form', 'hours_per_week' %></td>
+            		</tr>
+            		<tr>
+            			<td align="right">Is this person in New York: </td>
+            			<td><%= select 'form', 'tax_rate', [['No', 23],['Yes', 28]]%></td>
+            		</tr>
+            		<% end -%>
+            		<tr>
+            			<td align="right">Reason for Change: </td>		
+            			<td><%= text_field 'form', 'salary_reason' %></td>
+            		</tr>
+            		<tr>
+            			<td align="right">New Annual Base Salary (Net): </td>
+            			<td><%= text_field 'form', 'annual_salary', :size => 30 %></td>
+            		</tr>
+            		<tr>
+            			<td align="right" class="atop">Current Address during year of internship (for tax purposes):<br/>
+            			 (If this is wrong, go back and change it on the profile)</td>
+            			<td>
+            				<%=raw @current_address %><br/>
+            				<% if @current_address.homePhone.present? %>
+            				  Home Phone: <%= @current_address.homePhone %>
+            				<% end %>
+            			</td>
+            		</tr>
+            		<tr>
+            		  <td align="right" class="atop">Additional Notes:</td>
+            		  <td><%= text_area 'form', 'additional_notes', :rows => 5 %></td>
+            		</tr>
+          		</table>
+          	</div>
+          	<div id="search_button">
+          	  <a href="javascript:document.forms[0].submit();" class="button">Preview Form</a>
+          	  <%= link_to "Back to Profile", {:controller=>:profile, :id=>params[:id]}, :class=>'button'%>
+        		</div>
+        	<% end %>
+        </div>
       </div>
     </div>
   </div>

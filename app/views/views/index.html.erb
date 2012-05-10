@@ -9,37 +9,39 @@
 	  </div>
   </div> 
   <div id="main_panel">
-	  <div class="boxheader">Directory Listings View</div>
-	  <div id="directory_results">
-      <table cellspacing="0" border="0" width="100%" id="results">
-        <% if @views.size %>
-      	  <% @views.each do |view| -%>
+    <div id="holder">
+	    <div class="boxheader">Directory Listings View</div>
+  	  <div id="directory_results">
+        <table cellspacing="0" border="0" width="100%" id="results">
+          <% if @views.size %>
+        	  <% @views.each do |view| -%>
+          		<tr class="<%= cycle('odd', 'even') %>">
+        				<td>
+        				  <strong> 
+        				    <%=view.name%>
+        				  </strong>
+        				</td>
+    	    			<td width="170" align="center">
+    	    			  <%= link_to "Edit", {:action=>'edit', :id=>view.id}, :class=>'action' %>
+        				  <% href="javascript:delete_view(#{view.id},'#{escape_javascript(view.name)}')" %>
+        				  <%= link_to "Remove", "#{href}", :class=>'action'%>
+        				  <%= link_to "View",
+        				    {:controller=>'directory', :action=>'change_view', :view_id=>view.id},
+        				    :target=>'_blank', :class=>'action'%>
+        				</td>
+        			</tr>
+        		<% end %>
+        	<% else %>
         		<tr class="<%= cycle('odd', 'even') %>">
-      				<td>
+      				<td align="center">
       				  <strong> 
-      				    <%=view.name%>
+      				    No Created View
       				  </strong>
-      				</td>
-  	    			<td width="170" align="center">
-  	    			  <%= link_to "Edit", {:action=>'edit', :id=>view.id}, :class=>'action' %>
-      				  <% href="javascript:delete_view(#{view.id},'#{escape_javascript(view.name)}')" %>
-      				  <%= link_to "Remove", "#{href}", :class=>'action'%>
-      				  <%= link_to "View",
-      				    {:controller=>'directory', :action=>'change_view', :view_id=>view.id},
-      				    :target=>'_blank', :class=>'action'%>
       				</td>
       			</tr>
       		<% end %>
-      	<% else %>
-      		<tr class="<%= cycle('odd', 'even') %>">
-    				<td align="center">
-    				  <strong> 
-    				    No Created View
-    				  </strong>
-    				</td>
-    			</tr>
-    		<% end %>
-    	</table>
+      	</table>
+      </div>
     </div>
   </div>
 </div>
