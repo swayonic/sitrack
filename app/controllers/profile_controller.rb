@@ -97,7 +97,7 @@ class ProfileController < ApplicationController
         flash[:notice] = "Please enter a valid URL"
       end
     end
-    @fb_url = "https://www.facebook.com/#{@person.fb_uid}"
+    @fb_url = @person.fb_uid.present? ? "https://www.facebook.com/#{@person.fb_uid}" : ""
     render :layout => false
   end
   
