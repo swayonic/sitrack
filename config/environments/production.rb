@@ -66,5 +66,5 @@ Sitrack::Application.configure do
   # config.active_record.auto_explain_threshold_in_seconds = 0.5
   
   config.action_mailer.default_url_options = { :host => 'https://sitrack.uscm.org' }
-  config.cache_store = :dalli_store, 'localhost', { :namespace => 'sitrack_session', :expires_in => 1.day, :compression => true }
+  config.cache_store = :dalli_store, 'localhost', { :namespace => 'sitrack_session', :expires_in => 1.day, :compress => true }
 end
