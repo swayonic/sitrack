@@ -445,7 +445,7 @@ a.wide_link {
 	margin-bottom: 5px;
 }
 
-.ui-widget-content {
+div#directory_sidebar .ui-widget-content {
 	border: none;
 }
 
