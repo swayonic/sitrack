@@ -70,6 +70,7 @@ class ProfileController < ApplicationController
   end
 
   def edit_image
+    success = false
     @person = Person.find(params[:id])
     # Check if there is an input
     if params[:person].present? && params[:person][:url].present?
@@ -87,6 +88,7 @@ class ProfileController < ApplicationController
             @person.hr_si_applications do |app|
               expire_action(:controller => 'profile', :action => 'index', :id => app.id)
             end
+            success = true
           else
             flash[:notice] = "Please try again"
           end
@@ -97,8 +99,12 @@ class ProfileController < ApplicationController
         flash[:notice] = "Please enter a valid URL"
       end
     end
-    @fb_url = @person.fb_uid.present? ? "https://www.facebook.com/#{@person.fb_uid}" : ""
-    render :layout => false
+    if success
+      close_window
+    else
+      @fb_url = @person.fb_uid.present? ? "https://www.facebook.com/#{@person.fb_uid}" : ""
+      render :layout => false
+    end
   end
   
   def create_second_year
@@ -123,6 +129,7 @@ class ProfileController < ApplicationController
   end
   
   private
+  
   def get_uid(url)
     if url.include?("facebook.com") || url.include?("fb.com")
       if url.include?("id=")
@@ -142,6 +149,10 @@ class ProfileController < ApplicationController
     rescue
       nil
     end
+  end
+  
+  def close_window
+      render(:template => '/shared/close_window', :layout => false)
   end
   
 end

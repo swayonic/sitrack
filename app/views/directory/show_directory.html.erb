@@ -115,14 +115,14 @@
       		<input type="hidden" name="query_id" />
       		<div id="queries">
       		  <% @saved_queries.each do |query| -%>
-      			  <div class="entry">
+      			  <div class="entry" id="query<%= query[:id] %>">
       				  <%= link_to(query.name,
       				    {:controller => 'directory', :action => 'show_query', :id => query[:id]},
       				    {:class => 'menu'}) %>
       				  <div class="entry_delete">
-      					  <%= link_to(image_tag('x.png', :alt => 'Delete List', :class => 'x', :border => 0),
+      					  <%= link_to image_tag('x.png', :alt => 'Delete List', :class => 'x', :border => 0),
         					  {:action => 'delete_query', :id => query[:id]}, 
-        					  {:confirm => 'Are you sure you want to delete the "'+query.name+'" list?', :post => true}) %>
+        					  {:confirm => 'Are you sure you want to delete the "'+query.name+'" list?', :remote => true} %>
         				</div>
       				</div>
       			<% end -%>
@@ -139,14 +139,14 @@
           <input type="hidden" name="criteria_id" />
       		<div id="queries">
       		  <% @saved_criteria.each do |criteria| -%>
-      			  <div class="entry">
+      			  <div class="entry" id="criteria<%= criteria[:id] %>">
       				  <%= link_to(criteria.name,
       				      {:controller => 'directory', :action => 'show_criteria', :id => criteria[:id]},
       				      {:class => 'menu'})%>
       				  <div class="entry_delete">
-      					  <%= link_to(image_tag('x.png', :alt => 'Delete Query', :class => 'x', :border => 0),
-      					      {:action => 'delete_criteria', :id => criteria[:id]},
-      					      {:confirm => 'Are you sure you want to delete the "'+criteria.name+'" criteria?', :post => true}) %>
+      					  <%= link_to image_tag('x.png', :alt => 'Delete Query', :class => 'x', :border => 0),
+      					    {:action => 'delete_criteria', :id => criteria[:id]},
+      					    {:confirm => 'Are you sure you want to delete the "'+criteria.name+'" criteria?', :remote => true} %>
       					</div>
       				</div>
       			<% end -%>
