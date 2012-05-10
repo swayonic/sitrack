@@ -22,97 +22,99 @@
 	  </div>
   </div> 
   <div id="main_panel">
-	  <div id="profile_info">
-	    <div class="boxheader">Additional Salary Form for <%= @person.full_name %></div>
+    <div id="holder">
+	    <div id="profile_info">
+  	    <div class="boxheader">Additional Salary Form for <%= @person.full_name %></div>
 	    
-      <% @form.errors.full_messages.each do |msg| %>
-        <div class='flash_notice'><%= msg %></div>
-      <% end %>
-      <div class='segment'>
-        <strong>The following information is necessary to generate an add salary form:</strong>
-        <br/>
-        Please enter <strong>NET</strong> amounts. Tax will be added based on your tax rate selection. 
-	    </div>
-      <div class='segment'>
+        <% @form.errors.full_messages.each do |msg| %>
+          <div class='flash_notice'><%= msg %></div>
+        <% end %>
+        <div class='segment'>
+          <strong>The following information is necessary to generate an add salary form:</strong>
+          <br/>
+          Please enter <strong>NET</strong> amounts. Tax will be added based on your tax rate selection. 
+  	    </div>
+        <div class='segment'>
         
-        <%= form_tag :id => @application.id do %>
-          <div class="profile_box">
-        	  <div class="subboxheader-a">Information Fields</div>
-      		  <table>
-        		  <tr>
-          			<td align="right">Account #: </td>
-          			<td><%= text_field 'person', 'accountNo' %></td>
-          		</tr>
-          		<tr><td align="right">First Name:</td>
-          			<td><%= text_field 'person', 'firstName' %></td>
-          		</tr>
-          		<tr><td align="right">Last Name:</td>
-          			<td><%= text_field 'person', 'lastName' %></td>
-          		</tr>
-          		<tr><td align="right">Email Address:</td>
-          			<td><%= text_field 'current_address', 'email' %></td>
-          		</tr>		
-          		<tr><td align="right">Current year's salary not received due to inadequate support<br/>(i.e. short paychecks-no approval required):</td>
-          			<td>$ <%= text_field 'form', 'current_years_salary', :size => 28 %></td>
-          		</tr>		
-          		<tr><td align="right">Previous year's salary not received due to inadequate support:</td>
-          			<td>$ <%= text_field 'form', 'previous_years_salary', :size => 28 %></td>
-          		</tr>		
-          		<tr><td align="right">Additional salary not exceeding your Maximum Salary level:</td>
-          			<td>$ <%= text_field 'form', 'additional_salary', :size => 28 %></td>
-          		</tr>		
-          		<tr><td align="right">Adoption:</td>
-          			<td>$ <%= text_field 'form', 'adoption', :size => 28 %></td>
-          		</tr>		
-          		<tr><td align="right">Counseling that is not for the treatment of a medical condition<br/>(i.e. marital, family, or spiritual issues):</td>
-          			<td>$ <%= text_field 'form', 'counseling', :size => 28 %></td>
-          		</tr>		
-          		<tr><td align="right">Children's expenses on a ministry trip<br/>(support raising, CSU, etc.):</td>
-          			<td>$ <%= text_field 'form', 'childrens_expenses', :size => 28 %></td>
-          		</tr>		
-          		<tr><td align="right">Children's college education<br/>Maximum amount is $14,000 per year, per child:</td>
-          			<td>$ <%= text_field 'form', 'college', :size => 28 %></td>
-          		</tr>		
-          		<tr><td align="right">Non-College Private School Expenses:</td>
-          			<td>$ <%= text_field 'form', 'private_school', :size => 28 %></td>
-          		</tr>		
-          		<tr><td align="right">Approved Graduate Studies:</td>
-          			<td>$ <%= text_field 'form', 'graduate_studies', :size => 28 %></td>
-          		</tr>		
-          		<tr><td align="right">Auto Purchase<br/>Maximum amount is $11,000 per year per family unit:</td>
-          			<td>$ <%= text_field 'form', 'auto_purchase', :size => 28 %></td>
-          		</tr>		
-          		<tr><td align="right">Settling-in expenses:</td>
-          			<td>$ <%= text_field 'form', 'settling_in_expenses', :size => 28 %></td>
-          		</tr>		
-          		<tr><td align="right">Reimbursable expenses that were not approved within 90 days<br/>(attach copy of reimbursement):</td>
-          			<td>$ <%= text_field 'form', 'reimbursable_expenses', :size => 28 %></td>
-          		</tr>
-          		<% if @tracking.is_stint? -%>
-          	  	<tr>
-            			<td align="right">Tax Rate: </td>
-            			<td><%= select 'form', 'tax_rate', [['Stinter who is currently overseas: 18%', 18],
-            												['Stinter who is currently in US not in NY: 23%', 23],
-            												['Stinter who is currently in NY: 28%', 28]]%></td>
-            		</tr>
-          		<% else -%>
+          <%= form_tag :id => @application.id do %>
+            <div class="profile_box">
+          	  <div class="subboxheader-a">Information Fields</div>
+        		  <table>
           		  <tr>
-            			<td align="right">Tax Rate: </td>
-            			<td><%= select 'form', 'tax_rate', [['Intern who is currently not in NY: 23%', 23],
-            												['Intern who is currently in NY: 28%', 28]]%></td>
+            			<td align="right">Account #: </td>
+            			<td><%= text_field 'person', 'accountNo' %></td>
             		</tr>
-            		<tr>
-            		  <td align="right">Additional Notes:</td>
-            		  <td><%= text_area 'form', 'additional_notes', :rows => 5 %></td>
+            		<tr><td align="right">First Name:</td>
+            			<td><%= text_field 'person', 'firstName' %></td>
             		</tr>
-        	    <% end -%>
-        		</table>
-      		</div>
-        	<div id="search_button">
-        	  <a href="javascript:document.forms[0].submit();" class="button">Preview Form</a>
-        	  <%= link_to "Back to Profile", {:controller=>:profile, :id=>params[:id]}, :class=>'button'%>
-      		</div>
-      	<% end -%>
+            		<tr><td align="right">Last Name:</td>
+            			<td><%= text_field 'person', 'lastName' %></td>
+            		</tr>
+            		<tr><td align="right">Email Address:</td>
+            			<td><%= text_field 'current_address', 'email' %></td>
+            		</tr>		
+            		<tr><td align="right">Current year's salary not received due to inadequate support<br/>(i.e. short paychecks-no approval required):</td>
+            			<td>$ <%= text_field 'form', 'current_years_salary', :size => 28 %></td>
+            		</tr>		
+            		<tr><td align="right">Previous year's salary not received due to inadequate support:</td>
+            			<td>$ <%= text_field 'form', 'previous_years_salary', :size => 28 %></td>
+            		</tr>		
+            		<tr><td align="right">Additional salary not exceeding your Maximum Salary level:</td>
+            			<td>$ <%= text_field 'form', 'additional_salary', :size => 28 %></td>
+            		</tr>		
+            		<tr><td align="right">Adoption:</td>
+            			<td>$ <%= text_field 'form', 'adoption', :size => 28 %></td>
+            		</tr>		
+            		<tr><td align="right">Counseling that is not for the treatment of a medical condition<br/>(i.e. marital, family, or spiritual issues):</td>
+            			<td>$ <%= text_field 'form', 'counseling', :size => 28 %></td>
+            		</tr>		
+            		<tr><td align="right">Children's expenses on a ministry trip<br/>(support raising, CSU, etc.):</td>
+            			<td>$ <%= text_field 'form', 'childrens_expenses', :size => 28 %></td>
+            		</tr>		
+            		<tr><td align="right">Children's college education<br/>Maximum amount is $14,000 per year, per child:</td>
+            			<td>$ <%= text_field 'form', 'college', :size => 28 %></td>
+            		</tr>		
+            		<tr><td align="right">Non-College Private School Expenses:</td>
+            			<td>$ <%= text_field 'form', 'private_school', :size => 28 %></td>
+            		</tr>		
+            		<tr><td align="right">Approved Graduate Studies:</td>
+            			<td>$ <%= text_field 'form', 'graduate_studies', :size => 28 %></td>
+            		</tr>		
+            		<tr><td align="right">Auto Purchase<br/>Maximum amount is $11,000 per year per family unit:</td>
+            			<td>$ <%= text_field 'form', 'auto_purchase', :size => 28 %></td>
+            		</tr>		
+            		<tr><td align="right">Settling-in expenses:</td>
+            			<td>$ <%= text_field 'form', 'settling_in_expenses', :size => 28 %></td>
+            		</tr>		
+            		<tr><td align="right">Reimbursable expenses that were not approved within 90 days<br/>(attach copy of reimbursement):</td>
+            			<td>$ <%= text_field 'form', 'reimbursable_expenses', :size => 28 %></td>
+            		</tr>
+            		<% if @tracking.is_stint? -%>
+            	  	<tr>
+              			<td align="right">Tax Rate: </td>
+              			<td><%= select 'form', 'tax_rate', [['Stinter who is currently overseas: 18%', 18],
+              												['Stinter who is currently in US not in NY: 23%', 23],
+              												['Stinter who is currently in NY: 28%', 28]]%></td>
+              		</tr>
+            		<% else -%>
+            		  <tr>
+              			<td align="right">Tax Rate: </td>
+              			<td><%= select 'form', 'tax_rate', [['Intern who is currently not in NY: 23%', 23],
+              												['Intern who is currently in NY: 28%', 28]]%></td>
+              		</tr>
+              		<tr>
+              		  <td align="right">Additional Notes:</td>
+              		  <td><%= text_area 'form', 'additional_notes', :rows => 5 %></td>
+              		</tr>
+          	    <% end -%>
+          		</table>
+        		</div>
+          	<div id="search_button">
+          	  <a href="javascript:document.forms[0].submit();" class="button">Preview Form</a>
+          	  <%= link_to "Back to Profile", {:controller=>:profile, :id=>params[:id]}, :class=>'button'%>
+        		</div>
+        	<% end -%>
+        </div>
       </div>
     </div>
   </div>

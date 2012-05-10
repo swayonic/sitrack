@@ -9,39 +9,41 @@
 	  </div>
   </div> 
   <div id="main_panel">
-	  <div class="boxheader">Find Friend's View</div>
-	  <div id="content">
-	    <div class="segment">
-	      <%= form_for(:search, :url=>{:action=>:search}, :html=>{:autocomplete=>"off", :remote=>true}) do |f| %>
-          <table border="0" align="center">
-    		    <tr>
-    		      <td>
-    			      You can search by any combination of first or last name, including partial names:
-    			    </td>
-              <td>
-    			      <%= f.text_field :name, :value => @keyword, :onkeyup => "$('#spinner_user_search').show(); $(this).submit();" %>
-    			    </td>
-    			    <td width="25">
-    			      <%= image_tag("spinner.gif", :id=>"spinner_user_search") %>
-    			    </td>
-    			  </tr>
-    			</table>
-    		<% end %>
-    		<div id="memo_space" class="acenter">
-    		</div>
-	    </div>
+    <div id="holder">
+	    <div class="boxheader">Find Friend's View</div>
+  	  <div id="content">
+  	    <div class="segment">
+  	      <%= form_for(:search, :url=>{:action=>:search}, :html=>{:autocomplete=>"off", :remote=>true}) do |f| %>
+            <table border="0" align="center">
+      		    <tr>
+      		      <td>
+      			      You can search by any combination of first or last name, including partial names:
+      			    </td>
+                <td>
+      			      <%= f.text_field :name, :value => @keyword, :onkeyup => "$('#spinner_user_search').show(); $(this).submit();" %>
+      			    </td>
+      			    <td width="25">
+      			      <%= image_tag("spinner.gif", :id=>"spinner_user_search") %>
+      			    </td>
+      			  </tr>
+      			</table>
+      		<% end %>
+      		<div id="memo_space" class="acenter">
+      		</div>
+  	    </div>
 	    
-      <div class="col1">
-        <div class="boxed">
-          <div class="segment" id="results">
+        <div class="col1">
+          <div class="boxed">
+            <div class="segment" id="results">
 	          
+            </div>
           </div>
         </div>
-      </div>
-      <div class="col2">
-        <div class="boxed">
-          <div class="segment" id="friend">
+        <div class="col2">
+          <div class="boxed">
+            <div class="segment" id="friend">
 	      
+            </div>
           </div>
         </div>
       </div>

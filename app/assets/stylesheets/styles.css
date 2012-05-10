@@ -4,8 +4,7 @@ body {
 	color: #336699;
 	font-family: "Lucida Grande", "Lucida Sans Unicode", Helvetica, Arial, Verdana, sans-serif;
 	font-size: 12px;
-	overflow-x: hidden;
-	overflow-y: scroll;
+	overflow: scroll;
 }
 
 #topnav {
@@ -57,7 +56,7 @@ div.flash_notice_ok {
 }
 
 #center {
-	padding: 40px 10px;
+	padding: 40px 10px 10px 10px;
 }
 
 div.boxheader {
@@ -69,14 +68,19 @@ div.boxheader {
 }
 
 #main_panel {
-	overflow: hidden;
-	min-height: 150px;
+	margin: 0px 10px 0px 220px;
+	
+}
+
+div#holder {
+	display: inline-block;
 	border: 1px solid #336699;
+	margin-right: 10px;
+	min-height: 400px;
+	min-width: 850px;
 }
 
 #main_panel div#directory_results, #main_panel div#users_list, #main_panel div#profile_info {
-	overflow: hidden;
-	overflow-x: auto;
 }
 
 #main_panel div.frame {
@@ -155,20 +159,18 @@ div.segment {
 }
 
 #other_panel {
-	float:left;
 	border: 1px solid #336699;
-	margin-right: -1px;
 	background: #fcfcfc;
 	width: 210px;
-	padding: 5px;
 	display: none;
 	color: #fff;
+	float: left;
 }
 
 #other_panel div.label {
 	font-size: 14px;
 	color: #336699;
-	float: left;
+	text-align: left;
 }
 
 table#results {
@@ -373,6 +375,7 @@ div.entry div.entry_add {
 
 #other_panel div.filter_tab {
 	margin-bottom: 3px;
+	margin-top: -1px;
 }
 
 #other_panel .guide {
@@ -440,4 +443,12 @@ a.wide_link {
 .side_select {
 	width:180px;
 	margin-bottom: 5px;
+}
+
+.ui-widget-content {
+	border: none;
+}
+
+.ui-helper-reset {
+	line-height: 1;
 }

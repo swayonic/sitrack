@@ -151,7 +151,7 @@ function print_selected(show_apply){
 			}
 		}
 		if(print_label){
-			selected_options += "<div class='label'>" + field.attr('group') + ":</div><br/>";
+			selected_options += "<div class='label'>" + field.attr('group') + ":</div>";
 			title = field.attr('group');
 		}
 		if(print_entry){
