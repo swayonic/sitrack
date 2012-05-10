@@ -71,15 +71,33 @@ class ProfileController < ApplicationController
 
   def edit_image
     @person = Person.find(params[:id])
-    if params[:person].present?
-      @person.fb_uid = params[:person][:fb_uid]
-      if @person.save!
-        # clear page caches
-        @person.hr_si_applications do |app|
-          expire_action(:controller => 'profile', :action => 'index', :id => app.id)
-  	    end
+    # Check if there is an input
+    if params[:person].present? && params[:person][:url].present?
+      url = params[:person][:url]
+      
+      # Get UID from URL
+      fb_uid = get_uid(url)
+      if fb_uid.present?
+        # Get ID from UID
+        fb_id = get_id(fb_uid)
+        if fb_id.present?
+          @person.fb_uid = fb_id
+          if @person.save!
+            # clear page caches
+            @person.hr_si_applications do |app|
+              expire_action(:controller => 'profile', :action => 'index', :id => app.id)
+            end
+          else
+            flash[:notice] = "Please try again"
+          end
+        else
+          flash[:notice] = "Facebook user not found"
+        end
+      else
+        flash[:notice] = "Please enter a valid URL"
       end
     end
+    @fb_url = @person.fb_uid.present? ? "https://www.facebook.com/#{@person.fb_uid}" : ""
     render :layout => false
   end
   
@@ -103,4 +121,27 @@ class ProfileController < ApplicationController
     # go to the new profile
     redirect_to(:action => :index, :id => @second_year.id)
   end
+  
+  private
+  def get_uid(url)
+    if url.include?("facebook.com") || url.include?("fb.com")
+      if url.include?("id=")
+        uid = url.split('id=').last
+      elsif url.include?("/")
+        uid = url.split('/').last
+      end
+    end
+    uid
+  end
+  
+  def get_id(uid)
+    begin
+      response = RestClient.get("https://graph.facebook.com/#{uid}")
+      response = JSON.parse(response)
+      response['id']
+    rescue
+      nil
+    end
+  end
+  
 end

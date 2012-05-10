@@ -167,7 +167,7 @@ div.segment {
 	float: left;
 }
 
-#other_panel div.label {
+div.label {
 	font-size: 14px;
 	color: #336699;
 	text-align: left;
