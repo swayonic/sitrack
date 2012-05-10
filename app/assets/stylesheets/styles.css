@@ -452,3 +452,7 @@ div#directory_sidebar .ui-widget-content {
 .ui-helper-reset {
 	line-height: 1;
 }
+
+.bold {
+	font-weight: bold;
+}

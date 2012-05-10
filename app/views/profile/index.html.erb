@@ -153,7 +153,7 @@
 				var path = "/child/add_child?personID="+id;
 				break;
 		}
-		cwin = window.open(path, "cwin", "toolbar=0,scrollbars=0,resizable=1,width=290,height=190");
+		cwin = window.open(path, "cwin", "toolbar=0,scrollbars=0,resizable=1,width=290,height=300");
 		cwin.focus();
 	}
 	//Open picture window
@@ -373,23 +373,23 @@
           		      <div class="subboxheader-a">Children</div>
           	        <table cellspacing="0" border="0" width="100%" class="info">
           	          <tr>
-                				<td class="white nosort">Name</td>
-                				<td class="white nosort">Birthday</td>
-                				<td class="white nosort">Passport#</td>
+                				<td class="white nosort bold">Name</td>
+                				<td class="white nosort bold">Birthday</td>
+                				<td class="white nosort bold">Passport#</td>
                 				<td class="white nosort" align="center"><a href="javascript:childWindow(<%=person_id%>,'add');">Add Child</a></td>
           	          </tr>
           	          <% @children.each do |child|%>
-          	            <tr id="child#{child.id}">
-          		            <td><%=child.name %></td>
-          		            <td><%=child.birthday.strftime('%m/%d/%Y') unless child.birthday.nil?%></td>
-                  				<td><%=child.passport_no %></td>
+          	            <tr id="child<%= child.id %>">
+          		            <td><%= child.name %></td>
+          		            <td><%= formatted_date(child.birthday) unless child.birthday.nil? %></td>
+                  				<td><%= child.passport_no.present? ? child.passport_no : "None" %></td>
                   				<td align="center">
-                  				  <a href="javascript:childWindow(<%=child.id%>,'edit');">edit</a>
-                  				  <br/>
-          			            <%= link_to_remote 'remove', 
-          									  :url => {:controller => 'child', :action => 'delete_child', :id => child.id},
-          										:complete => "document.location = '/profile/#{application_id}'",
-          										:condition => "confirm('Are you sure you want to remove this child?')"%>
+                  				  <%= link_to image_tag('edit.png', :border=>0),
+                				      "javascript:childWindow(#{child.id},'edit')",
+                				      :title=>"Edit" %>
+          			            <%= link_to image_tag('x.png', :border=>0), 
+          									  {:controller => 'child', :action => 'delete_child', :id => child.id},
+          										:remote=>true, :title=>"Remove", :confirm=>"Are you sure you want to remove this child?" %>
           		            </td>
           	            </tr>
           	          <% end -%>

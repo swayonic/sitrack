@@ -9,11 +9,11 @@
     <div class="segment">
 
       <% @child.errors.full_messages.each do |msg| %>
-        <li><%= msg %></li>
+        <div class="flash_notice"><%= msg %></div>
       <% end %>
-
       <%= form_for :child, {:action => 'save_child', :id => @child.id} do |f| %>
       <%= f.hidden_field 'person_id'%>
+      <%= f.hidden_field 'id'%>
         <table>
           <tr>
           	<td><strong>Name</strong>:</td>

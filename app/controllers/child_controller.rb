@@ -1,56 +1,64 @@
 class ChildController < ApplicationController
   
   def add_child
-    if params[:personID]
-      @child = SitrackChild.new(:person_id => params[:personID])
-      render(:action => :child, :layout => false)
+    if params[:child].present?
+      save_child
     else
-      close_window
+      if params[:personID]
+        @child = SitrackChild.new(:person_id => params[:personID])
+        render(:action => :child, :layout => false)
+      else
+        close_window
+      end
     end
   end
   
   def edit_child
-    if params[:childID]
-      @child = SitrackChild.find(params[:childID])
-      render(:action => :child, :layout => false)    
+    if params[:child].present?
+      save_child
     else
-      close_window
+      if params[:childID]
+        @child = SitrackChild.find(params[:childID])
+        @child.birthday = @child.birthday.strftime("%m/%d/%Y")
+        render(:action => :child, :layout => false)    
+      else
+        close_window
+      end
     end
   end
   
   def save_child
-    Rails.logger.info "1"
-    unless params[:child] && params[:child][:person_id] 
-      raise "Bad form post: "+params.inspect
-      Rails.logger.info "2"
+    unless params[:child].present? && params[:child][:person_id].present?
+      raise "Bad form post: " + params.inspect
     end
-    if params[:id]
-      Rails.logger.info "3"
+    
+    #Reformat Birthday
+    bday = params[:child][:birthday]
+    params[:child][:birthday] = Date.strptime(bday, '%m/%d/%Y').strftime('%Y-%m-%d') if bday.present?
+    
+    if params[:child][:id].present?
       #update
-      @child = SitrackChild.find(params[:id])
+      @child = SitrackChild.find(params[:child][:id])
       @child.update_attributes(params[:child])
     else
-      Rails.logger.info "4"
       #insert
       @child = SitrackChild.create(params["child"])
     end
     if @child.valid?
-      Rails.logger.info "5"
       # clear page caches
       @child.person.hr_si_applications do |app|
 	      expire_action(:action => :index, :id => app.id)
 	    end
       close_window
     else 
-      Rails.logger.info "6"
       render(:action => :child, :layout => false)
     end
-    Rails.logger.info "7"
   end
   
   def delete_child
-    SitrackChild.destroy(params[:id]) if params[:id]
-    render :nothing => true
+    @child_id = params[:id]
+    SitrackChild.destroy(@child_id) if @child_id
+    renderJS
   end
   
   private 
