@@ -115,14 +115,14 @@
       		<input type="hidden" name="query_id" />
       		<div id="queries">
       		  <% @saved_queries.each do |query| -%>
-      			  <div class="entry">
+      			  <div class="entry" id="query<%= query[:id] %>">
       				  <%= link_to(query.name,
       				    {:controller => 'directory', :action => 'show_query', :id => query[:id]},
       				    {:class => 'menu'}) %>
       				  <div class="entry_delete">
-      					  <%= link_to(image_tag('x.png', :alt => 'Delete List', :class => 'x', :border => 0),
+      					  <%= link_to image_tag('x.png', :alt => 'Delete List', :class => 'x', :border => 0),
         					  {:action => 'delete_query', :id => query[:id]}, 
-        					  {:confirm => 'Are you sure you want to delete the "'+query.name+'" list?', :post => true}) %>
+        					  {:confirm => 'Are you sure you want to delete the "'+query.name+'" list?', :remote => true} %>
         				</div>
       				</div>
       			<% end -%>
