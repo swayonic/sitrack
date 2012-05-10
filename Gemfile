@@ -12,6 +12,8 @@ gem 'jquery-rails'
 gem 'dalli'
 gem 'jquery-ui-rails'
 gem 'rest-client'
+gem 'paperclip' # needed for common engine
+gem 'aasm' # needed for common engine
 
 
 # Gems used only for assets and not required
