@@ -51,6 +51,7 @@ jQuery(document).ready(function() {
 	$("div#directory_tabs").tabs();
 	
 	$("div#other_panel").fadeIn();
+	$("#topnav #left").fadeIn();
 	
 	$(document).click(function(){
 		if(!$("div#ui-datepicker-div").is(':visible')){
@@ -86,3 +87,14 @@ function initialize_sortable_manage_view_used(){
   $("table.used").disableSelection();
   $("table.used tr").css("cursor","pointer");
 };
+
+function toggle_sidebar(){
+	$("div#other_panel").toggle();
+	if($("div#other_panel").is(':visible')){
+		$("div#main_panel").css('margin-left','220px');
+		$("span#sidebar_toggle").html("Hide Sidebar");
+	}else{
+		$("div#main_panel").css('margin-left','0px');
+		$("span#sidebar_toggle").html("Show Sidebar");
+	}
+}

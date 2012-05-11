@@ -18,16 +18,31 @@ body {
 	z-index: 99;
 }
 
+#topnav #left {
+	float: left;
+	padding: 0 15px;
+	display: none;
+}
+
+#topnav #left #image {
+	width: 16px;
+	height: 16px;
+	margin-bottom: -3px;
+	margin-left: -35px;
+}
+
 #topnav a {
 	color: #fff;
 	text-decoration: none;
 	margin-right: 40px;
 	margin-left: -30px;
+	cursor: pointer;
 }
 
 #topnav a:hover {
 	color: #dedede;
 	text-decoration: none;
+	cursor: pointer;
 }
 
 div#notice_space {
