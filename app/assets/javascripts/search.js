@@ -164,9 +164,11 @@ function print_selected(show_apply){
 		}
 	}
 	if(show_apply){
+		active += 1;
 		selected_options += "<center><br/><a href='javascript:document.search_f.submit();' id='apply_selected' class='button'>Apply Changes</a></center>";
 	}
-	if(active == 0 && show_apply == false){
+	
+	if(active == 0){
 		$('#selected_options').html("");
 	}else{
 		div_selected_options = "<div id='advance_search_options' class='filter_tab padb3'>";
@@ -220,22 +222,6 @@ function selected(form) {
 			}
 		}
 	}
-	// Get pointer for selected options
-	// var sel_ptr = $('#selected_options');
-	// var op_ptr = document.getElementById('options');
-	$('#selected_options').html(selected_options);
-	// sel_ptr.style.display = 'block';
-	// if (selected_options != '') {
-	// 	sel_ptr.innerHTML = selected_options;
-	// 	sel_ptr.style.visibility = 'hidden';
-	// 	$('toggle_options').innerHTML = '(show search options)';
-	// 	return true;
-	// } else {
-	// 	sel_ptr.innerHTML = '';
-	// 	sel_ptr.style.visibility='hidden';
-	// 	$('toggle_options').innerHTML = '';
-	// 	return false;
-	// }
 }
 
 function clear_form()
