@@ -297,7 +297,7 @@
                       						<a id="<%= link_id %>" href="<%= href %>"><%= value %></a>
                     							</span>
                     							<span id="f<%=column_name%><%=application_id%>c<%=column_id%>" class="modify_field">
-                    							  <select id="v<%=column_name%><%=application_id%>c<%=column_id%>" name="<%=column_name%><%=application_id%>c<%=column_id%>" onblur="update_value('<%=column_name%>','<%=application_id%>','<%=column_id%>','enum')">
+                    							  <select id="v<%=column_name%><%=application_id%>c<%=column_id%>" name="<%=column_name%><%=application_id%>c<%=column_id%>" onblur="update_value('<%=column_name%>','<%=application_id%>','<%=column_id%>','enum')" onchange="$(this).blur()">
                     							    <% @teams_ordered.each do |team| -%>
                     									  <%key = team[0]%>
                     									  <%option = team[1]%>

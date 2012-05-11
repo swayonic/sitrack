@@ -74,11 +74,15 @@ class ApplicationController < ActionController::Base
   
   private
   def sitrack_user
-    unless @sitrack_user 
-      @sitrack_user ||= authorize
-      session[:sitrack_user_id] = @sitrack_user.id
+    begin
+      unless @sitrack_user 
+        @sitrack_user ||= authorize
+        session[:sitrack_user_id] = @sitrack_user.id
+      end
+      @sitrack_user
+    rescue "Cannot Determine User"
+      redirect_to "/"
     end
-    @sitrack_user
   end
   # reset the user object in the session
   def reset_user

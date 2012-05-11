@@ -238,6 +238,9 @@ function appendField(fieldname, id, value, colID, type, selectClause, maxlength)
 		field.onblur = function () {
 			update_value(fieldname, id, colID, type, selectClause, maxlength);
 		}
+		field.onchange = function () {
+			field.blur();
+		}
 		break;
 	default:
 		var field = document.createElement("input");
