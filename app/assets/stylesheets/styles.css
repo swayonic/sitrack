@@ -128,6 +128,7 @@ div#holder {
 
 #main_panel span.label  {
 	font-weight: bold;
+	color: #336699;
 }
 
 #main_panel div.col1 {
@@ -170,6 +171,7 @@ div.segment {
 }
 #main_panel table.info td {
 	vertical-align: top;
+	color: #55a062;
 	line-height: 25px;
 }
 
