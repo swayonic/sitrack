@@ -169,12 +169,20 @@ function print_selected(show_apply){
 	if(active == 0 && show_apply == false){
 		$('#selected_options').html("");
 	}else{
-		div_selected_options = "<div class='head'>Active Search Options</div>";
-		div_selected_options += "<div class='segment'>";
-			div_selected_options += selected_options
+		div_selected_options = "<div id='advance_search_options' class='filter_tab padb3'>";
+			div_selected_options += "<h3><a href='#'>Active Search Options</a></h3>";
+			div_selected_options += "<div>";
+				div_selected_options += selected_options;
+			div_selected_options += "</div>";
 		div_selected_options += "</div>";
 		$('#selected_options').html(div_selected_options);
 		$('#apply_selected').button();
+		$("#advance_search_options").accordion({
+			collapsible: true,
+			active: false,
+			autoHeight: false,
+			active: 0
+		});
 	}
 }
 
@@ -246,12 +254,20 @@ function clear_form()
 		}
 	}
 	
-	div_selected_options = "<div class='head'>Active Search Options</div>";
-	div_selected_options += "<div class='segment'>";
-		div_selected_options += "<center><br/><a href='javascript:document.search_f.submit();' id='apply_selected' class='button'>Apply Changes</a></center>";
+	div_selected_options = "<div id='advance_search_options' class='filter_tab padb3'>";
+		div_selected_options += "<h3><a href='#'>Active Search Options</a></h3>";
+		div_selected_options += "<div>";
+			div_selected_options += "<center><br/><a href='javascript:document.search_f.submit();' id='apply_selected' class='button'>Apply Changes</a></center>";
+		div_selected_options += "</div>";
 	div_selected_options += "</div>";
 	$('#selected_options').html(div_selected_options);
 	$('#apply_selected').button();
+	$("#advance_search_options").accordion({
+		collapsible: true,
+		active: false,
+		autoHeight: false,
+		active: 0
+	});
 }
 
 function clear_search()

@@ -12,10 +12,17 @@ jQuery(document).ready(function() {
 		autoHeight: false
 	});
 	
-	$("#directory_sidebar").accordion({
+	$(".directory_sidebar_closed").accordion({
 		collapsible: true,
 		active: false,
 		autoHeight: false
+	});
+	
+	$(".directory_sidebar_open").accordion({
+		collapsible: true,
+		active: false,
+		autoHeight: false,
+		active: 0
 	});
 	
 	$("#storage_accordion").accordion({

@@ -374,7 +374,6 @@ div.entry div.entry_add {
 }
 
 #other_panel div.filter_tab {
-	margin-bottom: 3px;
 	margin-top: -1px;
 }
 
@@ -445,7 +444,7 @@ a.wide_link {
 	margin-bottom: 5px;
 }
 
-div#directory_sidebar .ui-widget-content {
+.filter_tab .ui-widget-content {
 	border: none;
 }
 
@@ -455,4 +454,8 @@ div#directory_sidebar .ui-widget-content {
 
 .bold {
 	font-weight: bold;
+}
+
+.padb3 {
+	margin-bottom: 3px;
 }
