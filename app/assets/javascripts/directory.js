@@ -228,6 +228,9 @@ function appendField(fieldname, id, value, colID, type, selectClause, maxlength)
 		field.onblur = function () {
 			update_value(fieldname, id, colID, type, selectClause, maxlength);
 		}
+		field.onchange = function () {
+			field.blur();
+		}
 		break;
 	case 'team':
 		var field = document.createElement("select");

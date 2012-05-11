@@ -5,7 +5,7 @@ function appendOptions(field, fieldname, value) {
 	var option = document.createElement('option'); 
 	option.setAttribute('value', '1'); 
 	if ('1' == value) { 
-	option.setAttribute("selected", "true"); 
+	option.setAttribute('selected', 'true'); 
 	} 
 	var option_value = document.createTextNode('Male'); 
 	option.appendChild(option_value); 

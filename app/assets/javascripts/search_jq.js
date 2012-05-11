@@ -63,9 +63,6 @@ jQuery(document).ready(function() {
 	$("div#other_panel").fadeIn();
 	$("#topnav #left").fadeIn();
 	
-	$(document).on('change', 'select', function(){ 
-		$(this).blur();
-	});
 	
 	$(document).click(function(){
 		if(!$("div#ui-datepicker-div").is(':visible')){
