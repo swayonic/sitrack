@@ -324,7 +324,11 @@ function update_value(fieldname, id, colID, type, selectClause, maxlength)
 		var text = field[field.selectedIndex].text;
 		var params = "'"+fieldname+"','"+id+"','"+value+"','"+colID+"','"+type+"','"+selectClause+"','true'";	// Redefine params
 		var href = 'href="javascript:edit_value('+params+')"'; // Redefine href
-		item.innerHTML = '<a id="link'+fieldname+id+'c'+colID+'" '+href+'>'+text+'</a>';
+		if(text){
+			item.innerHTML = '<a id="link'+fieldname+id+'c'+colID+'" '+href+'>'+text+'</a>';
+		}else{
+			item.innerHTML = '<a id="link'+fieldname+id+'c'+colID+'" '+href+'><img src="/assets/edit.png" border="0"/></a>';
+		}
 		break;
 	case 'team':
 		var field = document.getElementById('v'+fieldname+id+'c'+colID);
@@ -333,11 +337,7 @@ function update_value(fieldname, id, colID, type, selectClause, maxlength)
 		var text = field[field.selectedIndex].text;
 		var params = "'"+fieldname+"','"+id+"','"+value+"','"+colID+"','"+type+"','"+selectClause+"','true'";	// Redefine params
 		var href = 'href="javascript:edit_value('+params+')"'; // Redefine href
-		if(text){
-			item.innerHTML = '<a id="link'+fieldname+id+'c'+colID+'" '+href+'>'+text+'</a>';
-		}else{
-			item.innerHTML = '<a id="link'+fieldname+id+'c'+colID+'" '+href+'><img src="/assets/edit.png" border="0"/></a>';
-		}
+		item.innerHTML = '<a id="link'+fieldname+id+'c'+colID+'" '+href+'>'+text+'</a>';
 		break;
 	default: 
 		if (value.replace(/s+/gi,'') != '') {
