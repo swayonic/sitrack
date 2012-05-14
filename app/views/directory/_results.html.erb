@@ -32,9 +32,6 @@
 							<%= link_to column.name,
 							    {:action => 'index', :order_by => column_name+' asc'},
 							    {:class => 'sort'} %>
-			  			<%= link_to image_tag('sort_down.png', :height=>12),
-							    {:action => 'index', :order_by => column_name+' asc'},
-							    {:class => 'sort'} %>
 						</td>
 			    <% end -%>
   	    <% else -%>
