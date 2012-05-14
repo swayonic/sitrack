@@ -100,8 +100,6 @@
   				      <% case column.column_type %>
   						  <% when 'date' %>
   					      <% value = is_date(value) ? formatted_date(value) : '' %>
-  					    <% when 'project' %>
-  							  <% value = value %>
   						  <% when 'percent' %>
   							  <% value = value.to_i.round.to_s+'%' %>
   						  <% when 'dollar' %>
