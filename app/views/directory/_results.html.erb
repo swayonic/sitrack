@@ -15,14 +15,21 @@
 			    <% column_name = column.safe_name %>
 					<% if column.safe_name == @order_column -%>
 						<% direction, img = (@order_direction == 'asc') ? ['desc', 'arrow-up.gif'] : ['asc', 'arrow-down.gif'] -%>
-						<td class="white sortactive" align="center" nowrap="nowrap">
+						<td class="sort sortactive" align="center" nowrap="nowrap">
 			  			<%= link_to column.name,
+							    {:action => 'index', :order_by => column_name + ' ' + direction}, 
+							    {:class => 'sortactive sortable-title'} %>
+							<% image = params[:order_by].index('asc') ? 'sort_up.png' : 'sort_down.png' %>
+			  			<%= link_to image_tag(image, :height=>12),
 							    {:action => 'index', :order_by => column_name + ' ' + direction}, 
 							    {:class => 'sortactive sortable-title'} %>
 						</td>
 			    <% else -%>
-						<td class="white sort" align="center" nowrap="nowrap">
+						<td class="sort" align="center" nowrap="nowrap">
 							<%= link_to column.name,
+							    {:action => 'index', :order_by => column_name+' asc'},
+							    {:class => 'sort'} %>
+			  			<%= link_to image_tag('sort_down.png', :height=>12),
 							    {:action => 'index', :order_by => column_name+' asc'},
 							    {:class => 'sort'} %>
 						</td>

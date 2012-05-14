@@ -253,6 +253,13 @@ table#results td.white {
 	border-bottom: 1px solid #cdcdcd;
 }
 
+table#results td.sort {
+	background: #ececec;
+	height: 20px;
+	border-left: 1px solid #cdcdcd;
+	border-bottom: 1px solid #cdcdcd;
+}
+
 table#results td.white a {
 	color: #555;
 	text-decoration: none;
