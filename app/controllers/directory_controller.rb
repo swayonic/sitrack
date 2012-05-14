@@ -84,8 +84,25 @@ class DirectoryController < ApplicationController
   def search
     @options = get_options if !@options
     query_string = {:status => '', :type => '', :position => '', :tenure => '', :misc => '',   
-                    :region_of_origin => '', :caring_region => '', :app_year => '', :name => ''}
+                    :region_of_origin => '', :caring_region => '', :app_year => '',
+                    :name => '', :asg_year => ''}
     @selected_options = ''
+    
+
+    # Check first, last and preferred names
+		if (@first_name = params["first_name"]) && @first_name != ''
+			query_string[:name] += " AND #{Person.table_name}.firstName LIKE '#{escape_string(@first_name)}%' "
+			@selected_options += '<first_name>' + @first_name + '</first_name>';
+		end
+		if (@last_name = params["last_name"]) && @last_name != ''
+			query_string[:name] += " AND #{Person.table_name}.lastName LIKE '#{escape_string(@last_name)}%' "
+			@selected_options += '<last_name>' + @last_name + '</last_name>';
+		end
+		if (@pref_name = params["pref_name"]) && @pref_name != ''
+			query_string[:name] += " AND #{Person.table_name}.preferredName LIKE '#{escape_string(@pref_name)}%' "
+			@selected_options += '<pref_name>' + @pref_name + '</pref_name>';
+		end
+		
     
     ## Application Status
     SiApplicationStatus.all.each do |status|
@@ -167,20 +184,16 @@ class DirectoryController < ApplicationController
       end
     end
     query_string[:app_year] += ')' unless query_string[:app_year] == ''
-
-    # Check first, last and preferred names
-		if (@first_name = params["first_name"]) && @first_name != ''
-			query_string[:name] += " AND #{Person.table_name}.firstName LIKE '#{escape_string(@first_name)}%' "
-			@selected_options += '<first_name>' + @first_name + '</first_name>';
-		end
-		if (@last_name = params["last_name"]) && @last_name != ''
-			query_string[:name] += " AND #{Person.table_name}.lastName LIKE '#{escape_string(@last_name)}%' "
-			@selected_options += '<last_name>' + @last_name + '</last_name>';
-		end
-		if (@pref_name = params["pref_name"]) && @pref_name != ''
-			query_string[:name] += " AND #{Person.table_name}.preferredName LIKE '#{escape_string(@pref_name)}%' "
-			@selected_options += '<pref_name>' + @pref_name + '</pref_name>';
-		end
+    
+    ## Asg Year
+    @options['Asg Year'].each do |asg_year|
+      if params['asg_year_'+asg_year[0]]
+        join = (query_string[:asg_year] == '') ? ' AND (' : ' OR '
+        query_string[:asg_year] += join + SitrackTracking.table_name + ".asgYear = '#{asg_year[0]}'"
+        @selected_options += "[asg_year_#{asg_year[0]}]"
+      end
+    end
+    query_string[:asg_year] += ')' unless query_string[:asg_year] == ''
     
     @qs = query_string.values.join
     
@@ -407,9 +420,6 @@ class DirectoryController < ApplicationController
     end
     # if we have a order_by in the session, use it
     order_by = sitrack_session.get_value('order_by')
-    Rails.logger.info ">>>>>>>>>>>>>>>>>>>>>"
-    Rails.logger.info ">>>>>>>>>>>>>>>>>>>>>#{order_by}"
-    Rails.logger.info ">>>>>>>>>>>>>>>>>>>>>"
     # Set up a default orderby
     # if "Full Name" is a column, sort by that. Otherwise, try lastname
     columns = view.safe_column_names
