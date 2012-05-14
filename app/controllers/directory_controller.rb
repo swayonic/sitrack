@@ -381,7 +381,7 @@ class DirectoryController < ApplicationController
     select_clause = @view.display_columns
     from_clause = SitrackView.join_tables
     @where_clause = all_where unless @where_clause
-    @sql = 'SELECT fb_uid, '+select_clause+' FROM '+from_clause+' WHERE '+@where_clause
+    @sql = 'SELECT '+select_clause+' FROM '+from_clause+' WHERE '+@where_clause
     
     # Remove first "AND" if there's no where_clause
     if @where_clause.blank?
@@ -407,6 +407,9 @@ class DirectoryController < ApplicationController
     end
     # if we have a order_by in the session, use it
     order_by = sitrack_session.get_value('order_by')
+    Rails.logger.info ">>>>>>>>>>>>>>>>>>>>>"
+    Rails.logger.info ">>>>>>>>>>>>>>>>>>>>>#{order_by}"
+    Rails.logger.info ">>>>>>>>>>>>>>>>>>>>>"
     # Set up a default orderby
     # if "Full Name" is a column, sort by that. Otherwise, try lastname
     columns = view.safe_column_names

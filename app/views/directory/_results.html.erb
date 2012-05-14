@@ -12,17 +12,18 @@
 		  <% @view.sitrack_view_columns.each do |view_column| -%>
 				<% column = view_column.sitrack_column -%>
 				<% if column.column_type != 'text' -%>
+			    <% column_name = column.safe_name %>
 					<% if column.safe_name == @order_column -%>
 						<% direction, img = (@order_direction == 'asc') ? ['desc', 'arrow-up.gif'] : ['asc', 'arrow-down.gif'] -%>
 						<td class="white sortactive" align="center" nowrap="nowrap">
 			  			<%= link_to column.name,
-							    {:action => 'index', :order_by => column.safe_name + ' ' + direction}, 
+							    {:action => 'index', :order_by => column_name + ' ' + direction}, 
 							    {:class => 'sortactive sortable-title'} %>
 						</td>
 			    <% else -%>
 						<td class="white sort" align="center" nowrap="nowrap">
 							<%= link_to column.name,
-							    {:action => 'index', :order_by => column.safe_name+' asc'},
+							    {:action => 'index', :order_by => column_name+' asc'},
 							    {:class => 'sort'} %>
 						</td>
 			    <% end -%>
@@ -100,7 +101,7 @@
   						  <% when 'date' %>
   					      <% value = is_date(value) ? formatted_date(value) : '' %>
   					    <% when 'project' %>
-  							  <% value = get_project(value.to_i) %>
+  							  <% value = value %>
   						  <% when 'percent' %>
   							  <% value = value.to_i.round.to_s+'%' %>
   						  <% when 'dollar' %>
