@@ -81,20 +81,14 @@ function append_query(){
 	}
 }
 
-function get_id_list()
-{
-	var f = document.participants_f;
+function get_id_list(){
+	// Initialize
+	var f = $("#participants_f #id_check:checked");
 	var id_list = '0';
-	if (f["id_array[]"]) {
-		if (f["id_array[]"].length) {
-			for(i=0; i<f["id_array[]"].length; i++) {
-				if (f["id_array[]"][i].checked == true)
-					id_list = id_list + ',' + f["id_array[]"][i].value;
-			}
-		} else {
-			if (f["id_array[]"].checked == true)
-				id_list = id_list + ',' + f["id_array[]"].value;
-		}
+	
+	for(x=0; x<f.length; x++){
+		id = f.eq(x).val();
+		id_list += ", " + id;
 	}
 	return id_list;
 }
@@ -124,6 +118,7 @@ function perform_action(){
 	var action = $('#option_action').val();
 	var count = 0;
 	var max_recipients = 75;
+	var f = $("#participants_f");
 	
 	// Set the value to default
 	$('#option_action').val(0);
@@ -137,9 +132,9 @@ function perform_action(){
 		var count = 0;
 		
 		// Fetch checked checkboxes
-		var f = $("#participants_f #id_check:checked");
-		for(x=0; x<f.length; x++){
-			email = $("#e"+f.eq(x).val()).val();
+		elements = $("#participants_f #id_check:checked");
+		for(x=0; x<elements.length; x++){
+			email = $("#e"+elements.eq(x).val()).val();
 			email_list += email + punc + ' ';
 			count++;
 			if(count==max_recipients){
@@ -147,6 +142,7 @@ function perform_action(){
 			}
 		}
 	
+		// Process results
 		if(count > 0){
 			if(count >= 75){
 				alert('WARNING: This email is only being sent to the first 75 people you selected.');
@@ -157,13 +153,16 @@ function perform_action(){
 			alert('You must select at least one person to email.');
 		}
 		break;
+		
 	case 'excel':
-	    var id_list = get_id_list();
-    	if (id_list != '0') {
-    		f.id_list.value = id_list;
-    	}
-	    f.action = '/directory/excel_download';
-		f.submit();
+		var id_list = get_id_list();
+ 		$("#id_list").val(id_list);
+   	if(id_list == '0'){
+			alert('You must select at least one person to export.');
+   	}else{
+	    f.attr('action', '/directory/excel_download');
+			f.submit();
+		}
 		break;
 	case 'delete':
 		var id_list = get_id_list();
