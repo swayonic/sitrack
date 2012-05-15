@@ -7,15 +7,14 @@ function change_view(){
 	}
 	document.location.href = redirect_path
 }
-function change_region()
-{
+
+function change_region(){
 	var region = $('#option_region');
 	var redirect_path = '/directory/change_region?region=' + region.val();
 	document.location.href = redirect_path;
 }
 
-function save_query(action)
-{	
+function save_query(action){	
 	var f = document.participants_f;
 	var id_list = get_id_list();
 	if (id_list != '0') {
@@ -100,7 +99,7 @@ function get_id_list()
 	return id_list;
 }
 
-function checkAll() {
+function checkAll(){
 	// Initialize variables
 	f = $("#participants_f #id_check");
 	checked = true;
@@ -120,43 +119,42 @@ function checkAll() {
 	}
 }
 
-function perform_action()
-{
-  var f = document.search_f;
+function perform_action(){
+	// Initialize variables
 	var action = $('#option_action').val();
-	$('#option_action').val(0);
 	var count = 0;
-	// perform the action selected
-	var f = document.participants_f;
+	var max_recipients = 75;
+	
+	// Set the value to default
+	$('#option_action').val(0);
+	
+	// Perform action
 	switch (action)	{
 	case 'email':
+		// Initialize process variables
 		var punc = ';'
 		var email_list = '';
+		var count = 0;
 		
-		if(f["id_array[]"]){
-			if(f["id_array[]"].length){
-				for(i=0; i<f["id_array[]"].length; i++){
-					if (f["id_array[]"][i].checked == true && f['e'+f["id_array[]"][i].value].value != '') {
-						email_list = email_list + punc + f['e'+f["id_array[]"][i].value].value;
-						count++;
-						if (count == 75) {
-							break;
-						}
-					}
-				}
-			} else {
-				if (f["id_array[]"].checked == true)
-					email_list = email_list + punc + f['e'+f["id_array[]"].value].value;
+		// Fetch checked checkboxes
+		var f = $("#participants_f #id_check:checked");
+		for(x=0; x<f.length; x++){
+			email = $("#e"+f.eq(x).val()).val();
+			email_list += email + punc + ' ';
+			count++;
+			if(count==max_recipients){
+				break;
 			}
 		}
-		if (email_list == '') {
-			alert('You must select at least one person to email.');
-		} else {
-			if (count == 75) {
+	
+		if(count > 0){
+			if(count >= 75){
 				alert('WARNING: This email is only being sent to the first 75 people you selected.');
 			}
 			document.location.href = 'mailto:?bcc='+email_list;
 			return;
+		}else{
+			alert('You must select at least one person to email.');
 		}
 		break;
 	case 'excel':
