@@ -181,7 +181,6 @@ div.segment {
 	display: none;
 	color: #fff;
 	float: left;
-	height: 900px;
 }
 
 div.label {
@@ -489,4 +488,8 @@ a.wide_link {
 
 .padb3 {
 	margin-bottom: 3px;
+}
+
+img {
+	border: none;
 }
