@@ -72,7 +72,7 @@
       <h3><a href="#">Options</a></h3>
       <div>
         <div class="label">Directory View:</div>
-        <select name="view" onchange="change_view();" class="side_select">
+        <select name="view" onchange="change_view();" class="side_select" id="option_view">
           <% @views.sort_by(&:name).each do |view| -%>
 	          <% if view.id == @view.id -%>
 		          <option value="<%=view.id%>" selected="selected"><%=view.name%></option>
@@ -83,7 +83,7 @@
           <option value="|ev|">[Edit Views]</option>
         </select>
         <div class="label">Restrict Search To:</div>
-        <select name="region" id="region" onchange="change_region();" class="side_select">
+        <select name="region" id="option_region" onchange="change_region();" class="side_select">
           <% if '%' == @sel_region_name -%>
             <option value="all" selected="selected">All</option>
           <% else -%>
@@ -98,7 +98,7 @@
           <% end %>
         </select>
         <div class="label">Actions:</div>
-        <select name="do_something" onchange="perform_action();" class="side_select">
+        <select name="do_something" onchange="perform_action();" class="side_select" id="option_action">
           <option value="">
             Choose One
           </option>

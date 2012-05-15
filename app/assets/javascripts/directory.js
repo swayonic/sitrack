@@ -1,18 +1,17 @@
-function change_view()
-{
-	var f = document.search_f;
-	var view = f.view;
-	if (view.options[view.selectedIndex].value == '|ev|') {
-		document.location = '/views';
-		return;
+function change_view(){
+	var view = $('#option_view');
+	if (view.val() == '|ev|') {
+		redirect_path = '/views';
+	}else{
+		redirect_path = '/directory/change_view?view_id=' + view.val();
 	}
-	document.location = '/directory/change_view?view_id=' + view.options[view.selectedIndex].value;
+	document.location.href = redirect_path
 }
 function change_region()
 {
-	var f = document.search_f;
-	var region = f.region;
-	document.location = '/directory/change_region?region=' + region.options[region.selectedIndex].value;
+	var region = $('#option_region');
+	var redirect_path = '/directory/change_region?region=' + region.val();
+	document.location.href = redirect_path;
 }
 
 function save_query(action)
@@ -128,9 +127,9 @@ function checkAll()
 }
 function perform_action()
 {
-    var f = document.search_f;
-	var action = f.do_something.options[f.do_something.selectedIndex].value;
-	f.do_something.selectedIndex = 0;
+  var f = document.search_f;
+	var action = $('#option_action').val();
+	$('#option_action').val(0);
 	var count = 0;
 	// perform the action selected
 	var f = document.participants_f;
@@ -161,7 +160,7 @@ function perform_action()
 			if (count == 75) {
 				alert('WARNING: This email is only being sent to the first 75 people you selected.');
 			}
-			document.location = 'mailto:?bcc='+email_list;
+			document.location.href = 'mailto:?bcc='+email_list;
 			return;
 		}
 		break;
@@ -185,7 +184,7 @@ function perform_action()
 		}
 		break;
 		case 'add_person':
-			document.location = '/people/new'
+			document.location.href = '/people/new'
 		break;
 	}
 }

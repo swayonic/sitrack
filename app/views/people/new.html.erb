@@ -6,8 +6,12 @@ information, the system will try to match an existing person in the system based
 filling out the profile.
 </p>
 <strong>New Person</strong><br/>
-<%= error_messages_for 'person' %>
-<%= error_messages_for 'current_address' %>
+<% @person.errors.full_messages.each do |msg| %>
+  <div class='flash_notice'><%= msg %></div>
+<% end %>
+<% @current_address.errors.full_messages.each do |msg| %>
+  <div class='flash_notice'><%= msg %></div>
+<% end %>
 <% form_for(:person, :url => '/people/create') do |f| %>
 	<%= render :partial => 'form', :locals => {:f => f} %>
 <% end %>
