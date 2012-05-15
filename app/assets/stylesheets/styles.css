@@ -181,6 +181,7 @@ div.segment {
 	display: none;
 	color: #fff;
 	float: left;
+	height: 900px;
 }
 
 div.label {
