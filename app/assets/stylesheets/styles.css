@@ -20,15 +20,22 @@ body {
 
 #topnav #left {
 	float: left;
-	padding: 0 15px;
+	width: 150px;
+	text-align: left;
 	display: none;
 }
 
 #topnav #left #image {
 	width: 16px;
 	height: 16px;
-	margin-bottom: -3px;
-	margin-left: -35px;
+	margin-bottom:-3px;
+}
+
+#topnav div#toggle_sidebar {
+	color: #fff;
+	text-decoration: none;
+	margin-left: -10px;
+	cursor: pointer;
 }
 
 #topnav a {
@@ -39,7 +46,7 @@ body {
 	cursor: pointer;
 }
 
-#topnav a:hover {
+#topnav a:hover, #topnav div#toggle_sidebar:hover {
 	color: #dedede;
 	text-decoration: none;
 	cursor: pointer;
