@@ -1,17 +1,34 @@
 <div id="center">
-	<div class="boxheader">Add Someone to the Tracker</div>
-<p>
-The fields listed below are required. If you'd also like to enter contact information at this time, you can. Once you enter your
-information, the system will try to match an existing person in the system based on email. If successful, the it might save you some time
-filling out the profile.
-</p>
-<strong>New Person</strong><br/>
-<% @person.errors.full_messages.each do |msg| %>
-  <div class='flash_notice'><%= msg %></div>
-<% end %>
-<% @current_address.errors.full_messages.each do |msg| %>
-  <div class='flash_notice'><%= msg %></div>
-<% end %>
-<%= form_for(:person, :url => '/people/create') do |f| %>
-	<%= render :partial => 'form', :locals => {:f => f} %>
-<% end %>
+  <div id="other_panel">
+  	<div class="head">Quick Links</div>
+    <div class="entry">
+	    <%= link_to "Back to Directory", {:controller=>'directory'} %>
+	  </div>
+  </div> 
+  <div id="main_panel">
+    <div id="holder">
+	    <div id="profile_info">
+  	    <div class="boxheader">Add Someone to the Tracker</div>
+        <% @person.errors.full_messages.each do |msg| %>
+          <div class='flash_notice'><%= msg %></div>
+        <% end %>
+        <% @current_address.errors.full_messages.each do |msg| %>
+          <div class='flash_notice'><%= msg %></div>
+        <% end %>
+	      
+        <div class='segment'>
+          The fields listed below are required. If you'd also like to enter contact information at this time, you can. Once you enter your information, the system will try to match an existing person in the system based on email. If successful, the it might save you some time filling out the profile.
+        </div>
+	      
+	      <div class='segment'>
+          <%= form_for(:person, :url => '/people/create') do |f| %>
+            <div class="profile_box">
+          	  <div class="subboxheader-a">New Person</div>
+          	  <%= render :partial => 'form', :locals => {:f => f} %>
+            </div>
+          <% end %>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

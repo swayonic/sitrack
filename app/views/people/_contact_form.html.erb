@@ -1,32 +1,35 @@
-	<strong>Current Address</strong><br />
-	<table>
-	<tr>
-		<td>Address 1: </td>
-		<td><%= text_field :current_address, :address1 %></td>
-	</tr>
-	<tr>
-		<td>Address 2: </td>
-		<td><%= text_field :current_address, :address2 %></td>
-	</tr>
-	<tr>
-		<td>City: </td>
-		<td><%= text_field :current_address, :city %></td>
-	</tr>
-	<tr>
-		<td>State: </td>
-		<td><%= select :current_address, :state, State::NAMES %></td>
-	</tr>
-	<tr>
-		<td>Zip: </td>
-		<td><%= text_field :current_address, :zip %></td>
-	</tr>
-	<tr>
-		<td>Main Phone: </td>
-		<td><%= text_field :current_address, :homePhone %></td>
-	</tr>
-	<tr>
-		<td>Second Phone: </td>
-		<td><%= text_field :current_address, :cellPhone %></td>
-	</tr>
-	</table>
-	
+<br/>
+<center>
+  <strong>Current Address</strong>
+</center>
+<br />
+<table align="center">
+  <tr>
+  	<td width="90">Address 1: </td>
+  	<td><%= text_field :current_address, :address1 %></td>
+  </tr>
+  <tr>
+  	<td>Address 2: </td>
+  	<td><%= text_field :current_address, :address2 %></td>
+  </tr>
+  <tr>
+  	<td>City: </td>
+  	<td><%= text_field :current_address, :city %></td>
+  </tr>
+  <tr>
+  	<td>State: </td>
+  	<td><%= select :current_address, :state, State::NAMES %></td>
+  </tr>
+  <tr>
+  	<td>Zip: </td>
+  	<td><%= text_field :current_address, :zip %></td>
+  </tr>
+  <tr>
+  	<td>Main Phone: </td>
+  	<td><%= text_field :current_address, :homePhone %></td>
+  </tr>
+  <tr>
+  	<td>Second Phone: </td>
+  	<td><%= text_field :current_address, :cellPhone %></td>
+  </tr>
+</table>
