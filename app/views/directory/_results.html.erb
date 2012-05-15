@@ -1,4 +1,4 @@
-<form name="participants_f" method="post" action="/directory">
+<form name="participants_f" id="participants_f" method="post" action="/directory">
 	<input type="hidden" name="id" />
 	<input type="hidden" name="id_list" />
 	<input type="hidden" name="name" />
@@ -42,8 +42,8 @@
 	  <% @people.each_with_index do | person, i | -%>
   		<tr class="<%= cycle('odd', 'even') %>">
   			<td class="checkbox">
-  				<input type="Checkbox" name="id_array[]" value="<%=person['applicationID']%>" />
-  				<input type="hidden" name="e<%=person['applicationID']%>" value="<%=person['email']%>" />
+  				<input type="Checkbox" name="id_array[]" id="id_check" value="<%=person['applicationID']%>" />
+  				<input type="hidden" name="e<%=person['applicationID']%>" id="e<%=person['applicationID']%>" value="<%=person['email']%>" />
   			</td>
   			<% @view.sitrack_view_columns.each do |view_column| -%>
   				<% column = view_column.sitrack_column -%>

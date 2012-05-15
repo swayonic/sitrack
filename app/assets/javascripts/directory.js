@@ -100,31 +100,26 @@ function get_id_list()
 	return id_list;
 }
 
-function checkAll() 
-{
-	f = document.participants_f;
-	if (f.all.checked == true) {
-		if (f["id_array[]"]) {
-			if (f["id_array[]"].length) {
-				for(i=0; i<f["id_array[]"].length; i++) {
-					f["id_array[]"][i].checked = true;
-				}
-			} else {
-				f["id_array[]"].checked = true;
-			}
-		}
-	} else {
-		if (f["id_array[]"]) {
-			if (f["id_array[]"].length) {
-				for(i=0; i<f["id_array[]"].length; i++) {
-					f["id_array[]"][i].checked = false;
-				}
-			} else {
-				f["id_array[]"].checked = false;
-			}
+function checkAll() {
+	// Initialize variables
+	f = $("#participants_f #id_check");
+	checked = true;
+	
+	// Verify checkboxes current state
+	for(x=0; x<f.length; x++){
+		if(!f.eq(x).is(':checked')){
+			checked = false;
 		}
 	}
+	
+	// Change checkboxes status
+	if(checked){
+		f.attr('checked',false);
+	}else{
+		f.attr('checked',true);
+	}
 }
+
 function perform_action()
 {
   var f = document.search_f;
@@ -136,11 +131,11 @@ function perform_action()
 	switch (action)	{
 	case 'email':
 		var punc = ';'
-		// concat the emails for each checked person
 		var email_list = '';
-		if (f["id_array[]"]) {
-			if (f["id_array[]"].length) {
-				for(i=0; i<f["id_array[]"].length; i++) {
+		
+		if(f["id_array[]"]){
+			if(f["id_array[]"].length){
+				for(i=0; i<f["id_array[]"].length; i++){
 					if (f["id_array[]"][i].checked == true && f['e'+f["id_array[]"][i].value].value != '') {
 						email_list = email_list + punc + f['e'+f["id_array[]"][i].value].value;
 						count++;

@@ -12,6 +12,6 @@ filling out the profile.
 <% @current_address.errors.full_messages.each do |msg| %>
   <div class='flash_notice'><%= msg %></div>
 <% end %>
-<% form_for(:person, :url => '/people/create') do |f| %>
+<%= form_for(:person, :url => '/people/create') do |f| %>
 	<%= render :partial => 'form', :locals => {:f => f} %>
 <% end %>
