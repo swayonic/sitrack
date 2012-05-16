@@ -20,7 +20,7 @@ class JoinStaffFormController < ApplicationController
         @person.update_attributes(params[:person])
         @mpd.update_attributes(params[:mpd])
         @form.update_attributes(params[:form])
-        preview if @person.valid? && @mpd.valid? && @tracking.valid? && @form.save 
+        preview if @person.valid? && @mpd.valid? && @form.save 
       end
     end
   end

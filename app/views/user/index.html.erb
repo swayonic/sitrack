@@ -5,7 +5,7 @@
   	  <div class="guide">You can search by First Name, Last Name, or Partial Name:</div>
     	<div class="acenter">
     	  <%= form_for(:search, :url=>{:action=>:search}, :html=>{:autocomplete=>"off", :remote=>true}) do |f| %>
-          <%= f.text_field :name, :value => @keyword, :onkeyup => "$('#spinner_user_search').show();$(this).submit();" %>
+          <%= f.text_field :name, :value => @keyword, :id => "user_search_field" %>
         <% end %>
       </div>
     </div>

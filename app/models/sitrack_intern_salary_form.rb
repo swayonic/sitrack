@@ -44,6 +44,8 @@
 #
 
 class SitrackInternSalaryForm < SitrackSalaryForm
+  attr_accessible :hr_si_application_id
+  
   def validate
     super
     errors.add_on_empty('State') if hr_si_application.sitrack_tracking.nil? || hr_si_application.sitrack_tracking.asgState.nil? || hr_si_application.sitrack_tracking.asgState.empty?

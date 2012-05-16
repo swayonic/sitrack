@@ -48,6 +48,8 @@ class SitrackForm < ActiveRecord::Base
   belongs_to :approver, :class_name => "Person", :foreign_key => "approver_id"
  # enforce_schema_rules
   
+  attr_accessible :additional_notes, :hours_per_week, :tax_rate
+  
   def to
     if hr_si_application.sitrack_tracking.is_stint?
       'Celeste Allison <celeste.allison@ccci.org>'

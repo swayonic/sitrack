@@ -56,6 +56,11 @@ jQuery(document).ready(function() {
 		}
 	});
 	
+	$("#user_search_field").stop(true, true).on('keyup',function(){
+		$('#spinner_user_search').show();
+		$(this).submit();
+	});
+	
 	$(".button").button();
 	
 	$("div#directory_tabs").tabs();

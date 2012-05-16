@@ -16,10 +16,7 @@ class SalaryFormController < ApplicationController
     setup
     unless request.get?
       # save and preview
-      if !params[:tracking][:asgContinent].present?
-        flash[:notice] = "AOA is required!"
-        redirect_to :action => 'fill', :id => app_id
-      elsif !params[:form][:annual_salary].present?
+      if !params[:form][:annual_salary].present?
         flash[:notice] = "New Annual Base Salary is required and should be a number!"
         redirect_to :action => 'fill', :id => app_id
       else
