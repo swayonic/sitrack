@@ -9,7 +9,7 @@
         </div>
         <%= "#{p.lastName}, #{p.firstName}" %>
         <br/>
-        <span class="detail"><%= "#{p.user.username}" %></span>
+        <span class="detail"><%= "#{p.user.username}" if p.user %></span>
       </div>
     <% end %>
   <% else %>
