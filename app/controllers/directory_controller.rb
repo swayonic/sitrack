@@ -151,7 +151,7 @@ class DirectoryController < ApplicationController
 			@selected_options += '[misc_team_leader]';
     end
     if params['misc_monthly_birthday']
-      query_string[:misc] += " AND MONTH(STR_TO_DATE(birthDate, '%m/%d/%Y')) = Month(NOW()) ";
+      query_string[:misc] += " AND MONTH(birth_date) = Month(NOW()) ";
 			@selected_options += '[misc_monthly_birthday]';
     end
     

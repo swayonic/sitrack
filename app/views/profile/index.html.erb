@@ -203,7 +203,7 @@
 		<% end-%>
   	<div class="head">Quick Links</div>
     <div class="entry">
-	    <%= link_to "Create Another Year Record", "create_second_year?id=#{application_id}" %>
+	    <%= link_to "Create Another Year Record", :action=>"create_second_year", :id=>"#{application_id}" %>
 	  </div>
     <div class="entry">
 	    <%= link_to "Set Picture from Facebook", "javascript:picture_window(#{person_id})" %>

@@ -109,20 +109,44 @@ class ProfileController < ApplicationController
   
   def create_second_year
     @first_year = HrSiApplication.find(params[:id])
-    @second_year = @first_year.clone
-    @apply = @first_year.apply ? @first_year.apply.clone : Apply.new
+    @second_year = HrSiApplication.new(
+                    @first_year.attributes.except('id', 'applicationID', 'updated_at', 'created_at'), 
+                    without_protection: true)
+                    
+    if @first_year.apply.present?
+      @apply = Apply.new(
+                @first_year.apply.attributes.except('id', 'updated_at', 'created_at'),
+                without_protection: true)
+    else 
+      @apply = Apply.new
+    end
     @second_year.apply = @apply
-    @tracking = @first_year.sitrack_tracking ? @first_year.sitrack_tracking.clone : SitrackTracking.new
+    
+    if @first_year.sitrack_tracking.present?
+      @tracking = SitrackTracking.new(
+                    @first_year.sitrack_tracking.attributes.except('id', 'updated_at', 'created_at'),
+                    without_protection: true)
+    else
+      @tracking = SitrackTracking.new
+    end
     @tracking.asgYear = "#{Time.now.year}-#{Time.now.year+1}"
     @tracking.tenure = 'Second Year'
     @tracking.status = 'Re-Applied'
     @second_year.sitrack_tracking = @tracking
-    @mpd = @first_year.sitrack_mpd ? @first_year.sitrack_mpd.clone : SitrackMpd.new
+    
+    if @first_year.sitrack_mpd.present?
+      @mpd = SitrackMpd.new(
+              @first_year.sitrack_mpd.attributes.except('id', 'updated_at', 'created_at'),
+              without_protection: true)
+    else
+      @mpd = SitrackMpd.new
+    end
     @mpd.monthlyRaised = 0
     @mpd.oneTimeRaised = 0
     @mpd.totalRaised = 0
     @mpd.percentRaised = 0
     @second_year.sitrack_mpd = @mpd
+    
     @second_year.save!
     # go to the new profile
     redirect_to(:action => :index, :id => @second_year.id)
