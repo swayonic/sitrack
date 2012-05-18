@@ -93,6 +93,18 @@ function get_id_list(){
 	return id_list;
 }
 
+function get_all_id_list(){
+	// Initialize
+	var f = $("#participants_f #id_check");
+	var id_list = '0';
+	
+	for(x=0; x<f.length; x++){
+		id = f.eq(x).val();
+		id_list += ", " + id;
+	}
+	return id_list;
+}
+
 function checkAll(){
 	// Initialize variables
 	f = $("#participants_f #id_check");
@@ -158,11 +170,11 @@ function perform_action(){
 		var id_list = get_id_list();
  		$("#id_list").val(id_list);
    	if(id_list == '0'){
-			alert('You must select at least one person to export.');
-   	}else{
-	    f.attr('action', '/directory/excel_download');
-			f.submit();
-		}
+			id_list = get_all_id_list();
+ 			$("#id_list").val(id_list);
+   	}
+    f.attr('action', '/directory/excel_download');
+		f.submit();
 		break;
 	case 'delete':
 		var id_list = get_id_list();
