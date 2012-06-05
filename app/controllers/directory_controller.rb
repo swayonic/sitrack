@@ -1,5 +1,5 @@
 class DirectoryController < ApplicationController
-  
+
   def index
     show_directory
   end       

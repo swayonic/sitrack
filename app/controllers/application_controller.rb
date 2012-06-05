@@ -1,7 +1,7 @@
 class ApplicationController < ActionController::Base
   @@public_pages = ['up_monitor','no_access','logout','expire']
   include AuthenticatedSystem
-  before_filter CASClient::Frameworks::Rails3::Filter, AuthenticationFilter, :current_user, :except => @@public_pages
+  before_filter CASClient::Frameworks::Rails3::Filter, AuthenticationFilter, :authorize, :except => @@public_pages
   # before_filter CASClient::Frameworks::Rails3::Filter, AuthenticationFilter
   # skip_before_filter CAS::Filter, :only => @@public_pages
   # before_filter AuthenticationFilter, :authorize, :except => @@public_pages
