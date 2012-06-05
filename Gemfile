@@ -30,6 +30,11 @@ end
 
 gem 'jquery-rails'
 
+group :production do
+  gem 'ruby-oci8'
+  gem 'activerecord-oracle_enhanced-adapter', '1.3.2'
+end
+
 # To use ActiveModel has_secure_password
 # gem 'bcrypt-ruby', '~> 3.0.0'
 
