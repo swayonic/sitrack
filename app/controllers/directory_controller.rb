@@ -78,14 +78,31 @@ class DirectoryController < ApplicationController
     @first_name = @selected_options ? (@selected_options.match(/<first_name>(.*)<\/first_name>/) ? $1 : '') : ''
     @last_name = @selected_options ? (@selected_options.match(/<last_name>(.*)<\/last_name>/) ? $1 : '') : ''
     @pref_name = @selected_options ? (@selected_options.match(/<pref_name>(.*)<\/pref_name>/) ? $1 : '') : ''
-    render(:action => :show_directory)
+    render :controller => :directory, :action => :show_directory
   end
   
   def search
     @options = get_options if !@options
     query_string = {:status => '', :type => '', :position => '', :tenure => '', :misc => '',   
-                    :region_of_origin => '', :caring_region => '', :app_year => '', :name => ''}
+                    :region_of_origin => '', :caring_region => '', :app_year => '',
+                    :name => '', :asg_year => ''}
     @selected_options = ''
+    
+
+    # Check first, last and preferred names
+		if (@first_name = params["first_name"]) && @first_name != ''
+			query_string[:name] += " AND #{Person.table_name}.firstName LIKE '#{escape_string(@first_name)}%' "
+			@selected_options += '<first_name>' + @first_name + '</first_name>';
+		end
+		if (@last_name = params["last_name"]) && @last_name != ''
+			query_string[:name] += " AND #{Person.table_name}.lastName LIKE '#{escape_string(@last_name)}%' "
+			@selected_options += '<last_name>' + @last_name + '</last_name>';
+		end
+		if (@pref_name = params["pref_name"]) && @pref_name != ''
+			query_string[:name] += " AND #{Person.table_name}.preferredName LIKE '#{escape_string(@pref_name)}%' "
+			@selected_options += '<pref_name>' + @pref_name + '</pref_name>';
+		end
+		
     
     ## Application Status
     SiApplicationStatus.all.each do |status|
@@ -134,7 +151,7 @@ class DirectoryController < ApplicationController
 			@selected_options += '[misc_team_leader]';
     end
     if params['misc_monthly_birthday']
-      query_string[:misc] += " AND MONTH(STR_TO_DATE(birthDate, '%m/%d/%Y')) = Month(NOW()) ";
+      query_string[:misc] += " AND MONTH(birth_date) = Month(NOW()) ";
 			@selected_options += '[misc_monthly_birthday]';
     end
     
@@ -167,27 +184,25 @@ class DirectoryController < ApplicationController
       end
     end
     query_string[:app_year] += ')' unless query_string[:app_year] == ''
-
-    # Check first, last and preferred names
-		if (@first_name = params["first_name"]) && @first_name != ''
-			query_string[:name] += " AND #{Person.table_name}.firstName LIKE '#{escape_string(@first_name)}%' "
-			@selected_options += '<first_name>' + @first_name + '</first_name>';
-		end
-		if (@last_name = params["last_name"]) && @last_name != ''
-			query_string[:name] += " AND #{Person.table_name}.lastName LIKE '#{escape_string(@last_name)}%' "
-			@selected_options += '<last_name>' + @last_name + '</last_name>';
-		end
-		if (@pref_name = params["pref_name"]) && @pref_name != ''
-			query_string[:name] += " AND #{Person.table_name}.preferredName LIKE '#{escape_string(@pref_name)}%' "
-			@selected_options += '<pref_name>' + @pref_name + '</pref_name>';
-		end
+    
+    ## Asg Year
+    @options['Asg Year'].each do |asg_year|
+      if params['asg_year_'+asg_year[0]]
+        join = (query_string[:asg_year] == '') ? ' AND (' : ' OR '
+        query_string[:asg_year] += join + SitrackTracking.table_name + ".asgYear = '#{asg_year[0]}'"
+        @selected_options += "[asg_year_#{asg_year[0]}]"
+      end
+    end
+    query_string[:asg_year] += ')' unless query_string[:asg_year] == ''
     
     @qs = query_string.values.join
     
     # save the query criteria
     @criteria = SitrackSavedCriteria.create(:owner => sitrack_user.id, :criteria => @qs, :options => @selected_options)
+    
     # put the criteria in the session
     sitrack_session.save_value('criteria_id',@criteria.id)
+    
     # remove any query_id. You can't use a criteria and query at the same time.
     sitrack_session.remove_value('query_id')
     show_directory
@@ -218,16 +233,18 @@ class DirectoryController < ApplicationController
   
   def delete_query
     # make sure they own the query
-    query = SitrackQuery.find_by_owner_and_id(sitrack_user.id, params[:id])
+    @query_id = params[:id]
+    query = SitrackQuery.find_by_owner_and_id(sitrack_user.id, @query_id)
     query.destroy if query
-    index
+    renderJS
   end
   
   def delete_criteria
     # make sure they own the query
-    criteria = SitrackSavedCriteria.find_by_owner_and_id(sitrack_user.id, params[:id])
+    @criteria_id = params[:id]
+    criteria = SitrackSavedCriteria.find_by_owner_and_id(sitrack_user.id, @criteria_id)
     criteria.destroy if criteria
-    index
+    renderJS
   end
   
   def save_query
@@ -347,7 +364,7 @@ class DirectoryController < ApplicationController
           when 'date'
             value = ApplicationController.formatted_date(value) 
           when 'enum'
-            value = @options_hash[column.name][u(value)]
+            value = @options_hash[column.name][u("#{value}")]
           when 'project'
             value = get_project(value.to_i)
           when 'team'

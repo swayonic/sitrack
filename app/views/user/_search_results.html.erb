@@ -1,0 +1,18 @@
+<% if @name.present? %>
+  <% if @people.count > 0 %>
+    <% @people.each do |p| %>
+      <div class="entry">
+        <div class="entry_add">
+          <%= link_to image_tag('add.gif', :alt => 'Add User', :class => 'x', :border => 0), 
+							{:action => :add, :ssm_id => p.fk_ssmUserId},
+							{:remote => true, :onclick=>"$('#spinner_user_search').show();"} %>
+        </div>
+        <%= "#{p.lastName}, #{p.firstName}" %>
+        <br/>
+        <span class="detail"><%= "#{p.user.username}" if p.user %></span>
+      </div>
+    <% end %>
+  <% else %>
+    <div class="no_result">No Results Found</div>
+  <% end %>
+<% end %>

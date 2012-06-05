@@ -4,7 +4,9 @@ class ModifyController < ApplicationController
     begin
       value = escape_string(params[:value].to_s.strip)
       type = params[:type]
-      value = (value != '' ? Time.parse(value).strftime('%Y-%m-%d') : '') if type == 'date'
+      if type == 'date'
+        value = value.present? ? Date.strptime(value, '%m/%d/%Y').strftime('%Y-%m-%d') : ''
+      end
       # if this is an address field from the profile table, handle it differently
       if type == 'address'
         field = params[:fieldname]
@@ -54,7 +56,10 @@ class ModifyController < ApplicationController
       		end
           column.update_clause.gsub!(/\?/, id.to_s) # the rest are the id
       	  queries = column.update_clause.split(';')
-      	  queries.each {|@sql| @result = ActiveRecord::Base.connection.update(@sql)}
+      	  queries.each do |sql|
+      	    @sql = sql
+      	    @result = ActiveRecord::Base.connection.update(sql)
+      	  end
       	else
           # Use the select string to figure out which column to update
           # set some default values

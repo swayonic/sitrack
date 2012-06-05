@@ -1,0 +1,11 @@
+<% if @error %>
+  <script type="text/javascript" charset="utf-8">
+  alert('There was an error updating that field. The value was not actually changed.');
+  alert('<%= escape_javascript(@error.inspect) %>');
+  parent.document.location = parent.document.location;
+</script>
+<% end %>
+<%=params.inspect%>
+<%=@column.inspect%>
+<%=@sql%><br/><br/>
+<%=@result%>

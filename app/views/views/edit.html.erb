@@ -1,0 +1,28 @@
+<div id="center">
+  <div id="other_panel">
+  	<div class="head">Quick Links</div>
+    <div class="entry">
+	    <%= link_to "View This Directory", 
+	      {:controller=>'directory', :action=>'change_view', :view_id=>@view.id} %>
+	  </div>
+    <div class="entry">
+	    <%= link_to "Directory Views List", :action=>"index" %>
+	  </div>
+    <div class="entry">
+	    <%= link_to "Copy Someone Else's View", :action=>"borrow" %>
+	  </div>
+  </div> 
+  <div id="main_panel">
+    <div id="holder">
+	    <div class="boxheader">Edit Directory View</div>
+  	  <div id="content">
+  	    <% @view.errors.full_messages.each do |msg| %>
+          <div class='flash_notice'><%= msg %></div>
+        <% end %>
+        <%= form_for(@view, :url => view_path(@view), :method => :put, :html => {:id => 'view_form'}) do |f| %>
+  			  <%=render 'form', :f => f %>
+  		  <% end %>
+      </div>
+    </div>
+  </div>
+</div>

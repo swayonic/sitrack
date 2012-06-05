@@ -1,0 +1,192 @@
+<div id="center">
+  <div id="other_panel"> 
+    <%= form_tag({:action => 'search'}, {:name => 'search_f', :id => 'search_f'}) do %>
+      <div class="directory_sidebar_closed filter_tab padb3">
+    	  <h3><a href="#">Search Filters</a></h3>
+      	<div>
+      	  <div id="search" onblur="show_me('false');">
+            <div id="search_options_accordion">
+              <h3><a href="#">Name</a></h3>
+              <div>
+                <div class="search_label">First Name:</div>
+          			<%= text_field_tag :first_name, @first_name, :class=>"option_box search_field",
+          			    :title=>"First Name", :group=>"Name", :size=>"10", :onChange=>"print_selected()" %>
+          			<br/>
+          		  <div class="search_label">Last Name:</div>
+          			<%= text_field_tag :last_name, @last_name, :class=>"option_box search_field",
+          			    :title=>"Last Name", :group=>"Name", :size=>"10", :onChange=>"print_selected()" %>
+          			<br/>
+          		  <div class="search_label">Preferred Name:</div>
+          			<%= text_field_tag :pref_name, @pref_name, :class=>"option_box search_field",
+          			    :title=>"Preferred Name", :group=>"Name", :size=>"10", :onChange=>"print_selected()" %>
+          			<br/>
+              </div>
+              <h3><a href="#">Status</a></h3>
+              <div>
+                <%=raw display_option_box(@options['Status'], 'status', 'Status')%>
+              </div>
+              <h3><a href="#">Intern Type</a></h3>
+              <div>
+                <%=raw display_option_box(@options['Intern Type'], 'intern_type', 'Intern Type')%>
+              </div>
+              <h3><a href="#">Position</a></h3>
+              <div>
+                <%=raw display_option_box(@options['Position'], 'position', 'Position')%>
+              </div>
+              <h3><a href="#">Tenure</a></h3>
+              <div>
+                <%=raw display_option_box(@options['Tenure'], 'tenure', 'Tenure')%>
+              </div>
+              <h3><a href="#">Misc</a></h3>
+              <div>
+                <%=raw display_option_box(SiMiscOption.all, 'misc', 'Miscellaneous')%>
+              </div>
+              <h3><a href="#">Region of Origin</a></h3>
+              <div>
+                <%=raw display_option_box(@options['Region of Origin'], 'region_of_origin', 'Region of Origin')%>
+              </div>
+              <h3><a href="#">Caring Region</a></h3>
+              <div>
+                <%=raw display_option_box(@options['Caring Region'], 'caring_region', 'Caring Region')%>
+              </div>
+              <h3><a href="#">Application Year</a></h3>
+              <div>
+                <%=raw display_option_box(@options['App Year'], 'app_year', 'Application Year')%>
+              </div>
+              <h3><a href="#">Assignment Year</a></h3>
+              <div>
+                <%=raw display_option_box(@options['Asg Year'], 'asg_year', 'Assignment Year')%>
+              </div>
+            </div>
+          	<div id="search_button">
+        			<a href="javascript:document.search_f.submit();" class="button">Search</a>
+        			<a href="javascript:clear_search();" class="button">Clear</a>
+        		</div>
+          </div>
+        </div>
+      </div>
+      <div id="selected_options">
+      </div>
+  	<% end %>
+    <div class="directory_sidebar_open filter_tab padb3">
+      <h3><a href="#">Options</a></h3>
+      <div>
+        <div class="label">Directory View:</div>
+        <select name="view" onchange="change_view();" class="side_select" id="option_view">
+          <% @views.sort_by(&:name).each do |view| -%>
+	          <% if view.id == @view.id -%>
+		          <option value="<%=view.id%>" selected="selected"><%=view.name%></option>
+	          <% else -%>
+		          <option value="<%=view.id%>"><%=view.name%></option>
+	          <% end -%>
+          <% end -%>
+          <option value="|ev|">[Edit Views]</option>
+        </select>
+        <div class="label">Restrict Search To:</div>
+        <select name="region" id="option_region" onchange="change_region();" class="side_select">
+          <% if '%' == @sel_region_name -%>
+            <option value="all" selected="selected">All</option>
+          <% else -%>
+            <option value="all">All</option>
+          <% end -%>
+          <% @regions.sort.each do |region| -%>
+            <% if region[0] == @sel_region_name -%>
+	            <option value="<%=region[0]%>" selected="selected"><%=region[0]%></option>
+            <% else -%>
+	            <option value="<%=region[0]%>"><%=region[0]%></option>
+            <% end -%>
+          <% end %>
+        </select>
+        <div class="label">Actions:</div>
+        <select name="do_something" onchange="perform_action();" class="side_select" id="option_action">
+          <option value="">
+            Choose One
+          </option>
+          <option value="email">
+            Send Email
+          </option>
+          <option value="excel">
+            Create Spreadsheet
+          </option>
+          <option value="add_person">
+            Add Person
+          </option>
+          <!-- <option value="delete">Delete People</option> -->
+          <!-- <option value="print">Print</option> -->
+        </select>
+      </div>
+    </div>
+    <div class="directory_sidebar_open filter_tab padb3">
+      <h3><a href="#">Stored Lists</a></h3>
+      <div>
+        <%= form_tag({}, {:id => 'query_form', :name => 'query_form'}) do %>
+      		<input type="hidden" name="query_id" />
+      		<div id="queries">
+      		  <% @saved_queries.each do |query| -%>
+      			  <div class="entry" id="query<%= query[:id] %>">
+      				  <%= link_to(query.name,
+      				    {:controller => 'directory', :action => 'show_query', :id => query[:id]},
+      				    {:class => 'menu'}) %>
+      				  <div class="entry_delete">
+      					  <%= link_to image_tag('x.png', :alt => 'Delete List', :class => 'x', :border => 0),
+        					  {:action => 'delete_query', :id => query[:id]}, 
+        					  {:confirm => 'Are you sure you want to delete the "'+query.name+'" list?', :remote => true} %>
+        				</div>
+      				</div>
+      			<% end -%>
+          	<div id="search_button">
+              <a href="javascript:save_query('new');" class="button">Save</a>
+      				<a href="javascript:save_query('append');" class="button">Append</a>
+        		</div>
+    			</div>
+      	<% end %>
+      </div>
+    </div>
+    <div class="directory_sidebar_open filter_tab">
+      <h3><a href="#">Stored Searches</a></h3>
+      <div>
+        <%= form_tag({}, {:id => 'criteria_form', :name => 'criteria_form'}) do %>
+          <input type="hidden" name="criteria_id" />
+      		<div id="queries">
+      		  <% @saved_criteria.each do |criteria| -%>
+      			  <div class="entry" id="criteria<%= criteria[:id] %>">
+      				  <%= link_to(criteria.name,
+      				      {:controller => 'directory', :action => 'show_criteria', :id => criteria[:id]},
+      				      {:class => 'menu'})%>
+      				  <div class="entry_delete">
+      					  <%= link_to image_tag('x.png', :alt => 'Delete Query', :class => 'x', :border => 0),
+      					    {:action => 'delete_criteria', :id => criteria[:id]},
+      					    {:confirm => 'Are you sure you want to delete the "'+criteria.name+'" criteria?', :remote => true} %>
+      					</div>
+      				</div>
+      			<% end -%>
+          	<div id="search_button">
+      				<% if @selected_options -%>
+      					<% js = 'save_criteria()' -%>
+      			 	<% else -%>
+      			  	<% js = 'alert(\'You must perform click the \\\'Search\\\' button before you can save the criteria.\')' -%>
+      			 	<% end-%>
+      				<a href="javascript:<%=js%>;" class="button">Save Current Criteria</a>
+        		</div>
+      		</div>
+      	<% end %>
+      </div>
+    </div>
+  </div> 
+  <div id="main_panel">
+    <div id="holder">
+  	  <div class="boxheader">Directory Listing - <%=@people.size%> displayed records</div>
+      <%= render :partial => 'results' %>
+    </div>
+  </div>
+</div>
+<div class="<%= 'modify_field' if ENV['RAILS_ENV'] == 'production' %>">
+  <iframe src="" width="100%" height="20px" frameborder="0" scrolling="yes" name="modify_frame"></iframe>
+</div>
+<div id="list_append_dialog" title="Append to List" class="centered hidden">
+	<div class="fleft font14">Choose a list to append to:</div>
+	<br/>
+	<br/>
+	<%= collection_select(:current_query, :id, @saved_queries, :id, :name) %>
+</div>
+<script>print_selected(false)</script>

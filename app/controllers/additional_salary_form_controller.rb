@@ -1,4 +1,5 @@
 class AdditionalSalaryFormController < ApplicationController
+  
   def fill
     if params[:form_id]
       @form = SitrackForm.find(params[:form_id])
@@ -30,7 +31,7 @@ class AdditionalSalaryFormController < ApplicationController
                 'approver' => @approver,
                 'tracking' => @tracking}
     form_html = render_to_string(:template => 'shared/form', :layout => 'additional_salary_form_layout')
-    @form.email(var_hash, form_html)
+    # @form.email(var_hash, form_html)
     @form_type = 'Additional Salary'
     render(:template => 'shared/form_submitted', :layout => 'application')
   end

@@ -10,6 +10,9 @@
 #
 
 class SitrackViewColumn < ActiveRecord::Base
+  
+  attr_accessible :sitrack_view_id, :sitrack_column_id, :position
+  
   belongs_to  :sitrack_view
   belongs_to  :sitrack_column
   acts_as_list :scope => :sitrack_view

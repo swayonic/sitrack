@@ -12,10 +12,11 @@ class ViewsController < ApplicationController
   def update
     @view = SitrackView.find(params[:id])
     if @view.update_attributes(params[:sitrack_view])
-      redirect_to params[:next]
+      flash[:notice] = "Directory View successfully renamed"
+      redirect_to :action=>:edit, :id=>@view
     else
-      edit
-      render :edit
+      flash[:notice] = "Failed to rename Directory View"
+      redirect_to :action=>:edit, :id=>@view
     end
   end
   
@@ -50,6 +51,16 @@ class ViewsController < ApplicationController
     render :nothing => true
   end
   
+  def reorder_used
+    @view = SitrackView.find(params[:id], :include => :sitrack_view_columns)
+    @view.sitrack_view_columns.each do |view_column|
+      view_column.position = params['used'].index(view_column.id.to_s) + 1
+      view_column.save
+    end
+    delete_cache(@view.id)
+    render :nothing => true
+  end
+  
   def save_name
     #raise params.inspect
     @view = SitrackView.find(params[:id])
@@ -62,6 +73,7 @@ class ViewsController < ApplicationController
   def add_column
     #raise params.inspect
     # make sure the column isn't already on this view (catch a double-click)
+    @column_id = params[:column_id]
     @view_column = SitrackViewColumn.find(:first, 
                                           :conditions => ['sitrack_view_id = ? and sitrack_column_id = ?', params[:id], params[:column_id]])
     unless @view_column    
@@ -71,21 +83,38 @@ class ViewsController < ApplicationController
     end
     @view = @view_column.sitrack_view
     delete_cache(@view.id)
+    
+    @view = SitrackView.find(params[:id], :include => [:sitrack_view_columns => :sitrack_column])
+    @all_columns = SitrackColumn.find(:all, :order => :name)
+    @unused_columns = @all_columns - @view.sitrack_columns
+    
+    renderJS
   end
   
   def remove_column
+    
+    @column_id = params[:view_column_id]
+    
     @view_column = SitrackViewColumn.find(params[:view_column_id], 
                               :include => [:sitrack_view, :sitrack_column])
     @column = @view_column.sitrack_column
     @view = @view_column.sitrack_view
     @view_column.destroy
     delete_cache(@view.id)
+    
+    
+    @view = SitrackView.find(@view.id, :include => [:sitrack_view_columns => :sitrack_column])
+    @all_columns = SitrackColumn.find(:all, :order => :name)
+    @unused_columns = @all_columns - @view.sitrack_columns
+    
+    renderJS
+    
   end
   
   def search
     @people = ''
-    @name = request.raw_post || request.query_string
-    if @name and !@name.empty? 
+    @name = params[:search][:name]
+    if @name.present?
     	names = @name.strip.split('%20')
     	if (names.size > 1)
 	    	first = names[0].gsub("=","")
@@ -99,34 +128,35 @@ class ViewsController < ApplicationController
 	  	                                 :conditions => @conditions, 
 	  	                                 :include => {:user => :person})
 	  end
-	  render(:layout => false)
+	  renderJS
   end
   
   def friend
-    unless params[:id]
-      redirect_to(:action => :borrow); return;
-    end
     @user = SitrackUser.find(params[:id])
     @person = @user.user.person
     @views = @user.sitrack_views
+    renderJS
   end
   
   def import
-    unless params[:id]
-      redirect_to(:action => :borrow); return;
-    end
     @view = SitrackView.find(params[:id])
-    @new_view = @view.clone
-    @view.sitrack_view_columns.each do |vc|
-      @new_view.sitrack_view_columns << vc.clone
-    end
-    sitrack_user.sitrack_views << @new_view
-    redirect_to(:action => :index)
+    @new_view = sitrack_user.sitrack_views.create!(
+      :name => @view.name
+    )
+    
+    @view.sitrack_view_columns.each do |c|
+      @new_view.sitrack_view_columns.create!(
+        :position => c.position,
+        :sitrack_column_id => c.sitrack_column_id
+      )
+    end 
+    
+    renderJS
   end
   
   protected
   def delete_cache(view_id)
-    template_with_path = "#{RAILS_ROOT}/app/views/directory/_results#{view_id}.rhtml"
+    template_with_path = "#{Rails.root}/app/views/directory/_results#{view_id}.rhtml"
     File.delete(template_with_path) if File.exist?(template_with_path)
   end
 end

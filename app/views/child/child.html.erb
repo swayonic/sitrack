@@ -1,0 +1,41 @@
+<html>
+  <head>
+    <%= stylesheet_link_tag '/stylesheets/custom-theme/jquery-ui-1.8.20.custom' %>
+    <%= stylesheet_link_tag 'application', :media => 'all' %>
+    <%= javascript_include_tag "application" %>
+	  <title>Child Information</title>
+  </head>
+  <body bgcolor="" style="">
+    <div class="boxheader">Child Information</div>
+    <div class="segment">
+
+      <% @child.errors.full_messages.each do |msg| %>
+        <div class="flash_notice"><%= msg %></div>
+      <% end %>
+      <%= form_for :child, {:action => 'save_child', :id => @child.id} do |f| %>
+      <%= f.hidden_field 'person_id'%>
+      <%= f.hidden_field 'id'%>
+        <table>
+          <tr>
+          	<td><strong>Name</strong>:</td>
+          	<td><%= f.text_field 'name' %></td>
+          </tr>
+          <tr>
+          	<td><strong>Birthdate</strong>:</td>
+          	<td><%= f.text_field 'birthday', :class=>"date_select" %></td>
+          </tr>
+          <tr>
+          	<td><strong>Passport#</strong>:</td>
+          	<td><%=text_field('child','passport_no')%></td>
+          </tr>
+          <tr>
+            <td>&nbsp;</td>
+          	<td>
+          	  <%= f.submit "Save", :class=>'button'%>
+          	</td>
+          </tr>
+        </table>
+      <% end %>
+    </div>
+  </body>
+</html>

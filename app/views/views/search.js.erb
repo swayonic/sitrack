@@ -1,0 +1,5 @@
+$('div#memo_space').hide();
+$('#results').hide();
+$("#results").html("<%= escape_javascript(render :partial => 'views/search_results') %>");
+$('#results').fadeIn();
+$('#spinner_user_search').hide();

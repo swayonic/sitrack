@@ -1,14 +1,11 @@
-require 'numeric'
-require 'sitrack_user'
-# Filters added to this controller will be run for all controllers in the application.
-# Likewise, all the methods added will be available for all controllers.
 class ApplicationController < ActionController::Base
-  filter_parameter_logging *FILTER_KEYS
   @@public_pages = ['up_monitor','no_access','logout','expire']
-  skip_before_filter CAS::Filter, :only => @@public_pages
-  before_filter AuthenticationFilter, :authorize, :except => @@public_pages
-#  after_filter :connection_bar
-  include ExceptionNotifiable	#Automatically generates emails of errors
+  include AuthenticatedSystem
+  before_filter CASClient::Frameworks::Rails3::Filter, AuthenticationFilter, :current_user, :except => @@public_pages
+  # before_filter CASClient::Frameworks::Rails3::Filter, AuthenticationFilter
+  # skip_before_filter CAS::Filter, :only => @@public_pages
+  # before_filter AuthenticationFilter, :authorize, :except => @@public_pages
+  # after_filter :connection_bar
   
   # Define the app name. This is used in authentication_filter
   @@application_name = "sitrack"
@@ -22,6 +19,13 @@ class ApplicationController < ActionController::Base
   # this action just exists to test our error handling.
   def boom
     raise "boom"
+  end
+  
+  def renderJS
+  	respond_to do |format|
+    	format.js if request.xhr?
+			format.html
+    end
   end
   
   def up_monitor
@@ -70,11 +74,15 @@ class ApplicationController < ActionController::Base
   
   private
   def sitrack_user
-    unless @sitrack_user 
-      @sitrack_user ||= authorize
-      session[:sitrack_user_id] = @sitrack_user.id
+    begin
+      unless @sitrack_user 
+        @sitrack_user ||= authorize
+        session[:sitrack_user_id] = @sitrack_user.id
+      end
+      @sitrack_user
+    rescue "Cannot Determine User"
+      redirect_to "/"
     end
-    @sitrack_user
   end
   # reset the user object in the session
   def reset_user
@@ -83,6 +91,7 @@ class ApplicationController < ActionController::Base
   
   def authorize
     if session[:sitrack_user_id].nil?
+      Rails.logger.info ">>>>>>>>>>>> #{current_user.to_json}"
       @sitrack_user = SitrackUser.find_by_ssm_id(current_user.id)
       if @sitrack_user.nil?
         redirect_to(:controller => 'directory', :action => 'no_access'); return; 
@@ -102,21 +111,21 @@ class ApplicationController < ActionController::Base
   
   def all_tables
     table_person = Person.table_name
-    table_mpd = 'sitrack_Mpd'
-    table_address = 'ministry_NewAddress'
+    table_mpd = 'sitrack_mpd'
+    table_address = 'ministry_newaddress'
     table_tracking = SitrackTracking.table_name
-    table_users = 'sitrack_Users'
-    table_staff = 'ministry_Staff'
+    table_users = 'sitrack_users'
+    table_staff = 'ministry_staff'
     table_app = HrSiApplication.table_name
-    table_views = 'sitrack_Views'
-    table_columns = 'sitrack_Columns'
-    table_vc = 'sitrack_View_Columns'
-    table_queries = 'sitrack_Queries'
-    table_criteria = 'sitrack_SavedCriteria'
-    table_session = 'sitrack_Session'
-    table_regions = 'ministry_RegionalTeam'
-    table_children = 'sitrack_Children'
-    table_files = 'sitrack_mpdFiles'
+    table_views = 'sitrack_views'
+    table_columns = 'sitrack_columns'
+    table_vc = 'sitrack_view_columns'
+    table_queries = 'sitrack_queries'
+    table_criteria = 'sitrack_savedcriteria'
+    table_session = 'sitrack_session'
+    table_regions = 'ministry_regionalteam'
+    table_children = 'sitrack_children'
+    table_files = 'sitrack_mpdfiles'
     table_apply = 'si_applies'
     return "#{table_person} p "+
   				 "LEFT JOIN #{table_staff} s on p.accountNo = s.accountNo "+
@@ -141,7 +150,7 @@ class ApplicationController < ActionController::Base
   
   def get_teams
     @teams ||= Rails.cache.fetch('teams', :expires_in => 1.day) do 
-      teams = MinistryLocalLevel.find(:all, :conditions => "isActive = 'T'", :order => 'name')
+      teams = Team.active.order('name')
       team_hash = {"" => ""}
       teams.each do |team|
         team_hash[team.teamID.to_s] = team.name
@@ -153,7 +162,7 @@ class ApplicationController < ActionController::Base
   
   def get_teams_ordered
     @ordered_teams ||= Rails.cache.fetch('ordered_teams', :expires_in => 1.day) do 
-      teams = MinistryLocalLevel.find(:all, :conditions => "isActive = 'T'", :order => 'name')
+      teams = Team.active.order('name')
       team_array = [["", ""]]
       teams.each do |team|
         team_array << [team.teamID.to_s, team.name]

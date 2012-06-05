@@ -44,6 +44,9 @@
 #
 
 class SitrackStintSalaryForm < SitrackSalaryForm
+  
+  attr_accessible :hr_si_application_id
+  
   def validate
     super
     errors.add_on_empty('AOA') if hr_si_application.sitrack_tracking.asgContinent.nil? || hr_si_application.sitrack_tracking.asgContinent.empty?

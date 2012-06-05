@@ -14,4 +14,5 @@
 #
 
 class SitrackSavedCriteria < ActiveRecord::Base
+  attr_accessible :owner, :criteria, :options
 end

@@ -44,6 +44,9 @@
 #
 
 class SitrackSalaryForm < SitrackForm
+  
+  attr_accessible :date_of_change, :salary_reason, :annual_salary, :additional_notes
+  
   def validate
     errors.add_on_empty('Account #') if hr_si_application.person.accountNo.empty?
     errors.add_on_empty('SSN') if hr_si_application.ssn.empty?

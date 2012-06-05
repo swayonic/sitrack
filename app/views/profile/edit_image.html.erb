@@ -1,0 +1,40 @@
+<html>
+  <head>
+    <%= stylesheet_link_tag '/stylesheets/custom-theme/jquery-ui-1.8.20.custom' %>
+    <%= stylesheet_link_tag 'application', :media => 'all' %>
+    <%= javascript_include_tag "application" %>
+  	<title>Picture Upload</title>
+  </head>
+  <body bgcolor="" style="">
+    <div class="boxheader">Profile Picture</div>
+  
+    <div style="float:left; width:200px; height:160px; padding: 5px; text-align:center; margin-top:5px;">  	
+      <% @person.errors.full_messages.each do |msg| %>
+        <div class='flash_notice'><%= msg %></div>
+      <% end %>
+      <% if flash[:notice].present? %>
+        <div class='flash_notice'><%= flash[:notice] %></div>
+        <% flash[:notice] = nil %>
+      <% end %>
+      <%=@fb_id%>
+      <%= form_for :person, {:action => 'edit_image', :id => @person.id}  do |f| %>
+        <div class="label">Facebook Profile URL:</div>
+        <%= f.text_field "url", :value=>"#{@fb_url if @fb_url.present?}",
+          :style=>"text-align:center; width:180px; padding: 3px 5px; font-size:11px;" %>
+        <br/>
+        <br/>
+      	<div id="search_button">
+      	  <a href="javascript:document.forms[0].submit();" class="button">Load Image</a>
+      	  <a href="javascript:self.close();" class="button">Close</a>
+    		</div>
+      <% end %>
+    </div>
+    <div style="float:right; width:170px; height:160px; text-align:center; margin-top:5px;">
+      <% if @person.fb_uid.present? %>
+    	  <%= image_tag(url_for_fb_picture(@person.fb_uid), :style=>"border: 2px solid #336699", :width=>"150") %>
+    	<% else %>
+    	  <%= image_tag("no-image.gif", :style=>"border: 2px solid #336699", :width=>"150") %>
+    	<% end %>
+    </div>
+  </body>
+</html>

@@ -44,6 +44,10 @@
 #
 
 class SitrackJoinStaffForm < SitrackForm
+  
+  attr_accessible :hr_si_application_id, :date_of_change, :new_staff_training_date, :payroll_action,
+    :payroll_reason, :hrd, :spouse_name, :additional_notes
+  
   def validate
     errors.add_on_empty('Effective Date of Change') if date_of_change.nil? || date_of_change.to_s.empty?
     errors.add_on_empty('Account Number') if hr_si_application.person.accountNo.nil? || hr_si_application.person.accountNo.empty?
@@ -57,8 +61,8 @@ class SitrackJoinStaffForm < SitrackForm
   end
   
   def email(var_hash, form_html)
-    email = FormMailer.create_form_email(to, var_hash, form_html, 'Join Staff Form')
-    FormMailer.deliver(email)
+    email = FormMailer.form_email(to, var_hash, form_html, 'Join Staff Form')
+    Rails.logger.info "#{email}"
     
     # Stamp "form submitted" column
     var_hash['tracking'].joinStaffForm = Time.now

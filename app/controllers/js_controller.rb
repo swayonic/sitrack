@@ -16,7 +16,7 @@ class JsController < ApplicationController
         ret += "\n	var option = document.createElement('option'); "
     		ret += "\n	option.setAttribute('value', '#{value.value}'); "
     		ret += "\n	if ('#{value.value}' == value) { "
-    		ret += "\n	option.setAttribute(\"selected\", \"true\"); "
+    		ret += "\n	option.setAttribute('selected', 'selected'); "
     		ret += "\n	} "
     		ret += "\n	var option_value = document.createTextNode('#{value.name}'); "
     		ret += "\n	option.appendChild(option_value); "
@@ -31,7 +31,7 @@ class JsController < ApplicationController
       ret += "\n var option = document.createElement('option'); "
       ret += "\n option.setAttribute('value', '#{value[0]}'); "
       ret += "\n if ('#{value[0]}' == value) { "
-      ret += "\n option.setAttribute(\"selected\", \"true\"); "
+      ret += "\n option.setAttribute('selected', 'selected'); "
       ret += "\n } "
       ret += "\n var option_value = document.createTextNode('#{value[1].gsub("'","")}'); "
       ret += "\n option.appendChild(option_value); "
@@ -39,9 +39,10 @@ class JsController < ApplicationController
     end 
     ret += " }"
     @out = ret
-    respond_to do |wants|
-      wants.js { render(:layout => false) }
-    end
+    render :layout => false
+    # respond_to do |wants|
+    #   wants.js { render(:layout => false) }
+    # end
     
   end
 end

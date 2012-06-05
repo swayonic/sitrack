@@ -1,0 +1,42 @@
+<div id="center">
+  <div id="other_panel">
+  	<div class="head">Quick Links</div>
+    <div class="entry">
+	    <%= link_to "Directory Views List", :action=>"index" %>
+	  </div>
+    <div class="entry">
+	    <%= link_to "Copy Someone Else's View", :action=>"borrow" %>
+	  </div>
+  </div> 
+  <div id="main_panel">
+    <div id="holder">
+	    <div class="boxheader">Create New View</div>
+  	  <div id="content">
+  	    <% @view.errors.full_messages.each do |msg| %>
+          <div class='flash_notice'><%= msg %></div>
+        <% end %>
+    		<br/>
+        <%= form_for :view, {:action => 'new'} do |f| %>
+          <center>
+            <table border="0">
+      		    <tr>
+      		      <td>
+      			      View Name:
+      			    </td>
+                <td>
+      			      <%= f.text_field :name %>
+      			    </td>
+      			  </tr>
+      			  <tr>
+      			    <td colspan="2" align="center">
+      			      <%= f.submit "Next", :class=>'button' %>
+      			    </td>
+      			  </tr>
+      			</table>
+      		</center>
+      		<br/>
+    		<% end %>
+      </div>
+    </div>
+  </div>
+</div>

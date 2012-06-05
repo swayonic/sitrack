@@ -1,0 +1,5 @@
+$('div#memo_space').hide();
+$('div#friend').hide();
+$("div#friend").html("<%= escape_javascript(render :partial=>'views/friend') %>")
+$('div#friend').show('slide', {direction: 'left'});
+$('#spinner_user_search').hide();

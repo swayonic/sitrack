@@ -14,6 +14,8 @@
 
 class SitrackUser < ActiveRecord::Base
   unloadable
+  
+  attr_accessible :ssm_id, :created_by, :updated_by
   has_many                  :sitrack_views, :dependent => :destroy
   has_one                   :sitrack_session, :dependent => :destroy
   belongs_to                :user, :foreign_key => :ssm_id

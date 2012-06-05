@@ -1,0 +1,43 @@
+<div class="boxheader">Current SI Track Users - <%=@sitrack_users.size%> displayed records</div>
+<table cellspacing="0" border="0" width="100%" id="results">
+	<tr>
+		<td class="checkbox white nosort">
+		  &nbsp;
+		</td>
+		<td class="white sortactive" align="center" nowrap="nowrap">
+		  Name
+		</td>
+		<td class="white sortactive" align="center" nowrap="nowrap">
+		  Username
+		</td>
+		<td class="white sortactive" align="center" nowrap="nowrap">
+		  Last Login
+		</td>
+		<td class="white sortactive" align="center" nowrap="nowrap">
+		  Date Added
+		</td>
+	</tr>
+  <% @sitrack_users.each do |su| %>
+    <% if su.user && su.user.person %>
+      <tr class="<%= cycle('odd', 'even') %>" id="si_user_<%=su.id%>">
+  			<td class="checkbox">
+  				<%= link_to image_tag('x.png', :border => 0), 
+							{:action => :delete, :id => su.id},
+							{:remote => true, :confirm=>"Are you sure you want to remove '#{su.user.person.lastName} #{su.user.person.firstName}' from SI Track users?"} %>
+  			</td>
+  			<td>
+				  <%= su.user.person.lastName %>, <%= su.user.person.firstName %>
+				</td>
+				<td>
+				  <%= su.user.username %>
+				</td>
+				<td align="center">
+				  <%= formatted_date(su.last_login) %>
+				</td>
+				<td align="center">
+				  <%= formatted_date(su.created_at) %>
+				</td>
+			</tr>
+    <% end %>
+  <% end %>
+</table>

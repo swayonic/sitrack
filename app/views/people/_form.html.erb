@@ -1,0 +1,14 @@
+<%= render :partial => 'simple_form', :locals => {:f => f} %>
+<br />
+<div id="contact_info" class="acenter">
+	<div id="contact_info_link">
+		<%= link_to_function "Add Contact Information", "$('#contact_info_form').show(); $('#contact_info').hide()" %> 
+		<br/>
+		(You can do this later)
+	</div>
+</div>
+<div id="contact_info_form" style="display:none"><%= render :partial => "contact_form" %></div>
+<div id="search_button">
+  <%= submit_tag "Add", :class=>'button' %>
+</div>
+<br/>

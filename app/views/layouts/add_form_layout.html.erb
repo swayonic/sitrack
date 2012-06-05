@@ -1,0 +1,54 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+   "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html>
+
+<head>
+<title><%=@title%></title>
+<style media="all" type="text/css">
+#header_table {
+	border: 2px;
+}
+.data {
+	color: blue;
+}
+body, table {
+	font-family: Arial, sans-serif;
+	font-size: 12px;
+}
+.instructions {
+	font-weight: bold;
+}
+#preview_text {
+  width: 400px;
+  border: 2px solid red;
+  padding: 7px;
+  padding-bottom: 12px;
+  margin-bottom: 20px;
+  background-color: #f0f0f0;
+}
+</style>
+<style media="print" type="text/css">
+body, table {
+	font-family: Times, serif;
+	font-size: 12px;
+}
+</style>
+</head>
+
+<body>
+  
+
+<%= yield %>
+
+<script type="text/javascript">
+var gaJsHost = (("https:" == document.location.protocol) ? "https://ssl." : "http://www.");
+document.write(unescape("%3Cscript src='" + gaJsHost + "google-analytics.com/ga.js' type='text/javascript'%3E%3C/script%3E"));
+</script>
+<script type="text/javascript">
+var pageTracker = _gat._getTracker("UA-79392-13");
+pageTracker._initData();
+pageTracker._trackPageview();
+</script>
+</body>
+
+</html>

@@ -1,6 +1,5 @@
 class ProfileController < ApplicationController
 #  caches_action :index
-  
   def index
     # if we don't have an id in the request, go back to the directory
     if params[:form_id]
@@ -25,6 +24,7 @@ class ProfileController < ApplicationController
     end
     
     # sometimes it's useful to have the person as an object instead of a hash
+    Rails.logger.info ">>>>>>>>> #{@person['personID']}"
     @person_obj = Person.find(@person['personID'])
     
     # determine whether to give option to create second year record
@@ -70,47 +70,113 @@ class ProfileController < ApplicationController
   end
 
   def edit_image
+    success = false
     @person = Person.find(params[:id])
-    render(:action => :edit_image, :layout => false)
-  end
-  
-  def update_image
-  	#make sure we have a person in the params
-  	@person = Person.find(params[:id])
-  	if params[:person] && @person
-	    @person.image = params[:person][:image]
-	    if @person.save
-        # clear page caches
-        @person.hr_si_applications do |app|
-          expire_action(:controller => 'profile', :action => 'index', :id => app.id)
-  	    end
-        render(:template => '/shared/close_window', :layout => false)
-      else 
-    	  edit_image
-	    end
-	  else
-	   edit_image
+    # Check if there is an input
+    if params[:person].present? && params[:person][:url].present?
+      url = params[:person][:url]
+      
+      # Get UID from URL
+      fb_uid = get_uid(url)
+      if fb_uid.present?
+        # Get ID from UID
+        fb_id = get_id(fb_uid)
+        if fb_id.present?
+          @person.fb_uid = fb_id
+          if @person.save!
+            # clear page caches
+            @person.hr_si_applications do |app|
+              expire_action(:controller => 'profile', :action => 'index', :id => app.id)
+            end
+            success = true
+          else
+            flash[:notice] = "Please try again"
+          end
+        else
+          flash[:notice] = "Facebook user not found"
+        end
+      else
+        flash[:notice] = "Please enter a valid URL"
+      end
     end
-  end  
+    if success
+      close_window
+    else
+      @fb_url = @person.fb_uid.present? ? "https://www.facebook.com/#{@person.fb_uid}" : ""
+      render :layout => false
+    end
+  end
   
   def create_second_year
     @first_year = HrSiApplication.find(params[:id])
-    @second_year = @first_year.clone
-    @apply = @first_year.apply ? @first_year.apply.clone : Apply.new
+    @second_year = HrSiApplication.new(
+                    @first_year.attributes.except('id', 'applicationID', 'updated_at', 'created_at'), 
+                    without_protection: true)
+                    
+    if @first_year.apply.present?
+      @apply = Apply.new(
+                @first_year.apply.attributes.except('id', 'updated_at', 'created_at'),
+                without_protection: true)
+    else 
+      @apply = Apply.new
+    end
     @second_year.apply = @apply
-    @tracking = @first_year.sitrack_tracking ? @first_year.sitrack_tracking.clone : SitrackTracking.new
+    
+    if @first_year.sitrack_tracking.present?
+      @tracking = SitrackTracking.new(
+                    @first_year.sitrack_tracking.attributes.except('id', 'updated_at', 'created_at'),
+                    without_protection: true)
+    else
+      @tracking = SitrackTracking.new
+    end
     @tracking.asgYear = "#{Time.now.year}-#{Time.now.year+1}"
     @tracking.tenure = 'Second Year'
     @tracking.status = 'Re-Applied'
     @second_year.sitrack_tracking = @tracking
-    @mpd = @first_year.sitrack_mpd ? @first_year.sitrack_mpd.clone : SitrackMpd.new
+    
+    if @first_year.sitrack_mpd.present?
+      @mpd = SitrackMpd.new(
+              @first_year.sitrack_mpd.attributes.except('id', 'updated_at', 'created_at'),
+              without_protection: true)
+    else
+      @mpd = SitrackMpd.new
+    end
     @mpd.monthlyRaised = 0
     @mpd.oneTimeRaised = 0
     @mpd.totalRaised = 0
     @mpd.percentRaised = 0
     @second_year.sitrack_mpd = @mpd
+    
     @second_year.save!
     # go to the new profile
     redirect_to(:action => :index, :id => @second_year.id)
   end
+  
+  private
+  
+  def get_uid(url)
+    if url.include?("facebook.com") || url.include?("fb.com")
+      if url.include?("id=")
+        uid = url.split('id=').last
+      elsif url.include?("/")
+        uid = url.split('/').last
+      end
+    end
+    uid
+  end
+  
+  def get_id(uid)
+    begin
+      response = RestClient.get("https://graph.facebook.com/#{uid}")
+      response = JSON.parse(response)
+      response['id']
+    rescue
+      nil
+    end
+  end
+  
+  def close_window
+      render(:template => '/shared/close_window', :layout => false)
+  end
+  
 end

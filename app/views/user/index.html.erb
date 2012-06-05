@@ -1,0 +1,27 @@
+<div id="center">
+  <div id="other_panel">
+  	<div class="head">Add SI Tracker User</div>
+  	<div class="segment acenter">
+  	  <div class="guide">You can search by First Name, Last Name, or Partial Name:</div>
+    	<div class="acenter">
+    	  <%= form_for(:search, :url=>{:action=>:search}, :html=>{:autocomplete=>"off", :remote=>true}) do |f| %>
+          <%= f.text_field :name, :value => @keyword, :id => "user_search_field" %>
+        <% end %>
+      </div>
+    </div>
+    <div id="user_search_results">
+      <div class="acenter spinner_container">
+        <%= image_tag("spinner.gif", :id=>"spinner_user_search") %>
+      </div>
+      <div id="results">
+      </div>
+    </div>
+  </div> 
+  <div id="main_panel">
+    <div id="holder">
+	    <div id="users_list">
+        <%= render :partial => 'users_list' %>
+      </div>
+    </div>
+  </div>
+</div>

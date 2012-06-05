@@ -44,6 +44,8 @@
 #
 
 class SitrackAddForm < SitrackForm
+  
+  attr_accessible :hr_si_application_id, :spouse_name
 
   def validate
     errors.add_on_empty('First Name') if hr_si_application.person.firstName.empty?
@@ -60,7 +62,7 @@ class SitrackAddForm < SitrackForm
     errors.add_on_empty('Sending Department') if hr_si_application.sitrack_tracking.send_dept.blank?
     errors.add_on_empty('Current Address', 'must be completely filled out') if hr_si_application.person.current_address.nil? || hr_si_application.person.current_address.address1.blank?
     errors.add_on_empty('Permanent Address', 'must be completely filled out') if hr_si_application.person.permanent_address.nil? || hr_si_application.person.permanent_address.address1.blank?
-    errors.add_on_empty('Emergency Address', 'must be completely filled out') if hr_si_application.person.emergency_address1.nil? || hr_si_application.person.emergency_address1.address1.blank?
+    # errors.add_on_empty('Emergency Address', 'must be completely filled out') if hr_si_application.person.emergency_address1.nil? || hr_si_application.person.emergency_address1.address1.blank?
     super
   end 
   
@@ -69,9 +71,8 @@ class SitrackAddForm < SitrackForm
   end
   
   def email(var_hash, form_html)
-    email = FormMailer.create_form_email(to, var_hash, form_html, 'Add Form')
-    FormMailer.deliver(email)
-    
+    email = FormMailer.form_email(to, var_hash, form_html, 'Add Form')
+    Rails.logger.info "#{email}"
     # Stamp "form submitted" column
     var_hash['tracking'].addForm = Time.now
     var_hash['tracking'].save!

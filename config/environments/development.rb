@@ -1,48 +1,44 @@
-# Settings specified here will take precedence over those in config/environment.rb
+Sitrack::Application.configure do
+  # Settings specified here will take precedence over those in config/application.rb
 
-# In the development environment your application's code is reloaded on
-# every request.  This slows down response time but is perfect for development
-# since you don't have to restart the webserver when you make code changes.
-config.cache_classes = false
+  # In the development environment your application's code is reloaded on
+  # every request. This slows down response time but is perfect for development
+  # since you don't have to restart the web server when you make code changes.
+  config.cache_classes = false
 
-# Log error messages when you accidentally call methods on nil.
-config.whiny_nils = true
+  # Log error messages when you accidentally call methods on nil.
+  config.whiny_nils = true
 
-# Enable the breakpoint server that script/breakpointer connects to
-# config.breakpoint_server = true
-
-# Show full error reports and disable caching
-config.action_controller.consider_all_requests_local = true
-config.action_controller.perform_caching             = false
-# config.action_view.cache_template_extensions         = false
-config.action_view.debug_rjs                         = true
-
-# Don't care if the mailer can't send
-config.action_mailer.raise_delivery_errors = false
-config.action_mailer.perform_deliveries = false
+  # Show full error reports and disable caching
+  config.consider_all_requests_local       = true
+  config.action_controller.perform_caching = false
 
 
-config.action_controller.session_store = :mem_cache_store
+  # Print deprecation notices to the Rails logger
+  config.active_support.deprecation = :log
 
-# Enable serving of images, stylesheets, and javascripts from an asset server
-# config.action_controller.asset_host                  = "http://assets.example.com"
+  # Only use best-standards-support built into browsers
+  config.action_dispatch.best_standards_support = :builtin
 
-# Disable delivery errors, bad email addresses will be ignored
-# config.action_mailer.raise_delivery_errors = false
+  # Raise exception on mass assignment protection for Active Record models
+  config.active_record.mass_assignment_sanitizer = :strict
 
-require 'memcache'
-memcache_options = {
-  :c_threshold => 10_000,
-  :compression => true,
-  :debug => false,
-  :namespace => "sitrackapp-#{RAILS_ENV}",
-  :readonly => false,
-  :urlencode => false
-}
+  # Log the query plan for queries taking more than this (works
+  # with SQLite, MySQL, and PostgreSQL)
+  config.active_record.auto_explain_threshold_in_seconds = 0.5
 
-CACHE = MemCache.new memcache_options
-CACHE.servers = 'localhost:11211'
+  # Do not compress assets
+  config.assets.compress = false
 
-ActionController::Base.session_options[:expires] = 1.day
-ActionController::Base.session_options[:cache] = CACHE
-ActionController::Base.session_options[:session_secure] = true
+  # Expands the lines which load the assets
+  config.assets.debug = true
+ 
+  # Don't care if the mailer can't send
+  config.action_mailer.raise_delivery_errors = true
+  config.action_mailer.perform_deliveries = true 
+  
+  config.action_mailer.default_url_options = { :host => 'local.sitrack:3000' }
+  config.action_mailer.default_url_options = { :host => 'localhost:3000' }
+
+ 
+end

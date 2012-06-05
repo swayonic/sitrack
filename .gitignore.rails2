@@ -1,0 +1,52 @@
+
+# /
+/.project
+/nbproject
+/.loadpath
+/sqlnet.log
+
+# /app/views/directory/
+/app/views/directory/_results*
+
+# /config/
+/config/database.yml
+
+# /db/
+/db/test.sqlite3
+
+# /db/migrate/
+/db/migrate/003_create_sitrack_forms.rb
+/db/migrate/004_create_sitrack_add_forms.rb
+/db/migrate/005_create_sitrack_salary_forms.rb
+/db/migrate/006_create_sitrack_additional_salary_forms.rb
+/db/migrate/008_create_sitrack_join_staff_forms.rb
+/db/migrate/009_create_sitrack_acos_forms.rb
+/db/migrate/010_create_sitrack_intern_additional_salary_forms.rb
+/db/migrate/011_create_sitrack_stint_additional_salary_forms.rb
+/db/migrate/012_create_sitrack_stint_salary_forms.rb
+/db/migrate/013_create_sitrack_intern_salary_forms.rb
+
+# /log/
+/log/*.log
+
+# /public/
+/public/files
+/public/plugin_assets
+
+# /test/
+/test/coverage
+
+# /tmp/
+/tmp/*
+
+# /tmp/cache/
+/tmp/cache/*
+
+# /tmp/sessions/
+/tmp/sessions/ruby_sess.*
+
+# /vendor/
+
+# /vendor/plugins/
+
+.rvmrc

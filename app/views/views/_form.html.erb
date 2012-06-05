@@ -1,0 +1,40 @@
+<table border="0">
+  <tr>
+    <td>
+      &nbsp;View Name:
+    </td>
+    <td>
+      <%= f.text_field :name %>
+    </td>
+    <td align="center">
+      <%= f.submit "Save Name", :class=>'button' %>
+    </td>
+  </tr>
+</table>
+<div class="col1">
+  <div class="boxed">
+    <div class="segment">
+      <center>
+        The following columns are currently a part of this view. To reorder them, simply click and drag the column where you'd like it to be. To remove a column from the view, simply click on the red 'x' on that row.
+        <br/>
+        <strong>Changes are saved automatically!</strong>
+      </center>
+    </div>
+    <div class="segment" id="list_used">
+      <%= render :partial => 'list_used' %>
+    </div>
+  </div>
+</div>
+<div class="col2">
+  <div class="boxed">
+    <div class="segment">
+      <center>
+        The columns listed below are not currently part of your view. To add one of the columns below to your view simply click on it. When you click on it it will jump to the bottom of the list above. Once it's there you can click and drag it where you'd like the column to go.
+        <strong>Changes are saved automatically!</strong>
+      </center>
+    </div>
+    <div class="segment" id="list_unused">
+      <%= render :partial => 'list_unused' %>
+    </div>
+  </div>
+</div>

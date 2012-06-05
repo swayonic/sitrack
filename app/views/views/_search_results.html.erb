@@ -1,0 +1,32 @@
+<% if @people.size > 0 %>
+  <div class="segment">
+    Click&nbsp;
+    <%= image_tag('forward.png')%>
+    &nbsp;to see the created Directory Views of a person:
+  </div>
+  <table width="90%" id="results" cellspacing="0" class="list bordered" align="center">
+    <tr>
+      <td class="white sortactive" align="center" nowrap="nowrap" colspan="2">
+        Results
+      </td>
+    </tr>
+    <% @people.each do |p| -%>
+	  	<% person = p.user.person -%>
+  		<% full_name = "#{person.lastName}, #{person.firstName}" -%>
+      <tr class="<%= cycle('odd', 'even') %>">
+        <td>
+          <%= full_name %>
+          <br/>
+          <span class="detail"><%= "#{p.user.username}" %></span>
+        </td>
+        <td class="checkbox">
+          <%=link_to image_tag('forward.png'), 
+            {:action => :friend, :id => p.id},
+            :remote=>true, :onclick=>"$('#spinner_user_search').show();" %>
+    		</td>
+    	</tr>
+    <% end %>
+  </table>
+<% else %> 
+	<div class="flash_notice">There are no matches for the name you have entered.</div>
+<% end -%>

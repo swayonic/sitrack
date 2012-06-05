@@ -12,4 +12,5 @@
 #
 
 class SitrackQuery < ActiveRecord::Base
+  attr_accessible :name, :owner, :persons
 end

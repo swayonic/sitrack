@@ -1,0 +1,14 @@
+<div id="topnav">
+  <div id="left">
+    <% if params[:controller] == 'directory' %>
+      <div href="#" id="toggle_sidebar">
+        <%= image_tag('sidebar.png', :id=>"image") %>
+        <span href="#" id="sidebar_toggle">Hide Sidebar</span>
+      </div>
+    <% end %>
+  </div>
+  <a href="/user">Add Users</a>
+  <a href="/directory">Directory</a>
+  <a href="/views">Views</a>
+  <a href="/logout">Log Out</a>
+</div>
