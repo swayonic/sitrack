@@ -70,9 +70,9 @@ class SitrackAddForm < SitrackForm
       'personnel.records@ccci.org'
   end
   
-  def email(var_hash, form_html)
-    email = FormMailer.form_email(to, var_hash, form_html, 'Add Form')
-    Rails.logger.info "#{email}"
+  def email(current_user, form, var_hash)
+    email = FormMailer.add_form(current_user, form, to, var_hash, 'Add Form').deliver!
+    
     # Stamp "form submitted" column
     var_hash['tracking'].addForm = Time.now
     var_hash['tracking'].save!

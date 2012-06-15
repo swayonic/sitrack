@@ -32,8 +32,7 @@ class AcosFormController < ApplicationController
     var_hash = {'person' => @person,
                 'approver' => @approver,
                 'tracking' => @tracking}
-    form_html = render_to_string(:template => 'shared/form', :layout => 'add_form_layout')
-    # @form.email(var_hash, form_html)
+    @form.email(current_user, @form, var_hash)
     @form_type = 'ACOS'
     render(:template => 'shared/form_submitted', :layout => 'application')
   end

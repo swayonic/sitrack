@@ -55,16 +55,16 @@
 		name=Text49></a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span></b></p> 
 	<p><span
 		style='font-size:9.0pt;'><a
-		name=Check1></a></span><span style='font-size:9.0pt;'> <%=@termination%> TERMINATION</span></p> 
+		name=Check1></a></span><span style='font-size:9.0pt;'> <%=raw @termination%> TERMINATION</span></p> 
 		<ul>
 	<li><span style='font-size:9.0pt;'>Reopen account as </span><b><span style='font-size:9.0pt;'><a
 		name=Check2></a></span></b><b><span style='font-size:9.0pt;'> </span></b><span
-		style='font-size:9.0pt;'><%=@staff%> Staff Applicant </span><b><span
-		style='font-size:9.0pt;'> </span></b><span style='font-size:9.0pt;'><%=@stint%> STINT Applicant<b> </b> </span><b><span style='font-size:9.0pt;'><a name=Check3></a></span></b><b><span style='font-size:9.0pt;'> </span></b><span
-		style='font-size:9.0pt;'><%=@intern%> Intern Applicant<b> </b></span>
+		style='font-size:9.0pt;'><%=raw @staff%> Staff Applicant </span><b><span
+		style='font-size:9.0pt;'> </span></b><span style='font-size:9.0pt;'><%=raw @stint%> STINT Applicant<b> </b> </span><b><span style='font-size:9.0pt;'><a name=Check3></a></span></b><b><span style='font-size:9.0pt;'> </span></b><span
+		style='font-size:9.0pt;'><%=raw @intern%> Intern Applicant<b> </b></span>
 	</li>
 	<li><b><span style='font-size:9.0pt;'> </span></b><span
-		style='font-size:9.0pt;'> <%=@freeze%> FREEZE ACCOUNT (No funds go in or out of the account)</span>
+		style='font-size:9.0pt;'> <%=raw @freeze%> FREEZE ACCOUNT (No funds go in or out of the account)</span>
 	<span style='font-size:9.0pt;'>From <%=ApplicationController::formatted_date(@form.freeze_start) if @freeze == '[X]'%> </span><b><span style='font-size:9.0pt;'><a name=Text47></a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span></b><span
 		style='font-size:9.0pt;'> to <%=ApplicationController::formatted_date @form.freeze_end if @freeze == '[X]'%></span><b><span style='font-size:9.0pt;'><a name=Text48></a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span></b><span
 		style='font-size:9.0pt;'> ( up to 1 year) </span>
@@ -72,37 +72,37 @@
 	</ul>
 	</p>
 	<p class=MsoHeader><b><span style='font-size:9.0pt;'><a name=Check5></a></span></b><span
-		style='font-size:9.0pt;'> <%=@toIntern%> TRANSITION FROM STINT to US Intern</span></p> 
+		style='font-size:9.0pt;'> <%=raw @toIntern%> TRANSITION FROM STINT to US Intern</span></p> 
 	<p class=MsoHeader><b><span
-		style='font-size:9.0pt;'> </span></b><span style='font-size:9.0pt;'> <%=@toStint%> TRANSITION FROM US Intern to STINT </span>
+		style='font-size:9.0pt;'> </span></b><span style='font-size:9.0pt;'> <%=raw @toStint%> TRANSITION FROM US Intern to STINT </span>
 	<br><span style='font-size:9.0pt;'> </span><span style='font-size:9.0pt;'><a name=Text53></a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>
-			<span style='font-size:9.0pt;'> <%=@tracking.caringRegion if @toStint == '[X]'%> Caring HR Team </span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-			<span style='font-size:9.0pt;'> <%=@person.region if @toStint == '[X]'%> Sending HR Team</span></p> 
+			<span style='font-size:9.0pt;'> <%=raw @tracking.caringRegion if @toStint == '[X]'%> Caring HR Team </span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+			<span style='font-size:9.0pt;'> <%=raw @person.region if @toStint == '[X]'%> Sending HR Team</span></p> 
 	<p class=MsoHeader><b><span style='font-size:9.0pt;'><a name=Check6></a></span></b><b><span style='font-size:9.0pt;'> </span></b><span
-		style='font-size:9.0pt;'> <%=@withdrawal%> WITHDRAWAL </span></p> 
+		style='font-size:9.0pt;'> <%=raw @withdrawal%> WITHDRAWAL </span></p> 
 	<p class=MsoHeader><b><span style='font-size:9.0pt;'><a name=Check7></a></span></b><b><span style='font-size:9.0pt;'> </span></b><span
-		style='font-size:9.0pt;'><%=@changeLocation%> CHANGE IN ASSIGNMENT (Please indicate: TEAM and LOCATION)</span>
+		style='font-size:9.0pt;'><%=raw @changeLocation%> CHANGE IN ASSIGNMENT (Please indicate: TEAM and LOCATION)</span>
 	<br><span style='font-size:9.0pt;'>From <%=@form.change_assignment_from_location if @changeLocation == '[X]'%></span><b><span style='font-size:9.0pt;'><a name=Text45></a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span></b><span
-		style='font-size:9.0pt;'> to <%=@form.change_assignment_to_location if @changeLocation == '[X]'%></span><b><span style='font-size:9.0pt;'><a name=Text46></a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span></b><span
+		style='font-size:9.0pt;'> to <%=raw @form.change_assignment_to_location if @changeLocation == '[X]'%></span><b><span style='font-size:9.0pt;'><a name=Text46></a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span></b><span
 		style='font-size:9.0pt;'> </span></p> 
 	<p class=MsoHeader><b><span style='font-size:9.0pt;'><a name=Check8></a></span></b><b><span style='font-size:9.0pt;'> </span></b><span
-		style='font-size:9.0pt;'><%=@restint%> RESTINT to Location: <span style='color:blue'><%=@form.restint_location if @restint == '[X]'%></span></span><span style='font-size:9.0pt;'><a name=Text51></a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>
+		style='font-size:9.0pt;'><%=raw @restint%> RESTINT to Location: <span style='color:blue'><%=@form.restint_location if @restint == '[X]'%></span></span><span style='font-size:9.0pt;'><a name=Text51></a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>
 	<br><span style='font-size:9.0pt;
 		'>DEPARTURE DATE: <%=ApplicationController::formatted_date(@tracking.departureDate) if @restint == '[X]'%></span><b><span
 		style='font-size:9.0pt;'><a
 		name=Text52></a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span></b><b><span
 		style='font-size:9.0pt;'> </span></b><b><span style='font-size:9.0pt;'><a
 		name=Check11></a></span></b><span
-		style='font-size:9.0pt;'> <%=@est%> Est. </span><b><span style='font-size:9.0pt;'><a name=Check12></a></span></b><span
-		style='font-size:9.0pt;'><%=@conf%> Conf.</span></p> 
+		style='font-size:9.0pt;'> <%=raw @est%> Est. </span><b><span style='font-size:9.0pt;'><a name=Check12></a></span></b><span
+		style='font-size:9.0pt;'><%=raw @conf%> Conf.</span></p> 
 	<p class=MsoHeader><b><span
 		style='font-size:9.0pt;'><a
 		name=Check21></a></span></b><span
-		style='font-size:9.0pt;'> <%=@reintern%> Intern approved for second-year Internship.</span></p> 
-	<p class=MsoHeader><span style='font-size:9.0pt;'><a name=Check22></a></span><span style='font-size:9.0pt;'> <%=@changeHours%> Change in hours worked. New number of hours per week: <%=@form.hours_per_week if @changeHours == '[X]'%> </span><span style='font-size:9.0pt;'><a name=Text55></a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>
+		style='font-size:9.0pt;'> <%=raw @reintern%> Intern approved for second-year Internship.</span></p> 
+	<p class=MsoHeader><span style='font-size:9.0pt;'><a name=Check22></a></span><span style='font-size:9.0pt;'> <%=raw @changeHours%> Change in hours worked. New number of hours per week: <%=@form.hours_per_week if @changeHours == '[X]'%> </span><span style='font-size:9.0pt;'><a name=Text55></a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>
 </p> 
 	<p><span
-		style='font-size:9.0pt;'> <%=@other%> Other: <%=@form.other_explanation if @other == '[X]'%></span><b><span style='font-size:9.0pt;'><a name=Text44></a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span></b><span
+		style='font-size:9.0pt;'> <%=raw @other%> Other: <%=@form.other_explanation if @other == '[X]'%></span><b><span style='font-size:9.0pt;'><a name=Text44></a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span></b><span
 		style='font-size:9.0pt;'> </span></p> 
 	<p><b><span
 		style='font-size:9.0pt;'>AUTHORIZING SIGNATURE: <span

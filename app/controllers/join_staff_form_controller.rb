@@ -32,8 +32,7 @@ class JoinStaffFormController < ApplicationController
     var_hash = {'person' => @person,
                 'approver' => @approver,
                 'tracking' => @tracking}
-    form_html = render_to_string(:template => 'shared/form', :layout => 'add_form_layout')
-    #@form.email(var_hash, form_html)
+    @form.email(current_user, @form, var_hash)
     @form_type = 'Join Staff'
     render(:template => 'shared/form_submitted', :layout => 'application')
   end
@@ -51,7 +50,7 @@ class JoinStaffFormController < ApplicationController
     @application = @form.hr_si_application
     @person = @application.person
     @current_address = @person.current_address || Address.new
-    @tracking = @application.sitrack_tracking
+    @tracking = @application.sitrack_tracking || SitrackTracking.new
     @spouse = @person.spouse || Person.new
     @form.spouse_name = @spouse.first_name
     @mpd = @application.sitrack_mpd || (@application.sitrack_mpd = SitrackMpd.new)

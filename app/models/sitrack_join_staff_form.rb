@@ -60,9 +60,8 @@ class SitrackJoinStaffForm < SitrackForm
       'Personel Records <personnel.records@ccci.org>'
   end
   
-  def email(var_hash, form_html)
-    email = FormMailer.form_email(to, var_hash, form_html, 'Join Staff Form')
-    Rails.logger.info "#{email}"
+  def email(current_user, form, var_hash)
+    email = FormMailer.join_staff_form(current_user, form, to, var_hash, 'Join Staff Form').deliver!
     
     # Stamp "form submitted" column
     var_hash['tracking'].joinStaffForm = Time.now

@@ -20,7 +20,7 @@ Sex: <span class="data"><%=@person.human_gender%></span>
 </p>
 
 <p>
-Marital Status: <span class="data"><%=get_option_hash["Marital Status"][@person.maritalStatus]%> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>
+Marital Status: <span class="data"><%=@maritalStatus%> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>
 Spouse First Name: <span class="data"><%=@form.spouse_name%></span>
 </p>
 
@@ -59,7 +59,7 @@ Email: <span class="data"><%=@permanent_address.email%></span><br/>
 </p>
 
 <p>
-Birthdate: <span class="data"><%=formatted_date(@person.birth_date)%></span>&nbsp;&nbsp; 
+Birthdate: <span class="data"><%=raw ApplicationController::formatted_date(@person.birth_date)%></span>&nbsp;&nbsp; 
 Spouse Birthdate: 
 </p>
 
@@ -69,7 +69,7 @@ Spouse S.S.#:
 </p>
 
 <p>
-HUMAN RESOURCES STATUS: &nbsp;&nbsp;<span class="data"><%=@tracking.internType.upcase%></span>
+HUMAN RESOURCES STATUS: &nbsp;&nbsp;<span class="data"><%=@tracking.internType.upcase if @tracking.internType.present? %></span>
 </p>
 
 <p>If "other", please specify_______________</p>
@@ -85,13 +85,13 @@ Secure Employee: <span class="data"><%= @person.isSecure == 'T' ? 'Yes' : 'No' %
 </p>
 
 <p>
-Hire Date: <%= @person.staff && @person.staff.hireDate ? '<span class="data">' + formatted_date(@person.staff.hireDate) + '</span>' : '__/__/__' %>
-Estimated Departure Date: <span class="data"><%= if @stint then ApplicationController::formatted_date(@tracking.departureDate) end%></span>&nbsp;
+Hire Date: <%=raw @person.staff && @person.staff.hireDate ? raw('<span class="data">') + raw(ApplicationController::formatted_date(@person.staff.hireDate)) + raw('</span>') : raw('__/__/__') %>
+Estimated Departure Date: <span class="data"><%= if @stint then raw(ApplicationController::formatted_date(@tracking.departureDate)) end%></span>&nbsp;
 <strong>(For STINT Only)</strong>
 </p>
 <p>&nbsp;</p>
 <h3>
 AUTHORIZING SIGNATURE: <span class="data"><%=@approver.firstName%> <%=@approver.lastName%></span> ACCT#: <span class="data"><%=@approver.accountNo%> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>
-DATE: <span class="data"><%=formatted_date%></span>
+DATE: <span class="data"><%=ApplicationController::formatted_date%></span>
 </h3>
 

@@ -32,8 +32,7 @@ class AddFormController < ApplicationController
     var_hash = {'person' => @person,
                 'approver' => @approver,
                 'tracking' => @tracking}
-    form_html = render_to_string(:template => 'shared/form', :layout => 'add_form_layout')
-    @form.email(var_hash, form_html)
+    @form.email(current_user, @form, var_hash)
     @form_type = 'Add'
     render(:template => 'shared/form_submitted')
   end
@@ -59,7 +58,12 @@ class AddFormController < ApplicationController
     @stint = @tracking.is_stint?
     @location = @stint ? [@tracking.asgCity, @tracking.asgCountry].join(', ') : @tracking.asgTeam
     @approver = @form.approver = current_user.person
+    @maritalStatus = get_option_hash["Marital Status"][@person.maritalStatus]
     @teams = get_teams
+  end
+  
+  def formatted_date(value=nil)
+    ApplicationController::formatted_date(value)
   end
 
 end
