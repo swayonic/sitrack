@@ -36,7 +36,7 @@ class FormMailer < ActionMailer::Base
     @form.spouse_name = @spouse.first_name
     @mpd = @application.sitrack_mpd || (@application.sitrack_mpd = SitrackMpd.new)
     @region = (Region.find_by_region(@person.region) || Region.new)
-    @approver = @form.approver = current_user.person
+    @approver = @form.approver
     
     mail(from: @from, to: @recipients, cc: @cc, subject: @subject)
   end
@@ -58,7 +58,7 @@ class FormMailer < ActionMailer::Base
     @person = @application.person
     @current_address = (@person.current_address || Address.new)
     @tracking = @application.sitrack_tracking
-    @approver = @form.approver = current_user.person
+    @approver = @form.approver
     
     mail(from: @from, to: @recipients, cc: @cc, subject: @subject)
   end
@@ -84,7 +84,7 @@ class FormMailer < ActionMailer::Base
     @tracking.asgState  = @current_address.state if @tracking.asgState.nil? || @tracking.asgState.empty?
     @tracking.asgCountry  = @current_address.country if @tracking.asgCountry.nil? || @tracking.asgCountry.empty?
     @mpd = @application.sitrack_mpd || SitrackMpd.new
-    @approver = @form.approver = current_user.person
+    @approver = @form.approver
     # If current date is >= 5th and <= 20th, put the 16th. Else put 1st
     day = Time.now.day
     month = Time.now.month
@@ -129,7 +129,7 @@ class FormMailer < ActionMailer::Base
     @spouse = (@person.spouse || Person.new)
     @stint = @tracking.is_stint?
     @location = @stint ? [@tracking.asgCity, @tracking.asgCountry].join(', ') : @tracking.asgTeam
-    @approver = @form.approver = current_user.person
+    @approver = @form.approver
     @maritalStatus = get_option_hash["Marital Status"][@person.maritalStatus]
     @teams = get_teams
     
@@ -157,7 +157,7 @@ class FormMailer < ActionMailer::Base
     @current_address = (@person.current_address || Address.new)
     @tracking = (@application.sitrack_tracking || SitrackTracking.new)
     @region = (Region.find_by_region(@person.region) || Region.new)
-    @approver = @form.approver = current_user.person
+    @approver = @form.approver
     setup_acos_action
     mail(from: @from, to: @recipients, cc: @cc, subject: @subject)
   end
