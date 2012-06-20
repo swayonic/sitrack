@@ -41,24 +41,20 @@ class FormMailer < ActionMailer::Base
     mail(from: @from, to: @recipients, cc: @cc, subject: @subject)
   end
   
-  def additional_salary_form(current_user, form, to, var_hash, form_type)
-    @subject = form_type + ' for '+var_hash['person'].full_name
-    from_name = var_hash['approver'].full_name
-    from_address = var_hash['approver'].email
-    @from = "#{from_name} <#{from_address}>"
+  def additional_salary_form(current_user, form, to, form_type)
+    extract_values(SitrackAdditionalSalaryForm.prepare(current_user, form))
+    extract_values(SitrackAdditionalSalaryForm.add_tax(form))
+    
+    Rails.logger.info ""
+    Rails.logger.info ""
+    Rails.logger.info "'#{@person.full_name}'"
+    Rails.logger.info ""
+    Rails.logger.info ""
+    
+    @subject = "#{form_type} Form for #{@person.full_name}"
+    @from = "#{@approver.full_name} <#{@approver.email}>"
     @cc = @from
     @recipients = to
-    
-    @person = var_hash["person"]
-    @approver = var_hash["approver"]
-    @tracking = var_hash["tracking"]
-    
-    @form = form
-    @application = @form.hr_si_application
-    @person = @application.person
-    @current_address = (@person.current_address || Address.new)
-    @tracking = @application.sitrack_tracking
-    @approver = @form.approver = current_user.person
     
     mail(from: @from, to: @recipients, cc: @cc, subject: @subject)
   end
@@ -204,5 +200,12 @@ class FormMailer < ActionMailer::Base
       team_hash
     end
     return @teams
+  end
+  
+  
+  def extract_values(hash)
+    hash.each do |name, value|
+      eval("@#{name} = value")
+    end
   end
 end

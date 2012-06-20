@@ -57,11 +57,65 @@ class SitrackAdditionalSalaryForm < SitrackForm
     end
   end
   
-  def email(current_user, form, var_hash)
-    email = FormMailer.additional_salary_form(current_user, form, to, var_hash, 'Additional Salary Form').deliver!
+  def email(current_user, form_type)
+    extract_values(SitrackAdditionalSalaryForm.prepare(current_user, self))
+    
+    email = FormMailer.additional_salary_form(current_user, @form, to, form_type).deliver!
     
     # Stamp "form submitted" column
-    var_hash['tracking'].additionalSalaryForm = Time.now
-    var_hash['tracking'].save!
+    @tracking.additionalSalaryForm = Time.now
+    @tracking.save!
   end
+  
+  def self.prepare(current_user, form)
+    
+    @form = form
+    @application = @form.hr_si_application
+    @person = @application.person
+    @current_address = (@person.current_address || Address.new)
+    @approver = @form.approver = current_user.person
+    @tracking = @application.sitrack_tracking
+    
+    var_hash = Hash.new
+    var_hash['form'] = @form
+    var_hash['application'] = @application
+    var_hash['person'] = @person
+    var_hash['current_address'] = @current_address
+    var_hash['approver'] = @approver
+    var_hash['tracking'] = @tracking
+    
+    return var_hash
+  end
+  
+  def self.add_tax(form)
+    columns = %w{current_years_salary previous_years_salary additional_salary adoption
+                counseling childrens_expenses college private_school graduate_studies auto_purchase
+                settling_in_expenses reimbursable_expenses}
+    @total = 0
+    var_hash = Hash.new
+    columns.each do |c|
+      amount = form[c].to_i
+      if amount != 0
+        amount = (amount / (1-(form.tax_rate.to_f/100))).round 
+        var_hash["#{c}_x"] = '[X]'
+        @total += amount
+      else
+        var_hash["#{c}_x"] = '[&nbsp;&nbsp;]'
+      end
+    end
+    var_hash["total"] = @total
+    return var_hash
+  end
+  
+  
+  def extract_values(hash)
+    hash.each do |name, value|
+      eval("@#{name} = value")
+    end
+  end
+  
+  
+  
+  
+  
 end
