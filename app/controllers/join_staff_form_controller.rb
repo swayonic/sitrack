@@ -8,7 +8,7 @@ class JoinStaffFormController < ApplicationController
       @form = SitrackJoinStaffForm.new(:hr_si_application_id => app_id)
     end
     # display form
-    setup
+    extract_values(SitrackJoinStaffForm.prepare(current_user, @form))
     unless request.get?
       if !params[:form][:hrd].present?
         flash[:notice] = "Name of approving HRD is required!"
@@ -28,33 +28,20 @@ class JoinStaffFormController < ApplicationController
     
   def submit
     @form = SitrackForm.find(params[:id])
-    setup
-    var_hash = {'person' => @person,
-                'approver' => @approver,
-                'tracking' => @tracking}
-    @form.email(current_user, @form, var_hash)
-    @form_type = 'Join Staff'
-    render(:template => 'shared/form_submitted', :layout => 'application')
+    extract_values(SitrackJoinStaffForm.prepare(current_user, @form))
+    @form.email(current_user)
+    render(:template => 'shared/form_submitted', :layout => "no_sidebar")
   end
   
   private
   
-  def preview
-    render(:template => 'shared/preview', :layout => 'add_form_layout')
+  def extract_values(hash)
+    hash.each do |name, value|
+      eval("@#{name} = value")
+    end
   end
   
-  # Create the instance variables needed in the views  
-  def setup
-    @title = 'Join Staff Form'
-    @options_hash = get_option_hash
-    @application = @form.hr_si_application
-    @person = @application.person
-    @current_address = @person.current_address || Address.new
-    @tracking = @application.sitrack_tracking || SitrackTracking.new
-    @spouse = @person.spouse || Person.new
-    @form.spouse_name = @spouse.first_name
-    @mpd = @application.sitrack_mpd || (@application.sitrack_mpd = SitrackMpd.new)
-    @region = (Region.find_by_region(@person.region) || Region.new)
-    @approver = @form.approver = current_user.person
+  def preview
+    render(:template => 'shared/preview', :layout => 'add_form_layout')
   end
 end
