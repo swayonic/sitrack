@@ -20,7 +20,7 @@ class SitrackAcosForm < SitrackForm
   
   def email(current_user)
     extract_values(SitrackAcosForm.prepare(current_user, self))
-    email = FormMailer.acos_form(current_user, @form, to, @form_type).deliver!
+    email = FormMailer.acos_form(current_user, @form, to, @form_title).deliver!
     
     # Stamp "form submitted" column
     @tracking.acosForm = Time.now
