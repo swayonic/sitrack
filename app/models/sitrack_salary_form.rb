@@ -57,11 +57,62 @@ class SitrackSalaryForm < SitrackForm
     super
   end 
   
-  def email(current_user, form, var_hash)
-    email = FormMailer.salary_form(current_user, form, to, var_hash, 'Salary Form').deliver!
+  def email(current_user, form_type)
+    extract_values(SitrackSalaryForm.prepare(current_user, self))
+    email = FormMailer.salary_form(current_user, @form, to, form_type).deliver!
     
     # Stamp "form submitted" column
-    var_hash['tracking'].salaryForm = Time.now
-    var_hash['tracking'].save!
+    @tracking.addForm = Time.now
+    @tracking.save!
+  end
+  
+  def self.prepare(current_user, form)
+    
+    @form = form
+    @form_title = 'Salary'
+    @application = @form.hr_si_application
+    @person = @application.person
+    
+    @current_address = @person.current_address || CurrentAddress.create(:person_id => @person.id)
+    @tracking = @application.sitrack_tracking || SitrackTracking.new
+    @tracking.asgCity  = @current_address.city if @tracking.asgCity.nil? || @tracking.asgCity.empty?
+    @tracking.asgState  = @current_address.state if @tracking.asgState.nil? || @tracking.asgState.empty?
+    @tracking.asgCountry  = @current_address.country if @tracking.asgCountry.nil? || @tracking.asgCountry.empty?
+    @mpd = @application.sitrack_mpd || SitrackMpd.new
+    @approver = @form.approver = current_user.person
+    # If current date is >= 5th and <= 20th, put the 16th. Else put 1st
+    day = Time.now.day
+    month = Time.now.month
+    year = Time.now.year
+  	if (day >= 5 && day <= 20) 
+  		date = Time.local(year, month, 16)
+  	elsif (day > 20)
+  	  month = month+1
+      year += 1 if month == 13
+      month = 1 if month == 13
+  		date = Time.local(year, month, 1)
+  	else
+  		date = Time.local(year, month, 1)
+  	end
+    @form.date_of_change ||= date
+    @form.annual_salary ||= @mpd.salary.to_i * 12 if @mpd.salary
+    
+    var_hash = Hash.new
+    var_hash['form_title'] = @form_title
+    var_hash['form'] = @form
+    var_hash['application'] = @application
+    var_hash['person'] = @person
+    var_hash['current_address'] = @current_address
+    var_hash['mpd'] = @mpd
+    var_hash['tracking'] = @tracking
+    var_hash['approver'] = @approver
+    
+    return var_hash
+  end
+  
+  def extract_values(hash)
+    hash.each do |name, value|
+      eval("@#{name} = value")
+    end
   end
 end
