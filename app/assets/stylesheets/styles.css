@@ -94,6 +94,18 @@ div.boxheader {
 	
 }
 
+#main_panel_no_sidebar {
+	margin: 0px 10px;
+}
+
+div#holder_no_sidebar {
+	display: inline-block;
+	border: 1px solid #336699;
+	margin-right: 10px;
+	min-height: 250px;
+	width: 100%;
+}
+
 div#holder {
 	display: inline-block;
 	border: 1px solid #336699;

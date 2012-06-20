@@ -1,6 +1,7 @@
 class FormMailer < ActionMailer::Base
   
   def form_email(to, var_hash, form_html, form_type)
+    
     @subject = form_type + ' for '+var_hash['person'].full_name
     from_name = var_hash['approver'].full_name
     from_address = var_hash['approver'].email
@@ -44,12 +45,6 @@ class FormMailer < ActionMailer::Base
   def additional_salary_form(current_user, form, to, form_type)
     extract_values(SitrackAdditionalSalaryForm.prepare(current_user, form))
     extract_values(SitrackAdditionalSalaryForm.add_tax(form))
-    
-    Rails.logger.info ""
-    Rails.logger.info ""
-    Rails.logger.info "'#{@person.full_name}'"
-    Rails.logger.info ""
-    Rails.logger.info ""
     
     @subject = "#{form_type} Form for #{@person.full_name}"
     @from = "#{@approver.full_name} <#{@approver.email}>"
@@ -101,33 +96,13 @@ class FormMailer < ActionMailer::Base
     mail(from: @from, to: @recipients, cc: @cc, subject: @subject)
   end
   
-  def add_form(current_user, form, to, var_hash, form_type)
-    @subject = form_type + ' for '+var_hash['person'].full_name
-    from_name = var_hash['approver'].full_name
-    from_address = var_hash['approver'].email
-    @from = "#{from_name} <#{from_address}>"
+  def add_form(current_user, form, to, form_type)
+    extract_values(SitrackAddForm.prepare(current_user, form))
+    
+    @subject = "#{form_type} Form for #{@person.full_name}"
+    @from = "#{@approver.full_name} <#{@approver.email}>"
     @cc = @from
     @recipients = to
-    
-    @person = var_hash["person"]
-    @approver = var_hash["approver"]
-    @tracking = var_hash["tracking"]
-    
-    @form = form
-    @title = 'STAFF ADD NOTICE - Class A Only'
-    @application = @form.hr_si_application
-    @person = @application.person
-    @current_address = (@person.current_address || Address.new)
-    @emergency_address = (@person.emergency_address1 || Address.new)
-    @permanent_address = (@person.permanent_address || Address.new)
-    @region = (Region.find_by_region(@person.region) || Region.new)
-    @tracking = @application.sitrack_tracking || SitrackTracking.new
-    @spouse = (@person.spouse || Person.new)
-    @stint = @tracking.is_stint?
-    @location = @stint ? [@tracking.asgCity, @tracking.asgCountry].join(', ') : @tracking.asgTeam
-    @approver = @form.approver = current_user.person
-    @maritalStatus = get_option_hash["Marital Status"][@person.maritalStatus]
-    @teams = get_teams
     
     mail(from: @from, to: @recipients, cc: @cc, subject: @subject)
   end

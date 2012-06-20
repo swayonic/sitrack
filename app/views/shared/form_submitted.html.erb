@@ -1,28 +1,6 @@
 <div id="center">
-  <div id="other_panel">
-  	<div class="head">Quick Links</div>
-    <div class="entry">
-	    <%= link_to "Back to Profile", {:controller=>'profile', :id=>params[:id]} %>
-	  </div>
-  	<div class="head">Generate Forms</div>
-    <div class="entry">
-	    <%= link_to "Add Form", "/add_form/fill?id=#{params[:id]}" %>
-	  </div>
-    <div class="entry">
-	    <%= link_to "Salary Form", "/salary_form/fill?id=#{params[:id]}" %>
-	  </div>
-    <div class="entry">
-	    <%= link_to "Additional Salary Form", "/additional_salary_form/fill?id=#{params[:id]}" %>
-	  </div>
-    <div class="entry">
-	    <%= link_to "ACOS Form", "/acos_form/fill?id=#{params[:id]}" %>
-	  </div>
-    <div class="entry">
-	    <%= link_to "Join Staff Form", "/join_staff_form/fill?id=#{params[:id]}" %>
-	  </div>
-  </div> 
-  <div id="main_panel">
-    <div id="holder">
+  <div id="main_panel_no_sidebar">
+    <div id="holder_no_sidebar">
   	  <div id="profile_info">
   	    
         <div class="boxheader"><%=@form_type%> Form Submited</div>

@@ -70,6 +70,7 @@ class SitrackAdditionalSalaryForm < SitrackForm
   def self.prepare(current_user, form)
     
     @form = form
+    @form_title = 'Additional Salary'
     @application = @form.hr_si_application
     @person = @application.person
     @current_address = (@person.current_address || Address.new)
@@ -78,6 +79,7 @@ class SitrackAdditionalSalaryForm < SitrackForm
     
     var_hash = Hash.new
     var_hash['form'] = @form
+    var_hash['form_title'] = @form_title
     var_hash['application'] = @application
     var_hash['person'] = @person
     var_hash['current_address'] = @current_address

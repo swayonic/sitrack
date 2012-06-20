@@ -70,11 +70,84 @@ class SitrackAddForm < SitrackForm
       'personnel.records@ccci.org'
   end
   
-  def email(current_user, form, var_hash)
-    email = FormMailer.add_form(current_user, form, to, var_hash, 'Add Form').deliver!
+  def email(current_user, form_type)
+    extract_values(SitrackAddForm.prepare(current_user, self))
+    email = FormMailer.add_form(current_user, @form, to, form_type).deliver!
     
     # Stamp "form submitted" column
-    var_hash['tracking'].addForm = Time.now
-    var_hash['tracking'].save!
+    @tracking.addForm = Time.now
+    @tracking.save!
+  end
+  
+  def self.prepare(current_user, form)
+    
+    @form = form
+    @title = 'STAFF ADD NOTICE - Class A Only'
+    @form_title = 'Add'
+    @application = @form.hr_si_application
+    @person = @application.person
+    @current_address = (@person.current_address || Address.new)
+    @emergency_address = (@person.emergency_address1 || Address.new)
+    @permanent_address = (@person.permanent_address || Address.new)
+    @region = (Region.find_by_region(@person.region) || Region.new)
+    @tracking = @application.sitrack_tracking || SitrackTracking.new
+    @spouse = (@person.spouse || Person.new)
+    @stint = @tracking.is_stint?
+    @location = @stint ? [@tracking.asgCity, @tracking.asgCountry].join(', ') : @tracking.asgTeam
+    @approver = @form.approver = current_user.person
+    @maritalStatus = get_option_hash["Marital Status"][@person.maritalStatus]
+    @teams = get_teams
+    
+    var_hash = Hash.new
+    var_hash['title'] = @title
+    var_hash['form_title'] = @form_title
+    var_hash['form'] = @form
+    var_hash['application'] = @application
+    var_hash['person'] = @person
+    var_hash['current_address'] = @current_address
+    var_hash['emergency_address'] = @emergency_address
+    var_hash['permanent_address'] = @permanent_address
+    var_hash['region'] = @region
+    var_hash['tracking'] = @tracking
+    var_hash['spouse'] = @spouse
+    var_hash['stint'] = @stint
+    var_hash['location'] = @location
+    var_hash['approver'] = @approver
+    var_hash['maritalStatus'] = @maritalStatus
+    var_hash['teams'] = @teams
+    
+    return var_hash
+  end
+  
+  
+  def self.get_option_hash
+    @option_hash ||= Rails.cache.fetch('option_hash', :expires_in => 1.day) do 
+      options = get_options
+      option_hash = {}
+      options.each do |column_name, column_array|
+        option_hash[column_name] = {}
+        column_array.each { |options| option_hash[column_name][options[0]] = options[1] }
+      end
+      option_hash
+    end
+    return @option_hash
+  end
+  
+  def self.get_teams
+    @teams ||= Rails.cache.fetch('teams', :expires_in => 1.day) do 
+      teams = Team.active.order('name')
+      team_hash = {"" => ""}
+      teams.each do |team|
+        team_hash[team.teamID.to_s] = team.name
+      end
+      team_hash
+    end
+    return @teams
+  end
+  
+  def extract_values(hash)
+    hash.each do |name, value|
+      eval("@#{name} = value")
+    end
   end
 end

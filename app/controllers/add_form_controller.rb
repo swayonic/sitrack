@@ -8,7 +8,7 @@ class AddFormController < ApplicationController
       @form.approver = current_user.person
       @form.save
     end
-    setup
+    extract_values(SitrackAddForm.prepare(current_user, @form))
 		unless request.get?
       if !params[:tracking][:caringRegion].present?
         flash[:notice] = "Caring Region is required!"
@@ -28,39 +28,24 @@ class AddFormController < ApplicationController
   
   def submit
     @form = SitrackAddForm.find(params[:id])
-    setup
-    var_hash = {'person' => @person,
-                'approver' => @approver,
-                'tracking' => @tracking}
-    @form.email(current_user, @form, var_hash)
-    @form_type = 'Add'
-    render(:template => 'shared/form_submitted')
+    extract_values(SitrackAddForm.prepare(current_user, @form))
+    @form.email(current_user, @form_title)
+    render(:template => 'shared/form_submitted', :layout => "no_sidebar")
   end
   
   private
   
+  def extract_values(hash)
+    hash.each do |name, value|
+      eval("@#{name} = value")
+    end
+  end
+  
   def preview
-    setup
     render(:template => 'shared/preview', :layout => 'add_form_layout')
   end
 
   # Create the instance variables needed in the views  
-  def setup
-    @title = 'STAFF ADD NOTICE - Class A Only'
-    @application = @form.hr_si_application
-    @person = @application.person
-    @current_address = (@person.current_address || Address.new)
-    @emergency_address = (@person.emergency_address1 || Address.new)
-    @permanent_address = (@person.permanent_address || Address.new)
-    @region = (Region.find_by_region(@person.region) || Region.new)
-    @tracking = @application.sitrack_tracking || SitrackTracking.new
-    @spouse = (@person.spouse || Person.new)
-    @stint = @tracking.is_stint?
-    @location = @stint ? [@tracking.asgCity, @tracking.asgCountry].join(', ') : @tracking.asgTeam
-    @approver = @form.approver = current_user.person
-    @maritalStatus = get_option_hash["Marital Status"][@person.maritalStatus]
-    @teams = get_teams
-  end
   
   def formatted_date(value=nil)
     ApplicationController::formatted_date(value)

@@ -26,10 +26,9 @@ class AdditionalSalaryFormController < ApplicationController
   
     
   def submit
-    @form_type = 'Additional Salary'
     @form = SitrackForm.find(params[:id])
     extract_values(SitrackAdditionalSalaryForm.prepare(current_user, @form))
-    @form.email(current_user, @form_type)
+    @form.email(current_user, @form_title)
     render(:template => 'shared/form_submitted', :layout => 'application')
   end
   
