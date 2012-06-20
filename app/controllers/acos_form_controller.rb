@@ -8,7 +8,7 @@ class AcosFormController < ApplicationController
       @form = SitrackAcosForm.new(:hr_si_application_id => @app_id)
     end
     # display form
-    setup
+    extract_values(SitrackAcosForm.prepare(current_user, @form))
     @form.change_assignment_from_location ||= [get_teams[@tracking.asgTeam], @tracking.asgCity, @tracking.asgCountry].join(', ')
     @form.restint_location ||= @form.change_assignment_from_location
     unless request.get?
@@ -27,50 +27,23 @@ class AcosFormController < ApplicationController
     
   def submit
     @form = SitrackForm.find(params[:id])
-    setup
-    setup_action
-    var_hash = {'person' => @person,
-                'approver' => @approver,
-                'tracking' => @tracking}
-    @form.email(current_user, @form, var_hash)
-    @form_type = 'ACOS'
-    render(:template => 'shared/form_submitted', :layout => 'application')
+    extract_values(SitrackAcosForm.prepare(current_user, @form))
+    @form.email(current_user)
+    render(:template => 'shared/form_submitted', :layout => "no_sidebar")
   end
   
   private
   
+  def extract_values(hash)
+    hash.each do |name, value|
+      eval("@#{name} = value")
+    end
+  end
+  
   def preview
-    setup_action
+    extract_values(SitrackAcosForm.setup_action(@form))
     render(:template => 'shared/preview', :layout => 'add_form_layout')
   end
   
   # Create the instance variables needed in the views  
-  def setup
-    @title = 'ACOS Form'
-    @options_hash = get_option_hash
-    @application = @form.hr_si_application
-    @person = @application.person
-    @spouse = @person.spouse || Person.new
-    @current_address = (@person.current_address || Address.new)
-    @tracking = (@application.sitrack_tracking || SitrackTracking.new)
-    @region = (Region.find_by_region(@person.region) || Region.new)
-    @approver = @form.approver = current_user.person
-  end
-  
-  def setup_action
-    statuses = ['termination','toIntern','toStint','withdrawal','changeLocation','restint','reintern','changeHours','other']
-    statuses.each do |status|
-      check = @form.action == status ? '[X]' : '[&nbsp;&nbsp;]'
-      eval("@#{status} = '#{check}'")
-    end
-    reopen = ['staff', 'intern', 'stint', 'freeze']
-    reopen.each do |as|
-      check = @form.reopen_as == as ? '[X]' : '[&nbsp;&nbsp;]'
-      eval("@#{as} = '#{check}'")
-    end
-    ['est','conf'].each do |certainty|
-      check = @form.departure_date_certainty == certainty ? '[X]' : '[&nbsp;&nbsp;]'
-      eval("@#{certainty} = '#{check}'")
-    end
-  end
 end

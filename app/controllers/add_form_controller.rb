@@ -29,7 +29,7 @@ class AddFormController < ApplicationController
   def submit
     @form = SitrackAddForm.find(params[:id])
     extract_values(SitrackAddForm.prepare(current_user, @form))
-    @form.email(current_user, @form_title)
+    @form.email(current_user)
     render(:template => 'shared/form_submitted', :layout => "no_sidebar")
   end
   

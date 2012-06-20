@@ -57,10 +57,10 @@ class SitrackAdditionalSalaryForm < SitrackForm
     end
   end
   
-  def email(current_user, form_type)
+  def email(current_user)
     extract_values(SitrackAdditionalSalaryForm.prepare(current_user, self))
     
-    email = FormMailer.additional_salary_form(current_user, @form, to, form_type).deliver!
+    email = FormMailer.additional_salary_form(current_user, @form, to, @form_title).deliver!
     
     # Stamp "form submitted" column
     @tracking.additionalSalaryForm = Time.now

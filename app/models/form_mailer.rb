@@ -76,76 +76,19 @@ class FormMailer < ActionMailer::Base
     mail(from: @from, to: @recipients, cc: @cc, subject: @subject)
   end
   
-  def acos_form(current_user, form, to, var_hash, form_type)
-    @subject = form_type + ' for '+var_hash['person'].full_name
-    from_name = var_hash['approver'].full_name
-    from_address = var_hash['approver'].email
-    @from = "#{from_name} <#{from_address}>"
+  def acos_form(current_user, form, to, form_type)
+    extract_values(SitrackAcosForm.prepare(current_user, form))
+    extract_values(SitrackAcosForm.setup_action(@form))
+    
+    @subject = "#{form_type} Form for #{@person.full_name}"
+    @from = "#{@approver.full_name} <#{@approver.email}>"
     @cc = @from
     @recipients = to
     
-    @person = var_hash["person"]
-    @approver = var_hash["approver"]
-    @tracking = var_hash["tracking"]
-    
-    @form = form
-    @title = 'ACOS Form'
-    @options_hash = get_option_hash
-    @application = @form.hr_si_application
-    @person = @application.person
-    @spouse = @person.spouse || Person.new
-    @current_address = (@person.current_address || Address.new)
-    @tracking = (@application.sitrack_tracking || SitrackTracking.new)
-    @region = (Region.find_by_region(@person.region) || Region.new)
-    @approver = @form.approver = current_user.person
-    setup_acos_action
-    mail(from: @from, to: @recipients, cc: @cc, subject: @subject)
+    mail(from: @from, to: @recipients, cc: @cc, subject: @subject) 
   end
   
   private
-  
-  def setup_acos_action
-    statuses = ['termination','toIntern','toStint','withdrawal','changeLocation','restint','reintern','changeHours','other']
-    statuses.each do |status|
-      check = @form.action == status ? '[X]' : '[&nbsp;&nbsp;]'
-      eval("@#{status} = '#{check}'")
-    end
-    reopen = ['staff', 'intern', 'stint', 'freeze']
-    reopen.each do |as|
-      check = @form.reopen_as == as ? '[X]' : '[&nbsp;&nbsp;]'
-      eval("@#{as} = '#{check}'")
-    end
-    ['est','conf'].each do |certainty|
-      check = @form.departure_date_certainty == certainty ? '[X]' : '[&nbsp;&nbsp;]'
-      eval("@#{certainty} = '#{check}'")
-    end
-  end
-  
-  def get_option_hash
-    @option_hash ||= Rails.cache.fetch('option_hash', :expires_in => 1.day) do 
-      options = get_options
-      option_hash = {}
-      options.each do |column_name, column_array|
-        option_hash[column_name] = {}
-        column_array.each { |options| option_hash[column_name][options[0]] = options[1] }
-      end
-      option_hash
-    end
-    return @option_hash
-  end
-  
-  def get_teams
-    @teams ||= Rails.cache.fetch('teams', :expires_in => 1.day) do 
-      teams = Team.active.order('name')
-      team_hash = {"" => ""}
-      teams.each do |team|
-        team_hash[team.teamID.to_s] = team.name
-      end
-      team_hash
-    end
-    return @teams
-  end
-  
   
   def extract_values(hash)
     hash.each do |name, value|

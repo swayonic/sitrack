@@ -38,7 +38,7 @@ class SalaryFormController < ApplicationController
   def submit
     @form = SitrackForm.find(params[:id])
     extract_values(SitrackSalaryForm.prepare(current_user, @form))
-    @form.email(current_user, @form_title)
+    @form.email(current_user)
     render(:template => 'shared/form_submitted', :layout => "no_sidebar")
   end
   

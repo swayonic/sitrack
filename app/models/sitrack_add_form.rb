@@ -70,9 +70,9 @@ class SitrackAddForm < SitrackForm
       'personnel.records@ccci.org'
   end
   
-  def email(current_user, form_type)
+  def email(current_user)
     extract_values(SitrackAddForm.prepare(current_user, self))
-    email = FormMailer.add_form(current_user, @form, to, form_type).deliver!
+    email = FormMailer.add_form(current_user, @form, to, @form_title).deliver!
     
     # Stamp "form submitted" column
     @tracking.addForm = Time.now
