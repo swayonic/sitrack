@@ -82,8 +82,8 @@ div.flash_notice_ok {
 }
 
 div.boxheader {
-	color: #336699;
-	background: #D0DDEA;
+	color: #fff;
+	background: #4183c4;
 	border-bottom: 1px solid #336699;
 	font-size: 16px;
 	padding: 5px;
@@ -513,7 +513,14 @@ img {
 	border: none;
 }
 
-.pagination {
+.pagination_top {
+  text-align: left;
+  padding: 5px;
+  background: #d0ddea;
+  border-bottom: 1px solid #336699;
+}
+
+.pagination_bottom {
   text-align: left;
   padding: 5px;
   background: #d0ddea;

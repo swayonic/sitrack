@@ -175,9 +175,18 @@
   </div> 
   <div id="main_panel">
     <div id="holder">
-  	  <div class="boxheader">Directory Listing - Page <%= params[:page] || "1" %> of <%=@people.total_pages%></div>
+  	  <div class="boxheader">Directory Listing <%= "- Page #{params[:page] || 1} of #{@people.total_pages}" if @people.total_pages.present? && @people.total_pages.to_i > 1 %></div>
+  	  <% if @people.total_pages.present? && @people.total_pages.to_i > 1 %>
+    	  <div class="pagination_top">
+          <%= will_paginate(@people, :params => { :controller => "directory", :action => "index" }) %>
+        </div>
+      <% end %>
       <%= render :partial => 'results' %>
-      <%= will_paginate(@people, :params => { :controller => "directory", :action => "index" }) %>
+  	  <% if @people.total_pages.present? && @people.total_pages.to_i > 1 %>
+    	  <div class="pagination_top">
+        <%= will_paginate(@people, :params => { :controller => "directory", :action => "index" }) %>
+        </div>
+      <% end %>
     </div>
   </div>
 </div>
