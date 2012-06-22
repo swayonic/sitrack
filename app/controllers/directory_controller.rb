@@ -404,7 +404,8 @@ class DirectoryController < ApplicationController
     # If we have a search or saved criteria, add the query string.
     @sql += @qs if @qs
     @order_by = get_order_by(@view)
-    @people = ActiveRecord::Base.connection.select_all(@sql+' ORDER BY '+@order_by)
+    # @people = ActiveRecord::Base.connection.select_all(@sql+' ORDER BY '+@order_by)
+    @people = Person.select(select_clause).joins(from_clause).where("#{@where_clause}#{@qs}").order(@order_by).page(params[:page])
   end
   
   # Replace spaces with underlines

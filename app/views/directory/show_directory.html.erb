@@ -175,8 +175,9 @@
   </div> 
   <div id="main_panel">
     <div id="holder">
-  	  <div class="boxheader">Directory Listing - <%=@people.size%> displayed records</div>
+  	  <div class="boxheader">Directory Listing - Page <%= params[:page] || "1" %></div>
       <%= render :partial => 'results' %>
+      <%= will_paginate(@people, :params => { :controller => "directory", :action => "index" }) %>
     </div>
   </div>
 </div>

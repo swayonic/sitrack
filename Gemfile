@@ -14,6 +14,7 @@ gem 'jquery-ui-rails'
 gem 'rest-client'
 gem 'paperclip' # needed for common engine
 gem 'aasm' # needed for common engine
+gem 'will_paginate', '~> 3.0'
 
 
 # Gems used only for assets and not required
