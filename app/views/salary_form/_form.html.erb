@@ -29,7 +29,7 @@
 		  <p><%=@application.ssn%><br/>
 			<b>Social Security Number</b></p>
 	
-		  <p><%=@person.birth_date%><br/>
+		  <p><%=ApplicationController::formatted_date(@person.birth_date)%><br/>
 			<b>Birth Date</b></p>
 	
 		  <p><%=ApplicationController::formatted_date(@form.date_of_change)%><br/>
