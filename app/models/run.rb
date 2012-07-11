@@ -1,12 +1,4 @@
 class Run
-  def self.daily_tasks
-    update_account_balances
-  end
-  
-  def self.update_account_balances
-    SitrackMpd.update_account_balances
-  end
-  
   def self.fix_applies
     result = Apply.connection.execute("select applicationID from hr_si_applications group by apply_id having count(apply_id) > 1 order by fk_personID")
     result.each do |r|
