@@ -28,9 +28,6 @@ class UserController < ApplicationController
       # see if the user already has access
       if !SitrackUser.exists?(:ssm_id => ssm_id)
         @sitrack_user = SitrackUser.create(:ssm_id => ssm_id, :created_by => current_user.id, :updated_by => current_user.id)
-        # set the new user up with some default views
-        # UserController.create_views(@sitrack_user)
-        # Should be discussed
       end
     end
     @sitrack_users = SitrackUser.find(:all, :order => "ministry_person.lastName, ministry_person.firstName", :include => {:user => :person})
@@ -44,15 +41,5 @@ class UserController < ApplicationController
     @sitrack_users_count = SitrackUser.count(:all, :include => {:user => :person})
     renderJS
   end
-  
-  protected
-    def self.create_views(si_user)
-      SitrackView.find_all_by_sitrack_user_id(0).each do |view|
-        new_view = view.clone
-        view.sitrack_view_columns.each do |vc|
-          new_view.sitrack_view_columns << vc.clone
-        end
-        si_user.sitrack_views << new_view
-      end
-    end
+
 end
