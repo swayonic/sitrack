@@ -19,4 +19,16 @@ class SitrackUser < ActiveRecord::Base
   has_many                  :sitrack_views, :dependent => :destroy
   has_one                   :sitrack_session, :dependent => :destroy
   belongs_to                :user, :foreign_key => :ssm_id
+
+  def create_views
+    SitrackView.transaction do
+      SitrackView.find_all_by_sitrack_user_id(0).each do |view|
+        new_view = sitrack_views.create(name: view.name)
+        view.sitrack_view_columns.each do |vc|
+          new_view.sitrack_view_columns << vc.clone
+        end
+      end
+      save
+    end
+  end
 end

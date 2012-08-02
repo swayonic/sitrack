@@ -20,7 +20,7 @@ class DirectoryController < ApplicationController
       # end
       @view = sitrack_user.sitrack_views.find(:first, :include => {:sitrack_view_columns => :sitrack_column})
       unless @view
-        UserController.create_views(sitrack_user)
+        sitrack_user.create_views
         @view = sitrack_user.sitrack_views.find(:first, :include => {:sitrack_view_columns => :sitrack_column})
       end
       @view_id = @view.id
