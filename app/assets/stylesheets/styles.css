@@ -447,7 +447,19 @@ input[type='text'] {
 }
 
 .spinner_container {
-	height: 20px;
+	height: 30px;
+}
+
+#results_container {
+  color: black;
+  display: none;
+  font-weight: bold;
+}
+
+span.subtext {
+  font-size: 10px;
+  color: gray;
+  font-weight: normal;
 }
 
 #spinner_user_search {

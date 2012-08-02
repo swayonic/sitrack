@@ -56,7 +56,8 @@ jQuery(document).ready(function() {
 		}
 	});
 	
-	$("#user_search_field").stop(true, true).on('keyup',function(){
+	$("#user_search_field").stop().on('keyup',function(){
+    $('#results_container').hide();
 		$('#spinner_user_search').show();
 		$(this).submit();
 	});

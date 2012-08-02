@@ -1,4 +1,9 @@
 $('#results').hide();
+$('#results_container').hide();
 $("#results").html("<%= escape_javascript(render :partial => 'user/search_results') %>");
 $('#results').fadeIn();
 $('#spinner_user_search').hide();
+if("<%= @message %>" != ""){
+  $('#results_container').html("<%== @message %>");
+  $('#results_container').show();
+}
