@@ -174,27 +174,28 @@ class ApplicationController < ActionController::Base
   helper_method :get_teams_ordered
 
   def get_options
-    @options ||= Rails.cache.fetch('options', :expires_in => 1.day) do 
+    # @options ||= Rails.cache.fetch('options', :expires_in => 1.day) do 
+    unless @options
       options = Hash.new
       SitrackColumn.find(:all, :include => :sitrack_enum_values, :order => 'sitrack_enum_values.position').each do |column|
         options[column.name] = column.sitrack_enum_values.collect {|option| [option.value, option.name]} if column.column_type == 'enum'
       end
-      options
+      @options = options
     end
     return @options
   end
   
   def get_option_hash
-    @option_hash ||= Rails.cache.fetch('option_hash', :expires_in => 1.day) do 
+    unless @option_hash
       options = get_options
       option_hash = {}
       options.each do |column_name, column_array|
         option_hash[column_name] = {}
         column_array.each { |options| option_hash[column_name][options[0]] = options[1] }
       end
-      option_hash
+      @option_hash = option_hash
     end
-    return @option_hash
+    @option_hash
   end
   helper_method :get_option_hash
 end
