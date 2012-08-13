@@ -173,8 +173,7 @@ class ApplicationController < ActionController::Base
   end
   helper_method :get_teams_ordered
 
-  def get_options
-    # @options ||= Rails.cache.fetch('options', :expires_in => 1.day) do 
+  def self.get_options
     unless @options
       options = Hash.new
       SitrackColumn.find(:all, :include => :sitrack_enum_values, :order => 'sitrack_enum_values.position').each do |column|
@@ -184,8 +183,12 @@ class ApplicationController < ActionController::Base
     end
     return @options
   end
-  
-  def get_option_hash
+
+  def get_options
+    ApplicationController.get_options
+  end
+
+  def self.get_option_hash
     unless @option_hash
       options = get_options
       option_hash = {}
@@ -197,5 +200,11 @@ class ApplicationController < ActionController::Base
     end
     @option_hash
   end
+  
+
+  def get_option_hash
+    ApplicationController.get_option_hash
+  end
+
   helper_method :get_option_hash
 end
