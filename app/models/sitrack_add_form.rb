@@ -44,7 +44,7 @@
 #
 
 class SitrackAddForm < SitrackForm
-  
+
   attr_accessible :hr_si_application_id, :spouse_name
 
   def validate
@@ -65,22 +65,22 @@ class SitrackAddForm < SitrackForm
     # errors.add_on_empty('Emergency Address', 'must be completely filled out') if hr_si_application.person.emergency_address1.nil? || hr_si_application.person.emergency_address1.address1.blank?
     super
   end 
-  
+
   def to
-      'personnel.records@ccci.org'
+    'personnel.records@ccci.org'
   end
-  
+
   def email(current_user)
     extract_values(SitrackAddForm.prepare(current_user, self))
     email = FormMailer.add_form(current_user, @form, to, @form_title).deliver!
-    
+
     # Stamp "form submitted" column
     @tracking.addForm = Time.now
     @tracking.save!
   end
-  
+
   def self.prepare(current_user, form)
-    
+
     @form = form
     @title = 'STAFF ADD NOTICE - Class A Only'
     @form_title = 'Add'
@@ -95,9 +95,9 @@ class SitrackAddForm < SitrackForm
     @stint = @tracking.is_stint?
     @location = @stint ? [@tracking.asgCity, @tracking.asgCountry].join(', ') : @tracking.asgTeam
     @approver = @form.approver = current_user.person
-    @maritalStatus = get_option_hash["Marital Status"][@person.maritalStatus]
+    @maritalStatus = ApplicationController.get_option_hash["Marital Status"][@person.maritalStatus]
     @teams = get_teams
-    
+
     var_hash = Hash.new
     var_hash['title'] = @title
     var_hash['form_title'] = @form_title
@@ -115,24 +115,10 @@ class SitrackAddForm < SitrackForm
     var_hash['approver'] = @approver
     var_hash['maritalStatus'] = @maritalStatus
     var_hash['teams'] = @teams
-    
+
     return var_hash
   end
-  
-  
-  def self.get_option_hash
-    @option_hash ||= Rails.cache.fetch('option_hash', :expires_in => 1.day) do 
-      options = get_options
-      option_hash = {}
-      options.each do |column_name, column_array|
-        option_hash[column_name] = {}
-        column_array.each { |options| option_hash[column_name][options[0]] = options[1] }
-      end
-      option_hash
-    end
-    return @option_hash
-  end
-  
+
   def self.get_teams
     @teams ||= Rails.cache.fetch('teams', :expires_in => 1.day) do 
       teams = Team.active.order('name')
@@ -144,7 +130,7 @@ class SitrackAddForm < SitrackForm
     end
     return @teams
   end
-  
+
   def extract_values(hash)
     hash.each do |name, value|
       eval("@#{name} = value")

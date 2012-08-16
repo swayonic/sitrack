@@ -31,7 +31,7 @@ class SitrackAcosForm < SitrackForm
     
     @form = form
     @form_title = 'ACOS'
-    @options_hash = get_option_hash
+    @options_hash = ApplicationController.get_option_hash
     @application = @form.hr_si_application
     @person = @application.person
     @spouse = @person.spouse || Person.new
@@ -72,19 +72,6 @@ class SitrackAcosForm < SitrackForm
       var_hash["#{certainty}"] = "#{check}"
     end
     return var_hash
-  end
-  
-  def self.get_option_hash
-    @option_hash ||= Rails.cache.fetch('option_hash', :expires_in => 1.day) do 
-      options = get_options
-      option_hash = {}
-      options.each do |column_name, column_array|
-        option_hash[column_name] = {}
-        column_array.each { |options| option_hash[column_name][options[0]] = options[1] }
-      end
-      option_hash
-    end
-    return @option_hash
   end
   
   def extract_values(hash)
