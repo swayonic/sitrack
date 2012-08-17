@@ -176,12 +176,7 @@
   <div id="main_panel">
     <div id="holder">
   	  <div class="boxheader">Directory Listing
-  	    <% current_page = params[:page].to_i || 1 %>
-  	    <% if @people.count <= 100 %> 
-  	      <%= "- Showing #{@people.count} of #{@people.count} records" %>
-  	    <% else %>
-  	      <%= "- Showing #{current_page == @people.total_pages.to_i ? @people.count - (100 * (current_page - 1)) : 100} of #{@people.count} records" %>
-  	    <% end %>
+  	    <%= display_page_info %>
   	  </div>
   	  <% if @people.total_pages.present? && @people.total_pages.to_i > 1 %>
     	  <div class="pagination_top">
@@ -195,12 +190,7 @@
         </div>
       <% end %>
   	  <div class="boxheader">Directory Listing
-  	    <% current_page = params[:page].to_i || 1 %>
-  	    <% if @people.count <= 100 %> 
-  	      <%= "- Showing #{@people.count} of #{@people.count} records" %>
-  	    <% else %>
-  	      <%= "- Showing #{current_page == @people.total_pages.to_i ? @people.count - (100 * (current_page - 1)) : 100} of #{@people.count} records" %>
-  	    <% end %>
+  	    <%= display_page_info %>
   	  </div>
     </div>
   </div>

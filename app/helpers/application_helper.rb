@@ -1,4 +1,23 @@
 module ApplicationHelper
+  
+  def display_page_info
+    current_page = params[:page].present? ? params[:page].to_i : 1
+    record_per_page = WillPaginate.per_page
+  	if @people.count <= record_per_page
+  	  record_count = "1-#{@people.count}"
+    else
+      if current_page == @people.total_pages.to_i
+        record_difference = @people.count - (record_per_page * (current_page - 1))
+        record_end = @people.count
+        record_start = record_end - (record_difference - 1)
+      else 
+        record_end = record_per_page * current_page
+        record_start = record_end - (record_per_page - 1)
+      end
+      record_count = "#{number_with_delimiter(record_start)}-#{number_with_delimiter(record_end)}"
+    end
+    "- Showing #{record_count} of #{number_with_delimiter(@people.count)} records"
+  end
 
   def display_option_box(options, name='', clean_name='')
     ret_val = '';
