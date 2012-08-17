@@ -16,7 +16,7 @@ module ApplicationHelper
       end
       record_count = "#{number_with_delimiter(record_start)}-#{number_with_delimiter(record_end)}"
     end
-    "- Showing #{record_count} of #{number_with_delimiter(@people.count)} records"
+    "- Showing #{record_count} of #{number_with_delimiter(@people.count)} people"
   end
 
   def display_option_box(options, name='', clean_name='')
