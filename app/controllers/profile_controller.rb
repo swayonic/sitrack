@@ -11,7 +11,14 @@ class ProfileController < ApplicationController
     end
     
     # if they don't have a tracking record, now would be a good time to create one.
-    @tracking = SitrackTracking.find_by_application_id(params[:id]) || SitrackTracking.create(:application_id => params[:id])
+    @tracking = SitrackTracking.find_by_application_id(params[:id])
+    unless @tracking  # if they don't have a tracking record, now would be a good time to create one.
+      hr_app = HrSiApplication.find(params[:id])
+      intern_type = nil
+      intern_type = hr_app.app_type if hr_app
+      intern_type = "Internship" if intern_type == "US Internship"
+      SitrackTracking.create(:application_id => params[:id], :internType => intern_type)
+    end
     # build query
     @sql =  "SELECT personID, applicationID, "+SitrackColumn.all_select_clauses
     @sql += " FROM "+SitrackView.join_tables
