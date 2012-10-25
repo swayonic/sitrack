@@ -29,7 +29,6 @@ Sitrack::Application.routes.draw do
 
   match 'profile/:id' => 'profile#index', :requirements => {:id => /\d+/}
                              
-  match 'logout' => 'application#logout'
   match 'up_monitor' => 'application#up_monitor'
   
   match ':controller(/:action(/:id))(.:format)'

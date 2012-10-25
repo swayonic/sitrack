@@ -1,7 +1,7 @@
 require 'user'
 require 'person'
 class AuthenticationFilter
-  @logger = RAILS_DEFAULT_LOGGER
+  @logger = Rails.logger
 
   def self.filter(controller)
     unless controller.current_user
