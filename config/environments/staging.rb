@@ -66,5 +66,7 @@ Sitrack::Application.configure do
   # config.active_record.auto_explain_threshold_in_seconds = 0.5
   
   config.action_mailer.default_url_options = { :host => 'http://sitrack.ccci.us' }
-  config.cache_store = :dalli_store, 'localhost', { :namespace => 'sitrack_stage', :expires_in => 1.day, :compress => true }
+  config.after_initialize do # Apparently Rails doesn't recognize 1.day during initialization. See: https://github.com/mperham/dalli/issues/243
+    config.cache_store = :dalli_store, 'localhost', { :namespace => 'sitrack_stage', :expires_in => 1.day, :compress => true }
+  end
 end

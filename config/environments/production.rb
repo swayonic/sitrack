@@ -67,5 +67,7 @@ Sitrack::Application.configure do
   config.action_mailer.delivery_method = :sendmail
   
   config.action_mailer.default_url_options = { :host => 'https://sitrack.uscm.org' }
-  config.cache_store = :dalli_store, 'localhost', { :namespace => 'sitrack_session', :expires_in => 1.day, :compress => true }
+  config.after_initialize do # Apparently Rails doesn't recognize 1.day during initialization. See: https://github.com/mperham/dalli/issues/243
+    config.cache_store = :dalli_store, 'localhost', { :namespace => 'sitrack_session', :expires_in => 1.day, :compress => true }
+  end
 end
