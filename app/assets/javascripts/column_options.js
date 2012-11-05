@@ -106,106 +106,127 @@ function appendOptions(field, fieldname, value) {
 
  case 'Status':
 
+  var option = document.createElement('option'); 
+  option.setAttribute('value', 'started'); 
+  if ('started' == value) { 
+    option.setAttribute("selected", "true"); 
+  } 
+  var option_value = document.createTextNode('Applicant'); 
+  option.appendChild(option_value); 
+  field.appendChild(option); 
+  
+  var option = document.createElement('option'); 
+  option.setAttribute('value', 'submitted'); 
+  if ('submitted' == value) { 
+    option.setAttribute("selected", "true"); 
+  } 
+  var option_value = document.createTextNode('Submitted'); 
+  option.appendChild(option_value); 
+  field.appendChild(option); 
+  
 	var option = document.createElement('option'); 
-	option.setAttribute('value', 'Applicant'); 
-	if ('Applicant' == value) { 
-	option.setAttribute("selected", "true"); 
-	} 
-	var option_value = document.createTextNode('Applicant'); 
-	option.appendChild(option_value); 
-	field.appendChild(option); 
-	var option = document.createElement('option'); 
-	option.setAttribute('value', 'Ready'); 
-	if ('Ready' == value) { 
-	option.setAttribute("selected", "true"); 
+	option.setAttribute('value', 'completed'); 
+	if ('completed' == value) { 
+    option.setAttribute("selected", "true"); 
 	} 
 	var option_value = document.createTextNode('Ready'); 
 	option.appendChild(option_value); 
 	field.appendChild(option); 
+	
 	var option = document.createElement('option'); 
-	option.setAttribute('value', 'Being_Evaluated'); 
-	if ('Being_Evaluated' == value) { 
-	option.setAttribute("selected", "true"); 
+	option.setAttribute('value', 'being_evaluated'); 
+	if ('being_evaluated' == value) { 
+    option.setAttribute("selected", "true"); 
 	} 
 	var option_value = document.createTextNode('Being Evaluated'); 
 	option.appendChild(option_value); 
 	field.appendChild(option); 
+	
 	var option = document.createElement('option'); 
-	option.setAttribute('value', 'Pre_A'); 
-	if ('Pre_A' == value) { 
-	option.setAttribute("selected", "true"); 
+	option.setAttribute('value', 'pre_a'); 
+	if ('pre_a' == value) { 
+    option.setAttribute("selected", "true"); 
 	} 
 	var option_value = document.createTextNode('Pre A'); 
 	option.appendChild(option_value); 
 	field.appendChild(option); 
+	
 	var option = document.createElement('option'); 
-	option.setAttribute('value', 'Accepted'); 
-	if ('Accepted' == value) { 
-	option.setAttribute("selected", "true"); 
+	option.setAttribute('value', 'accepted'); 
+	if ('accepted' == value) { 
+    option.setAttribute("selected", "true"); 
 	} 
 	var option_value = document.createTextNode('Accepted'); 
 	option.appendChild(option_value); 
 	field.appendChild(option); 
+	
 	var option = document.createElement('option'); 
-	option.setAttribute('value', 'Follow_Through'); 
-	if ('Follow_Through' == value) { 
-	option.setAttribute("selected", "true"); 
+	option.setAttribute('value', 'follow_through'); 
+	if ('follow_through' == value) { 
+    option.setAttribute("selected", "true"); 
 	} 
 	var option_value = document.createTextNode('Follow Through'); 
 	option.appendChild(option_value); 
 	field.appendChild(option); 
+	
 	var option = document.createElement('option'); 
-	option.setAttribute('value', 'Placed'); 
-	if ('Placed' == value) { 
-	option.setAttribute("selected", "true"); 
+	option.setAttribute('value', 'placed'); 
+	if ('placed' == value) { 
+    option.setAttribute("selected", "true"); 
 	} 
 	var option_value = document.createTextNode('Placed'); 
 	option.appendChild(option_value); 
 	field.appendChild(option); 
+	
 	var option = document.createElement('option'); 
-	option.setAttribute('value', 'On_Assignment'); 
-	if ('On_Assignment' == value) { 
-	option.setAttribute("selected", "true"); 
+	option.setAttribute('value', 'on_assignment'); 
+	if ('on_assignment' == value) { 
+    option.setAttribute("selected", "true"); 
 	} 
 	var option_value = document.createTextNode('On Assignment'); 
 	option.appendChild(option_value); 
 	field.appendChild(option); 
+	
 	var option = document.createElement('option'); 
-	option.setAttribute('value', 'Declined'); 
-	if ('Declined' == value) { 
-	option.setAttribute("selected", "true"); 
+	option.setAttribute('value', 'declined'); 
+	if ('declined' == value) { 
+    option.setAttribute("selected", "true"); 
 	} 
 	var option_value = document.createTextNode('Declined'); 
 	option.appendChild(option_value); 
 	field.appendChild(option); 
+	
 	var option = document.createElement('option'); 
-	option.setAttribute('value', 'Withdrawn'); 
-	if ('Withdrawn' == value) { 
-	option.setAttribute("selected", "true"); 
+	option.setAttribute('value', 'withdrawn'); 
+	if ('withdrawn' == value) { 
+    option.setAttribute("selected", "true"); 
 	} 
 	var option_value = document.createTextNode('Withdrawn'); 
 	option.appendChild(option_value); 
 	field.appendChild(option); 
+	
 	var option = document.createElement('option'); 
-	option.setAttribute('value', 'Alumni'); 
-	if ('Alumni' == value) { 
-	option.setAttribute("selected", "true"); 
+	option.setAttribute('value', 'alumni'); 
+	if ('alumni' == value) { 
+    option.setAttribute("selected", "true"); 
 	} 
 	var option_value = document.createTextNode('Alumni'); 
 	option.appendChild(option_value); 
 	field.appendChild(option); 
+	
 	var option = document.createElement('option'); 
-	option.setAttribute('value', 'Re-Applied'); 
-	if ('Re-Applied' == value) { 
-	option.setAttribute("selected", "true"); 
+	option.setAttribute('value', 're-applied'); 
+	if ('re-applied' == value) { 
+    option.setAttribute("selected", "true"); 
 	} 
 	var option_value = document.createTextNode('Re-Applied'); 
 	option.appendChild(option_value); 
 	field.appendChild(option); 
+	
 	var option = document.createElement('option'); 
-	option.setAttribute('value', 'Terminated'); 
-	if ('Terminated' == value) { 
-	option.setAttribute("selected", "true"); 
+	option.setAttribute('value', 'terminated'); 
+	if ('terminated' == value) { 
+    option.setAttribute("selected", "true"); 
 	} 
 	var option_value = document.createTextNode('Terminated'); 
 	option.appendChild(option_value); 
