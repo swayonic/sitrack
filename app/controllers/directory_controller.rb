@@ -387,10 +387,13 @@ class DirectoryController < ApplicationController
   #########################
   def build_query
     @sel_region_name = sitrack_session.get_value('region') || current_user.person.region
-    @sel_region_name = '%' if @sel_region_name == 'all'
     all_where = ""
-    all_where = "( #{Person.table_name}.region LIKE '#{@sel_region_name}' OR #{SitrackTracking.table_name}.caringRegion LIKE '#{@sel_region_name}' OR #{SitrackTracking.table_name}.regionOfOrigin LIKE '#{@sel_region_name}' ) "+
-			     "AND (#{Person.table_name}.firstName <> '' OR #{Person.table_name}.lastName <>'' )" if @sel_region_name
+    if @sel_region_name.nil? || @sel_region_name == 'all'
+      all_where += "(#{Person.table_name}.firstName <> '' OR #{Person.table_name}.lastName <> '')"
+    else
+      all_where += "(#{Person.table_name}.region LIKE '#{@sel_region_name}' OR #{SitrackTracking.table_name}.caringRegion LIKE '#{@sel_region_name}' OR #{SitrackTracking.table_name}.regionOfOrigin LIKE '#{@sel_region_name}' ) "+
+			     "AND (#{Person.table_name}.firstName <> '' OR #{Person.table_name}.lastName <> '')" 
+		end
     select_clause = @view.display_columns
     from_clause = SitrackView.join_tables
     @where_clause = all_where unless @where_clause
