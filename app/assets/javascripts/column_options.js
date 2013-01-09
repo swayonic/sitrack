@@ -235,14 +235,24 @@ function appendOptions(field, fieldname, value) {
 
  case 'Intern Type':
 
-	var option = document.createElement('option'); 
-	option.setAttribute('value', 'STINT'); 
-	if ('STINT' == value) { 
-	option.setAttribute("selected", "true"); 
-	} 
-	var option_value = document.createTextNode('STINT'); 
-	option.appendChild(option_value); 
-	field.appendChild(option); 
+  var option = document.createElement('option'); 
+  option.setAttribute('value', 'STINT'); 
+  if ('STINT' == value) { 
+  option.setAttribute("selected", "true"); 
+  } 
+  var option_value = document.createTextNode('STINT'); 
+  option.appendChild(option_value); 
+  field.appendChild(option); 
+  
+  var option = document.createElement('option'); 
+  option.setAttribute('value', 'ICS'); 
+  if ('ICS' == value) { 
+  option.setAttribute("selected", "true"); 
+  } 
+  var option_value = document.createTextNode('ICS'); 
+  option.appendChild(option_value); 
+  field.appendChild(option); 
+  
 	var option = document.createElement('option'); 
 	option.setAttribute('value', 'Internship'); 
 	if ('Internship' == value) { 
@@ -251,14 +261,7 @@ function appendOptions(field, fieldname, value) {
 	var option_value = document.createTextNode('Internship'); 
 	option.appendChild(option_value); 
 	field.appendChild(option); 
-	var option = document.createElement('option'); 
-	option.setAttribute('value', 'Class_B_Intern'); 
-	if ('Class_B_Intern' == value) { 
-	option.setAttribute("selected", "true"); 
-	} 
-	var option_value = document.createTextNode('Class B Intern'); 
-	option.appendChild(option_value); 
-	field.appendChild(option); 
+	
 	var option = document.createElement('option'); 
 	option.setAttribute('value', 'Affiliate'); 
 	if ('Affiliate' == value) { 
@@ -267,6 +270,24 @@ function appendOptions(field, fieldname, value) {
 	var option_value = document.createTextNode('Affiliate'); 
 	option.appendChild(option_value); 
 	field.appendChild(option); 
+	
+  var option = document.createElement('option'); 
+  option.setAttribute('value', 'Part_Time_Field_Staff'); 
+  if ('Part_Time_Field_Staff' == value) { 
+  option.setAttribute("selected", "true"); 
+  } 
+  var option_value = document.createTextNode('Part Time Field Staff'); 
+  option.appendChild(option_value); 
+  field.appendChild(option); 
+  
+  var option = document.createElement('option'); 
+  option.setAttribute('value', 'Alumni'); 
+  if ('Alumni' == value) { 
+  option.setAttribute("selected", "true"); 
+  } 
+  var option_value = document.createTextNode('Alumni'); 
+  option.appendChild(option_value); 
+  field.appendChild(option); 
  break;
 
  case 'Team Leader':
