@@ -10,7 +10,7 @@ gem 'aasm'
 gem 'airbrake'
 gem 'jquery-rails'
 gem 'dalli'
-gem 'jquery-ui-rails'
+gem 'jquery-ui-rails', '2.0.2'
 gem 'rest-client'
 gem 'paperclip' # needed for common engine
 gem 'aasm' # needed for common engine
@@ -24,7 +24,7 @@ group :assets do
   gem 'coffee-rails', '~> 3.2.1'
 
   # See https://github.com/sstephenson/execjs#readme for more supported runtimes
-  gem 'therubyracer'
+  # gem 'therubyracer'
 
   gem 'uglifier', '>= 1.0.3'
 end

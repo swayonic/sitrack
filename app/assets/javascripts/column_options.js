@@ -235,14 +235,24 @@ function appendOptions(field, fieldname, value) {
 
  case 'Intern Type':
 
-	var option = document.createElement('option'); 
-	option.setAttribute('value', 'STINT'); 
-	if ('STINT' == value) { 
-	option.setAttribute("selected", "true"); 
-	} 
-	var option_value = document.createTextNode('STINT'); 
-	option.appendChild(option_value); 
-	field.appendChild(option); 
+  var option = document.createElement('option'); 
+  option.setAttribute('value', 'STINT'); 
+  if ('STINT' == value) { 
+  option.setAttribute("selected", "true"); 
+  } 
+  var option_value = document.createTextNode('STINT'); 
+  option.appendChild(option_value); 
+  field.appendChild(option); 
+  
+  var option = document.createElement('option'); 
+  option.setAttribute('value', 'ICS'); 
+  if ('ICS' == value) { 
+  option.setAttribute("selected", "true"); 
+  } 
+  var option_value = document.createTextNode('ICS'); 
+  option.appendChild(option_value); 
+  field.appendChild(option); 
+  
 	var option = document.createElement('option'); 
 	option.setAttribute('value', 'Internship'); 
 	if ('Internship' == value) { 
@@ -251,14 +261,7 @@ function appendOptions(field, fieldname, value) {
 	var option_value = document.createTextNode('Internship'); 
 	option.appendChild(option_value); 
 	field.appendChild(option); 
-	var option = document.createElement('option'); 
-	option.setAttribute('value', 'Class_B_Intern'); 
-	if ('Class_B_Intern' == value) { 
-	option.setAttribute("selected", "true"); 
-	} 
-	var option_value = document.createTextNode('Class B Intern'); 
-	option.appendChild(option_value); 
-	field.appendChild(option); 
+	
 	var option = document.createElement('option'); 
 	option.setAttribute('value', 'Affiliate'); 
 	if ('Affiliate' == value) { 
@@ -267,6 +270,24 @@ function appendOptions(field, fieldname, value) {
 	var option_value = document.createTextNode('Affiliate'); 
 	option.appendChild(option_value); 
 	field.appendChild(option); 
+	
+  var option = document.createElement('option'); 
+  option.setAttribute('value', 'Part_Time_Field_Staff'); 
+  if ('Part_Time_Field_Staff' == value) { 
+  option.setAttribute("selected", "true"); 
+  } 
+  var option_value = document.createTextNode('Part Time Field Staff'); 
+  option.appendChild(option_value); 
+  field.appendChild(option); 
+  
+  var option = document.createElement('option'); 
+  option.setAttribute('value', 'Alumni'); 
+  if ('Alumni' == value) { 
+  option.setAttribute("selected", "true"); 
+  } 
+  var option_value = document.createTextNode('Alumni'); 
+  option.appendChild(option_value); 
+  field.appendChild(option); 
  break;
 
  case 'Team Leader':
@@ -371,14 +392,96 @@ function appendOptions(field, fieldname, value) {
 	var option_value = document.createTextNode('2005'); 
 	option.appendChild(option_value); 
 	field.appendChild(option); 
-	var option = document.createElement('option'); 
-	option.setAttribute('value', '2006'); 
-	if ('2006' == value) { 
-	option.setAttribute("selected", "true"); 
-	} 
-	var option_value = document.createTextNode('2006'); 
-	option.appendChild(option_value); 
-	field.appendChild(option); 
+  var option = document.createElement('option'); 
+  option.setAttribute('value', '2006'); 
+  if ('2006' == value) { 
+  option.setAttribute("selected", "true"); 
+  } 
+  var option_value = document.createTextNode('2006'); 
+  option.appendChild(option_value); 
+  field.appendChild(option); 
+  
+  var option = document.createElement('option'); 
+  option.setAttribute('value', '2007'); 
+  if ('2007' == value) { 
+  option.setAttribute("selected", "true"); 
+  } 
+  var option_value = document.createTextNode('2007'); 
+  option.appendChild(option_value); 
+  field.appendChild(option); 
+  
+  var option = document.createElement('option'); 
+  option.setAttribute('value', '2008'); 
+  if ('2008' == value) { 
+  option.setAttribute("selected", "true"); 
+  } 
+  var option_value = document.createTextNode('2008'); 
+  option.appendChild(option_value); 
+  field.appendChild(option); 
+  
+  var option = document.createElement('option'); 
+  option.setAttribute('value', '2009'); 
+  if ('2009' == value) { 
+  option.setAttribute("selected", "true"); 
+  } 
+  var option_value = document.createTextNode('2009'); 
+  option.appendChild(option_value); 
+  field.appendChild(option); 
+  
+  var option = document.createElement('option'); 
+  option.setAttribute('value', '2010'); 
+  if ('2010' == value) { 
+  option.setAttribute("selected", "true"); 
+  } 
+  var option_value = document.createTextNode('2010'); 
+  option.appendChild(option_value); 
+  field.appendChild(option); 
+  
+  var option = document.createElement('option'); 
+  option.setAttribute('value', '2011'); 
+  if ('2011' == value) { 
+  option.setAttribute("selected", "true"); 
+  } 
+  var option_value = document.createTextNode('2011'); 
+  option.appendChild(option_value); 
+  field.appendChild(option); 
+  
+  var option = document.createElement('option'); 
+  option.setAttribute('value', '2012'); 
+  if ('2012' == value) { 
+  option.setAttribute("selected", "true"); 
+  } 
+  var option_value = document.createTextNode('2012'); 
+  option.appendChild(option_value); 
+  field.appendChild(option); 
+  
+  var option = document.createElement('option'); 
+  option.setAttribute('value', '2013'); 
+  if ('2013' == value) { 
+  option.setAttribute("selected", "true"); 
+  } 
+  var option_value = document.createTextNode('2013'); 
+  option.appendChild(option_value); 
+  field.appendChild(option); 
+  
+  var option = document.createElement('option'); 
+  option.setAttribute('value', '2014'); 
+  if ('2014' == value) { 
+  option.setAttribute("selected", "true"); 
+  } 
+  var option_value = document.createTextNode('2014'); 
+  option.appendChild(option_value); 
+  field.appendChild(option); 
+  
+  var option = document.createElement('option'); 
+  option.setAttribute('value', '2015'); 
+  if ('2015' == value) { 
+  option.setAttribute("selected", "true"); 
+  } 
+  var option_value = document.createTextNode('2015'); 
+  option.appendChild(option_value); 
+  field.appendChild(option); 
+  
  break;
 
  case 'Tenure':
@@ -411,106 +514,216 @@ function appendOptions(field, fieldname, value) {
 
  case 'Region of Origin':
 
-	var option = document.createElement('option'); 
-	option.setAttribute('value', 'GL'); 
-	if ('GL' == value) { 
-	option.setAttribute("selected", "true"); 
-	} 
-	var option_value = document.createTextNode('GL'); 
-	option.appendChild(option_value); 
-	field.appendChild(option); 
-	var option = document.createElement('option'); 
-	option.setAttribute('value', 'GP'); 
-	if ('GP' == value) { 
-	option.setAttribute("selected", "true"); 
-	} 
-	var option_value = document.createTextNode('GP'); 
-	option.appendChild(option_value); 
-	field.appendChild(option); 
-	var option = document.createElement('option'); 
-	option.setAttribute('value', 'AIA'); 
-	if ('AIA' == value) { 
-	option.setAttribute("selected", "true"); 
-	} 
-	var option_value = document.createTextNode('AIA'); 
-	option.appendChild(option_value); 
-	field.appendChild(option); 
-	var option = document.createElement('option'); 
-	option.setAttribute('value', 'MA'); 
-	if ('MA' == value) { 
-	option.setAttribute("selected", "true"); 
-	} 
-	var option_value = document.createTextNode('MA'); 
-	option.appendChild(option_value); 
-	field.appendChild(option); 
-	var option = document.createElement('option'); 
-	option.setAttribute('value', 'MS'); 
-	if ('MS' == value) { 
-	option.setAttribute("selected", "true"); 
-	} 
-	var option_value = document.createTextNode('MS'); 
-	option.appendChild(option_value); 
-	field.appendChild(option); 
-	var option = document.createElement('option'); 
-	option.setAttribute('value', 'NC'); 
-	if ('NC' == value) { 
-	option.setAttribute("selected", "true"); 
-	} 
-	var option_value = document.createTextNode('NC'); 
-	option.appendChild(option_value); 
-	field.appendChild(option); 
-	var option = document.createElement('option'); 
-	option.setAttribute('value', 'NE'); 
-	if ('NE' == value) { 
-	option.setAttribute("selected", "true"); 
-	} 
-	var option_value = document.createTextNode('NE'); 
-	option.appendChild(option_value); 
-	field.appendChild(option); 
-	var option = document.createElement('option'); 
-	option.setAttribute('value', 'NW'); 
-	if ('NW' == value) { 
-	option.setAttribute("selected", "true"); 
-	} 
-	var option_value = document.createTextNode('NW'); 
-	option.appendChild(option_value); 
-	field.appendChild(option); 
-	var option = document.createElement('option'); 
-	option.setAttribute('value', 'RR'); 
-	if ('RR' == value) { 
-	option.setAttribute("selected", "true"); 
-	} 
-	var option_value = document.createTextNode('RR'); 
-	option.appendChild(option_value); 
-	field.appendChild(option); 
-	var option = document.createElement('option'); 
-	option.setAttribute('value', 'SE'); 
-	if ('SE' == value) { 
-	option.setAttribute("selected", "true"); 
-	} 
-	var option_value = document.createTextNode('SE'); 
-	option.appendChild(option_value); 
-	field.appendChild(option); 
-	var option = document.createElement('option'); 
-	option.setAttribute('value', 'SW'); 
-	if ('SW' == value) { 
-	option.setAttribute("selected", "true"); 
-	} 
-	var option_value = document.createTextNode('SW'); 
-	option.appendChild(option_value); 
-	field.appendChild(option); 
-	var option = document.createElement('option'); 
-	option.setAttribute('value', 'UM'); 
-	if ('UM' == value) { 
-	option.setAttribute("selected", "true"); 
-	} 
-	var option_value = document.createTextNode('UM'); 
-	option.appendChild(option_value); 
-	field.appendChild(option); 
+  var option = document.createElement('option'); 
+  option.setAttribute('value', 'AIA'); 
+  if ('AIA' == value) { 
+  option.setAttribute("selected", "true"); 
+  } 
+  var option_value = document.createTextNode('AIA'); 
+  option.appendChild(option_value); 
+  field.appendChild(option); 
+  
+  var option = document.createElement('option'); 
+  option.setAttribute('value', 'DEST'); 
+  if ('DEST' == value) { 
+  option.setAttribute("selected", "true"); 
+  } 
+  var option_value = document.createTextNode('DEST'); 
+  option.appendChild(option_value); 
+  field.appendChild(option); 
+  
+  var option = document.createElement('option'); 
+  option.setAttribute('value', 'EPIC'); 
+  if ('EPIC' == value) { 
+  option.setAttribute("selected", "true"); 
+  } 
+  var option_value = document.createTextNode('EPIC'); 
+  option.appendChild(option_value); 
+  field.appendChild(option); 
+  
+  var option = document.createElement('option'); 
+  option.setAttribute('value', 'GL'); 
+  if ('GL' == value) { 
+  option.setAttribute("selected", "true"); 
+  } 
+  var option_value = document.createTextNode('GL'); 
+  option.appendChild(option_value); 
+  field.appendChild(option); 
+  
+  var option = document.createElement('option'); 
+  option.setAttribute('value', 'GP'); 
+  if ('GP' == value) { 
+  option.setAttribute("selected", "true"); 
+  } 
+  var option_value = document.createTextNode('GP'); 
+  option.appendChild(option_value); 
+  field.appendChild(option); 
+  
+  var option = document.createElement('option'); 
+  option.setAttribute('value', 'HLIC'); 
+  if ('HLIC' == value) { 
+  option.setAttribute("selected", "true"); 
+  } 
+  var option_value = document.createTextNode('HLIC'); 
+  option.appendChild(option_value); 
+  field.appendChild(option); 
+  
+  var option = document.createElement('option'); 
+  option.setAttribute('value', 'JF'); 
+  if ('JF' == value) { 
+  option.setAttribute("selected", "true"); 
+  } 
+  var option_value = document.createTextNode('JF'); 
+  option.appendChild(option_value); 
+  field.appendChild(option); 
+  
+  var option = document.createElement('option'); 
+  option.setAttribute('value', 'MA'); 
+  if ('MA' == value) { 
+  option.setAttribute("selected", "true"); 
+  } 
+  var option_value = document.createTextNode('MA'); 
+  option.appendChild(option_value); 
+  field.appendChild(option); 
+  
+  var option = document.createElement('option'); 
+  option.setAttribute('value', 'MM'); 
+  if ('MM' == value) { 
+  option.setAttribute("selected", "true"); 
+  } 
+  var option_value = document.createTextNode('MM'); 
+  option.appendChild(option_value); 
+  field.appendChild(option); 
+  
+  var option = document.createElement('option'); 
+  option.setAttribute('value', 'MS'); 
+  if ('MS' == value) { 
+  option.setAttribute("selected", "true"); 
+  } 
+  var option_value = document.createTextNode('MS'); 
+  option.appendChild(option_value); 
+  field.appendChild(option); 
+  
+  var option = document.createElement('option'); 
+  option.setAttribute('value', 'NC'); 
+  if ('NC' == value) { 
+  option.setAttribute("selected", "true"); 
+  } 
+  var option_value = document.createTextNode('NC'); 
+  option.appendChild(option_value); 
+  field.appendChild(option); 
+  
+  var option = document.createElement('option'); 
+  option.setAttribute('value', 'NE'); 
+  if ('NE' == value) { 
+  option.setAttribute("selected", "true"); 
+  } 
+  var option_value = document.createTextNode('NE'); 
+  option.appendChild(option_value); 
+  field.appendChild(option); 
+  
+  var option = document.createElement('option'); 
+  option.setAttribute('value', 'NW'); 
+  if ('NW' == value) { 
+  option.setAttribute("selected", "true"); 
+  } 
+  var option_value = document.createTextNode('NW'); 
+  option.appendChild(option_value); 
+  field.appendChild(option); 
+  
+  var option = document.createElement('option'); 
+  option.setAttribute('value', 'RR'); 
+  if ('RR' == value) { 
+  option.setAttribute("selected", "true"); 
+  } 
+  var option_value = document.createTextNode('RR'); 
+  option.appendChild(option_value); 
+  field.appendChild(option); 
+  
+  var option = document.createElement('option'); 
+  option.setAttribute('value', 'SE'); 
+  if ('SE' == value) { 
+  option.setAttribute("selected", "true"); 
+  } 
+  var option_value = document.createTextNode('SE'); 
+  option.appendChild(option_value); 
+  field.appendChild(option); 
+  
+  var option = document.createElement('option'); 
+  option.setAttribute('value', 'SW'); 
+  if ('SW' == value) { 
+  option.setAttribute("selected", "true"); 
+  } 
+  var option_value = document.createTextNode('SW'); 
+  option.appendChild(option_value); 
+  field.appendChild(option); 
+  
+  var option = document.createElement('option'); 
+  option.setAttribute('value', 'UM'); 
+  if ('UM' == value) { 
+  option.setAttribute("selected", "true"); 
+  } 
+  var option_value = document.createTextNode('UM'); 
+  option.appendChild(option_value); 
+  field.appendChild(option); 
+  
+  var option = document.createElement('option'); 
+  option.setAttribute('value', 'SV'); 
+  if ('SV' == value) { 
+  option.setAttribute("selected", "true"); 
+  } 
+  var option_value = document.createTextNode('CHS'); 
+  option.appendChild(option_value); 
+  field.appendChild(option); 
+  
+  var option = document.createElement('option'); 
+  option.setAttribute('value', 'BRG'); 
+  if ('BRG' == value) { 
+  option.setAttribute("selected", "true"); 
+  } 
+  var option_value = document.createTextNode('BRG'); 
+  option.appendChild(option_value); 
+  field.appendChild(option); 
+  
+  var option = document.createElement('option'); 
+  option.setAttribute('value', 'KEY'); 
+  if ('KEY' == value) { 
+  option.setAttribute("selected", "true"); 
+  } 
+  var option_value = document.createTextNode('KEY'); 
+  option.appendChild(option_value); 
+  field.appendChild(option); 
  break;
 
  case 'Caring Region':
 
+  var option = document.createElement('option'); 
+  option.setAttribute('value', 'AIA'); 
+  if ('AIA' == value) { 
+  option.setAttribute("selected", "true"); 
+  } 
+  var option_value = document.createTextNode('AIA'); 
+  option.appendChild(option_value); 
+  field.appendChild(option); 
+  
+  var option = document.createElement('option'); 
+  option.setAttribute('value', 'DEST'); 
+  if ('DEST' == value) { 
+  option.setAttribute("selected", "true"); 
+  } 
+  var option_value = document.createTextNode('DEST'); 
+  option.appendChild(option_value); 
+  field.appendChild(option); 
+  
+  var option = document.createElement('option'); 
+  option.setAttribute('value', 'EPIC'); 
+  if ('EPIC' == value) { 
+  option.setAttribute("selected", "true"); 
+  } 
+  var option_value = document.createTextNode('EPIC'); 
+  option.appendChild(option_value); 
+  field.appendChild(option); 
+  
 	var option = document.createElement('option'); 
 	option.setAttribute('value', 'GL'); 
 	if ('GL' == value) { 
@@ -519,6 +732,7 @@ function appendOptions(field, fieldname, value) {
 	var option_value = document.createTextNode('GL'); 
 	option.appendChild(option_value); 
 	field.appendChild(option); 
+	
 	var option = document.createElement('option'); 
 	option.setAttribute('value', 'GP'); 
 	if ('GP' == value) { 
@@ -527,14 +741,25 @@ function appendOptions(field, fieldname, value) {
 	var option_value = document.createTextNode('GP'); 
 	option.appendChild(option_value); 
 	field.appendChild(option); 
-	var option = document.createElement('option'); 
-	option.setAttribute('value', 'AIA'); 
-	if ('AIA' == value) { 
-	option.setAttribute("selected", "true"); 
-	} 
-	var option_value = document.createTextNode('AIA'); 
-	option.appendChild(option_value); 
-	field.appendChild(option); 
+	
+  var option = document.createElement('option'); 
+  option.setAttribute('value', 'HLIC'); 
+  if ('HLIC' == value) { 
+  option.setAttribute("selected", "true"); 
+  } 
+  var option_value = document.createTextNode('HLIC'); 
+  option.appendChild(option_value); 
+  field.appendChild(option); 
+  
+  var option = document.createElement('option'); 
+  option.setAttribute('value', 'JF'); 
+  if ('JF' == value) { 
+  option.setAttribute("selected", "true"); 
+  } 
+  var option_value = document.createTextNode('JF'); 
+  option.appendChild(option_value); 
+  field.appendChild(option); 
+  
 	var option = document.createElement('option'); 
 	option.setAttribute('value', 'MA'); 
 	if ('MA' == value) { 
@@ -543,6 +768,16 @@ function appendOptions(field, fieldname, value) {
 	var option_value = document.createTextNode('MA'); 
 	option.appendChild(option_value); 
 	field.appendChild(option); 
+	
+  var option = document.createElement('option'); 
+  option.setAttribute('value', 'MM'); 
+  if ('MM' == value) { 
+  option.setAttribute("selected", "true"); 
+  } 
+  var option_value = document.createTextNode('MM'); 
+  option.appendChild(option_value); 
+  field.appendChild(option); 
+  
 	var option = document.createElement('option'); 
 	option.setAttribute('value', 'MS'); 
 	if ('MS' == value) { 
@@ -551,6 +786,7 @@ function appendOptions(field, fieldname, value) {
 	var option_value = document.createTextNode('MS'); 
 	option.appendChild(option_value); 
 	field.appendChild(option); 
+	
 	var option = document.createElement('option'); 
 	option.setAttribute('value', 'NC'); 
 	if ('NC' == value) { 
@@ -559,6 +795,7 @@ function appendOptions(field, fieldname, value) {
 	var option_value = document.createTextNode('NC'); 
 	option.appendChild(option_value); 
 	field.appendChild(option); 
+	
 	var option = document.createElement('option'); 
 	option.setAttribute('value', 'NE'); 
 	if ('NE' == value) { 
@@ -567,6 +804,7 @@ function appendOptions(field, fieldname, value) {
 	var option_value = document.createTextNode('NE'); 
 	option.appendChild(option_value); 
 	field.appendChild(option); 
+	
 	var option = document.createElement('option'); 
 	option.setAttribute('value', 'NW'); 
 	if ('NW' == value) { 
@@ -575,6 +813,7 @@ function appendOptions(field, fieldname, value) {
 	var option_value = document.createTextNode('NW'); 
 	option.appendChild(option_value); 
 	field.appendChild(option); 
+	
 	var option = document.createElement('option'); 
 	option.setAttribute('value', 'RR'); 
 	if ('RR' == value) { 
@@ -583,6 +822,7 @@ function appendOptions(field, fieldname, value) {
 	var option_value = document.createTextNode('RR'); 
 	option.appendChild(option_value); 
 	field.appendChild(option); 
+	
 	var option = document.createElement('option'); 
 	option.setAttribute('value', 'SE'); 
 	if ('SE' == value) { 
@@ -591,6 +831,7 @@ function appendOptions(field, fieldname, value) {
 	var option_value = document.createTextNode('SE'); 
 	option.appendChild(option_value); 
 	field.appendChild(option); 
+	
 	var option = document.createElement('option'); 
 	option.setAttribute('value', 'SW'); 
 	if ('SW' == value) { 
@@ -599,14 +840,42 @@ function appendOptions(field, fieldname, value) {
 	var option_value = document.createTextNode('SW'); 
 	option.appendChild(option_value); 
 	field.appendChild(option); 
-	var option = document.createElement('option'); 
-	option.setAttribute('value', 'UM'); 
-	if ('UM' == value) { 
-	option.setAttribute("selected", "true"); 
-	} 
-	var option_value = document.createTextNode('UM'); 
-	option.appendChild(option_value); 
-	field.appendChild(option); 
+  
+  var option = document.createElement('option'); 
+  option.setAttribute('value', 'UM'); 
+  if ('UM' == value) { 
+  option.setAttribute("selected", "true"); 
+  } 
+  var option_value = document.createTextNode('UM'); 
+  option.appendChild(option_value); 
+  field.appendChild(option); 
+  
+  var option = document.createElement('option'); 
+  option.setAttribute('value', 'SV'); 
+  if ('SV' == value) { 
+  option.setAttribute("selected", "true"); 
+  } 
+  var option_value = document.createTextNode('CHS'); 
+  option.appendChild(option_value); 
+  field.appendChild(option); 
+  
+  var option = document.createElement('option'); 
+  option.setAttribute('value', 'BRG'); 
+  if ('BRG' == value) { 
+  option.setAttribute("selected", "true"); 
+  } 
+  var option_value = document.createTextNode('BRG'); 
+  option.appendChild(option_value); 
+  field.appendChild(option); 
+  
+  var option = document.createElement('option'); 
+  option.setAttribute('value', 'KEY'); 
+  if ('KEY' == value) { 
+  option.setAttribute("selected", "true"); 
+  } 
+  var option_value = document.createTextNode('KEY'); 
+  option.appendChild(option_value); 
+  field.appendChild(option); 
  break;
 
  case 'Asg Year':

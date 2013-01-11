@@ -365,8 +365,6 @@ class DirectoryController < ApplicationController
             value = ApplicationController.formatted_date(value) 
           when 'enum'
             value = @options_hash[column.name][u("#{value}")]
-          when 'project'
-            value = get_project(value.to_i)
           when 'team'
             value = @teams[value]
           end
