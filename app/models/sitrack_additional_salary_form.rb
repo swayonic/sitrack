@@ -47,7 +47,7 @@ class SitrackAdditionalSalaryForm < SitrackForm
   
   attr_accessible :hr_si_application_id, :current_years_salary, :previous_years_salary, :additional_salary,
     :adoption, :counseling, :childrens_expenses, :college, :private_school, :graduate_studies, 
-    :auto_purchase, :settling_in_expenses, :reimbursable_expenses, :tax_rate
+    :auto_purchase, :settling_in_expenses, :reimbursable_expenses, :tax_rate, :healthcare
   
   def to
     if hr_si_application.sitrack_tracking.is_stint?
@@ -92,7 +92,7 @@ class SitrackAdditionalSalaryForm < SitrackForm
   def self.add_tax(form)
     columns = %w{current_years_salary previous_years_salary additional_salary adoption
                 counseling childrens_expenses college private_school graduate_studies auto_purchase
-                settling_in_expenses reimbursable_expenses}
+                settling_in_expenses reimbursable_expenses healthcare}
     @total = 0
     var_hash = Hash.new
     columns.each do |c|
