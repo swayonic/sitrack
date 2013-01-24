@@ -91,7 +91,7 @@ div.boxheader {
 
 #main_panel {
 	margin: 0px 10px 0px 220px;
-	
+
 }
 
 #main_panel_no_sidebar {
@@ -126,7 +126,7 @@ div#holder {
 	color: #336699;
 	background: #D0DDEA;
 	padding: 5px;
-	
+
 }
 
 #main_panel div.profile_box div.subboxheader2 {
@@ -165,7 +165,7 @@ div#holder {
 }
 
 #main_panel div.boxed {
-	
+
 }
 
 div.segment {
@@ -296,7 +296,7 @@ table#results td.checkbox {
 }
 
 table.list {
-	
+
 }
 
 table.bordered {
@@ -388,7 +388,7 @@ div.entry-value:hover {
 }
 
 div.entry {
-	padding: 5px 8px;
+	padding: 5px 2px;
 }
 
 div.entry:hover {
@@ -396,12 +396,18 @@ div.entry:hover {
 }
 
 div.entry a {
-	font-size: 13px;
-	text-decoration: none;
+  font-size: 13px;
+  text-decoration: none;
+  max-width: 165px;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  display: inline-block;
+  overflow: hidden;
 }
 
 div.entry div.entry_delete {
 	float: right;
+  margin-top: -1px;
 }
 div.entry div.entry_add {
 	float: left;
