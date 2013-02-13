@@ -18,6 +18,8 @@ Sitrack::Application.routes.draw do
       post :borrow
     end
   end
+
+	match 'crumpd/dump' => 'crumpd#dump'
   
   #map.directory '', :controller => "directory", :action => "index"
   match '' => 'directory#index'
